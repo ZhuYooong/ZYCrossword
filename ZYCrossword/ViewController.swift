@@ -13,17 +13,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
     }
-    func loadJson(with name: String) {
-        if let path = Bundle.main.path(forResource: name, ofType: "json") {
-            if let data = NSData(contentsOfFile: path) as Data? {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options:.allowFragments) as? [String : AnyObject]
-                }catch {
-                    
-                }
-            }
-        }
-    }
+    
+    
 }
 

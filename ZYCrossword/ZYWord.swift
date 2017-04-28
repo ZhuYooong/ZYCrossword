@@ -7,11 +7,12 @@
 //
 
 import Foundation
-
-enum TYWord: String {
-    case TangPoetry300 = "唐诗三百首"
-    case SongPoetry300 = "宋词三百首"
-    case OldPoetry300 = "古诗三百首"
-    case TangPoetryAll = "全唐诗"
-    case SongPoetryAll = "全宋词"
+import RealmSwift
+class ZYWord: Object {
+    dynamic var isSelectted: String? = ""
+    dynamic var wordType: String? = ""
+    
+    override static func primaryKey() -> String? {
+        return "wordType"
+    }
 }

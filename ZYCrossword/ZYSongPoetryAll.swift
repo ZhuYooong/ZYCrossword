@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RealmSwift
-class ZYSongPoetryAll: Object {
+
+class ZYSongPoetryAll: ZYBaseWord {
     dynamic var userId: String? = ""
     dynamic var userName: String? = ""
     dynamic var levelName: String? = ""
