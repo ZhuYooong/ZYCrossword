@@ -9,20 +9,17 @@
 import Foundation
 
 class ZYSongPoetry300: ZYBaseWord {
-    dynamic var userId: String? = ""
-    dynamic var userName: String? = ""
-    dynamic var levelName: String? = ""
-    dynamic var photo: String? = ""
-    dynamic var userCode: String? = ""
-    dynamic var department: String? = ""
-    dynamic var departmentType: String? = ""
-    dynamic var mobileTel: String? = ""
-    dynamic var level: String? = ""
-    dynamic var reportId: String? = ""
-    dynamic var reportName: String? = ""
-    dynamic var isAttented: String? = ""
+    dynamic var detail: String? = ""
+    dynamic var title: String? = ""
+    dynamic var url: String? = ""
+    dynamic var translate: String? = ""
+    dynamic var note: String? = ""
+    dynamic var author: String? = ""
+    dynamic var appreciation: String? = ""
+    dynamic var dynasty: String? = ""
+    dynamic var background: String? = ""
     
     override static func primaryKey() -> String? {
-        return "userId"
+        return "title"
     }
 }

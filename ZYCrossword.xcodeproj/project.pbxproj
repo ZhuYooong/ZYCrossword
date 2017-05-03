@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0447D8A31EB9D4FE001331AC /* 古诗三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8A21EB9D4FE001331AC /* 古诗三百首.json */; };
+		0447D8A51EB9D50A001331AC /* 宋词三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8A41EB9D50A001331AC /* 宋词三百首.json */; };
+		0447D8AB1EB9D56C001331AC /* 楚辞.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AA1EB9D56C001331AC /* 楚辞.json */; };
+		0447D8AD1EB9D572001331AC /* 乐府诗集.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AC1EB9D572001331AC /* 乐府诗集.json */; };
+		0447D8AF1EB9D578001331AC /* 诗经.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AE1EB9D578001331AC /* 诗经.json */; };
+		0447D8B11EB9D63E001331AC /* ZYShiJing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447D8B01EB9D63E001331AC /* ZYShiJing.swift */; };
+		0447D8B31EB9D67F001331AC /* ZYYueFu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447D8B21EB9D67F001331AC /* ZYYueFu.swift */; };
+		0447D8B51EB9D6A1001331AC /* ZYChuCi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447D8B41EB9D6A1001331AC /* ZYChuCi.swift */; };
 		0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AA181EAEE0DB0051C47D /* AppDelegate.swift */; };
 		0490AA1B1EAEE0DB0051C47D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AA1A1EAEE0DB0051C47D /* ViewController.swift */; };
 		0490AA1E1EAEE0DB0051C47D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0490AA1C1EAEE0DB0051C47D /* Main.storyboard */; };
@@ -334,8 +342,6 @@
 		0490ACCB1EAEF0F40051C47D /* poet.tang.9000.json in Resources */ = {isa = PBXBuildFile; fileRef = 0490AB901EAEF0F30051C47D /* poet.tang.9000.json */; };
 		04C94ABF1EB3364E009F4381 /* ZYBaseWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C94ABE1EB3364E009F4381 /* ZYBaseWord.swift */; };
 		04C94AC11EB33BC5009F4381 /* ZYWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C94AC01EB33BC5009F4381 /* ZYWordViewModel.swift */; };
-		04D2EEA01EB18A7900BC24B0 /* 古诗三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D2EE9F1EB18A7900BC24B0 /* 古诗三百首.json */; };
-		04D2EEA21EB18A7F00BC24B0 /* 宋词三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D2EEA11EB18A7F00BC24B0 /* 宋词三百首.json */; };
 		04D2EEA41EB18A8300BC24B0 /* 唐诗三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D2EEA31EB18A8300BC24B0 /* 唐诗三百首.json */; };
 		04D2EEA61EB196D500BC24B0 /* ZYWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2EEA51EB196D500BC24B0 /* ZYWord.swift */; };
 		04D2EEA81EB1979300BC24B0 /* ZYOldPoetry300.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2EEA71EB1979300BC24B0 /* ZYOldPoetry300.swift */; };
@@ -364,6 +370,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0447D8A21EB9D4FE001331AC /* 古诗三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "古诗三百首.json"; sourceTree = "<group>"; };
+		0447D8A41EB9D50A001331AC /* 宋词三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "宋词三百首.json"; sourceTree = "<group>"; };
+		0447D8AA1EB9D56C001331AC /* 楚辞.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "楚辞.json"; sourceTree = "<group>"; };
+		0447D8AC1EB9D572001331AC /* 乐府诗集.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "乐府诗集.json"; sourceTree = "<group>"; };
+		0447D8AE1EB9D578001331AC /* 诗经.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "诗经.json"; sourceTree = "<group>"; };
+		0447D8B01EB9D63E001331AC /* ZYShiJing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYShiJing.swift; sourceTree = "<group>"; };
+		0447D8B21EB9D67F001331AC /* ZYYueFu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYYueFu.swift; sourceTree = "<group>"; };
+		0447D8B41EB9D6A1001331AC /* ZYChuCi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYChuCi.swift; sourceTree = "<group>"; };
 		0490AA151EAEE0DB0051C47D /* ZYCrossword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYCrossword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490AA181EAEE0DB0051C47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0490AA1A1EAEE0DB0051C47D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -697,8 +711,6 @@
 		0490AB901EAEF0F30051C47D /* poet.tang.9000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poet.tang.9000.json; sourceTree = "<group>"; };
 		04C94ABE1EB3364E009F4381 /* ZYBaseWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYBaseWord.swift; sourceTree = "<group>"; };
 		04C94AC01EB33BC5009F4381 /* ZYWordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYWordViewModel.swift; sourceTree = "<group>"; };
-		04D2EE9F1EB18A7900BC24B0 /* 古诗三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "古诗三百首.json"; sourceTree = "<group>"; };
-		04D2EEA11EB18A7F00BC24B0 /* 宋词三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "宋词三百首.json"; sourceTree = "<group>"; };
 		04D2EEA31EB18A8300BC24B0 /* 唐诗三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "唐诗三百首.json"; sourceTree = "<group>"; };
 		04D2EEA51EB196D500BC24B0 /* ZYWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYWord.swift; sourceTree = "<group>"; };
 		04D2EEA71EB1979300BC24B0 /* ZYOldPoetry300.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYOldPoetry300.swift; sourceTree = "<group>"; };
@@ -737,6 +749,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0447D8A61EB9D513001331AC /* ChinesePoetryOther */ = {
+			isa = PBXGroup;
+			children = (
+				0447D8A91EB9D557001331AC /* ShiJing */,
+				0447D8A81EB9D548001331AC /* YueFu */,
+				0447D8A71EB9D533001331AC /* ChuCi */,
+			);
+			name = ChinesePoetryOther;
+			sourceTree = "<group>";
+		};
+		0447D8A71EB9D533001331AC /* ChuCi */ = {
+			isa = PBXGroup;
+			children = (
+				0447D8AA1EB9D56C001331AC /* 楚辞.json */,
+				0447D8B41EB9D6A1001331AC /* ZYChuCi.swift */,
+			);
+			name = ChuCi;
+			sourceTree = "<group>";
+		};
+		0447D8A81EB9D548001331AC /* YueFu */ = {
+			isa = PBXGroup;
+			children = (
+				0447D8AC1EB9D572001331AC /* 乐府诗集.json */,
+				0447D8B21EB9D67F001331AC /* ZYYueFu.swift */,
+			);
+			name = YueFu;
+			sourceTree = "<group>";
+		};
+		0447D8A91EB9D557001331AC /* ShiJing */ = {
+			isa = PBXGroup;
+			children = (
+				0447D8AE1EB9D578001331AC /* 诗经.json */,
+				0447D8B01EB9D63E001331AC /* ZYShiJing.swift */,
+			);
+			name = ShiJing;
+			sourceTree = "<group>";
+		};
 		0490AA0C1EAEE0DA0051C47D = {
 			isa = PBXGroup;
 			children = (
@@ -841,6 +890,7 @@
 			isa = PBXGroup;
 			children = (
 				04D2EE9B1EB189DB00BC24B0 /* ChinesePoetry300 */,
+				0447D8A61EB9D513001331AC /* ChinesePoetryOther */,
 				0490AA541EAEF0B50051C47D /* ChinestPoetryAll */,
 			);
 			name = Poetry;
@@ -1216,7 +1266,7 @@
 		04D2EE9D1EB18A4200BC24B0 /* SongPoetry300 */ = {
 			isa = PBXGroup;
 			children = (
-				04D2EEA11EB18A7F00BC24B0 /* 宋词三百首.json */,
+				0447D8A41EB9D50A001331AC /* 宋词三百首.json */,
 				04D2EEA91EB19D6400BC24B0 /* ZYSongPoetry300.swift */,
 			);
 			name = SongPoetry300;
@@ -1225,7 +1275,7 @@
 		04D2EE9E1EB18A5500BC24B0 /* OldPoetry300 */ = {
 			isa = PBXGroup;
 			children = (
-				04D2EE9F1EB18A7900BC24B0 /* 古诗三百首.json */,
+				0447D8A21EB9D4FE001331AC /* 古诗三百首.json */,
 				04D2EEA71EB1979300BC24B0 /* ZYOldPoetry300.swift */,
 			);
 			name = OldPoetry300;
@@ -1371,6 +1421,7 @@
 				0490ACBA1EAEF0F40051C47D /* poet.tang.45000.json in Resources */,
 				0490ABDF1EAEF0F30051C47D /* poet.song.167000.json in Resources */,
 				0490AC471EAEF0F40051C47D /* poet.song.31000.json in Resources */,
+				0447D8A31EB9D4FE001331AC /* 古诗三百首.json in Resources */,
 				0490ACBE1EAEF0F40051C47D /* poet.tang.49000.json in Resources */,
 				0490AC7E1EAEF0F40051C47D /* poet.song.81000.json in Resources */,
 				0490AC121EAEF0F40051C47D /* poet.song.212000.json in Resources */,
@@ -1400,7 +1451,6 @@
 				0490ABDA1EAEF0F30051C47D /* poet.song.162000.json in Resources */,
 				0490AC701EAEF0F40051C47D /* poet.song.69000.json in Resources */,
 				0490ABCB1EAEF0F30051C47D /* poet.song.149000.json in Resources */,
-				04D2EEA21EB18A7F00BC24B0 /* 宋词三百首.json in Resources */,
 				0490ABC21EAEF0F30051C47D /* poet.song.140000.json in Resources */,
 				0490AC231EAEF0F40051C47D /* poet.song.228000.json in Resources */,
 				0490AC711EAEF0F40051C47D /* poet.song.7000.json in Resources */,
@@ -1427,6 +1477,7 @@
 				0490AC361EAEF0F40051C47D /* poet.song.245000.json in Resources */,
 				0490ABFD1EAEF0F40051C47D /* poet.song.194000.json in Resources */,
 				0490AC4A1EAEF0F40051C47D /* poet.song.34000.json in Resources */,
+				0447D8AD1EB9D572001331AC /* 乐府诗集.json in Resources */,
 				0490AC271EAEF0F40051C47D /* poet.song.231000.json in Resources */,
 				0490AC451EAEF0F40051C47D /* poet.song.3000.json in Resources */,
 				0490AC621EAEF0F40051C47D /* poet.song.56000.json in Resources */,
@@ -1438,6 +1489,7 @@
 				0490AC3E1EAEF0F40051C47D /* poet.song.252000.json in Resources */,
 				0490AB951EAEF0F30051C47D /* poet.song.10000.json in Resources */,
 				0490ACAB1EAEF0F40051C47D /* poet.tang.31000.json in Resources */,
+				0447D8AB1EB9D56C001331AC /* 楚辞.json in Resources */,
 				0490AC051EAEF0F40051C47D /* poet.song.200000.json in Resources */,
 				0490AC171EAEF0F40051C47D /* poet.song.217000.json in Resources */,
 				0490ABB81EAEF0F30051C47D /* poet.song.131000.json in Resources */,
@@ -1573,7 +1625,6 @@
 				0490AC661EAEF0F40051C47D /* poet.song.6000.json in Resources */,
 				0490AC491EAEF0F40051C47D /* poet.song.33000.json in Resources */,
 				0490ABBA1EAEF0F30051C47D /* poet.song.133000.json in Resources */,
-				04D2EEA01EB18A7900BC24B0 /* 古诗三百首.json in Resources */,
 				0490ABBB1EAEF0F30051C47D /* poet.song.134000.json in Resources */,
 				0490AC881EAEF0F40051C47D /* poet.song.90000.json in Resources */,
 				0490AC131EAEF0F40051C47D /* poet.song.213000.json in Resources */,
@@ -1585,6 +1636,7 @@
 				0490ABE81EAEF0F30051C47D /* poet.song.175000.json in Resources */,
 				0490AC871EAEF0F40051C47D /* poet.song.9000.json in Resources */,
 				0490ACC71EAEF0F40051C47D /* poet.tang.57000.json in Resources */,
+				0447D8AF1EB9D578001331AC /* 诗经.json in Resources */,
 				0490AC9E1EAEF0F40051C47D /* poet.tang.2000.json in Resources */,
 				0490AC5B1EAEF0F40051C47D /* poet.song.5000.json in Resources */,
 				0490AC031EAEF0F40051C47D /* poet.song.2000.json in Resources */,
@@ -1636,6 +1688,7 @@
 				0490AC691EAEF0F40051C47D /* poet.song.62000.json in Resources */,
 				0490AC6A1EAEF0F40051C47D /* poet.song.63000.json in Resources */,
 				0490ACC21EAEF0F40051C47D /* poet.tang.52000.json in Resources */,
+				0447D8A51EB9D50A001331AC /* 宋词三百首.json in Resources */,
 				0490AC281EAEF0F40051C47D /* poet.song.232000.json in Resources */,
 				0490ACCA1EAEF0F40051C47D /* poet.tang.8000.json in Resources */,
 				0490AC4B1EAEF0F40051C47D /* poet.song.35000.json in Resources */,
@@ -1754,17 +1807,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0447D8B31EB9D67F001331AC /* ZYYueFu.swift in Sources */,
 				04C94AC11EB33BC5009F4381 /* ZYWordViewModel.swift in Sources */,
 				04D2EEAA1EB19D6400BC24B0 /* ZYSongPoetry300.swift in Sources */,
 				04C94ABF1EB3364E009F4381 /* ZYBaseWord.swift in Sources */,
 				0490AA1B1EAEE0DB0051C47D /* ViewController.swift in Sources */,
 				04D2EEA61EB196D500BC24B0 /* ZYWord.swift in Sources */,
 				04D2EEB01EB19E4000BC24B0 /* ZYSongPoetryAll.swift in Sources */,
+				0447D8B51EB9D6A1001331AC /* ZYChuCi.swift in Sources */,
 				0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */,
 				04D2EEAC1EB19DB700BC24B0 /* ZYTangPoetry300.swift in Sources */,
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
 				04D2EEAE1EB19E1700BC24B0 /* ZYTangPoetryAll.swift in Sources */,
+				0447D8B11EB9D63E001331AC /* ZYShiJing.swift in Sources */,
 				0490AA4B1EAEE85B0051C47D /* NetDataManager.swift in Sources */,
 				04D2EEA81EB1979300BC24B0 /* ZYOldPoetry300.swift in Sources */,
 			);

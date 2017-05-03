@@ -1,14 +1,14 @@
 //
-//  ZYOldPoetry300.swift
-//  ZYCrossword
+//  ZYYueFu.swift
+//  
 //
-//  Created by MAC on 2017/4/27.
-//  Copyright © 2017年 ZhuYong. All rights reserved.
+//  Created by MAC on 2017/5/3.
+//
 //
 
-import Foundation
+import UIKit
 
-class ZYOldPoetry300: ZYBaseWord {
+class ZYYueFu: ZYBaseWord {
     dynamic var detail: String? = ""
     dynamic var title: String? = ""
     dynamic var url: String? = ""
