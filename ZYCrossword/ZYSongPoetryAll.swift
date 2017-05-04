@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftyJSON
+import RealmSwift
 
 class ZYSongPoetryAll: ZYBaseWord {
     dynamic var userId: String? = ""
@@ -24,5 +26,9 @@ class ZYSongPoetryAll: ZYBaseWord {
     
     override static func primaryKey() -> String? {
         return "userId"
+    }
+    convenience init(with json: JSON) {
+        self.init()
+        
     }
 }
