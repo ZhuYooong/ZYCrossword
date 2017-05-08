@@ -31,6 +31,7 @@ class ZYShiJing: ZYBaseWord {
         title = json["title"].stringValue
         detail = json["detail_text"].stringValue
         url = json["url"].stringValue
+        dynasty = json["detail_dynasty"].stringValue
         appreciation = json["detail_appreciation_text"].arrayValue.first?.stringValue
         let translateAndNoteArray = json["detail_translate_text"].arrayValue
         var translateString = ""

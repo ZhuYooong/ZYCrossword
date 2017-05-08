@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         ZYWordViewModel.shareWord.initData()
+//        ZYCrosswordsGenerator.shareCrosswordsGenerator.loadData()
+//        ZYCrosswordsGenerator.shareCrosswordsGenerator.generate()
     }
     
 }

@@ -40,7 +40,7 @@ class ZYWordViewModel: NSObject {
     }
     func changeWordData(with type: ZYWordType) {
         let predicate = NSPredicate(format: "wordType = '\(type.rawValue)'")
-        let word = realm.objects(ZYWord.self).filter(predicate)
+        let word = self.realm.objects(ZYWord.self).filter(predicate)
         let wordInfo = ZYWord()
         wordInfo.wordType = type.rawValue
         if word.first?.isSelectted == "0" {
@@ -48,8 +48,8 @@ class ZYWordViewModel: NSObject {
         }else {
             wordInfo.isSelectted = "0"
         }
-        try! realm.write {
-            realm.add(wordInfo, update: true)
+        try! self.realm.write {
+            self.realm.add(wordInfo, update: true)
         }
         if wordInfo.isSelectted == "1" {
             ZYJsonViewModel.shareJson.saveJsonData(with: type)
