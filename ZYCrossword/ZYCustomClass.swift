@@ -54,6 +54,14 @@ extension String {
         return textSize.height + 2
     }
 }
+//MARK: - Array的扩展
+extension Array where Element: Equatable {
+    mutating func remove(object: Element) {
+        if let index = index(of: object) {
+            remove(at: index)
+        }
+    }
+}
 //MARK: - HexColor的扩展
 extension UIColor {
     public convenience init(_ value: Int) {

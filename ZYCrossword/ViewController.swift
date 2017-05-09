@@ -13,9 +13,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ZYWordViewModel.shareWord.initData()
-//        ZYCrosswordsGenerator.shareCrosswordsGenerator.loadData()
-//        ZYCrosswordsGenerator.shareCrosswordsGenerator.generate()
+//        ZYWordViewModel.shareWord.initData()
+        ZYCrosswordsGenerator.shareCrosswordsGenerator.loadCrosswordsData()
     }
     
 }

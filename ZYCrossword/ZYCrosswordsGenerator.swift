@@ -22,8 +22,8 @@ class ZYCrosswordsGenerator: NSObject {
         case horizontal
     }
     // MARK: - Public properties
-    open var columns: Int = 10
-    open var rows: Int = 10
+    open var columns: Int = 12
+    open var rows: Int = 12
     open var words: Array<String> = Array()
     
     open var result: Array<Word> {
@@ -40,19 +40,27 @@ class ZYCrosswordsGenerator: NSObject {
     fileprivate var grid: Array2D<String>?
     fileprivate var currentWords: Array<String> = Array()
     fileprivate var resultData: Array<Word> = Array()
+    fileprivate var resultContentSet = Set<ZYBaseWord>()
     // MARK: - Initialization
     static let shareCrosswordsGenerator = ZYCrosswordsGenerator()
     fileprivate override init() { }
+    func loadCrosswordsData() {
+        let myQueue = DispatchQueue(label: "loadCrosswordsData")
+        myQueue.async {
+            self.loadData()
+        }
+        myQueue.async(group: nil, qos: .default, flags: .barrier) { 
+            self.generate()
+        }
+    }
     // MARK: - 加载数据
     var contentArray = [AnyObject]()
     
     func loadData() {
-        DispatchQueue.global().async {
-            let allWordArray = ZYWordViewModel.shareWord.loadWordData()
-            for word in allWordArray {
-                if word.isSelectted == "1" {
-                    self.loadJsonData(with: word.wordType)
-                }
+        let allWordArray = ZYWordViewModel.shareWord.loadWordData()
+        for word in allWordArray {
+            if word.isSelectted == "1" {
+                self.loadJsonData(with: word.wordType)
             }
         }
     }
@@ -77,37 +85,46 @@ class ZYCrosswordsGenerator: NSObject {
     }
     // MARK: - Crosswords generation
     open func generate() {
-        DispatchQueue.global().async {
-            var isSuccess = false
-            while !isSuccess {
-                self.grid = nil
-                self.grid = Array2D(columns: self.columns, rows: self.rows, defaultValue: self.emptySymbol)
-                
-                self.currentWords.removeAll()
-                self.resultData.removeAll()
-                
-                var isContininue = true
-                while isContininue {
-                    if let word = self.currentWords.last, word.length > 1 {
-                        let strArray = word.components(separatedBy: "")
-                        if let foundWord = self.findWord(with: strArray[self.randomInt(0, max: strArray.count - 1)]) {
-                            isContininue = self.fitAndAdd(foundWord)
-                        }else {
-                            isContininue = false
+        var isSuccess = false
+        while !isSuccess {
+            self.grid = nil
+            self.grid = Array2D(columns: self.columns, rows: self.rows, defaultValue: self.emptySymbol)
+            
+            self.currentWords.removeAll()
+            self.resultData.removeAll()
+            self.resultContentSet.removeAll()
+            self.currentContent = nil
+            
+            var isContininue = true
+            var count = 0
+            while isContininue {
+                if let word = self.currentWords.last, word.length > 1 {
+                    var strArray = [String]()
+                    for str in word.characters {
+                        strArray.append(String(str))
+                    }
+                    if let foundWord = self.findWord(with: strArray[self.randomInt(0, max: strArray.count - 1)]) {
+                        if self.fitAndAdd(foundWord) == false {
+                            count += 1
                         }
-                    }else if self.currentWords.count == 0 {
-                        if let foundWord = self.findWord(with: nil) {
-                            isContininue = self.fitAndAdd(foundWord)
-                        }else {
+                        if count == 200 {
                             isContininue = false
                         }
                     }else {
                         isContininue = false
                     }
+                }else if self.currentWords.count == 0 {
+                    if let foundWord = self.findWord(with: nil) {
+                        _ = self.fitAndAdd(foundWord)
+                    }else {
+                        isContininue = false
+                    }
+                }else {
+                    isContininue = false
                 }
-                if self.currentWords.count > 20 {
-                    isSuccess = true
-                }
+            }
+            if self.currentWords.count > 20 {
+                isSuccess = true
             }
         }
     }
@@ -115,36 +132,110 @@ class ZYCrosswordsGenerator: NSObject {
     func findWord(with name: String?) -> String? {
         if contentArray.count > 2 {
             let content = contentArray[randomInt(0, max: contentArray.count - 1)]
-            var findString: String?
-            if let str = name, str.length > 1 {
-               let strArray = str.components(separatedBy: "")
-               findString = strArray[randomInt(0, max: strArray.count - 1)]
-            }
-            return findWord(with: content, and: findString)
+            return findWord(with: content, and: name)
         }
         return nil
     }
+    var currentContent: AnyObject?
     func findWord(with content: AnyObject, and findString: String?) -> String? {
         if let results: Results<ZYTangPoetry300> = content as? Results<ZYTangPoetry300> {
-            let detailResult = filterResult(with: results, and: ZYTangPoetry300.self, and: findString).first
-            if let deatil = detailResult?.detail {
-                var detailStrArray = deatil.components(separatedBy: "，。（）")
-                var shouldDelete = false
-                for detailString in detailStrArray {
-                    
-                }
-                if let str = findString {
-                    for detailString in detailStrArray {
-                        if detailString.contains(str) {
-                            return str
-                        }
-                    }
-                }else {
-                    return detailStrArray[randomInt(0, max: detailStrArray.count - 1)]
+            var detailResult: ZYTangPoetry300?
+            for item in filterResult(with: results, and: ZYTangPoetry300.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
                 }
             }
+            if let deatil = detailResult?.detail {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
+        }else if let results: Results<ZYSongPoetry300> = content as? Results<ZYSongPoetry300> {
+            var detailResult: ZYSongPoetry300?
+            for item in filterResult(with: results, and: ZYSongPoetry300.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+            if let deatil = detailResult?.detail {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
+        }else if let results: Results<ZYOldPoetry300> = content as? Results<ZYOldPoetry300> {
+            var detailResult: ZYOldPoetry300?
+            for item in filterResult(with: results, and: ZYOldPoetry300.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+            if let deatil = detailResult?.detail {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
+        }else if let results: Results<ZYShiJing> = content as? Results<ZYShiJing> {
+            var detailResult: ZYShiJing?
+            for item in filterResult(with: results, and: ZYShiJing.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+            if let deatil = detailResult?.detail {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
+        }else if let results: Results<ZYYueFu> = content as? Results<ZYYueFu> {
+            var detailResult: ZYYueFu?
+            for item in filterResult(with: results, and: ZYYueFu.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+            if let deatil = detailResult?.detail {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
+        }else if let results: Results<ZYChuCi> = content as? Results<ZYChuCi> {
+            var detailResult: ZYChuCi?
+            for item in filterResult(with: results, and: ZYChuCi.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+            if let deatil = detailResult?.detail {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
+        }else if let results: Results<ZYTangPoetryAll> = content as? Results<ZYTangPoetryAll> {
+            var detailResult: ZYTangPoetryAll?
+            for item in filterResult(with: results, and: ZYTangPoetryAll.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+//            if let deatil = detailResult?.detail {
+//            currentContent = detailResult
+//                return findDetailWord(with: deatil, and: findString)
+//            }
+        }else if let results: Results<ZYSongPoetryAll> = content as? Results<ZYSongPoetryAll> {
+            var detailResult: ZYSongPoetryAll?
+            for item in filterResult(with: results, and: ZYSongPoetryAll.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+//            if let deatil = detailResult?.detail {
+//            currentContent = detailResult
+//                return findDetailWord(with: deatil, and: findString)
+//            }
         }
-        return nil;
+        return nil
     }
     func filterResult<T: Object>(with results: Results<T>, and type: T.Type, and findString: String?) -> Results<T> {
         if let findString = findString {
@@ -153,6 +244,25 @@ class ZYCrosswordsGenerator: NSObject {
         }else {
             return results.sorted(byProperty: "selecttedCount")
         }
+    }
+    func findDetailWord(with detail:String, and findString: String?) -> String? {
+        let set = CharacterSet(charactersIn: "，。！？；)")
+        var detailStrArray = detail.components(separatedBy: set)
+        for str in detailStrArray {
+            if str == "" || str.contains("(") {
+                detailStrArray.remove(object: str)
+            }
+        }
+        if let str = findString {
+            for detailString in detailStrArray {
+                if detailString.contains(str) {
+                    return detailString
+                }
+            }
+        }else {
+            return detailStrArray[randomInt(0, max: detailStrArray.count - 1)]
+        }
+        return nil
     }
     // MARK: addWord
     fileprivate func fitAndAdd(_ word: String) -> Bool {
@@ -200,12 +310,12 @@ class ZYCrosswordsGenerator: NSObject {
                     let cell = grid![column, row]
                     if String(letter) == cell {
                         if rowc - glc > 0 {
-                            if ((rowc - glc) + word.lengthOfBytes(using: String.Encoding.utf8)) <= rows {
+                            if ((rowc - glc) + word.length) <= rows {
                                 coordlist.append((colc, rowc - glc, 1, colc + (rowc - glc), 0))
                             }
                         }
                         if colc - glc > 0 {
-                            if ((colc - glc) + word.lengthOfBytes(using: String.Encoding.utf8)) <= columns {
+                            if ((colc - glc) + word.length) <= columns {
                                 coordlist.append((colc - glc, rowc, 0, rowc + (colc - glc), 0))
                             }
                         }
@@ -316,6 +426,7 @@ class ZYCrosswordsGenerator: NSObject {
         if force {
             let w = Word(word: word, column: column, row: row, direction: (direction == 0 ? .horizontal : .vertical))
             resultData.append(w)
+            resultContentSet.insert(currentContent as! ZYBaseWord)
             currentWords.append(word)
             var c = column
             var r = row
