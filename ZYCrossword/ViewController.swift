@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import SwiftyJSON
+import RealmSwift
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -15,6 +16,7 @@ class ViewController: UIViewController {
         
 //        ZYWordViewModel.shareWord.initData()
         ZYCrosswordsGenerator.shareCrosswordsGenerator.loadCrosswordsData()
+        
     }
     
 }

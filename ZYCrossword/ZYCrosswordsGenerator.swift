@@ -130,7 +130,7 @@ class ZYCrosswordsGenerator: NSObject {
     }
     // MARK: findWord
     func findWord(with name: String?) -> String? {
-        if contentArray.count > 2 {
+        if contentArray.count > 1 {
             let content = contentArray[randomInt(0, max: contentArray.count - 1)]
             return findWord(with: content, and: name)
         }
@@ -260,7 +260,11 @@ class ZYCrosswordsGenerator: NSObject {
                 }
             }
         }else {
-            return detailStrArray[randomInt(0, max: detailStrArray.count - 1)]
+            if detailStrArray.count > 1 {
+                return detailStrArray[randomInt(0, max: detailStrArray.count - 1)]
+            }else {
+                return detailStrArray.first
+            }
         }
         return nil
     }
