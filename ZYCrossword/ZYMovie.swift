@@ -21,11 +21,12 @@ class ZYMovie: ZYBaseWord {
     dynamic var genres: String? = ""
     dynamic var countries: String? = ""
     dynamic var summary: String? = ""
+    dynamic var type = ZYMovieType.Base.rawValue
     
     override static func primaryKey() -> String? {
         return "id"
     }
-    convenience init(with json: JSON) {
+    convenience init(base json: JSON) {//搜索电影
         self.init()
         id = json["id"].stringValue
         title = json["title"].stringValue
@@ -35,10 +36,30 @@ class ZYMovie: ZYBaseWord {
         year = json["year"].stringValue
         genres = json["genres"].arrayValue.first?.stringValue
     }
-    convenience init(from detailJson: JSON) {
+    convenience init(save json: JSON, and typeInfo: String) {//存储电影
         self.init()
-        languages = detailJson["languages"].stringValue
-        countries = detailJson["countries"].arrayValue.first?.stringValue
-        summary = detailJson["summary"].stringValue
+        id = json["id"].stringValue
+        title = json["title"].stringValue
+        alt = json["alt"].stringValue
+        directors = json["directors"].arrayValue.first?.dictionaryValue["name"]?.stringValue
+        casts = json["casts"].arrayValue.first?.dictionaryValue["name"]?.stringValue
+        year = json["year"].stringValue
+        genres = json["genres"].arrayValue.first?.stringValue
+        type = typeInfo
     }
+    convenience init(detail json: JSON) {//电影详情
+        self.init()
+        languages = json["languages"].stringValue
+        countries = json["countries"].arrayValue.first?.stringValue
+        summary = json["summary"].stringValue
+    }
+}
+enum ZYMovieType: String {
+    case Base = "电影"
+    case Theaters = "正在上映"
+    case Coming = "即将上映"
+    case Top250 = "Top250"
+    case Weekly = "口碑榜"
+    case Box = "北美票房榜"
+    case New = "新片榜"
 }
