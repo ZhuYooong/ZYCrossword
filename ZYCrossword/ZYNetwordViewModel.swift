@@ -14,7 +14,6 @@ class ZYNetwordViewModel: NSObject {
     static let shareNetword = ZYNetwordViewModel()
     fileprivate override init() { }
     
-    let realm = try! Realm()
     //MARK:图书
     func findBook(with name: String) -> ZYBook? {// 搜索图书
         var book: ZYBook?
@@ -53,7 +52,7 @@ class ZYNetwordViewModel: NSObject {
         }
         return movie
     }
-    func findNowMovie() -> List<ZYMovie> {// 最近的电影
+    func findNowMovie() -> Results<ZYMovie> {// 最近的电影
         let concurrentQueue = DispatchQueue(label: "findNowMovie", attributes: .concurrent)
         let group = DispatchGroup()
         let movieResults = List<ZYMovie>()
@@ -122,22 +121,23 @@ class ZYNetwordViewModel: NSObject {
             group.leave()
         }
         _ = group.wait(timeout: .distantFuture)
-        return movieResults
+        return movieResults.sorted(byProperty: "selecttedCount")
     }
     func findTop250Movie() {// Top250的电影
-        if realm.objects(ZYMovie.self).filter(NSPredicate(format: "type = '\(ZYMovieType.Top250.rawValue)'")).count == 0 {
-            NetDataManager.shareNetDataManager.findTop250Movie { (data) in
-                if let data = data {
-                    let jsonObj = JSON(data: data)
-                    if jsonObj != JSON.null {
-                        let rootDictionary = jsonObj.dictionaryValue
-                        let fatherArray = rootDictionary["subjects"]!.arrayValue
-                        for movieInfo in fatherArray {
-                            let topMovie = self.findDetailMovie(with: ZYMovie(save: movieInfo, and: ZYMovieType.Top250.rawValue))
-                            try! self.realm.write {
-                                self.realm.add(topMovie, update: true)
+        NetDataManager.shareNetDataManager.findTop250Movie { (data) in
+            let realm = try! Realm()
+            if let data = data {
+                let jsonObj = JSON(data: data)
+                if jsonObj != JSON.null {
+                    let rootDictionary = jsonObj.dictionaryValue
+                    let fatherArray = rootDictionary["subjects"]!.arrayValue
+                    for movieInfo in fatherArray {
+                        let topMovie = self.findDetailMovie(with: ZYMovie(save: movieInfo, and: ZYMovieType.Top250.rawValue))
+                        do {
+                            try! realm.write {
+                                realm.add(topMovie, update: true)
                             }
-                        }
+                        }catch { }
                     }
                 }
             }

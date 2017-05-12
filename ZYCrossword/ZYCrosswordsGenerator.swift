@@ -81,6 +81,10 @@ class ZYCrosswordsGenerator: NSObject {
             contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYTangPoetryAll.self))
         }else if name == "全宋词" {
             contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYSongPoetryAll.self))
+        }else if name == "Top250的电影" {
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYMovie.self).filter(NSPredicate(format: "type = '\(ZYMovieType.Top250.rawValue)'")))
+        }else if name == "最近的电影" {
+            contentArray.append(ZYNetwordViewModel.shareNetword.findNowMovie())
         }
     }
     // MARK: - Crosswords generation
@@ -234,12 +238,27 @@ class ZYCrosswordsGenerator: NSObject {
 //            currentContent = detailResult
 //                return findDetailWord(with: deatil, and: findString)
 //            }
+        }else if let results: Results<ZYMovie> = content as? Results<ZYMovie> {
+            var detailResult: ZYMovie?
+            for item in filterResult(with: results, and: ZYMovie.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+            if let deatil = detailResult?.title {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
         }
         return nil
     }
     func filterResult<T: Object>(with results: Results<T>, and type: T.Type, and findString: String?) -> Results<T> {
         if let findString = findString {
-            let predicate = NSPredicate(format: "detail contains '\(findString)'")
+            var predicate = NSPredicate(format: "detail contains '\(findString)'")
+            if type == ZYMovie.self {
+                predicate = NSPredicate(format: "title contains '\(findString)'")
+            }
             return results.filter(predicate).sorted(byProperty: "selecttedCount")
         }else {
             return results.sorted(byProperty: "selecttedCount")

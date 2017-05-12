@@ -18,6 +18,7 @@ class ZYJsonViewModel: NSObject {
     let realm = try! Realm()
     func saveJsonData(with type: ZYWordType) {
         switch type {
+            //诗歌
         case .TangPoetry300:
             readJson(with: "唐诗三百首", and: ZYTangPoetry300.self)
         case .SongPoetry300:
@@ -34,6 +35,11 @@ class ZYJsonViewModel: NSObject {
             readJson(with: "", and: ZYTangPoetryAll.self)
         case .SongPoetryAll:
             readJson(with: "", and: ZYSongPoetryAll.self)
+            //豆瓣
+        case .Top250Movie:
+            ZYNetwordViewModel.shareNetword.findTop250Movie()
+        default:
+            break
         }
     }
     func readJson<T: Object>(with name: String, and type: T.Type) {
