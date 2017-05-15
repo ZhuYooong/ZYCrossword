@@ -10,40 +10,27 @@ import UIKit
 import RealmSwift
 
 class ZYCrosswordsGenerator: NSObject {
-    // MARK: - Additional types
-    public struct Word {
-        public var word = ""
-        public var column = 0
-        public var row = 0
-        public var direction: WordDirection = .vertical
-    }
-    public enum WordDirection {
-        case vertical
-        case horizontal
-    }
-    // MARK: - Public properties
-    open var columns: Int = 12
-    open var rows: Int = 12
-    open var words: Array<String> = Array()
-    
+    // MARK: - Public additional properties
+    open var emptySymbol = "-"
+    open var orientationOptimization = false
+    // MARK: - Logic properties
+    open var grid: Array2D<String>?
+    open var currentWords: Array<String> = Array()
+    open var resultData: Array<Word> = Array()
+    open var resultContentSet = Set<ZYBaseWord>()
+    // MARK: - Initialization
+    fileprivate var columns: Int = 12
+    fileprivate var rows: Int = 12
     open var result: Array<Word> {
         get {
             return resultData
         }
     }
-    // MARK: - Public additional properties
-    open var fillAllWords = false
-    open var emptySymbol = "-"
-    open var debug = true
-    open var orientationOptimization = false
-    // MARK: - Logic properties
-    fileprivate var grid: Array2D<String>?
-    fileprivate var currentWords: Array<String> = Array()
-    fileprivate var resultData: Array<Word> = Array()
-    fileprivate var resultContentSet = Set<ZYBaseWord>()
-    // MARK: - Initialization
-    static let shareCrosswordsGenerator = ZYCrosswordsGenerator()
-    fileprivate override init() { }
+    public override init() { }
+    public init(columns: Int, rows: Int) {
+        self.columns = columns
+        self.rows = rows
+    }
     func loadCrosswordsData() {
         let myQueue = DispatchQueue(label: "loadCrosswordsData")
         myQueue.async {
@@ -474,4 +461,25 @@ class ZYCrosswordsGenerator: NSObject {
     fileprivate func randomInt(_ min: Int, max:Int) -> Int {
         return min + Int(arc4random_uniform(UInt32(max - min + 1)))
     }
+    // MARK: - Debug
+    func printGrid() {
+        for i in 0 ..< rows {
+            var s = ""
+            for j in 0 ..< columns {
+                s += grid![j, i]
+            }
+            print(s)
+        }
+    }
+}
+// MARK: - Additional types
+public struct Word {
+    public var word = ""
+    public var column = 0
+    public var row = 0
+    public var direction: WordDirection = .vertical
+}
+public enum WordDirection {
+    case vertical
+    case horizontal
 }

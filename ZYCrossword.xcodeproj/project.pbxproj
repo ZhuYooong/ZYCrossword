@@ -338,6 +338,7 @@
 		0490ACC91EAEF0F40051C47D /* poet.tang.7000.json in Resources */ = {isa = PBXBuildFile; fileRef = 0490AB8E1EAEF0F30051C47D /* poet.tang.7000.json */; };
 		0490ACCA1EAEF0F40051C47D /* poet.tang.8000.json in Resources */ = {isa = PBXBuildFile; fileRef = 0490AB8F1EAEF0F30051C47D /* poet.tang.8000.json */; };
 		0490ACCB1EAEF0F40051C47D /* poet.tang.9000.json in Resources */ = {isa = PBXBuildFile; fileRef = 0490AB901EAEF0F30051C47D /* poet.tang.9000.json */; };
+		04928DB71EC93DAF002915BD /* ZYChessboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04928DB61EC93DAF002915BD /* ZYChessboard.swift */; };
 		0496F3291EBB1027008D3285 /* ZYChuCi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3231EBB1027008D3285 /* ZYChuCi.swift */; };
 		0496F32A1EBB1027008D3285 /* ZYOldPoetry300.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3241EBB1027008D3285 /* ZYOldPoetry300.swift */; };
 		0496F32B1EBB1027008D3285 /* ZYShiJing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3251EBB1027008D3285 /* ZYShiJing.swift */; };
@@ -715,6 +716,7 @@
 		0490AB8E1EAEF0F30051C47D /* poet.tang.7000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poet.tang.7000.json; sourceTree = "<group>"; };
 		0490AB8F1EAEF0F30051C47D /* poet.tang.8000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poet.tang.8000.json; sourceTree = "<group>"; };
 		0490AB901EAEF0F30051C47D /* poet.tang.9000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poet.tang.9000.json; sourceTree = "<group>"; };
+		04928DB61EC93DAF002915BD /* ZYChessboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYChessboard.swift; sourceTree = "<group>"; };
 		0496F3231EBB1027008D3285 /* ZYChuCi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYChuCi.swift; sourceTree = "<group>"; };
 		0496F3241EBB1027008D3285 /* ZYOldPoetry300.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYOldPoetry300.swift; sourceTree = "<group>"; };
 		0496F3251EBB1027008D3285 /* ZYShiJing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYShiJing.swift; sourceTree = "<group>"; };
@@ -850,6 +852,7 @@
 			children = (
 				0496F3311EBB1F71008D3285 /* CrosswordsGenerator */,
 				0490AA501EAEEFD40051C47D /* Word */,
+				04928DB51EC93D5D002915BD /* Chessboard */,
 				0490AA1A1EAEE0DB0051C47D /* ViewController.swift */,
 			);
 			name = Crossword;
@@ -1205,6 +1208,14 @@
 				0490AB901EAEF0F30051C47D /* poet.tang.9000.json */,
 			);
 			path = json;
+			sourceTree = "<group>";
+		};
+		04928DB51EC93D5D002915BD /* Chessboard */ = {
+			isa = PBXGroup;
+			children = (
+				04928DB61EC93DAF002915BD /* ZYChessboard.swift */,
+			);
+			name = Chessboard;
 			sourceTree = "<group>";
 		};
 		0496F3221EBB0FAF008D3285 /* json */ = {
@@ -1790,6 +1801,7 @@
 				04C94AC11EB33BC5009F4381 /* ZYWordViewModel.swift in Sources */,
 				04C94ABF1EB3364E009F4381 /* ZYBaseWord.swift in Sources */,
 				0496F32D1EBB1027008D3285 /* ZYTangPoetry300.swift in Sources */,
+				04928DB71EC93DAF002915BD /* ZYChessboard.swift in Sources */,
 				0496F32C1EBB1027008D3285 /* ZYSongPoetry300.swift in Sources */,
 				0496F3301EBB1CAA008D3285 /* ZYJsonViewModel.swift in Sources */,
 				0490AA1B1EAEE0DB0051C47D /* ViewController.swift in Sources */,
