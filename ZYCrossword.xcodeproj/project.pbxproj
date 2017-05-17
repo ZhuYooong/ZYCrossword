@@ -13,6 +13,10 @@
 		0447D8AB1EB9D56C001331AC /* 楚辞.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AA1EB9D56C001331AC /* 楚辞.json */; };
 		0447D8AD1EB9D572001331AC /* 乐府诗集.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AC1EB9D572001331AC /* 乐府诗集.json */; };
 		0447D8AF1EB9D578001331AC /* 诗经.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AE1EB9D578001331AC /* 诗经.json */; };
+		046A86CE1ECC4879001E7323 /* Top250的电影.json in Resources */ = {isa = PBXBuildFile; fileRef = 046A86CC1ECC4879001E7323 /* Top250的电影.json */; };
+		046A86CF1ECC4879001E7323 /* Top250的图书.json in Resources */ = {isa = PBXBuildFile; fileRef = 046A86CD1ECC4879001E7323 /* Top250的图书.json */; };
+		046A86D31ECC48AF001E7323 /* 汉语成语词典.json in Resources */ = {isa = PBXBuildFile; fileRef = 046A86D21ECC48AF001E7323 /* 汉语成语词典.json */; };
+		046A86D51ECC4C1B001E7323 /* ZYIdiom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A86D41ECC4C1B001E7323 /* ZYIdiom.swift */; };
 		0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AA181EAEE0DB0051C47D /* AppDelegate.swift */; };
 		0490AA1B1EAEE0DB0051C47D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AA1A1EAEE0DB0051C47D /* ViewController.swift */; };
 		0490AA1E1EAEE0DB0051C47D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0490AA1C1EAEE0DB0051C47D /* Main.storyboard */; };
@@ -385,6 +389,10 @@
 		0447D8AA1EB9D56C001331AC /* 楚辞.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "楚辞.json"; sourceTree = "<group>"; };
 		0447D8AC1EB9D572001331AC /* 乐府诗集.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "乐府诗集.json"; sourceTree = "<group>"; };
 		0447D8AE1EB9D578001331AC /* 诗经.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "诗经.json"; sourceTree = "<group>"; };
+		046A86CC1ECC4879001E7323 /* Top250的电影.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Top250的电影.json"; sourceTree = "<group>"; };
+		046A86CD1ECC4879001E7323 /* Top250的图书.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Top250的图书.json"; sourceTree = "<group>"; };
+		046A86D21ECC48AF001E7323 /* 汉语成语词典.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "汉语成语词典.json"; sourceTree = "<group>"; };
+		046A86D41ECC4C1B001E7323 /* ZYIdiom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYIdiom.swift; sourceTree = "<group>"; };
 		0490AA151EAEE0DB0051C47D /* ZYCrossword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYCrossword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490AA181EAEE0DB0051C47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0490AA1A1EAEE0DB0051C47D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -767,6 +775,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		046A86CA1ECC4840001E7323 /* Douban */ = {
+			isa = PBXGroup;
+			children = (
+				046A86CB1ECC4850001E7323 /* json */,
+				04BD13291EC2EA8F00B1DB9E /* ZYBook.swift */,
+				04BD132D1EC30DDB00B1DB9E /* ZYMovie.swift */,
+				04141ADC1EC4690500A1A8A2 /* ZYMusic.swift */,
+			);
+			name = Douban;
+			sourceTree = "<group>";
+		};
+		046A86CB1ECC4850001E7323 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				046A86CC1ECC4879001E7323 /* Top250的电影.json */,
+				046A86CD1ECC4879001E7323 /* Top250的图书.json */,
+			);
+			name = json;
+			sourceTree = "<group>";
+		};
+		046A86D01ECC4895001E7323 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				046A86D11ECC48A1001E7323 /* json */,
+				046A86D41ECC4C1B001E7323 /* ZYIdiom.swift */,
+			);
+			name = Dictionary;
+			sourceTree = "<group>";
+		};
+		046A86D11ECC48A1001E7323 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				046A86D21ECC48AF001E7323 /* 汉语成语词典.json */,
+			);
+			name = json;
+			sourceTree = "<group>";
+		};
 		0490AA0C1EAEE0DA0051C47D = {
 			isa = PBXGroup;
 			children = (
@@ -1246,9 +1291,8 @@
 			children = (
 				04D2EEA51EB196D500BC24B0 /* ZYWord.swift */,
 				04C94ABE1EB3364E009F4381 /* ZYBaseWord.swift */,
-				04BD13291EC2EA8F00B1DB9E /* ZYBook.swift */,
-				04BD132D1EC30DDB00B1DB9E /* ZYMovie.swift */,
-				04141ADC1EC4690500A1A8A2 /* ZYMusic.swift */,
+				046A86D01ECC4895001E7323 /* Dictionary */,
+				046A86CA1ECC4840001E7323 /* Douban */,
 				0490AA531EAEF0820051C47D /* Poetry */,
 			);
 			name = Model;
@@ -1494,6 +1538,7 @@
 				0490ABB71EAEF0F30051C47D /* poet.song.130000.json in Resources */,
 				0490ABDE1EAEF0F30051C47D /* poet.song.166000.json in Resources */,
 				0490AC981EAEF0F40051C47D /* poet.tang.14000.json in Resources */,
+				046A86CF1ECC4879001E7323 /* Top250的图书.json in Resources */,
 				0490AC801EAEF0F40051C47D /* poet.song.83000.json in Resources */,
 				0490ABE41EAEF0F30051C47D /* poet.song.171000.json in Resources */,
 				0490ACC61EAEF0F40051C47D /* poet.tang.56000.json in Resources */,
@@ -1635,6 +1680,7 @@
 				0490AC7D1EAEF0F40051C47D /* poet.song.80000.json in Resources */,
 				0490AC421EAEF0F40051C47D /* poet.song.27000.json in Resources */,
 				0490AC941EAEF0F40051C47D /* poet.tang.10000.json in Resources */,
+				046A86CE1ECC4879001E7323 /* Top250的电影.json in Resources */,
 				0490AC761EAEF0F40051C47D /* poet.song.74000.json in Resources */,
 				0490AC2B1EAEF0F40051C47D /* poet.song.235000.json in Resources */,
 				0490AC6B1EAEF0F40051C47D /* poet.song.64000.json in Resources */,
@@ -1715,6 +1761,7 @@
 				0490ACCB1EAEF0F40051C47D /* poet.tang.9000.json in Resources */,
 				0490AC241EAEF0F40051C47D /* poet.song.229000.json in Resources */,
 				0490AC4F1EAEF0F40051C47D /* poet.song.39000.json in Resources */,
+				046A86D31ECC48AF001E7323 /* 汉语成语词典.json in Resources */,
 				0490ACA21EAEF0F40051C47D /* poet.tang.23000.json in Resources */,
 				0490AC641EAEF0F40051C47D /* poet.song.58000.json in Resources */,
 				0490ABF11EAEF0F30051C47D /* poet.song.183000.json in Resources */,
@@ -1805,6 +1852,7 @@
 				0496F32C1EBB1027008D3285 /* ZYSongPoetry300.swift in Sources */,
 				0496F3301EBB1CAA008D3285 /* ZYJsonViewModel.swift in Sources */,
 				0490AA1B1EAEE0DB0051C47D /* ViewController.swift in Sources */,
+				046A86D51ECC4C1B001E7323 /* ZYIdiom.swift in Sources */,
 				04D2EEA61EB196D500BC24B0 /* ZYWord.swift in Sources */,
 				04D2EEB01EB19E4000BC24B0 /* ZYSongPoetryAll.swift in Sources */,
 				0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */,

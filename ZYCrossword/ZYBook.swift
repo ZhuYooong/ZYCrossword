@@ -11,25 +11,32 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYBook: ZYBaseWord {
+    dynamic var content_description: String? = ""
+    dynamic var ISBN: String? = ""
+    dynamic var name: String? = ""
     dynamic var author: String? = ""
-    dynamic var title: String? = ""
-    dynamic var summary: String? = ""
-    dynamic var url: String? = ""
-    dynamic var authorIntro: String? = ""
-    dynamic var image: String? = ""
-    dynamic var catalog: String? = ""
-    
+    dynamic var price: String? = ""
+    dynamic var press: String? = ""
+    dynamic var score: String? = ""
+    dynamic var link: String? = ""
+    dynamic var author_profile: String? = ""
+    dynamic var date: String? = ""
+    dynamic var page: String? = ""
     override static func primaryKey() -> String? {
-        return "title"
+        return "ISBN"
     }
     convenience init(with json: JSON) {
         self.init()
-        author = json["author"].arrayValue.first?.stringValue
-        title = json["title"].stringValue
-        summary = json["summary"].stringValue
-        url = json["url"].stringValue
-        authorIntro = json["author_intro"].stringValue
-        image = json["image"].stringValue
-        catalog = json["catalog"].stringValue
+        content_description = json["content_description"].arrayValue.first?.stringValue
+        ISBN = json["ISBN"].stringValue
+        name = json["name"].stringValue
+        author = json["author"].stringValue
+        price = json["price"].stringValue
+        press = json["press"].stringValue
+        score = json["score"].stringValue
+        link = json["link"].arrayValue.first?.stringValue
+        author_profile = json["author_profile"].stringValue
+        date = json["date"].stringValue
+        page = json["page"].stringValue
     }
 }

@@ -37,9 +37,12 @@ class ZYJsonViewModel: NSObject {
             readJson(with: "", and: ZYSongPoetryAll.self)
             //豆瓣
         case .Top250Movie:
-            ZYNetwordViewModel.shareNetword.findTop250Movie()
-        default:
-            break
+            readJson(with: "Top250的电影", and: ZYMovie.self)
+        case .Top250Book:
+            readJson(with: "Top250的图书", and: ZYBook.self)
+            //词典
+        case .Idiom:
+            readJson(with: "汉语成语词典", and: ZYIdiom.self)
         }
     }
     func readJson<T: Object>(with name: String, and type: T.Type) {
@@ -125,6 +128,32 @@ class ZYJsonViewModel: NSObject {
                             
                         }else if T.self == ZYSongPoetryAll.self {
                             
+                        }else if T.self == ZYMovie.self {
+                            let rootDictionary = jsonObj.dictionaryValue
+                            let chuciArray = rootDictionary["father"]!.arrayValue
+                            for chuci in chuciArray {
+                                let chuciItem = ZYMovie(with: chuci)
+                                try! realm.write {
+                                    realm.add(chuciItem, update: true)
+                                }
+                            }
+                        }else if T.self == ZYBook.self {
+                            let chuciArray = jsonObj.arrayValue
+                            for chuci in chuciArray {
+                                let chuciItem = ZYBook(with: chuci)
+                                try! realm.write {
+                                    realm.add(chuciItem, update: true)
+                                }
+                            }
+                        }else if T.self == ZYIdiom.self {
+                            let rootDictionary = jsonObj.dictionaryValue
+                            let chuciArray = rootDictionary["father"]!.arrayValue
+                            for chuci in chuciArray {
+                                let chuciItem = ZYMovie(with: chuci)
+                                try! realm.write {
+                                    realm.add(chuciItem, update: true)
+                                }
+                            }
                         }
                     }else {
                         print("Could not get json from file, make sure that file contains valid json.")

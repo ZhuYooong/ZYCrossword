@@ -69,9 +69,11 @@ class ZYCrosswordsGenerator: NSObject {
         }else if name == "全宋词" {
             contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYSongPoetryAll.self))
         }else if name == "Top250的电影" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYMovie.self).filter(NSPredicate(format: "type = '\(ZYMovieType.Top250.rawValue)'")))
-        }else if name == "最近的电影" {
-            contentArray.append(ZYNetwordViewModel.shareNetword.findNowMovie())
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYMovie.self))
+        }else if name == "Top250的图书" {
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYBook.self))
+        }else if name == "汉语成语词典" {
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYIdiom.self))
         }
     }
     // MARK: - Crosswords generation
@@ -233,6 +235,30 @@ class ZYCrosswordsGenerator: NSObject {
                     break
                 }
             }
+            if let deatil = detailResult?.movie_name {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
+        }else if let results: Results<ZYBook> = content as? Results<ZYBook> {
+            var detailResult: ZYBook?
+            for item in filterResult(with: results, and: ZYBook.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+            if let deatil = detailResult?.name {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
+        }else if let results: Results<ZYIdiom> = content as? Results<ZYIdiom> {
+            var detailResult: ZYIdiom?
+            for item in filterResult(with: results, and: ZYIdiom.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
             if let deatil = detailResult?.title {
                 currentContent = detailResult
                 return findDetailWord(with: deatil, and: findString)
@@ -244,6 +270,10 @@ class ZYCrosswordsGenerator: NSObject {
         if let findString = findString {
             var predicate = NSPredicate(format: "detail contains '\(findString)'")
             if type == ZYMovie.self {
+                predicate = NSPredicate(format: "movie_name contains '\(findString)'")
+            }else if type == ZYBook.self {
+                predicate = NSPredicate(format: "name contains '\(findString)'")
+            }else if type == ZYIdiom.self {
                 predicate = NSPredicate(format: "title contains '\(findString)'")
             }
             return results.filter(predicate).sorted(byProperty: "selecttedCount")
