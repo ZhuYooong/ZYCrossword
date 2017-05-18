@@ -22,10 +22,12 @@ class ZYBook: ZYBaseWord {
     dynamic var author_profile: String? = ""
     dynamic var date: String? = ""
     dynamic var page: String? = ""
+    dynamic var wordType = ZYBookType.Top250.rawValue
+    
     override static func primaryKey() -> String? {
         return "ISBN"
     }
-    convenience init(with json: JSON) {
+    convenience init(with json: JSON, and typeInfo: String) {
         self.init()
         content_description = json["content_description"].arrayValue.first?.stringValue
         ISBN = json["ISBN"].stringValue
@@ -34,9 +36,13 @@ class ZYBook: ZYBaseWord {
         price = json["price"].stringValue
         press = json["press"].stringValue
         score = json["score"].stringValue
-        link = json["link"].arrayValue.first?.stringValue
+        link = json["link"].stringValue
         author_profile = json["author_profile"].stringValue
         date = json["date"].stringValue
         page = json["page"].stringValue
+        wordType = typeInfo
     }
+}
+enum ZYBookType: String {
+    case Top250 = "Top250"
 }

@@ -1,16 +1,17 @@
 //
-//  ZYShiJing.swift
+//  ZYPoetry.swift
 //  ZYCrossword
 //
-//  Created by MAC on 2017/5/3.
+//  Created by MAC on 2017/5/18.
 //  Copyright © 2017年 ZhuYong. All rights reserved.
 //
 
 import UIKit
+import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class ZYShiJing: ZYBaseWord {
+class ZYPoetry: ZYBaseWord {
     dynamic var detail: String? = ""
     dynamic var title: String? = ""
     dynamic var url: String? = ""
@@ -20,11 +21,12 @@ class ZYShiJing: ZYBaseWord {
     dynamic var appreciation: String? = ""
     dynamic var dynasty: String? = ""
     dynamic var background: String? = ""
+    dynamic var wordType = ZYPoetryType.TangPoetry300.rawValue
     
     override static func primaryKey() -> String? {
         return "title"
     }
-    convenience init(with json: JSON) {
+    convenience init(with json: JSON, and typeInfo: String) {
         self.init()
         author = json["detail_author"].arrayValue.first?.stringValue
         background = json["detail_background_text"].arrayValue.first?.stringValue
@@ -57,5 +59,16 @@ class ZYShiJing: ZYBaseWord {
         }
         note = translateString
         translate = noteString
+        wordType = typeInfo
     }
+}
+enum ZYPoetryType: String {
+    case TangPoetry300 = "唐诗三百首"
+    case SongPoetry300 = "宋词三百首"
+    case OldPoetry300 = "古诗三百首"
+    case ShiJing = "诗经"
+    case YueFu = "乐府诗集"
+    case ChuCi = "楚辞"
+    case TangPoetryAll = "全唐诗"
+    case SongPoetryAll = "全宋词"
 }

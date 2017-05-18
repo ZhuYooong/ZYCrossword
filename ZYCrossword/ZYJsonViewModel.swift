@@ -18,31 +18,14 @@ class ZYJsonViewModel: NSObject {
     let realm = try! Realm()
     func saveJsonData(with type: ZYWordType) {
         switch type {
-            //诗歌
-        case .TangPoetry300:
-            readJson(with: "唐诗三百首", and: ZYTangPoetry300.self)
-        case .SongPoetry300:
-            readJson(with: "宋词三百首", and: ZYSongPoetry300.self)
-        case .OldPoetry300:
-            readJson(with: "古诗三百首", and: ZYOldPoetry300.self)
-        case .ShiJing:
-            readJson(with: "诗经", and: ZYShiJing.self)
-        case .YueFu:
-            readJson(with: "乐府诗集", and: ZYYueFu.self)
-        case .ChuCi:
-            readJson(with: "楚辞", and: ZYChuCi.self)
-        case .TangPoetryAll:
-            readJson(with: "", and: ZYTangPoetryAll.self)
-        case .SongPoetryAll:
-            readJson(with: "", and: ZYSongPoetryAll.self)
-            //豆瓣
-        case .Top250Movie:
-            readJson(with: "Top250的电影", and: ZYMovie.self)
-        case .Top250Book:
-            readJson(with: "Top250的图书", and: ZYBook.self)
-            //词典
-        case .Idiom:
-            readJson(with: "汉语成语词典", and: ZYIdiom.self)
+        case .TangPoetry300, .SongPoetry300, .OldPoetry300, .ShiJing, .YueFu, .ChuCi, .TangPoetryAll, .SongPoetryAll: //诗歌
+            readJson(with: type.rawValue, and: ZYPoetry.self)
+        case .Top250Movie: //电影
+            readJson(with: type.rawValue, and: ZYMovie.self)
+        case .Top250Book: //书籍
+            readJson(with: type.rawValue, and: ZYBook.self)
+        case .Idiom: //词典
+            readJson(with: type.rawValue, and: ZYIdiom.self)
         }
     }
     func readJson<T: Object>(with name: String, and type: T.Type) {
@@ -52,104 +35,40 @@ class ZYJsonViewModel: NSObject {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                     let jsonObj = JSON(data: data)
                     if jsonObj != JSON.null {
-                        if T.self == ZYTangPoetry300.self {
+                        if T.self == ZYPoetry.self { //诗歌
                             let rootDictionary = jsonObj.dictionaryValue
                             let fatherArray = rootDictionary["father"]!.arrayValue
                             for father in fatherArray {
                                 let desArray = father["des"].arrayValue
                                 for des in desArray {
-                                    let tangPoetry300 = ZYTangPoetry300(with: des)
+                                    let tangPoetry300 = ZYPoetry(with: des, and: name)
                                     try! realm.write {
                                         realm.add(tangPoetry300, update: true)
                                     }
                                 }
                             }
-                        }else if T.self == ZYSongPoetry300.self {
-                            let rootDictionary = jsonObj.dictionaryValue
-                            let chuciArray = rootDictionary["chuci"]!.arrayValue
-                            for chuci in chuciArray {
-                                let desArray = chuci["des"].arrayValue
-                                for des in desArray {
-                                    let songPoetry300 = ZYSongPoetry300(with: des)
-                                    try! realm.write {
-                                        realm.add(songPoetry300, update: true)
-                                    }
-                                }
-                            }
-                        }else if T.self == ZYOldPoetry300.self {
-                            let rootDictionary = jsonObj.dictionaryValue
-                            let chuciArray = rootDictionary["chuci"]!.arrayValue
-                            for chuci in chuciArray {
-                                let desArray = chuci["des"].arrayValue
-                                for des in desArray {
-                                    let oldPoetry300 = ZYOldPoetry300(with: des)
-                                    try! realm.write {
-                                        realm.add(oldPoetry300, update: true)
-                                    }
-                                }
-                            }
-                        }else if T.self == ZYShiJing.self {
-                            let rootDictionary = jsonObj.dictionaryValue
-                            let chuciArray = rootDictionary["chuci"]!.arrayValue
-                            for chuci in chuciArray {
-                                let desArray = chuci["des"].arrayValue
-                                for des in desArray {
-                                    let shijing = ZYShiJing(with: des)
-                                    try! realm.write {
-                                        realm.add(shijing, update: true)
-                                    }
-                                }
-                            }
-                        }else if T.self == ZYYueFu.self {
-                            let rootDictionary = jsonObj.dictionaryValue
-                            let chuciArray = rootDictionary["chuci"]!.arrayValue
-                            for chuci in chuciArray {
-                                let desArray = chuci["des"].arrayValue
-                                for des in desArray {
-                                    let yuefu = ZYYueFu(with: des)
-                                    try! realm.write {
-                                        realm.add(yuefu, update: true)
-                                    }
-                                }
-                            }
-                        }else if T.self == ZYChuCi.self {
-                            let rootDictionary = jsonObj.dictionaryValue
-                            let chuciArray = rootDictionary["chuci"]!.arrayValue
-                            for chuci in chuciArray {
-                                let desArray = chuci["des"].arrayValue
-                                for des in desArray {
-                                    let chuciItem = ZYChuCi(with: des)
-                                    try! realm.write {
-                                        realm.add(chuciItem, update: true)
-                                    }
-                                }
-                            }
-                        }else if T.self == ZYTangPoetryAll.self {
-                            
-                        }else if T.self == ZYSongPoetryAll.self {
-                            
-                        }else if T.self == ZYMovie.self {
+                        }else if T.self == ZYMovie.self { //电影
                             let rootDictionary = jsonObj.dictionaryValue
                             let chuciArray = rootDictionary["father"]!.arrayValue
                             for chuci in chuciArray {
-                                let chuciItem = ZYMovie(with: chuci)
+                                let chuciItem = ZYMovie(with: chuci, and: name)
                                 try! realm.write {
                                     realm.add(chuciItem, update: true)
                                 }
                             }
-                        }else if T.self == ZYBook.self {
+                        }else if T.self == ZYBook.self {//书籍
                             let chuciArray = jsonObj.arrayValue
                             for chuci in chuciArray {
-                                let chuciItem = ZYBook(with: chuci)
+                                let chuciItem = ZYBook(with: chuci, and: name)
                                 try! realm.write {
                                     realm.add(chuciItem, update: true)
                                 }
                             }
-                        }else if T.self == ZYIdiom.self {
+                        }else if T.self == ZYIdiom.self { //词典
                             let rootDictionary = jsonObj.dictionaryValue
                             let chuciArray = rootDictionary["father"]!.arrayValue
                             for chuci in chuciArray {
-                                let chuciItem = ZYMovie(with: chuci)
+                                let chuciItem = ZYMovie(with: chuci, and: name)
                                 try! realm.write {
                                     realm.add(chuciItem, update: true)
                                 }
@@ -167,7 +86,11 @@ class ZYJsonViewModel: NSObject {
         }
     }
     //MARK: - 读取本地数据
-    func loadJsonData<T: Object>(with type: T.Type) -> Results<T> {
-        return realm.objects(T.self).sorted(byProperty: "selecttedCount")
+    func loadJsonData<T: Object>(with type: T.Type, and wordType: String?) -> Results<T> {
+        if let str = wordType {
+            return realm.objects(T.self).filter(NSPredicate(format: "wordType = '\(str)'")).sorted(byProperty: "selecttedCount")
+        }else {
+            return realm.objects(T.self).sorted(byProperty: "selecttedCount")
+        }
     }
 }

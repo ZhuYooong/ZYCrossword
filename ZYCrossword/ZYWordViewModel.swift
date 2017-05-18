@@ -26,7 +26,7 @@ class ZYWordViewModel: NSObject {
         let wordInfo = ZYWord()
         wordInfo.wordType = type.rawValue
         switch type {
-        case .Top250Movie, .Idiom, .ShiJing, .YueFu, .ChuCi:
+        case .SongPoetry300, .OldPoetry300, .ShiJing, .YueFu, .ChuCi, .Top250Book, .Idiom:
             wordInfo.isSelectted = "1"
         default:
             wordInfo.isSelectted = "0"
@@ -70,12 +70,14 @@ enum ZYWordType: String {
     case ChuCi = "楚辞"
     case TangPoetryAll = "全唐诗"
     case SongPoetryAll = "全宋词"
-    //豆瓣
+    //电影
     case Top250Movie = "Top250的电影"
+    //书籍
     case Top250Book = "Top250的图书"
     //词典
     case Idiom = "汉语成语词典"
     static let allValues = [TangPoetry300,SongPoetry300,OldPoetry300,ShiJing,YueFu,ChuCi,TangPoetryAll,SongPoetryAll,
-                            Top250Movie,Top250Book,
+                            Top250Movie,
+                            Top250Book,
                             Idiom]
 }

@@ -54,8 +54,8 @@ extension NetDataManager {
     func findTop250Movie(_ NetData: @escaping (_ data: Data?)->Void) {// Top250的电影
         GETRequest("\(DoubanBaseURL)/movie/top250", NetData: NetData)
     }
-    func findDetailMovie(with movie: ZYMovie, NetData: @escaping (_ data: Data?)->Void) {// 电影条目信息
-        GETRequest("\(DoubanBaseURL)/movie/subject/\(String(describing: movie.id))", NetData: NetData)
+    func findDetailMovie(with id: String, NetData: @escaping (_ data: Data?)->Void) {// 电影条目信息
+        GETRequest("\(DoubanBaseURL)/movie/subject/\(id)", NetData: NetData)
     }
     func findMusic(with name: String, NetData: @escaping (_ data: Data?)->Void) {// 搜索音乐
         GETRequest("\(DoubanBaseURL)/music/search", parameters: ["q":name], NetData: NetData)

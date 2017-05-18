@@ -52,28 +52,14 @@ class ZYCrosswordsGenerator: NSObject {
         }
     }
     func loadJsonData(with name:String?) {
-        if name == "唐诗三百首" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYTangPoetry300.self))
-        }else if name == "宋词三百首" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYSongPoetry300.self))
-        }else if name == "古诗三百首" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYOldPoetry300.self))
-        }else if name == "诗经" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYShiJing.self))
-        }else if name == "乐府诗集" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYYueFu.self))
-        }else if name == "楚辞" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYChuCi.self))
-        }else if name == "全唐诗" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYTangPoetryAll.self))
-        }else if name == "全宋词" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYSongPoetryAll.self))
+        if name == "唐诗三百首" || name == "宋词三百首" || name == "古诗三百首" || name == "诗经" || name == "乐府诗集" || name == "楚辞" || name == "全唐诗" || name == "全宋词" {
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYPoetry.self, and: name))
         }else if name == "Top250的电影" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYMovie.self))
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYMovie.self, and: name))
         }else if name == "Top250的图书" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYBook.self))
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYBook.self, and: name))
         }else if name == "汉语成语词典" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYIdiom.self))
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYIdiom.self, and: name))
         }
     }
     // MARK: - Crosswords generation
@@ -131,9 +117,9 @@ class ZYCrosswordsGenerator: NSObject {
     }
     var currentContent: AnyObject?
     func findWord(with content: AnyObject, and findString: String?) -> String? {
-        if let results: Results<ZYTangPoetry300> = content as? Results<ZYTangPoetry300> {
-            var detailResult: ZYTangPoetry300?
-            for item in filterResult(with: results, and: ZYTangPoetry300.self, and: findString) {
+        if let results: Results<ZYPoetry> = content as? Results<ZYPoetry> {
+            var detailResult: ZYPoetry?
+            for item in filterResult(with: results, and: ZYPoetry.self, and: findString) {
                 if !resultContentSet.contains(item) {
                     detailResult = item
                     break
@@ -143,90 +129,6 @@ class ZYCrosswordsGenerator: NSObject {
                 currentContent = detailResult
                 return findDetailWord(with: deatil, and: findString)
             }
-        }else if let results: Results<ZYSongPoetry300> = content as? Results<ZYSongPoetry300> {
-            var detailResult: ZYSongPoetry300?
-            for item in filterResult(with: results, and: ZYSongPoetry300.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
-                }
-            }
-            if let deatil = detailResult?.detail {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
-            }
-        }else if let results: Results<ZYOldPoetry300> = content as? Results<ZYOldPoetry300> {
-            var detailResult: ZYOldPoetry300?
-            for item in filterResult(with: results, and: ZYOldPoetry300.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
-                }
-            }
-            if let deatil = detailResult?.detail {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
-            }
-        }else if let results: Results<ZYShiJing> = content as? Results<ZYShiJing> {
-            var detailResult: ZYShiJing?
-            for item in filterResult(with: results, and: ZYShiJing.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
-                }
-            }
-            if let deatil = detailResult?.detail {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
-            }
-        }else if let results: Results<ZYYueFu> = content as? Results<ZYYueFu> {
-            var detailResult: ZYYueFu?
-            for item in filterResult(with: results, and: ZYYueFu.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
-                }
-            }
-            if let deatil = detailResult?.detail {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
-            }
-        }else if let results: Results<ZYChuCi> = content as? Results<ZYChuCi> {
-            var detailResult: ZYChuCi?
-            for item in filterResult(with: results, and: ZYChuCi.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
-                }
-            }
-            if let deatil = detailResult?.detail {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
-            }
-        }else if let results: Results<ZYTangPoetryAll> = content as? Results<ZYTangPoetryAll> {
-            var detailResult: ZYTangPoetryAll?
-            for item in filterResult(with: results, and: ZYTangPoetryAll.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
-                }
-            }
-//            if let deatil = detailResult?.detail {
-//            currentContent = detailResult
-//                return findDetailWord(with: deatil, and: findString)
-//            }
-        }else if let results: Results<ZYSongPoetryAll> = content as? Results<ZYSongPoetryAll> {
-            var detailResult: ZYSongPoetryAll?
-            for item in filterResult(with: results, and: ZYSongPoetryAll.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
-                }
-            }
-//            if let deatil = detailResult?.detail {
-//            currentContent = detailResult
-//                return findDetailWord(with: deatil, and: findString)
-//            }
         }else if let results: Results<ZYMovie> = content as? Results<ZYMovie> {
             var detailResult: ZYMovie?
             for item in filterResult(with: results, and: ZYMovie.self, and: findString) {

@@ -17,6 +17,7 @@
 		046A86CF1ECC4879001E7323 /* Top250的图书.json in Resources */ = {isa = PBXBuildFile; fileRef = 046A86CD1ECC4879001E7323 /* Top250的图书.json */; };
 		046A86D31ECC48AF001E7323 /* 汉语成语词典.json in Resources */ = {isa = PBXBuildFile; fileRef = 046A86D21ECC48AF001E7323 /* 汉语成语词典.json */; };
 		046A86D51ECC4C1B001E7323 /* ZYIdiom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A86D41ECC4C1B001E7323 /* ZYIdiom.swift */; };
+		046A86D71ECD4987001E7323 /* ZYPoetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046A86D61ECD4987001E7323 /* ZYPoetry.swift */; };
 		0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AA181EAEE0DB0051C47D /* AppDelegate.swift */; };
 		0490AA1B1EAEE0DB0051C47D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AA1A1EAEE0DB0051C47D /* ViewController.swift */; };
 		0490AA1E1EAEE0DB0051C47D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0490AA1C1EAEE0DB0051C47D /* Main.storyboard */; };
@@ -343,12 +344,6 @@
 		0490ACCA1EAEF0F40051C47D /* poet.tang.8000.json in Resources */ = {isa = PBXBuildFile; fileRef = 0490AB8F1EAEF0F30051C47D /* poet.tang.8000.json */; };
 		0490ACCB1EAEF0F40051C47D /* poet.tang.9000.json in Resources */ = {isa = PBXBuildFile; fileRef = 0490AB901EAEF0F30051C47D /* poet.tang.9000.json */; };
 		04928DB71EC93DAF002915BD /* ZYChessboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04928DB61EC93DAF002915BD /* ZYChessboard.swift */; };
-		0496F3291EBB1027008D3285 /* ZYChuCi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3231EBB1027008D3285 /* ZYChuCi.swift */; };
-		0496F32A1EBB1027008D3285 /* ZYOldPoetry300.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3241EBB1027008D3285 /* ZYOldPoetry300.swift */; };
-		0496F32B1EBB1027008D3285 /* ZYShiJing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3251EBB1027008D3285 /* ZYShiJing.swift */; };
-		0496F32C1EBB1027008D3285 /* ZYSongPoetry300.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3261EBB1027008D3285 /* ZYSongPoetry300.swift */; };
-		0496F32D1EBB1027008D3285 /* ZYTangPoetry300.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3271EBB1027008D3285 /* ZYTangPoetry300.swift */; };
-		0496F32E1EBB1027008D3285 /* ZYYueFu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3281EBB1027008D3285 /* ZYYueFu.swift */; };
 		0496F3301EBB1CAA008D3285 /* ZYJsonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F32F1EBB1CAA008D3285 /* ZYJsonViewModel.swift */; };
 		0496F3331EBB2084008D3285 /* ZYCrosswordsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3321EBB2084008D3285 /* ZYCrosswordsGenerator.swift */; };
 		0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3341EBB20D3008D3285 /* ZYArray2D.swift */; };
@@ -360,8 +355,6 @@
 		04C94AC11EB33BC5009F4381 /* ZYWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C94AC01EB33BC5009F4381 /* ZYWordViewModel.swift */; };
 		04D2EEA41EB18A8300BC24B0 /* 唐诗三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D2EEA31EB18A8300BC24B0 /* 唐诗三百首.json */; };
 		04D2EEA61EB196D500BC24B0 /* ZYWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2EEA51EB196D500BC24B0 /* ZYWord.swift */; };
-		04D2EEAE1EB19E1700BC24B0 /* ZYTangPoetryAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2EEAD1EB19E1700BC24B0 /* ZYTangPoetryAll.swift */; };
-		04D2EEB01EB19E4000BC24B0 /* ZYSongPoetryAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2EEAF1EB19E4000BC24B0 /* ZYSongPoetryAll.swift */; };
 		1D2D8092E042B60E396C39A3 /* Pods_ZYCrossword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */; };
 /* End PBXBuildFile section */
 
@@ -393,6 +386,7 @@
 		046A86CD1ECC4879001E7323 /* Top250的图书.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Top250的图书.json"; sourceTree = "<group>"; };
 		046A86D21ECC48AF001E7323 /* 汉语成语词典.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "汉语成语词典.json"; sourceTree = "<group>"; };
 		046A86D41ECC4C1B001E7323 /* ZYIdiom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYIdiom.swift; sourceTree = "<group>"; };
+		046A86D61ECD4987001E7323 /* ZYPoetry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYPoetry.swift; sourceTree = "<group>"; };
 		0490AA151EAEE0DB0051C47D /* ZYCrossword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYCrossword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490AA181EAEE0DB0051C47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0490AA1A1EAEE0DB0051C47D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -725,12 +719,6 @@
 		0490AB8F1EAEF0F30051C47D /* poet.tang.8000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poet.tang.8000.json; sourceTree = "<group>"; };
 		0490AB901EAEF0F30051C47D /* poet.tang.9000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poet.tang.9000.json; sourceTree = "<group>"; };
 		04928DB61EC93DAF002915BD /* ZYChessboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYChessboard.swift; sourceTree = "<group>"; };
-		0496F3231EBB1027008D3285 /* ZYChuCi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYChuCi.swift; sourceTree = "<group>"; };
-		0496F3241EBB1027008D3285 /* ZYOldPoetry300.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYOldPoetry300.swift; sourceTree = "<group>"; };
-		0496F3251EBB1027008D3285 /* ZYShiJing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYShiJing.swift; sourceTree = "<group>"; };
-		0496F3261EBB1027008D3285 /* ZYSongPoetry300.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYSongPoetry300.swift; sourceTree = "<group>"; };
-		0496F3271EBB1027008D3285 /* ZYTangPoetry300.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYTangPoetry300.swift; sourceTree = "<group>"; };
-		0496F3281EBB1027008D3285 /* ZYYueFu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYYueFu.swift; sourceTree = "<group>"; };
 		0496F32F1EBB1CAA008D3285 /* ZYJsonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYJsonViewModel.swift; sourceTree = "<group>"; };
 		0496F3321EBB2084008D3285 /* ZYCrosswordsGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYCrosswordsGenerator.swift; sourceTree = "<group>"; };
 		0496F3341EBB20D3008D3285 /* ZYArray2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYArray2D.swift; sourceTree = "<group>"; };
@@ -742,8 +730,6 @@
 		04C94AC01EB33BC5009F4381 /* ZYWordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYWordViewModel.swift; sourceTree = "<group>"; };
 		04D2EEA31EB18A8300BC24B0 /* 唐诗三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "唐诗三百首.json"; sourceTree = "<group>"; };
 		04D2EEA51EB196D500BC24B0 /* ZYWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYWord.swift; sourceTree = "<group>"; };
-		04D2EEAD1EB19E1700BC24B0 /* ZYTangPoetryAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYTangPoetryAll.swift; sourceTree = "<group>"; };
-		04D2EEAF1EB19E4000BC24B0 /* ZYSongPoetryAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYSongPoetryAll.swift; sourceTree = "<group>"; };
 		1EBD6372DBC0C4D850FF40C9 /* Pods-ZYCrossword.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.debug.xcconfig"; sourceTree = "<group>"; };
 		2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZYCrossword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5ACE0D0094E616FD0302C3 /* Pods-ZYCrossword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.release.xcconfig"; sourceTree = "<group>"; };
@@ -917,7 +903,8 @@
 		0490AA531EAEF0820051C47D /* Poetry */ = {
 			isa = PBXGroup;
 			children = (
-				04D2EE9B1EB189DB00BC24B0 /* ChinesePoetry300 */,
+				0496F3221EBB0FAF008D3285 /* json */,
+				046A86D61ECD4987001E7323 /* ZYPoetry.swift */,
 				0490AA541EAEF0B50051C47D /* ChinestPoetryAll */,
 			);
 			name = Poetry;
@@ -927,8 +914,6 @@
 			isa = PBXGroup;
 			children = (
 				0490AA551EAEF0F20051C47D /* json */,
-				04D2EEAD1EB19E1700BC24B0 /* ZYTangPoetryAll.swift */,
-				04D2EEAF1EB19E4000BC24B0 /* ZYSongPoetryAll.swift */,
 			);
 			name = ChinestPoetryAll;
 			sourceTree = "<group>";
@@ -1296,20 +1281,6 @@
 				0490AA531EAEF0820051C47D /* Poetry */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		04D2EE9B1EB189DB00BC24B0 /* ChinesePoetry300 */ = {
-			isa = PBXGroup;
-			children = (
-				0496F3221EBB0FAF008D3285 /* json */,
-				0496F3271EBB1027008D3285 /* ZYTangPoetry300.swift */,
-				0496F3261EBB1027008D3285 /* ZYSongPoetry300.swift */,
-				0496F3241EBB1027008D3285 /* ZYOldPoetry300.swift */,
-				0496F3251EBB1027008D3285 /* ZYShiJing.swift */,
-				0496F3281EBB1027008D3285 /* ZYYueFu.swift */,
-				0496F3231EBB1027008D3285 /* ZYChuCi.swift */,
-			);
-			name = ChinesePoetry300;
 			sourceTree = "<group>";
 		};
 		3A6FF91212327038D9969E08 /* Frameworks */ = {
@@ -1841,30 +1812,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0496F32A1EBB1027008D3285 /* ZYOldPoetry300.swift in Sources */,
 				04BD132C1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift in Sources */,
 				0496F3331EBB2084008D3285 /* ZYCrosswordsGenerator.swift in Sources */,
 				04BD132A1EC2EA8F00B1DB9E /* ZYBook.swift in Sources */,
 				04C94AC11EB33BC5009F4381 /* ZYWordViewModel.swift in Sources */,
 				04C94ABF1EB3364E009F4381 /* ZYBaseWord.swift in Sources */,
-				0496F32D1EBB1027008D3285 /* ZYTangPoetry300.swift in Sources */,
 				04928DB71EC93DAF002915BD /* ZYChessboard.swift in Sources */,
-				0496F32C1EBB1027008D3285 /* ZYSongPoetry300.swift in Sources */,
 				0496F3301EBB1CAA008D3285 /* ZYJsonViewModel.swift in Sources */,
 				0490AA1B1EAEE0DB0051C47D /* ViewController.swift in Sources */,
 				046A86D51ECC4C1B001E7323 /* ZYIdiom.swift in Sources */,
 				04D2EEA61EB196D500BC24B0 /* ZYWord.swift in Sources */,
-				04D2EEB01EB19E4000BC24B0 /* ZYSongPoetryAll.swift in Sources */,
 				0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */,
 				0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */,
+				046A86D71ECD4987001E7323 /* ZYPoetry.swift in Sources */,
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
-				0496F3291EBB1027008D3285 /* ZYChuCi.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
-				0496F32B1EBB1027008D3285 /* ZYShiJing.swift in Sources */,
-				04D2EEAE1EB19E1700BC24B0 /* ZYTangPoetryAll.swift in Sources */,
 				04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */,
 				04141ADD1EC4690500A1A8A2 /* ZYMusic.swift in Sources */,
-				0496F32E1EBB1027008D3285 /* ZYYueFu.swift in Sources */,
 				0496F3371EBB20E7008D3285 /* ZYArrayShuffle.swift in Sources */,
 				0490AA4B1EAEE85B0051C47D /* NetDataManager.swift in Sources */,
 			);

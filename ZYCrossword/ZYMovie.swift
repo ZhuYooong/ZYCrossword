@@ -20,20 +20,25 @@ class ZYMovie: ZYBaseWord {
     dynamic var date: String? = ""
     dynamic var IMDb: String? = ""
     dynamic var type: String? = ""
-    
+    dynamic var wordType = ZYMovieType.Top250.rawValue
+
     override static func primaryKey() -> String? {
         return "IMDb"
     }
-    convenience init(with json: JSON) {
+    convenience init(with json: JSON, and typeInfo: String) {
         self.init()
         content_description = json["content_description"].stringValue
         movie_name = json["movie_name"].stringValue
         url = json["url"].stringValue
-        direct = json["direct"].arrayValue.first?.stringValue
-        langrage = json["langrage"].arrayValue.first?.stringValue
+        direct = json["direct"].stringValue
+        langrage = json["langrage"].stringValue
         place = json["place"].stringValue
-        date = json["date"].arrayValue.first?.stringValue
+        date = json["date"].stringValue
         IMDb = json["IMDb"].stringValue
-        type = json["type"].arrayValue.first?.stringValue
+        type = json["type"].stringValue
+        wordType = typeInfo
     }
+}
+enum ZYMovieType: String {
+    case Top250 = "Top250"
 }
