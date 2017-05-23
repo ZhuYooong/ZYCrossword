@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 class ZYWord: Object {
-    dynamic var isSelectted: String? = ""
+    dynamic var isSelectted: Bool = false
     dynamic var wordType: String? = ""
     
     override static func primaryKey() -> String? {

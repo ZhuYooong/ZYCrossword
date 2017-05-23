@@ -15,20 +15,19 @@ class ZYJsonViewModel: NSObject {
     fileprivate override init() { }
     
     //MARK: - 存储本地数据
-    let realm = try! Realm()
-    func saveJsonData(with type: ZYWordType) {
+    func saveJsonData(with type: ZYWordType, and realm: Realm) {
         switch type {
         case .TangPoetry300, .SongPoetry300, .OldPoetry300, .ShiJing, .YueFu, .ChuCi, .TangPoetryAll, .SongPoetryAll: //诗歌
-            readJson(with: type.rawValue, and: ZYPoetry.self)
+            readJson(with: type.rawValue, and: ZYPoetry.self, and: realm)
         case .Top250Movie: //电影
-            readJson(with: type.rawValue, and: ZYMovie.self)
+            readJson(with: type.rawValue, and: ZYMovie.self, and: realm)
         case .Top250Book: //书籍
-            readJson(with: type.rawValue, and: ZYBook.self)
+            readJson(with: type.rawValue, and: ZYBook.self, and: realm)
         case .Idiom: //词典
-            readJson(with: type.rawValue, and: ZYIdiom.self)
+            readJson(with: type.rawValue, and: ZYIdiom.self, and: realm)
         }
     }
-    func readJson<T: Object>(with name: String, and type: T.Type) {
+    func readJson<T: Object>(with name: String, and type: T.Type, and realm: Realm) {
         if realm.objects(T.self).count == 0 {
             if let path = Bundle.main.path(forResource: name, ofType: "json") {
                 do {
@@ -86,7 +85,7 @@ class ZYJsonViewModel: NSObject {
         }
     }
     //MARK: - 读取本地数据
-    func loadJsonData<T: Object>(with type: T.Type, and wordType: String?) -> Results<T> {
+    func loadJsonData<T: Object>(with type: T.Type, and wordType: String?, and realm: Realm) -> Results<T> {
         if let str = wordType {
             return realm.objects(T.self).filter(NSPredicate(format: "wordType = '\(str)'")).sorted(byProperty: "selecttedCount")
         }else {

@@ -15,48 +15,49 @@ class ZYWordViewModel: NSObject {
     fileprivate override init() { }
     
     //MARK: - 存储本地数据
-    let realm = try! Realm()
     func initData() {
+        let config = Realm.Configuration(schemaVersion: 1)
+        let realm = try! Realm(configuration: config)
         let allWordArray = ZYWordType.allValues
         for type in allWordArray {
-            initWordData(with: type)
+            initWordData(with: type, and: realm)
         }
     }
-    func initWordData(with type: ZYWordType) {
+    func initWordData(with type: ZYWordType, and realm: Realm) {
         let wordInfo = ZYWord()
         wordInfo.wordType = type.rawValue
         switch type {
-        case .SongPoetry300, .OldPoetry300, .ShiJing, .YueFu, .ChuCi, .Top250Book, .Idiom:
-            wordInfo.isSelectted = "1"
+        case .ShiJing, .YueFu, .ChuCi:
+            wordInfo.isSelectted = true
         default:
-            wordInfo.isSelectted = "0"
+            wordInfo.isSelectted = false
         }
         try! realm.write {
             realm.add(wordInfo, update: true)
         }
-        if wordInfo.isSelectted == "1" {
-            ZYJsonViewModel.shareJson.saveJsonData(with: type)
+        if wordInfo.isSelectted == true {
+            ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
         }
     }
-    func changeWordData(with type: ZYWordType) {
+    func changeWordData(with type: ZYWordType, and realm: Realm) {
         let predicate = NSPredicate(format: "wordType = '\(type.rawValue)'")
-        let word = self.realm.objects(ZYWord.self).filter(predicate)
+        let word = realm.objects(ZYWord.self).filter(predicate)
         let wordInfo = ZYWord()
         wordInfo.wordType = type.rawValue
-        if word.first?.isSelectted == "0" {
-            wordInfo.isSelectted = "1"
+        if word.first?.isSelectted == false {
+            wordInfo.isSelectted = true
         }else {
-            wordInfo.isSelectted = "0"
+            wordInfo.isSelectted = false
         }
-        try! self.realm.write {
-            self.realm.add(wordInfo, update: true)
+        try! realm.write {
+            realm.add(wordInfo, update: true)
         }
-        if wordInfo.isSelectted == "1" {
-            ZYJsonViewModel.shareJson.saveJsonData(with: type)
+        if wordInfo.isSelectted == true {
+            ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
         }
     }
     //MARK: - 读取本地数据
-    func loadWordData() -> Results<ZYWord> {
+    func loadWordData(with realm: Realm) -> Results<ZYWord> {
         return realm.objects(ZYWord.self)
     }
 }

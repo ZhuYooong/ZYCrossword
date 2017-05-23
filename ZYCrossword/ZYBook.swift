@@ -29,7 +29,7 @@ class ZYBook: ZYBaseWord {
     }
     convenience init(with json: JSON, and typeInfo: String) {
         self.init()
-        content_description = json["content_description"].arrayValue.first?.stringValue
+        content_description = json["content_description"].stringValue
         ISBN = json["ISBN"].stringValue
         name = json["name"].stringValue
         author = json["author"].stringValue

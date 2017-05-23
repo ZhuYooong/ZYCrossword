@@ -34,7 +34,9 @@ class ZYCrosswordsGenerator: NSObject {
     func loadCrosswordsData() {
         let myQueue = DispatchQueue(label: "loadCrosswordsData")
         myQueue.async {
-            self.loadData()
+            let config = Realm.Configuration(schemaVersion: 1)
+            let realm = try! Realm(configuration: config)
+            self.loadData(with: realm)
         }
         myQueue.async(group: nil, qos: .default, flags: .barrier) { 
             self.generate()
@@ -43,23 +45,24 @@ class ZYCrosswordsGenerator: NSObject {
     // MARK: - 加载数据
     var contentArray = [AnyObject]()
     
-    func loadData() {
-        let allWordArray = ZYWordViewModel.shareWord.loadWordData()
-        for word in allWordArray {
-            if word.isSelectted == "1" {
-                self.loadJsonData(with: word.wordType)
+    func loadData(with realm: Realm) {
+        let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
+        for i in 0 ..< allWordArray.count {
+            let word = allWordArray[i]
+            if word.isSelectted == true {
+                self.loadJsonData(with: word.wordType, and: realm)
             }
         }
     }
-    func loadJsonData(with name:String?) {
+    func loadJsonData(with name:String?, and realm: Realm) {
         if name == "唐诗三百首" || name == "宋词三百首" || name == "古诗三百首" || name == "诗经" || name == "乐府诗集" || name == "楚辞" || name == "全唐诗" || name == "全宋词" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYPoetry.self, and: name))
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYPoetry.self, and: name, and: realm))
         }else if name == "Top250的电影" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYMovie.self, and: name))
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYMovie.self, and: name, and: realm))
         }else if name == "Top250的图书" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYBook.self, and: name))
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYBook.self, and: name, and: realm))
         }else if name == "汉语成语词典" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYIdiom.self, and: name))
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYIdiom.self, and: name, and: realm))
         }
     }
     // MARK: - Crosswords generation
