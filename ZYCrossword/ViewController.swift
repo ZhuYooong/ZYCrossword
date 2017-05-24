@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         ZYWordViewModel.shareWord.initData()
         let crosswordsGenerator = ZYCrosswordsGenerator()
         crosswordsGenerator.loadCrosswordsData()
-        crosswordsGenerator.printGrid()
+//        crosswordsGenerator.printGrid()
     }
     
 }

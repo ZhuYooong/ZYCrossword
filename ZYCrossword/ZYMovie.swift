@@ -11,15 +11,15 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYMovie: ZYBaseWord {
-    dynamic var content_description: String? = ""
-    dynamic var movie_name: String? = ""
-    dynamic var url: String? = ""
-    dynamic var direct: String? = ""
-    dynamic var langrage: String? = ""
-    dynamic var place: String? = ""
-    dynamic var date: String? = ""
-    dynamic var IMDb: String? = ""
-    dynamic var type: String? = ""
+    dynamic var content_description = ""
+    dynamic var movie_name = ""
+    dynamic var url = ""
+    dynamic var direct = ""
+    dynamic var langrage = ""
+    dynamic var place = ""
+    dynamic var date = ""
+    dynamic var IMDb = ""
+    dynamic var type = ""
     dynamic var wordType = ZYMovieType.Top250.rawValue
 
     override static func primaryKey() -> String? {

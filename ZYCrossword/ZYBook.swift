@@ -11,17 +11,17 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYBook: ZYBaseWord {
-    dynamic var content_description: String? = ""
-    dynamic var ISBN: String? = ""
-    dynamic var name: String? = ""
-    dynamic var author: String? = ""
-    dynamic var price: String? = ""
-    dynamic var press: String? = ""
-    dynamic var score: String? = ""
-    dynamic var link: String? = ""
-    dynamic var author_profile: String? = ""
-    dynamic var date: String? = ""
-    dynamic var page: String? = ""
+    dynamic var content_description = ""
+    dynamic var ISBN = ""
+    dynamic var name = ""
+    dynamic var author = ""
+    dynamic var price = ""
+    dynamic var press = ""
+    dynamic var score = ""
+    dynamic var link = ""
+    dynamic var author_profile = ""
+    dynamic var date = ""
+    dynamic var page = ""
     dynamic var wordType = ZYBookType.Top250.rawValue
     
     override static func primaryKey() -> String? {

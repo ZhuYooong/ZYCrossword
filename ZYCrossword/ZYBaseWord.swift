@@ -9,6 +9,6 @@
 import Foundation
 import RealmSwift
 class ZYBaseWord: Object {
-    dynamic var selecttedCount: Int = 0
-    dynamic var isCollect: Bool = false
+    dynamic var selecttedCount = 0
+    dynamic var isCollect = false
 }

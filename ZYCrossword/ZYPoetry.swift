@@ -12,15 +12,15 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYPoetry: ZYBaseWord {
-    dynamic var detail: String? = ""
-    dynamic var title: String? = ""
-    dynamic var url: String? = ""
-    dynamic var translate: String? = ""
-    dynamic var note: String? = ""
-    dynamic var author: String? = ""
-    dynamic var appreciation: String? = ""
-    dynamic var dynasty: String? = ""
-    dynamic var background: String? = ""
+    dynamic var detail = ""
+    dynamic var title = ""
+    dynamic var url = ""
+    dynamic var translate = ""
+    dynamic var note = ""
+    dynamic var author = ""
+    dynamic var appreciation = ""
+    dynamic var dynasty = ""
+    dynamic var background = ""
     dynamic var wordType = ZYPoetryType.TangPoetry300.rawValue
     
     override static func primaryKey() -> String? {
@@ -28,13 +28,13 @@ class ZYPoetry: ZYBaseWord {
     }
     convenience init(with json: JSON, and typeInfo: String) {
         self.init()
-        author = json["detail_author"].arrayValue.first?.stringValue
-        background = json["detail_background_text"].arrayValue.first?.stringValue
+        author = (json["detail_author"].arrayValue.first ?? "").stringValue
+        background = (json["detail_background_text"].arrayValue.first ?? "").stringValue
         title = json["title"].stringValue
         detail = json["detail_text"].stringValue
         url = json["url"].stringValue
         dynasty = json["detail_dynasty"].stringValue
-        appreciation = json["detail_appreciation_text"].arrayValue.first?.stringValue
+        appreciation = (json["detail_appreciation_text"].arrayValue.first ?? "").stringValue
         let translateAndNoteArray = json["detail_translate_text"].arrayValue
         var translateString = ""
         var noteString = ""

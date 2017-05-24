@@ -11,13 +11,13 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYMusic: ZYBaseWord {
-    dynamic var id: String? = ""
-    dynamic var singer: String? = ""
-    dynamic var title: String? = ""
-    dynamic var version: String? = ""
-    dynamic var alt: String? = ""
-    dynamic var pubdate: String? = ""
-    dynamic var tracks: String? = ""
+    dynamic var id = ""
+    dynamic var singer = ""
+    dynamic var title = ""
+    dynamic var version = ""
+    dynamic var alt = ""
+    dynamic var pubdate = ""
+    dynamic var tracks = ""
     
     override static func primaryKey() -> String? {
         return "id"
@@ -25,11 +25,11 @@ class ZYMusic: ZYBaseWord {
     convenience init(with json: JSON) {
         self.init()
         id = json["id"].stringValue
-        singer = json["attrs"].dictionaryValue["singer"]?.stringValue
+        singer = (json["attrs"].dictionaryValue["singer"] ?? "").stringValue
         title = json["title"].stringValue
-        version = json["attrs"].dictionaryValue["version"]?.stringValue
+        version = (json["attrs"].dictionaryValue["version"] ?? "").stringValue
         alt = json["alt"].stringValue
-        pubdate = json["attrs"].dictionaryValue["pubdate"]?.stringValue
-        tracks = json["attrs"].dictionaryValue["tracks"]?.stringValue
+        pubdate = (json["attrs"].dictionaryValue["pubdate"] ?? "").stringValue
+        tracks = (json["attrs"].dictionaryValue["tracks"] ?? "").stringValue
     }
 }
