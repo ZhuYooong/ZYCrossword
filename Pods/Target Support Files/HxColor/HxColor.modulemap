@@ -1,6 +1,0 @@
-framework module HxColor {
-  umbrella header "HxColor-umbrella.h"
-
-  export *
-  module * { export * }
-}
