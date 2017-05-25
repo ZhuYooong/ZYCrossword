@@ -19,17 +19,10 @@ class ZYCrosswordsGenerator: NSObject {
     open var resultData: Array<Word> = Array()
     open var resultContentSet = Set<ZYBaseWord>()
     // MARK: - Initialization
-    fileprivate var columns: Int = 12
-    fileprivate var rows: Int = 12
     open var result: Array<Word> {
         get {
             return resultData
         }
-    }
-    public override init() { }
-    public init(columns: Int, rows: Int) {
-        self.columns = columns
-        self.rows = rows
     }
     func loadCrosswordsData() {
         let myQueue = DispatchQueue(label: "loadCrosswordsData")
@@ -70,7 +63,7 @@ class ZYCrosswordsGenerator: NSObject {
         var isSuccess = false
         while !isSuccess {
             self.grid = nil
-            self.grid = Array2D(columns: self.columns, rows: self.rows, defaultValue: self.emptySymbol)
+            self.grid = Array2D(columns: columns, rows: rows, defaultValue: self.emptySymbol)
             
             self.currentWords.removeAll()
             self.resultData.removeAll()
@@ -181,9 +174,9 @@ class ZYCrosswordsGenerator: NSObject {
             }else if type == ZYIdiom.self {
                 predicate = NSPredicate(format: "title contains '\(findString)'")
             }
-            return results.filter(predicate).sorted(byProperty: "selecttedCount")
+            return results.filter(predicate).sorted(byKeyPath: "selecttedCount")
         }else {
-            return results.sorted(byProperty: "selecttedCount")
+            return results.sorted(byKeyPath: "selecttedCount")
         }
     }
     func findDetailWord(with detail:String, and findString: String?) -> String? {

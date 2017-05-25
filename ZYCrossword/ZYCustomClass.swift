@@ -7,6 +7,11 @@
 //
 
 import UIKit
+//MARK: - 宏定义
+let columns: Int = 12
+let rows: Int = 12
+let screenHeight = UIScreen.main.bounds.height
+let screenWidth = UIScreen.main.bounds.width
 
 class ZYCustomClass: NSObject {
 
@@ -99,8 +104,12 @@ extension UIColor {
     }
 }
 enum ZYCustomColor: Int {//特定色值
-    case tittleHeaderColor = 0x7acc8e
-    case lightCyanColor = 0x0cb4b7
-    case darkCyanColor = 0x1a9593
-    case blueLineColor = 0x67bcd1
+    case mainBlue = 0x00BBD3
+    case inferiorBlue = 0x009688
+    case buttonTittleGray = 0x7a7a7a
+    case buttonTittleRed = 0xFF7070
+    case buttonBlue = 0x02B5CC
+    case buttonSelectedGray = 0xD8D8D8
+    case textBlack = 0x3E3E3E
+    case textGray = 0xC1C1C1
 }

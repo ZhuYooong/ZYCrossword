@@ -87,9 +87,9 @@ class ZYJsonViewModel: NSObject {
     //MARK: - 读取本地数据
     func loadJsonData<T: Object>(with type: T.Type, and wordType: String?, and realm: Realm) -> Results<T> {
         if let str = wordType {
-            return realm.objects(T.self).filter(NSPredicate(format: "wordType = '\(str)'")).sorted(byProperty: "selecttedCount")
+            return realm.objects(T.self).filter(NSPredicate(format: "wordType = '\(str)'")).sorted(byKeyPath: "selecttedCount")
         }else {
-            return realm.objects(T.self).sorted(byProperty: "selecttedCount")
+            return realm.objects(T.self).sorted(byKeyPath: "selecttedCount")
         }
     }
 }

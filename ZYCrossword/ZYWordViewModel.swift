@@ -27,7 +27,7 @@ class ZYWordViewModel: NSObject {
         let wordInfo = ZYWord()
         wordInfo.wordType = type.rawValue
         switch type {
-        case .ShiJing, .YueFu, .ChuCi:
+        case .TangPoetry300, .Top250Movie, .Idiom, .ShiJing:
             wordInfo.isSelectted = true
         default:
             wordInfo.isSelectted = false
