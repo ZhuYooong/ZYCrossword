@@ -9,13 +9,18 @@
 import UIKit
 
 class ZYChessboardView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    func creatButton(with gridArray: Array2D<String>?) {
+        for i in 0 ..< rows {
+            for j in 0 ..< columns {
+                if let str = gridArray?[j, i], str != "-" {
+                    let chessboardButton = ZYChessboardButton(with: str, and: j, and: i, and: self.bounds.size.width)
+                    self.addSubview(chessboardButton)
+                    chessboardButton.addTarget(self, action: #selector(chessboardButtonClick(sender:)), for: .touchUpInside)
+                }
+            }
+        }
     }
-    */
-
+    func chessboardButtonClick(sender: ZYChessboardButton) {
+        
+    }
 }

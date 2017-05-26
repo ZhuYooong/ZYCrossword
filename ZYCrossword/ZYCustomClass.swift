@@ -8,10 +8,12 @@
 
 import UIKit
 //MARK: - 宏定义
-let columns: Int = 12
-let rows: Int = 12
 let screenHeight = UIScreen.main.bounds.height
 let screenWidth = UIScreen.main.bounds.width
+//棋盘定义
+let columns: Int = 12
+let rows: Int = 12
+var emptySymbol = "-"
 
 class ZYCustomClass: NSObject {
 

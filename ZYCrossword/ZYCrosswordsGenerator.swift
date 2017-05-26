@@ -10,8 +10,6 @@ import UIKit
 import RealmSwift
 
 class ZYCrosswordsGenerator: NSObject {
-    // MARK: - Public additional properties
-    open var emptySymbol = "-"
     open var orientationOptimization = false
     // MARK: - Logic properties
     open var grid: Array2D<String>?
@@ -63,7 +61,7 @@ class ZYCrosswordsGenerator: NSObject {
         var isSuccess = false
         while !isSuccess {
             self.grid = nil
-            self.grid = Array2D(columns: columns, rows: rows, defaultValue: self.emptySymbol)
+            self.grid = Array2D(columns: columns, rows: rows, defaultValue: emptySymbol)
             
             self.currentWords.removeAll()
             self.resultData.removeAll()
@@ -115,6 +113,7 @@ class ZYCrosswordsGenerator: NSObject {
     func findWord(with content: AnyObject, and findString: String?) -> String? {
         if let results: Results<ZYPoetry> = content as? Results<ZYPoetry> {
             var detailResult: ZYPoetry?
+            let a = filterResult(with: results, and: ZYPoetry.self, and: findString)
             for item in filterResult(with: results, and: ZYPoetry.self, and: findString) {
                 if !resultContentSet.contains(item) {
                     detailResult = item

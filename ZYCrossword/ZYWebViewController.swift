@@ -26,7 +26,7 @@ class ZYWebViewController: UIViewController {
         
         progressView.progress = 0.0
         self.progressView.isHidden = true
-        self.progressView.tintColor = UIColor(ZYCustomColor.darkCyanColor.rawValue)
+        self.progressView.tintColor = UIColor(ZYCustomColor.inferiorBlue.rawValue)
         view.addSubview(progressView)
         
         httpWebView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
