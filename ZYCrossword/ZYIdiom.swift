@@ -17,7 +17,7 @@ class ZYIdiom: ZYBaseWord {
     dynamic var derivation: String? = ""
     dynamic var title: String? = ""
     
-    override static func primaryKey() -> String? {
+    override static func primaryKey() -> String {
         return "title"
     }
     convenience init(with json: JSON) {

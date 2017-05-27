@@ -16,8 +16,7 @@ class ZYWordViewModel: NSObject {
     
     //MARK: - 存储本地数据
     func initData() {
-        let config = Realm.Configuration(schemaVersion: 1)
-        let realm = try! Realm(configuration: config)
+        let realm = try! Realm()
         let allWordArray = ZYWordType.allValues
         for type in allWordArray {
             initWordData(with: type, and: realm)
@@ -27,7 +26,7 @@ class ZYWordViewModel: NSObject {
         let wordInfo = ZYWord()
         wordInfo.wordType = type.rawValue
         switch type {
-        case .TangPoetry300, .OldPoetry300:
+        case .TangPoetry300, .OldPoetry300, .Top250Movie, .Top250Book:
             wordInfo.isSelectted = true
         default:
             wordInfo.isSelectted = false

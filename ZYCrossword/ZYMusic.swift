@@ -19,7 +19,7 @@ class ZYMusic: ZYBaseWord {
     dynamic var pubdate = ""
     dynamic var tracks = ""
     
-    override static func primaryKey() -> String? {
+    override static func primaryKey() -> String {
         return "id"
     }
     convenience init(with json: JSON) {

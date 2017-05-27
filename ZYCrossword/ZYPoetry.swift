@@ -23,7 +23,7 @@ class ZYPoetry: ZYBaseWord {
     dynamic var background = ""
     dynamic var wordType = ZYPoetryType.TangPoetry300.rawValue
     
-    override static func primaryKey() -> String? {
+    override static func primaryKey() -> String {
         return "title"
     }
     convenience init(with json: JSON, and typeInfo: String) {

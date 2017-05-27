@@ -22,7 +22,7 @@ class ZYMovie: ZYBaseWord {
     dynamic var type = ""
     dynamic var wordType = ZYMovieType.Top250.rawValue
 
-    override static func primaryKey() -> String? {
+    override static func primaryKey() -> String {
         return "IMDb"
     }
     convenience init(with json: JSON, and typeInfo: String) {

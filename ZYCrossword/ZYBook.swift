@@ -24,7 +24,7 @@ class ZYBook: ZYBaseWord {
     dynamic var page = ""
     dynamic var wordType = ZYBookType.Top250.rawValue
     
-    override static func primaryKey() -> String? {
+    override static func primaryKey() -> String {
         return "ISBN"
     }
     convenience init(with json: JSON, and typeInfo: String) {

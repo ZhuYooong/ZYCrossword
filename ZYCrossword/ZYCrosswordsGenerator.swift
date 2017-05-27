@@ -23,13 +23,9 @@ class ZYCrosswordsGenerator: NSObject {
         }
     }
     func loadCrosswordsData() {
-        let myQueue = DispatchQueue(label: "loadCrosswordsData")
-        myQueue.async {
-            let config = Realm.Configuration(schemaVersion: 1)
-            let realm = try! Realm(configuration: config)
-            self.loadData(with: realm)
-        }
-        myQueue.async(group: nil, qos: .default, flags: .barrier) { 
+        let realm = try! Realm()
+        self.loadData(with: realm)
+        DispatchQueue.global(qos: .default).async(group: nil, qos: .default, flags: .barrier) {
             self.generate()
         }
     }
@@ -38,8 +34,7 @@ class ZYCrosswordsGenerator: NSObject {
     
     func loadData(with realm: Realm) {
         let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
-        for i in 0 ..< allWordArray.count {
-            let word = allWordArray[i]
+        for word in allWordArray {
             if word.isSelectted == true {
                 self.loadJsonData(with: word.wordType, and: realm)
             }
@@ -57,11 +52,14 @@ class ZYCrosswordsGenerator: NSObject {
         }
     }
     // MARK: - Crosswords generation
+    var columnsCount = columns
+    var rowsCount = rows
+    var emptySymbolStr = emptySymbol
     open func generate() {
         var isSuccess = false
         while !isSuccess {
             self.grid = nil
-            self.grid = Array2D(columns: columns, rows: rows, defaultValue: emptySymbol)
+            self.grid = Array2D(columns: columnsCount, rows: rowsCount, defaultValue: emptySymbolStr)
             
             self.currentWords.removeAll()
             self.resultData.removeAll()
@@ -70,29 +68,41 @@ class ZYCrosswordsGenerator: NSObject {
             
             var isContininue = true
             var count = 0
+            var oldFindWord = ""
             while isContininue {
-                if let word = self.currentWords.last, word.length > 1 {
-                    var strArray = [String]()
-                    for str in word.characters {
-                        strArray.append(String(str))
-                    }
-                    if let foundWord = self.findWord(with: strArray[self.randomInt(0, max: strArray.count - 1)]) {
-                        if self.fitAndAdd(foundWord) == false {
-                            count += 1
-                        }
-                        if count == 200 {
-                            isContininue = false
-                        }
-                    }else {
-                        isContininue = false
-                    }
-                }else if self.currentWords.count == 0 {
+                if self.currentWords.count == 0 {
                     if let foundWord = self.findWord(with: nil) {
                         _ = self.fitAndAdd(foundWord)
                     }else {
-                        isContininue = false
+                        count += 1
                     }
                 }else {
+                    let word = self.currentWords[self.randomInt(0, max: self.currentWords.count - 1)]
+                    if word.length > 1 {
+                        var strArray = [String]()
+                        for str in word.characters {
+                            strArray.append(String(str))
+                        }
+                        var isRepeat = true
+                        while isRepeat {
+                            let findWord = strArray[self.randomInt(0, max: strArray.count - 1)]
+                            if findWord != oldFindWord {
+                                oldFindWord = findWord
+                                isRepeat = false
+                            }
+                        }
+                        if let foundWord = self.findWord(with: oldFindWord) {
+                            if self.fitAndAdd(foundWord) == false {
+                                count += 1
+                            }
+                        }else {
+                            count += 1
+                        }
+                    }else {
+                        count += 1
+                    }
+                }
+                if count == 200 {
                     isContininue = false
                 }
             }
@@ -113,7 +123,6 @@ class ZYCrosswordsGenerator: NSObject {
     func findWord(with content: AnyObject, and findString: String?) -> String? {
         if let results: Results<ZYPoetry> = content as? Results<ZYPoetry> {
             var detailResult: ZYPoetry?
-            let a = filterResult(with: results, and: ZYPoetry.self, and: findString)
             for item in filterResult(with: results, and: ZYPoetry.self, and: findString) {
                 if !resultContentSet.contains(item) {
                     detailResult = item
@@ -188,7 +197,7 @@ class ZYCrosswordsGenerator: NSObject {
         }
         if let str = findString {
             for detailString in detailStrArray {
-                if detailString.contains(str) {
+                if detailString.contains(str) && !currentWords.contains(detailString) {
                     return detailString
                 }
             }

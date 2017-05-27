@@ -11,8 +11,8 @@ import UIKit
 let screenHeight = UIScreen.main.bounds.height
 let screenWidth = UIScreen.main.bounds.width
 //棋盘定义
-let columns: Int = 12
-let rows: Int = 12
+let columns: Int = 10
+let rows: Int = 10
 var emptySymbol = "-"
 
 class ZYCustomClass: NSObject {
