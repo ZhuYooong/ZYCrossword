@@ -9,6 +9,9 @@
 import UIKit
 
 class ZYChessboardButton: UIButton {
+    let columns: Int = 10
+    let rows: Int = 10
+    var emptySymbol = "-"
     // MARK: - Initialization
     init(with word: String, and column: Int, and row: Int, and fatherWidth: CGFloat) {
         self.word = word

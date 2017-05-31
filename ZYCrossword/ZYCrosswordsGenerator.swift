@@ -13,8 +13,8 @@ class ZYCrosswordsGenerator: NSObject {
     open var orientationOptimization = false
     // MARK: - Logic properties
     open var grid: Array2D<String>?
-    open var currentWords: Array<String> = Array()
-    open var resultData: Array<Word> = Array()
+    open var currentWords: Array<String> = Array<String>()
+    open var resultData: Array<Word> = Array<Word>()
     open var resultContentSet = Set<ZYBaseWord>()
     // MARK: - Initialization
     open var result: Array<Word> {
@@ -24,10 +24,8 @@ class ZYCrosswordsGenerator: NSObject {
     }
     func loadCrosswordsData() {
         let realm = try! Realm()
-        self.loadData(with: realm)
-        DispatchQueue.global(qos: .default).async(group: nil, qos: .default, flags: .barrier) {
-            self.generate()
-        }
+        loadData(with: realm)
+        generate()
     }
     // MARK: - 加载数据
     var contentArray = [AnyObject]()
@@ -52,62 +50,64 @@ class ZYCrosswordsGenerator: NSObject {
         }
     }
     // MARK: - Crosswords generation
-    var columnsCount = columns
-    var rowsCount = rows
-    var emptySymbolStr = emptySymbol
+    let columns: Int = 10
+    let rows: Int = 10
+    var emptySymbol = "-"
     open func generate() {
-        var isSuccess = false
-        while !isSuccess {
-            self.grid = nil
-            self.grid = Array2D(columns: columnsCount, rows: rowsCount, defaultValue: emptySymbolStr)
-            
-            self.currentWords.removeAll()
-            self.resultData.removeAll()
-            self.resultContentSet.removeAll()
-            self.currentContent = nil
-            
-            var isContininue = true
-            var count = 0
-            var oldFindWord = ""
-            while isContininue {
-                if self.currentWords.count == 0 {
-                    if let foundWord = self.findWord(with: nil) {
-                        _ = self.fitAndAdd(foundWord)
+        DispatchQueue(label: "Crosswords").sync { [weak self] in
+            var isSuccess = false
+            while !isSuccess {
+                self?.grid = nil
+                self?.grid = Array2D(columns: self!.columns, rows: self!.rows, defaultValue: self!.emptySymbol)
+                
+                self?.currentWords = Array<String>()
+                self?.resultData = Array<Word>()
+                self?.resultContentSet = Set<ZYBaseWord>()
+                self?.currentContent = nil
+                
+                var isContininue = true
+                var count = 0
+                var oldFindWord = ""
+                while isContininue {
+                    if self?.currentWords.count == 0 {
+                        if let foundWord = self?.findWord(with: nil) {
+                            _ = self?.fitAndAdd(foundWord)
+                        }else {
+                            count += 1
+                        }
                     }else {
-                        count += 1
-                    }
-                }else {
-                    let word = self.currentWords[self.randomInt(0, max: self.currentWords.count - 1)]
-                    if word.length > 1 {
-                        var strArray = [String]()
-                        for str in word.characters {
-                            strArray.append(String(str))
-                        }
-                        var isRepeat = true
-                        while isRepeat {
-                            let findWord = strArray[self.randomInt(0, max: strArray.count - 1)]
-                            if findWord != oldFindWord {
-                                oldFindWord = findWord
-                                isRepeat = false
+                        let word = self!.currentWords[self!.randomInt(0, max: self!.currentWords.count - 1)]
+                        if word.length > 1 {
+                            var strArray = [String]()
+                            for str in word.characters {
+                                strArray.append(String(str))
                             }
-                        }
-                        if let foundWord = self.findWord(with: oldFindWord) {
-                            if self.fitAndAdd(foundWord) == false {
+                            var isRepeat = true
+                            while isRepeat {
+                                let findWord = strArray[self!.randomInt(0, max: strArray.count - 1)]
+                                if findWord != oldFindWord {
+                                    oldFindWord = findWord
+                                    isRepeat = false
+                                }
+                            }
+                            if let foundWord = self?.findWord(with: oldFindWord) {
+                                if self?.fitAndAdd(foundWord) == false {
+                                    count += 1
+                                }
+                            }else {
                                 count += 1
                             }
                         }else {
                             count += 1
                         }
-                    }else {
-                        count += 1
+                    }
+                    if count == 200 {
+                        isContininue = false
                     }
                 }
-                if count == 200 {
-                    isContininue = false
+                if self!.currentWords.count > 8 {
+                    isSuccess = true
                 }
-            }
-            if self.currentWords.count > 20 {
-                isSuccess = true
             }
         }
     }
@@ -406,6 +406,7 @@ class ZYCrosswordsGenerator: NSObject {
             }
             print(s)
         }
+        print("over")
     }
 }
 // MARK: - Additional types

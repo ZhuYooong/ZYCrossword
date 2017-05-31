@@ -9,6 +9,9 @@
 import UIKit
 
 class ZYChessboardView: UIView {
+    let columns: Int = 10
+    let rows: Int = 10
+    var emptySymbol = "-"
     func creatButton(with gridArray: Array2D<String>?) {
         for i in 0 ..< rows {
             for j in 0 ..< columns {
