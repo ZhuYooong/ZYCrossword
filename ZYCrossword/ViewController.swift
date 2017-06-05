@@ -15,10 +15,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         ZYWordViewModel.shareWord.initData()
+        let chessboard = creatChessboardData()
+        chessboard.printGrid()
+    }
+    func creatChessboardData() -> ZYChessboard {
         let crosswordsGenerator = ZYCrosswordsGenerator()
         crosswordsGenerator.loadCrosswordsData()
-        crosswordsGenerator.printGrid()
+        return ZYChessboard(with: crosswordsGenerator)
     }
-    
 }
 

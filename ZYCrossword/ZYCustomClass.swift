@@ -11,6 +11,10 @@ import UIKit
 let screenHeight = UIScreen.main.bounds.height
 let screenWidth = UIScreen.main.bounds.width
 
+let chessboardColumns: Int = 10
+let chessboardRows: Int = 10
+var chessboardEmptySymbol = "-"
+
 class ZYCustomClass: NSObject {
 
 }

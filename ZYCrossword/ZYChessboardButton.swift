@@ -9,13 +9,10 @@
 import UIKit
 
 class ZYChessboardButton: UIButton {
-    let columns: Int = 10
-    let rows: Int = 10
-    var emptySymbol = "-"
     // MARK: - Initialization
     init(with word: String, and column: Int, and row: Int, and fatherWidth: CGFloat) {
         self.word = word
-        let width = (fatherWidth - CGFloat(4 * columns - 4)) / CGFloat(columns)
+        let width = (fatherWidth - CGFloat(4 * chessboardColumns - 4)) / CGFloat(chessboardColumns)
         super.init(frame: CGRect(x: CGFloat(column) * (width + 4), y: CGFloat(row) * (width + 4), width: width, height: width))
         creatTittleLabel()
         selectedState = .normal

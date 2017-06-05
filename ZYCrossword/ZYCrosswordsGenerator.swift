@@ -105,7 +105,7 @@ class ZYCrosswordsGenerator: NSObject {
                         isContininue = false
                     }
                 }
-                if self!.currentWords.count > 8 {
+                if self!.currentWords.count > 9 {
                     isSuccess = true
                 }
             }
@@ -218,8 +218,8 @@ class ZYCrosswordsGenerator: NSObject {
         while !fit && count < 2000 {
             if currentWords.count == 0 {
                 let direction = randomValue()
-                let column = 1 + 1
-                let row = 1 + 1
+                let column = 1
+                let row = 1
                 if checkFitScore(column, row: row, direction: direction, word: word) > 0 {
                     fit = true
                     setWord(column, row: row, direction: direction, word: word, force: true)
@@ -370,20 +370,22 @@ class ZYCrosswordsGenerator: NSObject {
     }
     fileprivate func setWord(_ column: Int, row: Int, direction: Int, word: String, force: Bool = false) {
         if force {
-            let w = Word(word: word, column: column, row: row, direction: (direction == 0 ? .horizontal : .vertical))
-            resultData.append(w)
-            resultContentSet.insert(currentContent as! ZYBaseWord)
-            currentWords.append(word)
             var c = column
             var r = row
+            var grid = [Array<Int>]()
             for letter in word.characters {
                 setCell(c, row: r, value: String(letter))
+                grid.append([c - 1, r - 1])
                 if direction == 0 {
                     c += 1
                 }else {
                     r += 1
                 }
             }
+            let w = Word(word: word, column: column, row: row, direction: (direction == 0 ? .horizontal : .vertical), grid: grid)
+            resultData.append(w)
+            resultContentSet.insert(currentContent as! ZYBaseWord)
+            currentWords.append(word)
         }
     }
     // MARK: - Misc
@@ -397,17 +399,6 @@ class ZYCrosswordsGenerator: NSObject {
     fileprivate func randomInt(_ min: Int, max:Int) -> Int {
         return min + Int(arc4random_uniform(UInt32(max - min + 1)))
     }
-    // MARK: - Debug
-    func printGrid() {
-        for i in 0 ..< rows {
-            var s = ""
-            for j in 0 ..< columns {
-                s += grid![j, i]
-            }
-            print(s)
-        }
-        print("over")
-    }
 }
 // MARK: - Additional types
 public struct Word {
@@ -415,6 +406,7 @@ public struct Word {
     public var column = 0
     public var row = 0
     public var direction: WordDirection = .vertical
+    public var grid = [[0, 0]]
 }
 public enum WordDirection {
     case vertical
