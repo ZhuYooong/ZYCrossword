@@ -13,22 +13,18 @@ class ZYCrosswordsGenerator: NSObject {
     open var orientationOptimization = false
     // MARK: - Logic properties
     open var grid: Array2D<String>?
-    open var currentWords: Array<String> = Array<String>()
     open var resultData: Array<Word> = Array<Word>()
-    open var resultContentSet = Set<ZYBaseWord>()
+    open var resultContentArray = Array<ZYBaseWord>()
     // MARK: - Initialization
-    open var result: Array<Word> {
-        get {
-            return resultData
-        }
-    }
     func loadCrosswordsData() {
         let realm = try! Realm()
         loadData(with: realm)
         generate()
     }
     // MARK: - 加载数据
-    var contentArray = [AnyObject]()
+    fileprivate var contentArray = [AnyObject]()
+    fileprivate var resultContentSet = Set<ZYBaseWord>()
+    fileprivate var currentWords: Array<String> = Array<String>()
     
     func loadData(with realm: Realm) {
         let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
@@ -47,6 +43,8 @@ class ZYCrosswordsGenerator: NSObject {
             contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYBook.self, and: name, and: realm))
         }else if name == "汉语成语词典" {
             contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYIdiom.self, and: name, and: realm))
+        }else if name == "歇后语词典" {
+            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYAllegoric.self, and: name, and: realm))
         }
     }
     // MARK: - Crosswords generation
@@ -59,12 +57,12 @@ class ZYCrosswordsGenerator: NSObject {
             while !isSuccess {
                 self?.grid = nil
                 self?.grid = Array2D(columns: self!.columns, rows: self!.rows, defaultValue: self!.emptySymbol)
-                
-                self?.currentWords = Array<String>()
                 self?.resultData = Array<Word>()
-                self?.resultContentSet = Set<ZYBaseWord>()
-                self?.currentContent = nil
+                self?.resultContentArray = Array<ZYBaseWord>()
                 
+                self?.currentContent = nil
+                self?.currentWords = Array<String>()
+                self?.resultContentSet = Set<ZYBaseWord>()
                 var isContininue = true
                 var count = 0
                 var oldFindWord = ""
@@ -105,7 +103,7 @@ class ZYCrosswordsGenerator: NSObject {
                         isContininue = false
                     }
                 }
-                if self!.currentWords.count > 9 {
+                if self!.currentWords.count > 10 {
                     isSuccess = true
                 }
             }
@@ -169,6 +167,18 @@ class ZYCrosswordsGenerator: NSObject {
                 currentContent = detailResult
                 return findDetailWord(with: deatil, and: findString)
             }
+        }else if let results: Results<ZYAllegoric> = content as? Results<ZYAllegoric> {
+            var detailResult: ZYAllegoric?
+            for item in filterResult(with: results, and: ZYAllegoric.self, and: findString) {
+                if !resultContentSet.contains(item) {
+                    detailResult = item
+                    break
+                }
+            }
+            if let deatil = detailResult?.name {
+                currentContent = detailResult
+                return findDetailWord(with: deatil, and: findString)
+            }
         }
         return nil
     }
@@ -177,7 +187,7 @@ class ZYCrosswordsGenerator: NSObject {
             var predicate = NSPredicate(format: "detail contains '\(findString)'")
             if type == ZYMovie.self {
                 predicate = NSPredicate(format: "movie_name contains '\(findString)'")
-            }else if type == ZYBook.self {
+            }else if type == ZYBook.self || type == ZYAllegoric.self {
                 predicate = NSPredicate(format: "name contains '\(findString)'")
             }else if type == ZYIdiom.self {
                 predicate = NSPredicate(format: "title contains '\(findString)'")
@@ -385,6 +395,7 @@ class ZYCrosswordsGenerator: NSObject {
             let w = Word(word: word, column: column, row: row, direction: (direction == 0 ? .horizontal : .vertical), grid: grid)
             resultData.append(w)
             resultContentSet.insert(currentContent as! ZYBaseWord)
+            resultContentArray.append(currentContent as! ZYBaseWord)
             currentWords.append(word)
         }
     }

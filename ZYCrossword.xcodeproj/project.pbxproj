@@ -352,6 +352,7 @@
 		0496F3331EBB2084008D3285 /* ZYCrosswordsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3321EBB2084008D3285 /* ZYCrosswordsGenerator.swift */; };
 		0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3341EBB20D3008D3285 /* ZYArray2D.swift */; };
 		0496F3371EBB20E7008D3285 /* ZYArrayShuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F3361EBB20E7008D3285 /* ZYArrayShuffle.swift */; };
+		0496F8FD1EE6504800F51542 /* ZYAllegoric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F8FC1EE6504800F51542 /* ZYAllegoric.swift */; };
 		04BD132A1EC2EA8F00B1DB9E /* ZYBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD13291EC2EA8F00B1DB9E /* ZYBook.swift */; };
 		04BD132C1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD132B1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift */; };
 		04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD132D1EC30DDB00B1DB9E /* ZYMovie.swift */; };
@@ -731,6 +732,7 @@
 		0496F3321EBB2084008D3285 /* ZYCrosswordsGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYCrosswordsGenerator.swift; sourceTree = "<group>"; };
 		0496F3341EBB20D3008D3285 /* ZYArray2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYArray2D.swift; sourceTree = "<group>"; };
 		0496F3361EBB20E7008D3285 /* ZYArrayShuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYArrayShuffle.swift; sourceTree = "<group>"; };
+		0496F8FC1EE6504800F51542 /* ZYAllegoric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYAllegoric.swift; sourceTree = "<group>"; };
 		04BD13291EC2EA8F00B1DB9E /* ZYBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYBook.swift; sourceTree = "<group>"; };
 		04BD132B1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYNetwordViewModel.swift; sourceTree = "<group>"; };
 		04BD132D1EC30DDB00B1DB9E /* ZYMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYMovie.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				046A86D11ECC48A1001E7323 /* json */,
+				0496F8FC1EE6504800F51542 /* ZYAllegoric.swift */,
 				046A86D41ECC4C1B001E7323 /* ZYIdiom.swift */,
 			);
 			name = Dictionary;
@@ -1840,6 +1843,7 @@
 				0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */,
 				0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */,
 				046A86D71ECD4987001E7323 /* ZYPoetry.swift in Sources */,
+				0496F8FD1EE6504800F51542 /* ZYAllegoric.swift in Sources */,
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
 				04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */,

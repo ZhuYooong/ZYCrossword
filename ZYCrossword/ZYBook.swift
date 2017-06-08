@@ -44,5 +44,5 @@ class ZYBook: ZYBaseWord {
     }
 }
 enum ZYBookType: String {
-    case Top250 = "Top250"
+    case Top250 = "Top250的图书"
 }

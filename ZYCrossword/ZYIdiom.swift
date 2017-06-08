@@ -16,16 +16,21 @@ class ZYIdiom: ZYBaseWord {
     dynamic var paraphrase: String? = ""
     dynamic var derivation: String? = ""
     dynamic var title: String? = ""
+    dynamic var wordType = ZYIdiomType.Base.rawValue
     
     override static func primaryKey() -> String {
         return "title"
     }
-    convenience init(with json: JSON) {
+    convenience init(with json: JSON, and typeInfo: String) {
         self.init()
         title = json["title"].stringValue
         url = json["url"].stringValue
         enunciation = json["enunciation"].stringValue
-        paraphrase = json["paraphrase"].arrayValue.first?.stringValue
-        derivation = json["derivation"].arrayValue.first?.stringValue
+        paraphrase = json["paraphrase"].stringValue
+        derivation = json["derivation"].stringValue
+        wordType = typeInfo
     }
+}
+enum ZYIdiomType: String {
+    case Base = "汉语成语词典"
 }

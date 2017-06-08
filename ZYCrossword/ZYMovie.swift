@@ -40,5 +40,5 @@ class ZYMovie: ZYBaseWord {
     }
 }
 enum ZYMovieType: String {
-    case Top250 = "Top250"
+    case Top250 = "Top250的电影"
 }

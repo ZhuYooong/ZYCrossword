@@ -23,8 +23,10 @@ class ZYJsonViewModel: NSObject {
             readJson(with: type.rawValue, and: ZYMovie.self, and: realm)
         case .Top250Book: //书籍
             readJson(with: type.rawValue, and: ZYBook.self, and: realm)
-        case .Idiom: //词典
+        case .Idiom: //成语词典
             readJson(with: type.rawValue, and: ZYIdiom.self, and: realm)
+        case .Allegoric: //歇后语
+            readJson(with: type.rawValue, and: ZYAllegoric.self, and: realm)
         }
     }
     func readJson<T: Object>(with name: String, and type: T.Type, and realm: Realm) {
@@ -62,11 +64,20 @@ class ZYJsonViewModel: NSObject {
                                 realm.add(chuciItem, update: true)
                             }
                         }
-                    }else if T.self == ZYIdiom.self { //词典
+                    }else if T.self == ZYIdiom.self { //成语词典
                         let rootDictionary = jsonObj.dictionaryValue
                         let chuciArray = rootDictionary["father"]!.arrayValue
                         for chuci in chuciArray {
-                            let chuciItem = ZYMovie(with: chuci, and: name)
+                            let chuciItem = ZYIdiom(with: chuci, and: name)
+                            try! realm.write {
+                                realm.add(chuciItem, update: true)
+                            }
+                        }
+                    }else if T.self == ZYAllegoric.self { //歇后语
+                        let rootDictionary = jsonObj.dictionaryValue
+                        let chuciArray = rootDictionary["father"]!.arrayValue
+                        for chuci in chuciArray {
+                            let chuciItem = ZYAllegoric(with: chuci, and: name)
                             try! realm.write {
                                 realm.add(chuciItem, update: true)
                             }

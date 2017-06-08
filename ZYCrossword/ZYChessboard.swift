@@ -11,11 +11,11 @@ import RealmSwift
 
 class ZYChessboard: Object {
     dynamic var id: String? = ""
-    fileprivate var grid: Array2D<String>?
-    fileprivate var tipXArr: Array<Word> = Array()
-    fileprivate var tipYArr: Array<Word> = Array()
-    fileprivate var tipXdataArr: Array<ZYBaseWord> = Array()
-    fileprivate var tipYdataArr: Array<ZYBaseWord> = Array()
+    open var grid: Array2D<String>?
+    open var tipXArr: Array<Word> = Array()
+    open var tipYArr: Array<Word> = Array()
+    open var tipXdataArr: Array<ZYBaseWord> = Array()
+    open var tipYdataArr: Array<ZYBaseWord> = Array()
     
     override static func primaryKey() -> String? {
         return "id"
@@ -23,9 +23,15 @@ class ZYChessboard: Object {
     convenience init(with crosswordsGenerator: ZYCrosswordsGenerator) {
         self.init()
         grid = crosswordsGenerator.grid
-        for result in crosswordsGenerator.resultData {
-            for resultContent in crosswordsGenerator.resultContentSet {
-                
+        for i in 0 ..< crosswordsGenerator.resultContentArray.count {
+            let word = crosswordsGenerator.resultData[i]
+            let result = crosswordsGenerator.resultContentArray[i]
+            if word.direction == .vertical {
+                tipYArr.append(word)
+                tipYdataArr.append(result)
+            }else {
+                tipXArr.append(word)
+                tipXdataArr.append(result)
             }
         }
     }

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ZYWordViewModel.shareWord.initData()
+//        ZYWordViewModel.shareWord.initData()
         let chessboard = creatChessboardData()
         chessboard.printGrid()
     }
