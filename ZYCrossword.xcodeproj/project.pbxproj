@@ -360,6 +360,8 @@
 		04C94AC11EB33BC5009F4381 /* ZYWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C94AC01EB33BC5009F4381 /* ZYWordViewModel.swift */; };
 		04D2EEA41EB18A8300BC24B0 /* 唐诗三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D2EEA31EB18A8300BC24B0 /* 唐诗三百首.json */; };
 		04D2EEA61EB196D500BC24B0 /* ZYWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2EEA51EB196D500BC24B0 /* ZYWord.swift */; };
+		04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259C1EEA413000B62794 /* ZYMainViewController.swift */; };
+		04F8259F1EEA4DD200B62794 /* ZYMaterialDesignClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */; };
 		1D2D8092E042B60E396C39A3 /* Pods_ZYCrossword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */; };
 /* End PBXBuildFile section */
 
@@ -740,6 +742,8 @@
 		04C94AC01EB33BC5009F4381 /* ZYWordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYWordViewModel.swift; sourceTree = "<group>"; };
 		04D2EEA31EB18A8300BC24B0 /* 唐诗三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "唐诗三百首.json"; sourceTree = "<group>"; };
 		04D2EEA51EB196D500BC24B0 /* ZYWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYWord.swift; sourceTree = "<group>"; };
+		04F8259C1EEA413000B62794 /* ZYMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYMainViewController.swift; sourceTree = "<group>"; };
+		04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYMaterialDesignClass.swift; sourceTree = "<group>"; };
 		1EBD6372DBC0C4D850FF40C9 /* Pods-ZYCrossword.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.debug.xcconfig"; sourceTree = "<group>"; };
 		2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZYCrossword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5ACE0D0094E616FD0302C3 /* Pods-ZYCrossword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.release.xcconfig"; sourceTree = "<group>"; };
@@ -878,6 +882,7 @@
 			children = (
 				0490AA481EAEE85B0051C47D /* NetDataManager.swift */,
 				0490AA491EAEE85B0051C47D /* ZYCustomClass.swift */,
+				04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */,
 				0490AA4A1EAEE85B0051C47D /* ZYWebViewController.swift */,
 			);
 			name = CustomClass;
@@ -897,6 +902,7 @@
 				0490AA501EAEEFD40051C47D /* Word */,
 				04928DB51EC93D5D002915BD /* Chessboard */,
 				0490AA1A1EAEE0DB0051C47D /* ViewController.swift */,
+				04F8259C1EEA413000B62794 /* ZYMainViewController.swift */,
 			);
 			name = Crossword;
 			sourceTree = "<group>";
@@ -1836,6 +1842,7 @@
 				040E95EF1ED6B3B900FC29E2 /* ZYChessboardView.swift in Sources */,
 				04928DB71EC93DAF002915BD /* ZYChessboard.swift in Sources */,
 				0496F3301EBB1CAA008D3285 /* ZYJsonViewModel.swift in Sources */,
+				04F8259F1EEA4DD200B62794 /* ZYMaterialDesignClass.swift in Sources */,
 				0490AA1B1EAEE0DB0051C47D /* ViewController.swift in Sources */,
 				046A86D51ECC4C1B001E7323 /* ZYIdiom.swift in Sources */,
 				040E95F11ED6B3F500FC29E2 /* ZYChessboardButton.swift in Sources */,
@@ -1846,6 +1853,7 @@
 				0496F8FD1EE6504800F51542 /* ZYAllegoric.swift in Sources */,
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
+				04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */,
 				04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */,
 				040E95F31ED6B42C00FC29E2 /* ZYChessboardViewController.swift in Sources */,
 				04141ADD1EC4690500A1A8A2 /* ZYMusic.swift in Sources */,
