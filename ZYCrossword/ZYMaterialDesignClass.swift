@@ -13,7 +13,7 @@ class ZYMaterialDesignClass: NSObject {
 }
 extension UIView {
     //MARK: - public methods
-    func mdInflateTransition(from fromView: UIView, toView: UIView, originalPoint: CGPoint, duration: TimeInterval, completion block: @escaping () -> Void) {
+    open class func mdInflateTransition(from fromView: UIView, toView: UIView, originalPoint: CGPoint, duration: TimeInterval, completion block: @escaping () -> Void) {
         if let containerView = fromView.superview {
             let convertedPoint = fromView.convert(originalPoint, from: fromView)
             containerView.layer.masksToBounds = true
@@ -33,7 +33,7 @@ extension UIView {
             block()
         }
     }
-    func mdDeflateTransition(from fromView: UIView, toView: UIView, originalPoint: CGPoint, duration: TimeInterval, completion block: @escaping () -> Void) {
+    open class func mdDeflateTransition(from fromView: UIView, toView: UIView, originalPoint: CGPoint, duration: TimeInterval, completion block: @escaping () -> Void) {
         if let containerView = fromView.superview {
             containerView.insertSubview(toView, belowSubview: fromView)
             toView.frame = fromView.frame
@@ -94,9 +94,35 @@ extension UIView {
     }
     //MARK: - animation
     func mdAnimate(at point: CGPoint, backgroundColor: UIColor, duration: TimeInterval, inflating: Bool, zTopPosition: Bool, shapeLayer: CAShapeLayer?, completion block: @escaping () -> Void) {
-        if let shapeLayer = shapeLayer {
-            let shapeLayer = mdShapeLayerForAnimation(at: point)
+        var shapeLayer = shapeLayer
+        if shapeLayer == nil {
+            shapeLayer = mdShapeLayerForAnimation(at: point)
             self.layer.masksToBounds = true
+            if zTopPosition {
+                self.layer.addSublayer(shapeLayer!)
+            }else {
+                self.layer.insertSublayer(shapeLayer!, at: 0)
+            }
+            if inflating {
+                shapeLayer?.fillColor = backgroundColor.cgColor
+            }else {
+                shapeLayer?.fillColor = self.backgroundColor?.cgColor
+                self.backgroundColor = backgroundColor
+            }
         }
+        let scale: CGFloat = 1.0 / shapeLayer!.frame.size.width
+        let animation = shapeAnimation(with: CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault), scale: scale, inflating: inflating)
+        animation.duration = duration
+        shapeLayer?.transform = (animation.toValue as AnyObject).caTransform3DValue
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { 
+            if inflating {
+                self.backgroundColor = backgroundColor
+            }
+            shapeLayer?.removeFromSuperlayer()
+            block()
+        }
+        shapeLayer?.add(animation, forKey: "shapeBackgroundAnimation")
+        CATransaction.commit()
     }
 }

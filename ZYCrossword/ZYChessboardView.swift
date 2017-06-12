@@ -7,7 +7,7 @@
 //
 
 import UIKit
-public typealias PrefetcherProgressBlock = ((_ skippedResources: [Resource], _ failedResources: [Resource], _ completedResources: [Resource]) -> ())
+//public typealias PrefetcherProgressBlock = ((_ skippedResources: [Resource], _ failedResources: [Resource], _ completedResources: [Resource]) -> ())
 class ZYChessboardView: UIView {
     func creatButton(with gridArray: Array2D<String>?) {
         for i in 0 ..< chessboardRows {
