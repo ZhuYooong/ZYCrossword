@@ -7,44 +7,47 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ZYMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        beganTitle(with: CGPoint(x: view.bounds.size.width - 30, y: 20))
+        view.addSubview(titleViewController.view)
+        performSelector(inBackground: #selector(ZYMainViewController.loadData), with: nil)
     }
     //MARK: - 加载资源
+    let realm = try! Realm()
+    func loadData() {
+        titleViewController.startLoading()
+        if let a = realm.objects(ZYChessboard.self).first {
+            chessboard = a
+        }else {
+            chessboard = self.creatChessboardData()
+            try! realm.write {
+                realm.add(chessboard, update: true)
+            }
+        }
+        chessboard.printGrid()
+        beganChessboard()
+    }
     var chessboard = ZYChessboard()
     func creatChessboardData() -> ZYChessboard {
-//        ZYWordViewModel.shareWord.initData()
+        ZYWordViewModel.shareWord.initData()
         let crosswordsGenerator = ZYCrosswordsGenerator()
         crosswordsGenerator.loadCrosswordsData()
         return ZYChessboard(with: crosswordsGenerator)
     }
     //MARK: - ViewController
-    var titleViewController: ZYTitleViewController {
-        get {
-            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID")
-            return viewController as! ZYTitleViewController
-        }
-    }
+    var titleViewController: ZYTitleViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID") as! ZYTitleViewController
     func beganTitle(with originalPoint: CGPoint) {
         UIView.mdInflateTransition(from: chessboardViewController.view, toView: titleViewController.view, originalPoint: originalPoint, duration: 0.7) {
-            self.titleViewController.startLoading()
-            self.chessboard = self.creatChessboardData()
-            self.chessboard.printGrid()
-            self.beganChessboard()
+            self.loadData()
         }
     }
-    var chessboardViewController: ZYChessboardViewController {
-        get {
-            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID")
-            return viewController as! ZYChessboardViewController
-        }
-    }
+    var chessboardViewController: ZYChessboardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID") as! ZYChessboardViewController
     func beganChessboard() {
-        
-        self.titleViewController.stopLoading()
+        chessboardViewController.chessboard = chessboard
+        titleViewController.stopLoading()
         UIView.mdInflateTransition(from: titleViewController.view, toView: chessboardViewController.view, originalPoint: titleViewController.loadingActivityIndicator.center, duration: 0.7) { }
     }
 }

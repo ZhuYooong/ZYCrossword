@@ -18,8 +18,10 @@ class ZYWordViewModel: NSObject {
     func initData() {
         let realm = try! Realm()
         let allWordArray = ZYWordType.allValues
-        for type in allWordArray {
-            initWordData(with: type, and: realm)
+        if realm.objects(ZYWord.self).count >= allWordArray.count {
+            for type in allWordArray {
+                initWordData(with: type, and: realm)
+            }
         }
     }
     func initWordData(with type: ZYWordType, and realm: Realm) {
