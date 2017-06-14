@@ -48,11 +48,11 @@ class ZYChessboardButton: UIButton {
         didSet {
             switch selectedState {
             case .normal:
-                self.setBackgroundImage(UIImage(named: ""), for: .normal)
+                self.setBackgroundImage(UIImage(named: "Rectangle"), for: .normal)
             case .selected:
-                self.setBackgroundImage(UIImage(named: ""), for: .normal)
+                self.setBackgroundImage(UIImage(named: "Rectangle Selected"), for: .normal)
             case .call:
-                self.setBackgroundImage(UIImage(named: ""), for: .normal)
+                self.setBackgroundImage(UIImage(named: "Rectangle"), for: .normal)
             }
         }
     }

@@ -17,6 +17,7 @@
 		0447D8AB1EB9D56C001331AC /* 楚辞.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AA1EB9D56C001331AC /* 楚辞.json */; };
 		0447D8AD1EB9D572001331AC /* 乐府诗集.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AC1EB9D572001331AC /* 乐府诗集.json */; };
 		0447D8AF1EB9D578001331AC /* 诗经.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AE1EB9D578001331AC /* 诗经.json */; };
+		04621BE71EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04621BE61EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift */; };
 		046A86CE1ECC4879001E7323 /* Top250的电影.json in Resources */ = {isa = PBXBuildFile; fileRef = 046A86CC1ECC4879001E7323 /* Top250的电影.json */; };
 		046A86CF1ECC4879001E7323 /* Top250的图书.json in Resources */ = {isa = PBXBuildFile; fileRef = 046A86CD1ECC4879001E7323 /* Top250的图书.json */; };
 		046A86D31ECC48AF001E7323 /* 汉语成语词典.json in Resources */ = {isa = PBXBuildFile; fileRef = 046A86D21ECC48AF001E7323 /* 汉语成语词典.json */; };
@@ -394,6 +395,7 @@
 		0447D8AA1EB9D56C001331AC /* 楚辞.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "楚辞.json"; sourceTree = "<group>"; };
 		0447D8AC1EB9D572001331AC /* 乐府诗集.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "乐府诗集.json"; sourceTree = "<group>"; };
 		0447D8AE1EB9D578001331AC /* 诗经.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "诗经.json"; sourceTree = "<group>"; };
+		04621BE61EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYCrosswordDataTableViewCell.swift; sourceTree = "<group>"; };
 		046A86CC1ECC4879001E7323 /* Top250的电影.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Top250的电影.json"; sourceTree = "<group>"; };
 		046A86CD1ECC4879001E7323 /* Top250的图书.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Top250的图书.json"; sourceTree = "<group>"; };
 		046A86D21ECC48AF001E7323 /* 汉语成语词典.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "汉语成语词典.json"; sourceTree = "<group>"; };
@@ -1265,6 +1267,7 @@
 				040E95F21ED6B42C00FC29E2 /* ZYChessboardViewController.swift */,
 				040E95EE1ED6B3B900FC29E2 /* ZYChessboardView.swift */,
 				040E95F01ED6B3F500FC29E2 /* ZYChessboardButton.swift */,
+				04621BE61EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift */,
 			);
 			name = Chessboard;
 			sourceTree = "<group>";
@@ -1875,6 +1878,7 @@
 				04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */,
 				04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */,
 				049E5A041EEE47CA00FC3560 /* ZYActivityIndicator.swift in Sources */,
+				04621BE71EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift in Sources */,
 				040E95F31ED6B42C00FC29E2 /* ZYChessboardViewController.swift in Sources */,
 				04141ADD1EC4690500A1A8A2 /* ZYMusic.swift in Sources */,
 				0496F3371EBB20E7008D3285 /* ZYArrayShuffle.swift in Sources */,

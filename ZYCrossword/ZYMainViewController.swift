@@ -48,6 +48,10 @@ class ZYMainViewController: UIViewController {
     func beganChessboard() {
         chessboardViewController.chessboard = chessboard
         titleViewController.stopLoading()
-        UIView.mdInflateTransition(from: titleViewController.view, toView: chessboardViewController.view, originalPoint: titleViewController.loadingActivityIndicator.center, duration: 0.7) { }
+        UIView.mdInflateTransition(from: titleViewController.view, toView: chessboardViewController.view, originalPoint: titleViewController.loadingActivityIndicator.center, duration: 0.7) {
+            self.chessboardViewController.resetValueClosure = { point in
+                self.beganTitle(with: point)
+            }
+        }
     }
 }
