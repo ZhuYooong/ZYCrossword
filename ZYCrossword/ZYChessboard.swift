@@ -42,7 +42,7 @@ class ZYChessboard: Object {
 }
 extension ZYChessboard {
     func printGrid() {
-        for i in 0 ..< chessboardRows {
+        for i in 0 ..< chessboardColumns {
             var s = ""
             for j in 0 ..< chessboardColumns {
                 s += grid![j, i]

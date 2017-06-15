@@ -14,8 +14,9 @@ class ZYChessboardViewController: UIViewController {
     var resetValueClosure: ((_ point: CGPoint) -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        creatChessboardViewData()
     }
+    //MARK: - Menu
     @IBOutlet weak var starLabel: UILabel!
     @IBAction func starButtonClick(_ sender: UIButton) {
     }
@@ -39,7 +40,16 @@ class ZYChessboardViewController: UIViewController {
     }
     @IBAction func moreButtonClick(_ sender: UIButton) {
     }
+    //MARK: - ChessboardView
     @IBOutlet weak var chessboardView: ZYChessboardView!
+    func creatChessboardViewData() {
+        if let gridArray = chessboard?.grid {
+            chessboardView.creatButton(with: gridArray)
+            chessboardView.chessboardButtonClosure = { sender in
+                
+            }
+        }
+    }
     @IBOutlet weak var crosswordDataTableView: UITableView!
     @IBAction func allDataButtonClick(_ sender: UIButton) {
     }

@@ -24,4 +24,5 @@ class ZYTitleViewController: UIViewController {
     open func stopLoading() {
         loadingActivityIndicator.stopAnimating()
     }
+    @IBOutlet weak var loadingTitleLabel: UILabel!
 }

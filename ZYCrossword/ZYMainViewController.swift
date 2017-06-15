@@ -16,26 +16,31 @@ class ZYMainViewController: UIViewController {
         performSelector(inBackground: #selector(ZYMainViewController.loadData), with: nil)
     }
     //MARK: - 加载资源
-    let realm = try! Realm()
     func loadData() {
         titleViewController.startLoading()
+        titleViewController.loadingTitleLabel.text = "正在加载资源包……"
+        performSelector(onMainThread: #selector(ZYMainViewController.initChessboardData), with: nil, waitUntilDone: true)
+//        chessboard.printGrid()
+        beganChessboard()
+    }
+    func initChessboardData() {
+        let realm = try! Realm()
         if let a = realm.objects(ZYChessboard.self).first {
             chessboard = a
         }else {
-            chessboard = self.creatChessboardData()
-            try! realm.write {
-                realm.add(chessboard, update: true)
-            }
+            creatChessboardData(with: realm)
         }
-        chessboard.printGrid()
-        beganChessboard()
     }
     var chessboard = ZYChessboard()
-    func creatChessboardData() -> ZYChessboard {
+    func creatChessboardData(with realm: Realm) {
         ZYWordViewModel.shareWord.initData()
         let crosswordsGenerator = ZYCrosswordsGenerator()
+        titleViewController.loadingTitleLabel.text = "正在准备小抄……"
         crosswordsGenerator.loadCrosswordsData()
-        return ZYChessboard(with: crosswordsGenerator)
+        chessboard = ZYChessboard(with: crosswordsGenerator)
+        try! realm.write {
+            realm.add(chessboard, update: true)
+        }
     }
     //MARK: - ViewController
     var titleViewController: ZYTitleViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID") as! ZYTitleViewController

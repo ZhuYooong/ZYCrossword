@@ -50,20 +50,33 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMU-Tb-jYK">
+                                <rect key="frame" x="16" y="625" width="343" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="8qi-6p-sY7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.83236607139999996" blue="0.81272321430000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="qMU-Tb-jYK" firstAttribute="leading" secondItem="G2G-0B-nEj" secondAttribute="leading" constant="16" id="H4f-d7-ktB"/>
+                            <constraint firstItem="7YF-bs-cSz" firstAttribute="top" secondItem="qMU-Tb-jYK" secondAttribute="bottom" constant="8" id="Lli-M5-Ko6"/>
                             <constraint firstItem="F4m-ev-KwM" firstAttribute="centerX" secondItem="G2G-0B-nEj" secondAttribute="centerX" id="RiX-qs-TtO"/>
                             <constraint firstItem="F4m-ev-KwM" firstAttribute="centerY" secondItem="G2G-0B-nEj" secondAttribute="centerY" id="kWa-yZ-qwx"/>
+                            <constraint firstAttribute="trailing" secondItem="qMU-Tb-jYK" secondAttribute="trailing" constant="16" id="xh0-oL-RDg"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="loadingActivityIndicator" destination="F4m-ev-KwM" id="0yA-yb-4Kq"/>
+                        <outlet property="loadingTitleLabel" destination="qMU-Tb-jYK" id="dWa-HK-jia"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Kj-ml-uEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="834" y="36"/>
+            <point key="canvasLocation" x="832.79999999999995" y="35.532233883058474"/>
         </scene>
         <!--Chessboard View Controller-->
         <scene sceneID="qe7-jh-YLX">

@@ -48,15 +48,16 @@ class ZYCrosswordsGenerator: NSObject {
         }
     }
     // MARK: - Crosswords generation
-    let columns: Int = 10
-    let rows: Int = 10
+    let columns: Int = { () -> Int in
+        return Int((screenWidth - 44) / 33)
+    }()
     var emptySymbol = "-"
     open func generate() {
         DispatchQueue(label: "Crosswords").sync { [weak self] in
             var isSuccess = false
             while !isSuccess {
                 self?.grid = nil
-                self?.grid = Array2D(columns: self!.columns, rows: self!.rows, defaultValue: self!.emptySymbol)
+                self?.grid = Array2D(columns: self!.columns, rows: self!.columns, defaultValue: self!.emptySymbol)
                 self?.resultData = Array<Word>()
                 self?.resultContentArray = Array<ZYBaseWord>()
                 
@@ -258,7 +259,7 @@ class ZYCrosswordsGenerator: NSObject {
         for letter in word.characters {
             glc += 1
             var rowc = 0
-            for row: Int in 0 ..< rows {
+            for row: Int in 0 ..< columns {
                 rowc += 1
                 var colc = 0
                 for column: Int in 0 ..< columns {
@@ -266,7 +267,7 @@ class ZYCrosswordsGenerator: NSObject {
                     let cell = grid![column, row]
                     if String(letter) == cell {
                         if rowc - glc > 0 {
-                            if ((rowc - glc) + word.length) <= rows {
+                            if ((rowc - glc) + word.length) <= columns {
                                 coordlist.append((colc, rowc - glc, 1, colc + (rowc - glc), 0))
                             }
                         }
@@ -300,7 +301,7 @@ class ZYCrosswordsGenerator: NSObject {
     fileprivate func checkFitScore(_ column: Int, row: Int, direction: Int, word: String) -> Int {
         var c = column
         var r = row
-        if c < 1 || r < 1 || c >= columns || r >= rows {
+        if c < 1 || r < 1 || c >= columns || r >= columns {
             return 0
         }
         var count = 1
@@ -355,7 +356,7 @@ class ZYCrosswordsGenerator: NSObject {
                 }else {
                     r += 1
                 }
-                if (c >= columns || r >= rows) {
+                if (c >= columns || r >= columns) {
                     return 0
                 }
                 count += 1
@@ -372,7 +373,7 @@ class ZYCrosswordsGenerator: NSObject {
         return grid![column - 1, row - 1]
     }
     func checkIfCellClear(_ column: Int, row: Int) -> Bool {
-        if column > 0 && row > 0 && column < columns && row < rows {
+        if column > 0 && row > 0 && column < columns && row < columns {
             return getCell(column, row: row) == emptySymbol ? true : false
         }else {
             return true

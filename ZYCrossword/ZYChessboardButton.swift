@@ -12,8 +12,8 @@ class ZYChessboardButton: UIButton {
     // MARK: - Initialization
     init(with word: String, and column: Int, and row: Int, and fatherWidth: CGFloat) {
         self.word = word
-        let width = (fatherWidth - CGFloat(4 * chessboardColumns - 4)) / CGFloat(chessboardColumns)
-        super.init(frame: CGRect(x: CGFloat(column) * (width + 4), y: CGFloat(row) * (width + 4), width: width, height: width))
+        let interval = (fatherWidth - CGFloat(29 * chessboardColumns)) / CGFloat(chessboardColumns - 1)
+        super.init(frame: CGRect(x: CGFloat(column) * (interval + 29), y: CGFloat(row) * (interval + 29), width: 29, height: 29))
         creatTittleLabel()
         selectedState = .normal
     }
