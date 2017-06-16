@@ -29,6 +29,7 @@ class ZYIdiom: ZYBaseWord {
         paraphrase = json["paraphrase"].stringValue
         derivation = json["derivation"].stringValue
         wordType = typeInfo
+        showString = json["title"].stringValue
     }
 }
 enum ZYIdiomType: String {

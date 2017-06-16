@@ -60,6 +60,7 @@ class ZYPoetry: ZYBaseWord {
         note = translateString
         translate = noteString
         wordType = typeInfo
+        showString = json["detail_text"].stringValue
     }
 }
 enum ZYPoetryType: String {

@@ -27,6 +27,7 @@ class ZYAllegoric: ZYBaseWord {
         name = json["name"].stringValue
         answer = json["answer"].stringValue
         wordType = typeInfo
+        showString = json["name"].stringValue
     }
 }
 enum ZYAllegoricType: String {

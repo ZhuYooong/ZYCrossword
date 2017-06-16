@@ -31,5 +31,6 @@ class ZYMusic: ZYBaseWord {
         alt = json["alt"].stringValue
         pubdate = (json["attrs"].dictionaryValue["pubdate"] ?? "").stringValue
         tracks = (json["attrs"].dictionaryValue["tracks"] ?? "").stringValue
+        showString = json["title"].stringValue
     }
 }

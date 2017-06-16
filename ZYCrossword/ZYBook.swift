@@ -41,6 +41,7 @@ class ZYBook: ZYBaseWord {
         date = json["date"].stringValue
         page = json["page"].stringValue
         wordType = typeInfo
+        showString = json["name"].stringValue
     }
 }
 enum ZYBookType: String {

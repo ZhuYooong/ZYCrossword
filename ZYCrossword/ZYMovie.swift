@@ -37,6 +37,7 @@ class ZYMovie: ZYBaseWord {
         IMDb = json["IMDb"].stringValue
         type = json["type"].stringValue
         wordType = typeInfo
+        showString = json["movie_name"].stringValue
     }
 }
 enum ZYMovieType: String {

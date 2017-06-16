@@ -12,21 +12,43 @@ import RealmSwift
 class ZYMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(titleViewController.view)
-        performSelector(inBackground: #selector(ZYMainViewController.loadData), with: nil)
+        view.addSubview(self.titleViewController.view)
+        DispatchQueue(label: "Crosswords").async { [weak self] in
+            self?.loadData()
+        }
     }
     //MARK: - 加载资源
     func loadData() {
         titleViewController.startLoading()
         titleViewController.loadingTitleLabel.text = "正在加载资源包……"
-        performSelector(onMainThread: #selector(ZYMainViewController.initChessboardData), with: nil, waitUntilDone: true)
-//        chessboard.printGrid()
+        initChessboardData()
+        chessboard.printGrid()
         beganChessboard()
     }
     func initChessboardData() {
         let realm = try! Realm()
         if let a = realm.objects(ZYChessboard.self).first {
+            DispatchQueue.main.sync { [weak self] in
+                self?.titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
+            }
             chessboard = a
+            var tipXdataArr = [ZYBaseWord]()
+            var tipYdataArr = [ZYBaseWord]()
+            let showReults = realm.objects(ZYBaseWord.self).filter(NSPredicate(format: "isShow = true"))
+            for result in showReults {
+                for Xdata in chessboard.tipXArr {
+                    if result.showString.contains(Xdata.word) {
+                        tipXdataArr.append(result)
+                    }
+                }
+                for Ydata in chessboard.tipYArr {
+                    if result.showString.contains(Ydata.word) {
+                        tipYdataArr.append(result)
+                    }
+                }
+            }
+            chessboardViewController.resultXArray = tipXdataArr
+            chessboardViewController.resultYArray = tipYdataArr
         }else {
             creatChessboardData(with: realm)
         }
@@ -35,9 +57,31 @@ class ZYMainViewController: UIViewController {
     func creatChessboardData(with realm: Realm) {
         ZYWordViewModel.shareWord.initData()
         let crosswordsGenerator = ZYCrosswordsGenerator()
-        titleViewController.loadingTitleLabel.text = "正在准备小抄……"
+        DispatchQueue.main.sync { [weak self] in
+            self?.titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
+        }
         crosswordsGenerator.loadCrosswordsData()
-        chessboard = ZYChessboard(with: crosswordsGenerator)
+        chessboard = ZYChessboard()
+        chessboard.grid = crosswordsGenerator.grid
+        var tipXdataArr = [ZYBaseWord]()
+        var tipYdataArr = [ZYBaseWord]()
+        for i in 0 ..< crosswordsGenerator.resultContentArray.count {
+            let word = crosswordsGenerator.resultData[i]
+            let result = crosswordsGenerator.resultContentArray[i]
+            result.isShow = true
+            if word.direction == .vertical {
+                chessboard.tipYArr.append(word)
+                tipYdataArr.append(result)
+            }else {
+                chessboard.tipXArr.append(word)
+                tipXdataArr.append(result)
+            }
+            try! realm.write {
+                realm.add(result, update: true)
+            }
+        }
+        chessboardViewController.resultXArray = tipXdataArr
+        chessboardViewController.resultYArray = tipYdataArr
         try! realm.write {
             realm.add(chessboard, update: true)
         }

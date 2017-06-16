@@ -11,6 +11,8 @@ import RealmSwift
 
 class ZYChessboardViewController: UIViewController {
     var chessboard: ZYChessboard?
+    var resultXArray = [ZYBaseWord]()
+    var resultYArray = [ZYBaseWord]()
     var resetValueClosure: ((_ point: CGPoint) -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()

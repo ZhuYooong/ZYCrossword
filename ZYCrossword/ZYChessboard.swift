@@ -9,35 +9,13 @@
 import UIKit
 import RealmSwift
 
-class ZYChessboard: Object {
+public class ZYChessboard: Object {
     dynamic var id: String? = ""
     open var grid: Array2D<String>?
     open var tipXArr = Array<Word>()
     open var tipYArr = Array<Word>()
-    open var tipXdataArr: List<ZYBaseWord>?
-    open var tipYdataArr: List<ZYBaseWord>?
-
-    override static func primaryKey() -> String? {
+    override public static func primaryKey() -> String? {
         return "id"
-    }
-    convenience init(with crosswordsGenerator: ZYCrosswordsGenerator) {
-        self.init()
-        grid = crosswordsGenerator.grid
-        let resultXArray = List<ZYBaseWord>()
-        let resultYArray = List<ZYBaseWord>()
-        for i in 0 ..< crosswordsGenerator.resultContentArray.count {
-            let word = crosswordsGenerator.resultData[i]
-            let result = crosswordsGenerator.resultContentArray[i]
-            if word.direction == .vertical {
-                tipYArr.append(word)
-                resultYArray.append(result)
-            }else {
-                tipXArr.append(word)
-                resultXArray.append(result)
-            }
-        }
-        tipXdataArr = resultXArray
-        tipYdataArr = resultYArray
     }
 }
 extension ZYChessboard {

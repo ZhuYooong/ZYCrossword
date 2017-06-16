@@ -185,15 +185,7 @@ class ZYCrosswordsGenerator: NSObject {
     }
     func filterResult<T: Object>(with results: Results<T>, and type: T.Type, and findString: String?) -> Results<T> {
         if let findString = findString {
-            var predicate = NSPredicate(format: "detail contains '\(findString)'")
-            if type == ZYMovie.self {
-                predicate = NSPredicate(format: "movie_name contains '\(findString)'")
-            }else if type == ZYBook.self || type == ZYAllegoric.self {
-                predicate = NSPredicate(format: "name contains '\(findString)'")
-            }else if type == ZYIdiom.self {
-                predicate = NSPredicate(format: "title contains '\(findString)'")
-            }
-            return results.filter(predicate).sorted(byKeyPath: "selecttedCount")
+            return results.filter(NSPredicate(format: "showString contains '\(findString)'")).sorted(byKeyPath: "selecttedCount")
         }else {
             return results.sorted(byKeyPath: "selecttedCount")
         }
