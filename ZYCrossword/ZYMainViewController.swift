@@ -25,66 +25,37 @@ class ZYMainViewController: UIViewController {
         chessboard.printGrid()
         beganChessboard()
     }
+    func idString() -> String {
+        let df = DateFormatter()
+        df.dateFormat = "yyyyMMddHmmssS"
+        return df.string(from: Date())
+    }
     func initChessboardData() {
-        let realm = try! Realm()
-        if let a = realm.objects(ZYChessboard.self).first {
+        if let dic = NSDictionary(contentsOfFile: getFilePath()) {
             DispatchQueue.main.sync { [weak self] in
                 self?.titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
             }
-            chessboard = a
-            var tipXdataArr = [ZYBaseWord]()
-            var tipYdataArr = [ZYBaseWord]()
-            let showReults = realm.objects(ZYBaseWord.self).filter(NSPredicate(format: "isShow = true"))
-            for result in showReults {
-                for Xdata in chessboard.tipXArr {
-                    if result.showString.contains(Xdata.word) {
-                        tipXdataArr.append(result)
-                    }
-                }
-                for Ydata in chessboard.tipYArr {
-                    if result.showString.contains(Ydata.word) {
-                        tipYdataArr.append(result)
-                    }
-                }
-            }
-            chessboardViewController.resultXArray = tipXdataArr
-            chessboardViewController.resultYArray = tipYdataArr
+            chessboard = ZYChessboard(dictionary: dic)
         }else {
-            creatChessboardData(with: realm)
+            creatChessboardData()
         }
     }
     var chessboard = ZYChessboard()
-    func creatChessboardData(with realm: Realm) {
+    func creatChessboardData() {
         ZYWordViewModel.shareWord.initData()
         let crosswordsGenerator = ZYCrosswordsGenerator()
         DispatchQueue.main.sync { [weak self] in
             self?.titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
         }
         crosswordsGenerator.loadCrosswordsData()
-        chessboard = ZYChessboard()
-        chessboard.grid = crosswordsGenerator.grid
-        var tipXdataArr = [ZYBaseWord]()
-        var tipYdataArr = [ZYBaseWord]()
-        for i in 0 ..< crosswordsGenerator.resultContentArray.count {
-            let word = crosswordsGenerator.resultData[i]
-            let result = crosswordsGenerator.resultContentArray[i]
-            result.isShow = true
-            if word.direction == .vertical {
-                chessboard.tipYArr.append(word)
-                tipYdataArr.append(result)
-            }else {
-                chessboard.tipXArr.append(word)
-                tipXdataArr.append(result)
-            }
-            try! realm.write {
-                realm.add(result, update: true)
-            }
-        }
-        chessboardViewController.resultXArray = tipXdataArr
-        chessboardViewController.resultYArray = tipYdataArr
-        try! realm.write {
-            realm.add(chessboard, update: true)
-        }
+        chessboard = ZYChessboard(crosswordsGenerator: crosswordsGenerator)
+        chessboard.getDictionary().write(toFile: getFilePath(), atomically: true)
+    }
+    let DBFILE_NAME = "Savedatas.plist"
+    func getFilePath() -> String {
+        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
+        let DBPath = (documentPath! as NSString).appendingPathComponent(DBFILE_NAME)
+        return DBPath
     }
     //MARK: - ViewController
     var titleViewController: ZYTitleViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID") as! ZYTitleViewController
@@ -98,7 +69,13 @@ class ZYMainViewController: UIViewController {
         chessboardViewController.chessboard = chessboard
         titleViewController.stopLoading()
         UIView.mdInflateTransition(from: titleViewController.view, toView: chessboardViewController.view, originalPoint: titleViewController.loadingActivityIndicator.center, duration: 0.7) {
+            self.chessboardViewController.creatChessboardViewData()
             self.chessboardViewController.resetValueClosure = { point in
+                do{
+                    try FileManager.default.removeItem(atPath: self.getFilePath())
+                }catch{
+                    print("error")
+                }
                 self.beganTitle(with: point)
             }
         }

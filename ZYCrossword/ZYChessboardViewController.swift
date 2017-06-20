@@ -11,12 +11,9 @@ import RealmSwift
 
 class ZYChessboardViewController: UIViewController {
     var chessboard: ZYChessboard?
-    var resultXArray = [ZYBaseWord]()
-    var resultYArray = [ZYBaseWord]()
     var resetValueClosure: ((_ point: CGPoint) -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
-        creatChessboardViewData()
     }
     //MARK: - Menu
     @IBOutlet weak var starLabel: UILabel!
@@ -29,11 +26,6 @@ class ZYChessboardViewController: UIViewController {
         let option = UIAlertController(title: nil, message: "您确定要重置本局游戏？", preferredStyle: .alert)
         option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         option.addAction(UIAlertAction(title: "重置", style: .default) { (action) in
-            let realm = try! Realm()
-            let chessboards = realm.objects(ZYChessboard.self)
-            try! realm.write {
-                realm.delete(chessboards)
-            }
             self.resetValueClosure!(sender.center)
         })
         self.present(option, animated: true, completion: nil)
@@ -48,7 +40,7 @@ class ZYChessboardViewController: UIViewController {
         if let gridArray = chessboard?.grid {
             chessboardView.creatButton(with: gridArray)
             chessboardView.chessboardButtonClosure = { sender in
-                
+                print("adasd")
             }
         }
     }

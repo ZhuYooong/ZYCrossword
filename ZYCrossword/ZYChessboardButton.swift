@@ -15,7 +15,7 @@ class ZYChessboardButton: UIButton {
         let interval = (fatherWidth - CGFloat(29 * chessboardColumns)) / CGFloat(chessboardColumns - 1)
         super.init(frame: CGRect(x: CGFloat(column) * (interval + 29), y: CGFloat(row) * (interval + 29), width: 29, height: 29))
         creatTittleLabel()
-        selectedState = .normal
+        setBackgroundImage(UIImage(named: "Rectangle"), for: .normal)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

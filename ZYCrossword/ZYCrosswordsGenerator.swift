@@ -49,7 +49,7 @@ class ZYCrosswordsGenerator: NSObject {
     }
     // MARK: - Crosswords generation
     let columns: Int = { () -> Int in
-        return Int((screenWidth - 44) / 33)
+        return Int((screenWidth - 44) / 33) + 2
     }()
     var emptySymbol = "-"
     open func generate() {
