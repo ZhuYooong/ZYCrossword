@@ -10,10 +10,11 @@ import UIKit
 
 class ZYChessboardView: UIView {
     var chessboardButtonClosure: ((_ sender: ZYChessboardButton) -> Void)?
-    func creatButton(with gridArray: Array2D<String>?) {
+    func creatButton(with gridArray: Array2D) {
         for i in 0 ..< chessboardColumns {
             for j in 0 ..< chessboardColumns {
-                if let str = gridArray?[j, i], str != chessboardEmptySymbol {
+                let str = gridArray[j, i]
+                if str != chessboardEmptySymbol {
                     let chessboardButton = ZYChessboardButton(with: str, and: j, and: i, and: self.bounds.size.width)
                     chessboardButton.tag = i * chessboardColumns + j + 1000
                     self.addSubview(chessboardButton)

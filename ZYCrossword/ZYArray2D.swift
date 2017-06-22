@@ -8,17 +8,32 @@
 
 import Foundation
 
-open class Array2D<T> {
-    open var columns: Int
-    open var rows: Int
-    open var matrix: [T]
+open class Array2D: NSObject, NSCoding {
+    open var columns: Int = 0
+    open var rows: Int = 0
+    open var matrix: [String] = [String]()
     
-    public init(columns: Int, rows: Int, defaultValue: T) {
+    convenience init(columns: Int, rows: Int, defaultValue: String) {
+        self.init()
         self.columns = columns
         self.rows = rows
         matrix = Array(repeating: defaultValue, count: columns * rows)
     }
-    open subscript(column: Int, row: Int) -> T {
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(NSNumber(value: self.columns), forKey: "columns")
+        aCoder.encode(NSNumber(value: self.rows), forKey: "rows")
+        aCoder.encode(self.matrix, forKey: "matrix")
+    }
+    required public init(coder aDecoder: NSCoder) {
+        super.init()
+        self.columns = aDecoder.decodeObject(forKey: "columns") as! Int
+        self.rows = aDecoder.decodeObject(forKey: "rows") as! Int
+        self.matrix = aDecoder.decodeObject(forKey: "matrix") as! [String]
+    }
+    override init() {
+        
+    }
+    open subscript(column: Int, row: Int) -> String {
         get {
             return matrix[columns * row + column]
         }set {

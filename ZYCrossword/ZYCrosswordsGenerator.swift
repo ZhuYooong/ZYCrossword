@@ -12,7 +12,7 @@ import RealmSwift
 class ZYCrosswordsGenerator: NSObject {
     open var orientationOptimization = false
     // MARK: - Logic properties
-    open var grid: Array2D<String>?
+    open var grid = Array2D()
     open var resultData: Array<Word> = Array<Word>()
     open var resultContentArray = Array<ZYBaseWord>()
     // MARK: - Initialization
@@ -56,7 +56,6 @@ class ZYCrosswordsGenerator: NSObject {
         DispatchQueue(label: "Crosswords").sync { [weak self] in
             var isSuccess = false
             while !isSuccess {
-                self?.grid = nil
                 self?.grid = Array2D(columns: self!.columns, rows: self!.columns, defaultValue: self!.emptySymbol)
                 self?.resultData = Array<Word>()
                 self?.resultContentArray = Array<ZYBaseWord>()
@@ -256,7 +255,7 @@ class ZYCrosswordsGenerator: NSObject {
                 var colc = 0
                 for column: Int in 0 ..< columns {
                     colc += 1
-                    let cell = grid![column, row]
+                    let cell = grid[column, row]
                     if String(letter) == cell {
                         if rowc - glc > 0 {
                             if ((rowc - glc) + word.length) <= columns {
@@ -359,10 +358,10 @@ class ZYCrosswordsGenerator: NSObject {
         return score
     }
     func setCell(_ column: Int, row: Int, value: String) {
-        grid![column - 1, row - 1] = value
+        grid[column - 1, row - 1] = value
     }
     func getCell(_ column: Int, row: Int) -> String{
-        return grid![column - 1, row - 1]
+        return grid[column - 1, row - 1]
     }
     func checkIfCellClear(_ column: Int, row: Int) -> Bool {
         if column > 0 && row > 0 && column < columns && row < columns {
@@ -405,14 +404,41 @@ class ZYCrosswordsGenerator: NSObject {
     }
 }
 // MARK: - Additional types
-public struct Word {
+public class Word: NSObject, NSCoding {
     public var word = ""
     public var column = 0
     public var row = 0
     public var direction: WordDirection = .vertical
     public var grid = [[0, 0]]
+    
+    convenience init(word: String, column: Int, row: Int, direction: WordDirection, grid: [Array<Int>]) {
+        self.init()
+        self.word = word
+        self.column = column
+        self.row = row
+        self.direction = direction
+        self.grid = grid
+    }
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.word, forKey: "word")
+        aCoder.encode(self.column, forKey: "column")
+        aCoder.encode(self.row, forKey: "row")
+        aCoder.encode(self.direction.rawValue, forKey: "direction")
+        aCoder.encode(self.grid, forKey: "grid")
+    }
+    required public init(coder aDecoder: NSCoder) {
+        super.init()
+        self.word = aDecoder.decodeObject(forKey: "word") as! String
+        self.column = aDecoder.decodeObject(forKey: "column") as! Int
+        self.row = aDecoder.decodeObject(forKey: "row") as! Int
+        self.direction = WordDirection(rawValue: (aDecoder.decodeObject(forKey: "direction") as! Int)) ?? .vertical
+        self.grid = aDecoder.decodeObject(forKey: "grid") as! [Array<Int>]
+    }
+    override init() {
+        
+    }
 }
-public enum WordDirection {
-    case vertical
-    case horizontal
+public enum WordDirection: Int {
+    case vertical = 0
+    case horizontal = 1
 }

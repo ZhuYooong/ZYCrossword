@@ -7,51 +7,31 @@
 //
 
 import UIKit
-import RealmSwift
 
-public class ZYChessboard: NSObject {
-    var grid: Array2D<String>?
+class ZYChessboard: NSObject, NSCoding {
+    var grid = Array2D()
     var tipXArr = Array<Word>()
     var tipYArr = Array<Word>()
-    var resultXArray = [ZYBaseWord]()
-    var resultYArray = [ZYBaseWord]()
     
-    convenience init(crosswordsGenerator: ZYCrosswordsGenerator) {
-        self.init()
-        grid = crosswordsGenerator.grid
-        for i in 0 ..< crosswordsGenerator.resultContentArray.count {
-            let word = crosswordsGenerator.resultData[i]
-            let result = crosswordsGenerator.resultContentArray[i]
-            result.realm?.beginWrite()
-            result.isShow = true
-            try! result.realm?.commitWrite()
-            if word.direction == .vertical {
-                tipYArr.append(word)
-                resultYArray.append(result)
-            }else {
-                tipXArr.append(word)
-                resultXArray.append(result)
-            }
-        }
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.grid, forKey: "grid")
+        aCoder.encode(self.tipXArr, forKey: "tipXArr")
+        aCoder.encode(self.tipYArr, forKey: "tipYArr")
     }
-    convenience init(dictionary: NSDictionary) {
-        self.init()
-        grid = dictionary.object(forKey: "grid") as? Array2D<String>
-        tipXArr = dictionary.object(forKey: "tipXArr") as! Array<Word>
-        tipYArr = dictionary.object(forKey: "tipYArr") as! Array<Word>
-        resultXArray = dictionary.object(forKey: "resultXArray") as! [ZYBaseWord]
-        resultYArray = dictionary.object(forKey: "resultYArray") as! [ZYBaseWord]
+    required init(coder aDecoder: NSCoder) {
+        super.init()
+        self.grid = aDecoder.decodeObject(forKey: "grid") as! Array2D
+        self.tipXArr = aDecoder.decodeObject(forKey: "tipXArr") as! Array<Word>
+        self.tipYArr = aDecoder.decodeObject(forKey: "tipYArr") as! Array<Word>
     }
-    func getDictionary() -> NSDictionary {
-        return NSDictionary(dictionary: ["grid":grid ?? Array2D<String>(columns: chessboardColumns, rows: chessboardColumns, defaultValue: chessboardEmptySymbol), "tipXArr":tipXArr, "tipYArr":tipYArr, "resultXArray":resultXArray, "resultYArray":resultYArray])
-    }
+    override init() { }
 }
 extension ZYChessboard {
     func printGrid() {
         for i in 0 ..< chessboardColumns {
             var s = ""
             for j in 0 ..< chessboardColumns {
-                s += grid![j, i]
+                s += grid[j, i]
             }
             print(s)
         }
