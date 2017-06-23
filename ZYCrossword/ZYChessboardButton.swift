@@ -10,12 +10,16 @@ import UIKit
 
 class ZYChessboardButton: UIButton {
     // MARK: - Initialization
+    public var column = 0
+    public var row = 0
     init(with word: String, and column: Int, and row: Int, and fatherWidth: CGFloat) {
         self.word = word
         let interval = (fatherWidth - CGFloat(29 * chessboardColumns)) / CGFloat(chessboardColumns - 1)
         super.init(frame: CGRect(x: CGFloat(column) * (interval + 29), y: CGFloat(row) * (interval + 29), width: 29, height: 29))
         creatTittleLabel()
         setBackgroundImage(UIImage(named: "Rectangle"), for: .normal)
+        self.column = column
+        self.row = row
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

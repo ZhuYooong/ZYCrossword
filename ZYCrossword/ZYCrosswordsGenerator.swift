@@ -49,7 +49,7 @@ class ZYCrosswordsGenerator: NSObject {
     }
     // MARK: - Crosswords generation
     let columns: Int = { () -> Int in
-        return Int((screenWidth - 44) / 33) + 2
+        return Int((screenWidth - 44) / 33)
     }()
     var emptySymbol = "-"
     open func generate() {
@@ -421,9 +421,9 @@ public class Word: NSObject, NSCoding {
     }
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(self.word, forKey: "word")
-        aCoder.encode(self.column, forKey: "column")
-        aCoder.encode(self.row, forKey: "row")
-        aCoder.encode(self.direction.rawValue, forKey: "direction")
+        aCoder.encode(NSNumber(value: self.column), forKey: "column")
+        aCoder.encode(NSNumber(value: self.row), forKey: "row")
+        aCoder.encode(NSNumber(value: self.direction.rawValue), forKey: "direction")
         aCoder.encode(self.grid, forKey: "grid")
     }
     required public init(coder aDecoder: NSCoder) {

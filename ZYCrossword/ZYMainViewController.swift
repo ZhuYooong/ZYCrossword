@@ -33,8 +33,7 @@ class ZYMainViewController: UIViewController {
     func initChessboardData() {
         do {
             let realm = try Realm()
-            let a = try NSData(contentsOfFile: getFilePath()) as Data
-            if let data = NSKeyedUnarchiver.unarchiveObject(with: a) as? ZYChessboard {
+            if let data = NSKeyedUnarchiver.unarchiveObject(withFile: getFilePath()) as? ZYChessboard {
                 DispatchQueue.main.sync { [weak self] in
                     self?.titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
                 }
@@ -94,9 +93,7 @@ class ZYMainViewController: UIViewController {
         }
         chessboardViewController.resultXArray = tipXdataArr
         chessboardViewController.resultYArray = tipYdataArr
-        let data = NSKeyedArchiver.archivedData(withRootObject: chessboard) as NSData
-        data.write(toFile: getFilePath(), atomically: true)
-//        NSKeyedArchiver.archiveRootObject(chessboard, toFile: getFilePath())
+        NSKeyedArchiver.archiveRootObject(chessboard, toFile: getFilePath())
     }
     let DBFILE_NAME = "Chessboard.plist"
     func getFilePath() -> String {
