@@ -86,6 +86,47 @@ class ZYChessboardViewController: UIViewController {
         }
         crosswordDataTableView.reloadData()
     }
+    func setCrosswordDataTableViewContentHeight(with index: Int) -> CGFloat {
+        let contentString = setCrosswordDataTableViewContent(with: index)
+        return contentString.textHeightWithFont(UIFont.systemFont(ofSize: 14), constrainedToSize: CGSize(width: crosswordDataTableView.bounds.size.width - 48, height: 1000)) + 28
+    }
+    func setCrosswordDataTableViewContent(with index: Int) -> String {
+        if index < crosswordDataArray.count {
+            if index == 0 {
+                if let isLandscape = crosswordShowDic["landscape"], isLandscape == true {
+                    return "横向：" + setCrosswordDataTableViewString(with: crosswordDataArray[index])
+                }else if let isPortrait = crosswordShowDic["portrait"], isPortrait == true {
+                    return "纵向：" + setCrosswordDataTableViewString(with: crosswordDataArray[index])
+                }
+            }else if index == 1 {
+                if let isPortrait = crosswordShowDic["portrait"], isPortrait == true {
+                    return "纵向：" + setCrosswordDataTableViewString(with: crosswordDataArray[index])
+                }
+            }
+        }
+        return ""
+    }
+    func setCrosswordDataTableViewString(with word: ZYBaseWord) -> String {
+        if let poetryWord = word as? ZYPoetry {
+            return crosswordDataString(with: poetryWord.detail, showString: poetryWord.showString, typeString: poetryWord.wordType)
+        }else if let movieWord = word as? ZYMovie {
+            return crosswordDataString(with: movieWord.content_description, showString: movieWord.showString, typeString: movieWord.wordType)
+        }else if let bookWord = word as? ZYBook {
+            return crosswordDataString(with: bookWord.content_description, showString: bookWord.showString, typeString: bookWord.wordType)
+        }else if let idiomWord = word as? ZYIdiom {
+            return crosswordDataString(with: idiomWord.paraphrase!, showString: idiomWord.showString, typeString: idiomWord.wordType)
+        }else if let allegoricWord = word as? ZYAllegoric {
+            return crosswordDataString(with: allegoricWord.content!, showString: allegoricWord.showString, typeString: allegoricWord.wordType)
+        }
+        return ""
+    }
+    func crosswordDataString(with contentString: String, showString: String, typeString: String) -> String {
+        var replaceString = ""
+        for _ in 0 ..< showString.characters.count {
+            replaceString += "_"
+        }
+        return contentString.replacingOccurrences(of: showString, with: replaceString) + "\n----" + typeString
+    }
     @IBAction func allDataButtonClick(_ sender: UIButton) {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -97,7 +138,11 @@ extension ZYChessboardViewController: UITableViewDelegate, UITableViewDataSource
         return crosswordDataArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CrosswordDataCellID", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CrosswordDataCellID", for: indexPath) as! ZYCrosswordDataTableViewCell
+        cell.crosswordDataLabel.text = setCrosswordDataTableViewContent(with: indexPath.row)
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return setCrosswordDataTableViewContentHeight(with: indexPath.row)
     }
 }

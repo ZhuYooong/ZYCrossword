@@ -12,8 +12,9 @@
         <!--Navigation Controller-->
         <scene sceneID="vCS-od-XSN">
             <objects>
-                <navigationController id="CN4-0t-Wih" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="CN4-0t-Wih" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wCI-O7-0n7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -24,7 +25,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5di-tq-QzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-684" y="36"/>
+            <point key="canvasLocation" x="-847" y="36"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -40,7 +41,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="287-Hv-h7s"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -242,7 +242,7 @@
                                 <rect key="frame" x="20" y="419" width="320" height="208"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CrosswordDataCellID" rowHeight="95" id="zcP-6w-Iq6" customClass="ZYCrosswordDataTableViewCell" customModule="ZYCrossword" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CrosswordDataCellID" rowHeight="95" id="zcP-6w-Iq6" customClass="ZYCrosswordDataTableViewCell" customModule="ZYCrossword" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zcP-6w-Iq6" id="FCi-1R-kHF">
