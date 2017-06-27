@@ -46,30 +46,27 @@ class ZYChessboardViewController: UIViewController {
                 var portraitIntro = [Array<Int>]()
                 var landscapeResultIntro: ZYBaseWord?
                 var portraitResultIntro: ZYBaseWord?
-                for i in 0 ..< self.chessboard!.tipXArr.count {
-                    let XWord = self.chessboard!.tipXArr[i]
-                    for num in XWord.grid {
-                        if sender.column == num[0] && sender.row == num[1] {
-                            landscapeResultIntro = self.resultXArray[i]
-                            landscapeIntro = XWord.grid
-                            break
-                        }
-                    }
-                }
-                for i in 0 ..< self.chessboard!.tipYArr.count {
-                    let YWord = self.chessboard!.tipYArr[i]
-                    for num in YWord.grid {
-                        if sender.column == num[0] && sender.row == num[1] {
-                            portraitResultIntro = self.resultYArray[i]
-                            portraitIntro = YWord.grid
-                            break
-                        }
-                    }
-                }
+                let x = self.setIntro(with: self.chessboard!.tipXArr, resultArray: self.resultXArray, sender: sender)
+                landscapeResultIntro = x?.resultIntro
+                landscapeIntro = x?.intro ?? [Array<Int>]()
+                let y = self.setIntro(with: self.chessboard!.tipYArr, resultArray: self.resultYArray, sender: sender)
+                portraitResultIntro = y?.resultIntro
+                portraitIntro = y?.intro ?? [Array<Int>]()
                 self.reloadCrosswordData(landscape: landscapeResultIntro, portrait: portraitResultIntro)
                 return (landscapeIntro, portraitIntro)
             }
         }
+    }
+    func setIntro(with tipArray: Array<Word>, resultArray: [ZYBaseWord], sender: ZYChessboardButton) -> (intro: [Array<Int>], resultIntro: ZYBaseWord)? {
+        for i in 0 ..< tipArray.count {
+            let XWord = tipArray[i]
+            for num in XWord.grid {
+                if sender.column == num[0] && sender.row == num[1] {
+                    return (XWord.grid, resultArray[i])
+                }
+            }
+        }
+        return nil
     }
     @IBOutlet weak var crosswordDataTableView: UITableView!
     var crosswordDataArray = [ZYBaseWord]()
@@ -114,9 +111,9 @@ class ZYChessboardViewController: UIViewController {
         }else if let bookWord = word as? ZYBook {
             return crosswordDataString(with: bookWord.content_description, showString: bookWord.showString, typeString: bookWord.wordType)
         }else if let idiomWord = word as? ZYIdiom {
-            return crosswordDataString(with: idiomWord.paraphrase!, showString: idiomWord.showString, typeString: idiomWord.wordType)
+            return crosswordDataString(with: idiomWord.paraphrase ?? "", showString: idiomWord.showString, typeString: idiomWord.wordType)
         }else if let allegoricWord = word as? ZYAllegoric {
-            return crosswordDataString(with: allegoricWord.content!, showString: allegoricWord.showString, typeString: allegoricWord.wordType)
+            return crosswordDataString(with: allegoricWord.content ?? "", showString: allegoricWord.showString, typeString: allegoricWord.wordType)
         }
         return ""
     }

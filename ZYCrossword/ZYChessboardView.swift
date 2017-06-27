@@ -24,6 +24,11 @@ class ZYChessboardView: UIView {
         }
     }
     func chessboardButtonClick(sender: ZYChessboardButton) {
+        for view in subviews {
+            if let button = view as? ZYChessboardButton {
+                button.selectedState = .normal
+            }
+        }
         let grid = chessboardButtonClosure!(sender)
         checkIsGroup(with: grid.landscapeIntro)
         checkIsGroup(with: grid.portraitIntro)
