@@ -57,7 +57,7 @@ extension UIView {
     func mdInflateAnimated(from point: CGPoint, backgroundColor: UIColor, duration: TimeInterval, completion block: @escaping () -> Void) {
         mdAnimate(at: point, backgroundColor: backgroundColor, duration: duration, inflating: true, zTopPosition: false, shapeLayer: nil, completion: block)
     }
-    func mdDeflateAnimated(from point: CGPoint, backgroundColor: UIColor, duration: TimeInterval, completion block: @escaping () -> Void) {
+    func mdDeflateAnimated(to point: CGPoint, backgroundColor: UIColor, duration: TimeInterval, completion block: @escaping () -> Void) {
         mdAnimate(at: point, backgroundColor: backgroundColor, duration: duration, inflating: false, zTopPosition: false, shapeLayer: nil, completion: block)
     }
     //MARK: - helpers

@@ -9,6 +9,7 @@
 import UIKit
 
 class ZYChessboardView: UIView {
+    //MARK: - button
     var chessboardButtonClosure: ((_ sender: ZYChessboardButton) -> (landscapeIntro: [Array<Int>], portraitIntro: [Array<Int>]))?
     func creatButton(with gridArray: Array2D) {
         for i in 0 ..< chessboardColumns {
@@ -22,25 +23,70 @@ class ZYChessboardView: UIView {
                 }
             }
         }
+        initSelectedView()
     }
     func chessboardButtonClick(sender: ZYChessboardButton) {
-        for view in subviews {
-            if let button = view as? ZYChessboardButton {
-                button.selectedState = .normal
+        let gridArray = chessboardButtonClosure!(sender)
+        var toFrame = CGRect()
+        if gridArray.landscapeIntro.count > 0 {
+            toFrame = checkIsGroup(with: gridArray.landscapeIntro)
+        }else {
+            toFrame = checkIsGroup(with: gridArray.portraitIntro)
+        }
+        if isFirst {
+            changeSelectedView(from: twoSelectedView, to: oneSelectedView, toFrame: toFrame, toPoint: sender.center)
+        }else {
+            changeSelectedView(from: oneSelectedView, to: twoSelectedView, toFrame: toFrame, toPoint: sender.center)
+        }
+        sender.selectedState = .selected
+        oldGrid = [sender.column, sender.row]
+        oldPoint = sender.center
+    }
+    var oldPoint: CGPoint?
+    var oldGrid: Array<Int>?
+    func checkIsGroup(with gridArray: [Array<Int>]) -> CGRect {
+        var firstOrigin = CGPoint()
+        var finalOrigin = CGPoint()
+        for i in 0 ..< gridArray.count {
+            let grid = gridArray[i]
+            if i == 0 {
+                firstOrigin = setButtonState(with: grid, selectedState: .call) ?? CGPoint()
+            }else if i == gridArray.count - 1 {
+                finalOrigin = setButtonState(with: grid, selectedState: .call) ?? CGPoint()
+            }else {
+                _ = setButtonState(with: grid, selectedState: .call)
             }
         }
-        let grid = chessboardButtonClosure!(sender)
-        checkIsGroup(with: grid.landscapeIntro)
-        checkIsGroup(with: grid.portraitIntro)
-        sender.selectedState = .selected
+        return CGRect(x: firstOrigin.x - 2, y: firstOrigin.y - 2, width: finalOrigin.x - firstOrigin.x + 33, height: finalOrigin.y - firstOrigin.y + 33)
     }
-    func checkIsGroup(with gridArray: [Array<Int>]) {
-        for grid in gridArray {
-            let tagIndex = grid[0] * chessboardColumns + grid[1] + 1000
-            guard let button = viewWithTag(tagIndex) as? ZYChessboardButton else {
-                return
-            }
-            button.selectedState = .call
+    func setButtonState(with grid: Array<Int>, selectedState: ChessboardButtonSelectedState) -> CGPoint? {
+        let tagIndex = grid[1] * chessboardColumns + grid[0] + 1000
+        guard let button = viewWithTag(tagIndex) as? ZYChessboardButton else {
+            return nil
+        }
+        button.selectedState = selectedState
+        return button.frame.origin
+    }
+    //MARK: - view
+    var isFirst = true
+    let oneSelectedView = UIView()
+    let twoSelectedView = UIView()
+    func initSelectedView() {
+        oneSelectedView.backgroundColor = UIColor(ZYCustomColor.mainBlue.rawValue)
+        
+        twoSelectedView.backgroundColor = UIColor(ZYCustomColor.mainBlue.rawValue)
+    }
+    func changeSelectedView(from fromView: UIView, to toView: UIView, toFrame: CGRect, toPoint: CGPoint) {
+        toView.frame = toFrame
+        insertSubview(toView, at: 0)
+        toView.mdInflateAnimated(from: toPoint, backgroundColor: UIColor(ZYCustomColor.buttonSelectedGray.rawValue), duration: UIViewMaterialDesignTransitionDurationCoeff, completion: {
+            
+        })
+        if let grid = oldGrid, let point = oldPoint {
+            _ = setButtonState(with: grid, selectedState: .normal)
+            fromView.mdDeflateAnimated(to: point, backgroundColor: UIColor(ZYCustomColor.mainBlue.rawValue), duration: UIViewMaterialDesignTransitionDurationCoeff, completion: {
+                fromView.removeFromSuperview()
+            })
         }
     }
 }
