@@ -16,6 +16,7 @@ class ZYChessboardViewController: UIViewController {
     var resetValueClosure: ((_ point: CGPoint) -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTextfieldNotification()
     }
     //MARK: - Menu
     @IBOutlet weak var starLabel: UILabel!
@@ -68,6 +69,7 @@ class ZYChessboardViewController: UIViewController {
         }
         return nil
     }
+    //MARK: - crosswordDataTableView
     @IBOutlet weak var crosswordDataTableView: UITableView!
     var crosswordDataArray = [ZYBaseWord]()
     var crosswordShowDic = ["landscape":false, "portrait":false]
@@ -128,6 +130,38 @@ class ZYChessboardViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+    }
+    //MARK: - wordInputView
+    @IBOutlet weak var wordInputView: UIView!
+    @IBOutlet weak var wordInputViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var wordInputTextField: UITextField!
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    func setupTextfieldNotification() -> Void {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    func keyWillShow(notification: Notification) -> Void {
+        let keyboardF: CGRect = ((notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue)!
+        let keyboardT: Double = ((notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey]) as? Double)!
+        UIView.animate(withDuration: keyboardT) {
+            self.wordInputViewBottomConstraint.constant = screenHeight - keyboardF.origin.y
+            self.view.layoutIfNeeded()
+        }
+    }
+    func keyWillHide(notification: Notification) -> Void {
+        UIView.animate(withDuration: 0.25) {
+            self.wordInputViewBottomConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        wordInputTextField.resignFirstResponder()
+    }
+    @IBAction func promptButtonClick(_ sender: UIButton) {
+    }
+    @IBAction func sendButtonClick(_ sender: UIButton) {
     }
 }
 extension ZYChessboardViewController: UITableViewDelegate, UITableViewDataSource {

@@ -73,20 +73,22 @@ class ZYChessboardView: UIView {
     let twoSelectedView = UIView()
     func initSelectedView() {
         oneSelectedView.backgroundColor = UIColor(ZYCustomColor.mainBlue.rawValue)
-        
+        oneSelectedView.setAmphitheatral(cornerRadius: 4.0)
         twoSelectedView.backgroundColor = UIColor(ZYCustomColor.mainBlue.rawValue)
+        twoSelectedView.setAmphitheatral(cornerRadius: 4.0)
     }
     func changeSelectedView(from fromView: UIView, to toView: UIView, toFrame: CGRect, toPoint: CGPoint) {
         toView.frame = toFrame
         insertSubview(toView, at: 0)
-        toView.mdInflateAnimated(from: toPoint, backgroundColor: UIColor(ZYCustomColor.buttonSelectedGray.rawValue), duration: UIViewMaterialDesignTransitionDurationCoeff, completion: {
+        toView.mdInflateAnimated(from: toPoint, backgroundColor: UIColor(ZYCustomColor.buttonSelectedGray.rawValue), duration: 0.3, completion: {
             
         })
         if let grid = oldGrid, let point = oldPoint {
             _ = setButtonState(with: grid, selectedState: .normal)
-            fromView.mdDeflateAnimated(to: point, backgroundColor: UIColor(ZYCustomColor.mainBlue.rawValue), duration: UIViewMaterialDesignTransitionDurationCoeff, completion: {
+            fromView.mdDeflateAnimated(to: point, backgroundColor: UIColor(ZYCustomColor.mainBlue.rawValue), duration: 0.3, completion: {
                 fromView.removeFromSuperview()
             })
         }
+        isFirst = !isFirst
     }
 }

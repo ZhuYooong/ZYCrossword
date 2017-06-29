@@ -70,6 +70,13 @@ extension Array where Element: Equatable {
         }
     }
 }
+//MARK: - View的扩展
+extension UIView {
+    func setAmphitheatral(cornerRadius: CGFloat) {
+        layer.masksToBounds = true
+        layer.cornerRadius = cornerRadius
+    }
+}
 //MARK: - HexColor的扩展
 extension UIColor {
     public convenience init(_ value: Int) {
