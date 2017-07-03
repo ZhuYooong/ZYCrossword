@@ -11,12 +11,13 @@ import UIKit
 class ZYChessboardView: UIView {
     //MARK: - button
     var chessboardButtonClosure: ((_ sender: ZYChessboardButton) -> (landscapeIntro: [Array<Int>], portraitIntro: [Array<Int>]))?
-    func creatButton(with gridArray: Array2D) {
+    func creatButton(with gridArray: Array2D, resultGrid: Array2D) {
         for i in 0 ..< chessboardColumns {
             for j in 0 ..< chessboardColumns {
                 let str = gridArray[j, i]
+                let resultStr = resultGrid[j, i]
                 if str != chessboardEmptySymbol {
-                    let chessboardButton = ZYChessboardButton(with: str, and: j, and: i, and: self.bounds.size.width)
+                    let chessboardButton = ZYChessboardButton(with: str, resultWord: resultStr, column: j, row: i, fatherWidth: self.bounds.size.width)
                     chessboardButton.tag = i * chessboardColumns + j + 1000
                     self.addSubview(chessboardButton)
                     chessboardButton.addTarget(self, action: #selector(chessboardButtonClick(sender:)), for: .touchUpInside)
@@ -28,6 +29,11 @@ class ZYChessboardView: UIView {
     func chessboardButtonClick(sender: ZYChessboardButton) {
         let gridArray = chessboardButtonClosure!(sender)
         var toFrame = CGRect()
+        for view in subviews {
+            if let button = view as? ZYChessboardButton {
+                button.selectedState = .normal
+            }
+        }
         if gridArray.landscapeIntro.count > 0 {
             toFrame = checkIsGroup(with: gridArray.landscapeIntro)
         }else {
@@ -90,5 +96,27 @@ class ZYChessboardView: UIView {
             })
         }
         isFirst = !isFirst
+    }
+    //MARK: - textInput 
+    func textInput(with text: String?) -> Bool {
+        var callButtonArray = [ZYChessboardButton]()
+        for view in subviews {
+            if let button = view as? ZYChessboardButton, button.selectedState == .normal || button.selectedState == .selected {
+                callButtonArray.append(button)
+            }
+        }
+        if let string = text {
+            for word in string.characters {
+                for button in callButtonArray {
+                    button.currentWord = String(word)
+                }
+            }
+        }
+        for button in callButtonArray {
+            if button.contentState != .right {
+                return false
+            }
+        }
+        return true
     }
 }

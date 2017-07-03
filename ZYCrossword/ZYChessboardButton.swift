@@ -12,11 +12,11 @@ class ZYChessboardButton: UIButton {
     // MARK: - Initialization
     public var column = 0
     public var row = 0
-    init(with word: String, and column: Int, and row: Int, and fatherWidth: CGFloat) {
+    init(with word: String, resultWord: String, column: Int, row: Int, fatherWidth: CGFloat) {
         self.word = word
         let interval = (fatherWidth - CGFloat(29 * chessboardColumns)) / CGFloat(chessboardColumns - 1)
         super.init(frame: CGRect(x: CGFloat(column) * (interval + 29), y: CGFloat(row) * (interval + 29), width: 29, height: 29))
-        creatTittleLabel()
+        creatTittleLabel(with: resultWord)
         setBackgroundImage(UIImage(named: "Rectangle"), for: .normal)
         self.column = column
         self.row = row
@@ -41,12 +41,16 @@ class ZYChessboardButton: UIButton {
         }
     }
     fileprivate let tittleLabel = UILabel()
-    fileprivate func creatTittleLabel() {
+    fileprivate func creatTittleLabel(with resultWord: String) {
         tittleLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height)
         tittleLabel.textAlignment = .center
         tittleLabel.font = UIFont.systemFont(ofSize: 20)
         self.addSubview(tittleLabel)
-        currentWord = ""
+        if resultWord == chessboardEmptySymbol {
+            currentWord = ""
+        }else {
+            currentWord = resultWord
+        }
     }
     public var selectedState = ChessboardButtonSelectedState.normal {
         didSet {

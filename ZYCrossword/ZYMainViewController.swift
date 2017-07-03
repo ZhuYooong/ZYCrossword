@@ -63,6 +63,7 @@ class ZYMainViewController: UIViewController {
         crosswordsGenerator.loadCrosswordsData()
         chessboard = ZYChessboard()
         chessboard.grid = crosswordsGenerator.grid
+        chessboard.resultGrid = Array2D(columns: chessboardColumns, rows: chessboardColumns, defaultValue: chessboardEmptySymbol)
         tipXdataArr = [ZYBaseWord]()
         tipYdataArr = [ZYBaseWord]()
         for i in 0 ..< crosswordsGenerator.resultContentArray.count {
@@ -121,6 +122,18 @@ class ZYMainViewController: UIViewController {
             self.chessboardViewController.resetValueClosure = { point in
                 do{
                     try FileManager.default.removeItem(atPath: self.getFilePath())
+                    for baseWord in self.chessboardViewController.resultXArray {
+                        baseWord.realm?.beginWrite()
+                        baseWord.isRight = false
+                        baseWord.isShow = false
+                        try baseWord.realm?.commitWrite()
+                    }
+                    for baseWord in self.chessboardViewController.resultYArray {
+                        baseWord.realm?.beginWrite()
+                        baseWord.isRight = false
+                        baseWord.isShow = false
+                        try baseWord.realm?.commitWrite()
+                    }
                 }catch{
                     print("error")
                 }

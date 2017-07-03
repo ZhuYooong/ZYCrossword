@@ -40,8 +40,8 @@ class ZYChessboardViewController: UIViewController {
     //MARK: - ChessboardView
     @IBOutlet weak var chessboardView: ZYChessboardView!
     func creatChessboardViewData() {
-        if let gridArray = chessboard?.grid {
-            chessboardView.creatButton(with: gridArray)
+        if let gridArray = chessboard?.grid, let resultGridArray = chessboard?.resultGrid {
+            chessboardView.creatButton(with: gridArray, resultGrid: resultGridArray)
             chessboardView.chessboardButtonClosure = { sender -> (landscapeIntro: [Array<Int>], portraitIntro: [Array<Int>]) in
                 var landscapeIntro = [Array<Int>]()
                 var portraitIntro = [Array<Int>]()
@@ -126,6 +126,17 @@ class ZYChessboardViewController: UIViewController {
         }
         return contentString.replacingOccurrences(of: showString, with: replaceString) + "\n----" + typeString
     }
+    func seekHelpButtonClick(sender: UIButton) {
+        let baseWord = crosswordDataArray[sender.tag]
+    }
+    func collectionButtonClick(sender: UIButton) {
+        let baseWord = crosswordDataArray[sender.tag]
+        baseWord.realm?.beginWrite()
+        baseWord.isCollect = true
+        try! baseWord.realm?.commitWrite()
+        sender.setImage(UIImage(named: "Oval 84"), for: .normal)
+        sender.isUserInteractionEnabled = false
+    }
     @IBAction func allDataButtonClick(_ sender: UIButton) {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -171,9 +182,31 @@ extension ZYChessboardViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CrosswordDataCellID", for: indexPath) as! ZYCrosswordDataTableViewCell
         cell.crosswordDataLabel.text = setCrosswordDataTableViewContent(with: indexPath.row)
+        if indexPath.row < crosswordDataArray.count {
+            cell.moreFunctionButton.tag = indexPath.row
+            let baseWord = crosswordDataArray[indexPath.row]
+            if baseWord.isRight == false {
+                cell.moreFunctionButton.setImage(UIImage(named: "Oval"), for: .normal)
+                cell.moreFunctionButton.addTarget(self, action: #selector(seekHelpButtonClick), for: .touchUpInside)
+            }else if baseWord.isCollect == false {
+                cell.moreFunctionButton.setImage(UIImage(named: "Oval 85"), for: .normal)
+                cell.moreFunctionButton.addTarget(self, action: #selector(collectionButtonClick), for: .touchUpInside)
+            }else {
+                cell.moreFunctionButton.setImage(UIImage(named: "Oval 84"), for: .normal)
+            }
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return setCrosswordDataTableViewContentHeight(with: indexPath.row)
+    }
+}
+extension ZYChessboardViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if chessboardView.textInput(with: textField.text) == true {
+            
+        }
+        textField.resignFirstResponder()
+        return true;
     }
 }
