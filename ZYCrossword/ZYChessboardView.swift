@@ -18,7 +18,7 @@ class ZYChessboardView: UIView {
                 let resultStr = resultGrid[j, i]
                 if str != chessboardEmptySymbol {
                     let chessboardButton = ZYChessboardButton(with: str, resultWord: resultStr, column: j, row: i, fatherWidth: self.bounds.size.width)
-                    chessboardButton.tag = i * chessboardColumns + j + 1000
+                    chessboardButton.tag = i * chessboardColumns * 100 + j + 100000
                     self.addSubview(chessboardButton)
                     chessboardButton.addTarget(self, action: #selector(chessboardButtonClick(sender:)), for: .touchUpInside)
                 }
@@ -66,7 +66,7 @@ class ZYChessboardView: UIView {
         return CGRect(x: firstOrigin.x - 2, y: firstOrigin.y - 2, width: finalOrigin.x - firstOrigin.x + 33, height: finalOrigin.y - firstOrigin.y + 33)
     }
     func setButtonState(with grid: Array<Int>, selectedState: ChessboardButtonSelectedState) -> CGPoint? {
-        let tagIndex = grid[1] * chessboardColumns + grid[0] + 1000
+        let tagIndex = grid[1] * chessboardColumns * 100 + grid[0] + 100000
         guard let button = viewWithTag(tagIndex) as? ZYChessboardButton else {
             return nil
         }
@@ -101,7 +101,7 @@ class ZYChessboardView: UIView {
     func textInput(with text: String?) -> Bool {
         var callButtonArray = [ZYChessboardButton]()
         for view in subviews {
-            if let button = view as? ZYChessboardButton, button.selectedState == .normal || button.selectedState == .selected {
+            if let button = view as? ZYChessboardButton, button.selectedState == .call || button.selectedState == .selected {
                 callButtonArray.append(button)
             }
         }
@@ -109,6 +109,7 @@ class ZYChessboardView: UIView {
             for word in string.characters {
                 for button in callButtonArray {
                     button.currentWord = String(word)
+                    break
                 }
             }
         }

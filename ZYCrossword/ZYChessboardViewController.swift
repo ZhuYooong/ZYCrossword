@@ -204,9 +204,65 @@ extension ZYChessboardViewController: UITableViewDelegate, UITableViewDataSource
 extension ZYChessboardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if chessboardView.textInput(with: textField.text) == true {
-            
+            changeWordRight()
+            selectedAnotherWord()
         }
         textField.resignFirstResponder()
         return true;
+    }
+    func changeWordRight() {
+        if let isLandscape = crosswordShowDic["landscape"], isLandscape == true {
+            for i in 0 ..< resultXArray.count {
+                if resultXArray[i] == crosswordDataArray[0] {
+                    resultXArray[i].realm?.beginWrite()
+                    resultXArray[i].selecttedCount += 1
+                    resultXArray[i].isRight = true
+                    try! resultXArray[i].realm?.commitWrite()
+                }
+            }
+        }else if let isPortrait = crosswordShowDic["portrait"], isPortrait == true {
+            for i in 0 ..< resultYArray.count {
+                if resultYArray[i] == crosswordDataArray[0] {
+                    resultYArray[i].realm?.beginWrite()
+                    resultYArray[i].selecttedCount += 1
+                    resultYArray[i].isRight = true
+                    try! resultYArray[i].realm?.commitWrite()
+                }
+            }
+        }
+    }
+    func selectedAnotherWord() {
+        var selectedWordArray = [Word]()
+        for i in 0 ..< resultXArray.count {
+            if let word = chessboard?.tipXArr[i], resultXArray[i].isRight == false {
+                selectedWordArray.append(word)
+            }
+        }
+        for i in 0 ..< resultYArray.count {
+            if let word = chessboard?.tipYArr[i], resultYArray[i].isRight == false {
+                selectedWordArray.append(word)
+            }
+        }
+        if selectedWordArray.count > 0 {
+            if let selectedGrid = selectedWordArray[randomInt(selectedWordArray.count)].grid.first, selectedGrid.count >= 2 {
+                let tagIndex = selectedGrid[1] * chessboardColumns * 100 + selectedGrid[0] + 100000
+                if let button = chessboardView.viewWithTag(tagIndex) as? ZYChessboardButton {
+                    chessboardView.chessboardButtonClick(sender: button)
+                }
+            }
+        }else {
+            allRight()
+        }
+    }
+    func allRight() {
+        let option = UIAlertController(title: nil, message: "", preferredStyle: .alert)
+        option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        option.addAction(UIAlertAction(title: "重置", style: .default) { (action) in
+//            self.resetValueClosure!(sender.center)
+        })
+        self.present(option, animated: true, completion: nil)
+    }
+    fileprivate func randomInt(_ max:Int) -> Int {
+        return Int(arc4random_uniform(UInt32(max)))
     }
 }
