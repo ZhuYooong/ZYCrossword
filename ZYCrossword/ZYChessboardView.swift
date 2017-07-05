@@ -9,6 +9,7 @@
 import UIKit
 
 class ZYChessboardView: UIView {
+    open var parientViewController = ZYChessboardViewController()
     //MARK: - button
     var chessboardButtonClosure: ((_ sender: ZYChessboardButton) -> (landscapeIntro: [Array<Int>], portraitIntro: [Array<Int>]))?
     func creatButton(with gridArray: Array2D, resultGrid: Array2D) {
@@ -108,8 +109,14 @@ class ZYChessboardView: UIView {
         if let string = text {
             for word in string.characters {
                 for button in callButtonArray {
-                    button.currentWord = String(word)
-                    break
+                    if button.contentState != .right {
+                        button.currentWord = String(word)
+                        if button.contentState == .right {
+                            parientViewController.chessboard.resultGrid[button.column, button.row] = button.currentWord
+                            NSKeyedArchiver.archiveRootObject(parientViewController.chessboard, toFile: chessboardDocumentPath.getFilePath())
+                            break
+                        }
+                    } 
                 }
             }
         }

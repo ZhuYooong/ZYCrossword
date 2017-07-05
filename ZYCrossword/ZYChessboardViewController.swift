@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class ZYChessboardViewController: UIViewController {
-    var chessboard: ZYChessboard?
+    var chessboard = ZYChessboard()
     var resultXArray = [ZYBaseWord]()
     var resultYArray = [ZYBaseWord]()
     var resetValueClosure: ((_ point: CGPoint) -> Void)?
@@ -40,22 +40,24 @@ class ZYChessboardViewController: UIViewController {
     //MARK: - ChessboardView
     @IBOutlet weak var chessboardView: ZYChessboardView!
     func creatChessboardViewData() {
-        if let gridArray = chessboard?.grid, let resultGridArray = chessboard?.resultGrid {
-            chessboardView.creatButton(with: gridArray, resultGrid: resultGridArray)
-            chessboardView.chessboardButtonClosure = { sender -> (landscapeIntro: [Array<Int>], portraitIntro: [Array<Int>]) in
-                var landscapeIntro = [Array<Int>]()
-                var portraitIntro = [Array<Int>]()
-                var landscapeResultIntro: ZYBaseWord?
-                var portraitResultIntro: ZYBaseWord?
-                let x = self.setIntro(with: self.chessboard!.tipXArr, resultArray: self.resultXArray, sender: sender)
-                landscapeResultIntro = x?.resultIntro
-                landscapeIntro = x?.intro ?? [Array<Int>]()
-                let y = self.setIntro(with: self.chessboard!.tipYArr, resultArray: self.resultYArray, sender: sender)
-                portraitResultIntro = y?.resultIntro
-                portraitIntro = y?.intro ?? [Array<Int>]()
-                self.reloadCrosswordData(landscape: landscapeResultIntro, portrait: portraitResultIntro)
-                return (landscapeIntro, portraitIntro)
-            }
+        chessboardView.parientViewController = self
+        chessboardView.creatButton(with: chessboard.grid, resultGrid: chessboard.resultGrid)
+        chessboardView.chessboardButtonClosure = { sender -> (landscapeIntro: [Array<Int>], portraitIntro: [Array<Int>]) in
+            var landscapeIntro = [Array<Int>]()
+            var portraitIntro = [Array<Int>]()
+            var landscapeResultIntro: ZYBaseWord?
+            var portraitResultIntro: ZYBaseWord?
+            let x = self.setIntro(with: self.chessboard.tipXArr, resultArray: self.resultXArray, sender: sender)
+            landscapeResultIntro = x?.resultIntro
+            landscapeIntro = x?.intro ?? [Array<Int>]()
+            let y = self.setIntro(with: self.chessboard.tipYArr, resultArray: self.resultYArray, sender: sender)
+            portraitResultIntro = y?.resultIntro
+            portraitIntro = y?.intro ?? [Array<Int>]()
+            self.reloadCrosswordData(landscape: landscapeResultIntro, portrait: portraitResultIntro)
+            return (landscapeIntro, portraitIntro)
+        }
+        if let button = chessboardView.viewWithTag(100000) as? ZYChessboardButton {
+            chessboardView.chessboardButtonClick(sender: button)
         }
     }
     func setIntro(with tipArray: Array<Word>, resultArray: [ZYBaseWord], sender: ZYChessboardButton) -> (intro: [Array<Int>], resultIntro: ZYBaseWord)? {
@@ -87,7 +89,7 @@ class ZYChessboardViewController: UIViewController {
     }
     func setCrosswordDataTableViewContentHeight(with index: Int) -> CGFloat {
         let contentString = setCrosswordDataTableViewContent(with: index)
-        return contentString.textHeightWithFont(UIFont.systemFont(ofSize: 14), constrainedToSize: CGSize(width: crosswordDataTableView.bounds.size.width - 48, height: 1000)) + 28
+        return contentString.textHeightWithFont(UIFont.systemFont(ofSize: 14), constrainedToSize: CGSize(width: crosswordDataTableView.bounds.size.width - 48, height: 10000)) + 28
     }
     func setCrosswordDataTableViewContent(with index: Int) -> String {
         if index < crosswordDataArray.count {
@@ -173,6 +175,7 @@ class ZYChessboardViewController: UIViewController {
     @IBAction func promptButtonClick(_ sender: UIButton) {
     }
     @IBAction func sendButtonClick(_ sender: UIButton) {
+        _ = textFieldShouldReturn(wordInputTextField)
     }
 }
 extension ZYChessboardViewController: UITableViewDelegate, UITableViewDataSource {
@@ -234,13 +237,13 @@ extension ZYChessboardViewController: UITextFieldDelegate {
     func selectedAnotherWord() {
         var selectedWordArray = [Word]()
         for i in 0 ..< resultXArray.count {
-            if let word = chessboard?.tipXArr[i], resultXArray[i].isRight == false {
-                selectedWordArray.append(word)
+            if resultXArray[i].isRight == false {
+                selectedWordArray.append(chessboard.tipXArr[i])
             }
         }
         for i in 0 ..< resultYArray.count {
-            if let word = chessboard?.tipYArr[i], resultYArray[i].isRight == false {
-                selectedWordArray.append(word)
+            if resultYArray[i].isRight == false {
+                selectedWordArray.append(chessboard.tipYArr[i])
             }
         }
         if selectedWordArray.count > 0 {
@@ -257,8 +260,14 @@ extension ZYChessboardViewController: UITextFieldDelegate {
     func allRight() {
         let option = UIAlertController(title: nil, message: "", preferredStyle: .alert)
         option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        option.addAction(UIAlertAction(title: "重置", style: .default) { (action) in
-//            self.resetValueClosure!(sender.center)
+        option.addAction(UIAlertAction(title: "分享结果", style: .default) { (action) in
+            
+        })
+        option.addAction(UIAlertAction(title: "请给予评分", style: .default) { (action) in
+            
+        })
+        option.addAction(UIAlertAction(title: "再来一次", style: .default) { (action) in
+            //            self.resetValueClosure!(sender.center)
         })
         self.present(option, animated: true, completion: nil)
     }

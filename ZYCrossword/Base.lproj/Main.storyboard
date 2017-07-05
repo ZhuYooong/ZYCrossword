@@ -338,10 +338,10 @@
                                             <action selector="sendButtonClick:" destination="ONd-gF-gc7" eventType="touchUpInside" id="9QK-dh-Y2H"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入答案后提交" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="24k-gu-dgE">
-                                        <rect key="frame" x="70" y="5" width="250" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入答案后提交" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="24k-gu-dgE">
+                                        <rect key="frame" x="70" y="0.0" width="250" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="gJU-l2-5kC"/>
+                                            <constraint firstAttribute="height" constant="40" id="gJU-l2-5kC"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>

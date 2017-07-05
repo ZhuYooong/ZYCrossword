@@ -35,11 +35,17 @@ class ZYMainViewController: UIViewController {
     func initChessboardData() {
         do {
             let realm = try Realm()
-            if let data = NSKeyedUnarchiver.unarchiveObject(withFile: getFilePath()) as? ZYChessboard {
+            if let data = NSKeyedUnarchiver.unarchiveObject(withFile: chessboardDocumentPath.getFilePath()) as? ZYChessboard {
                 titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
                 chessboard = data
                 tipXdataArr = [ZYBaseWord]()
+                for _ in 0 ..< chessboard.tipXArr.count {
+                    tipXdataArr.append(ZYBaseWord())
+                }
                 tipYdataArr = [ZYBaseWord]()
+                for _ in 0 ..< chessboard.tipYArr.count {
+                    tipYdataArr.append(ZYBaseWord())
+                }
                 loadChessboardData(realm: realm, type: ZYPoetry.self)
                 loadChessboardData(realm: realm, type: ZYMovie.self)
                 loadChessboardData(realm: realm, type: ZYBook.self)
@@ -80,26 +86,22 @@ class ZYMainViewController: UIViewController {
                 tipXdataArr.append(result)
             }
         }
-        NSKeyedArchiver.archiveRootObject(chessboard, toFile: getFilePath())
-    }
-    let DBFILE_NAME = "Chessboard.plist"
-    func getFilePath() -> String {
-        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let DBPath = (documentPath as NSString).appendingPathComponent(DBFILE_NAME)
-        return DBPath
+        NSKeyedArchiver.archiveRootObject(chessboard, toFile: chessboardDocumentPath.getFilePath())
     }
     //MARK: 加载资源
     func loadChessboardData<T: ZYBaseWord>(realm: Realm, type: T.Type) {
         let showReults = realm.objects(T.self).filter(NSPredicate(format: "isShow = true"))
         for result in showReults {
-            for Xdata in chessboard.tipXArr {
-                if result.showString.contains(Xdata.word) {
-                    tipXdataArr.append(result)
+            for i in 0 ..< chessboard.tipXArr.count {
+                if result.showString.contains(chessboard.tipXArr[i].word) {
+                    tipXdataArr.remove(at: i)
+                    tipXdataArr.insert(result, at: i)
                 }
             }
-            for Ydata in chessboard.tipYArr {
-                if result.showString.contains(Ydata.word) {
-                    tipYdataArr.append(result)
+            for i in 0 ..< chessboard.tipYArr.count {
+                if result.showString.contains(chessboard.tipYArr[i].word) {
+                    tipYdataArr.remove(at: i)
+                    tipYdataArr.insert(result, at: i)
                 }
             }
         }
@@ -121,7 +123,7 @@ class ZYMainViewController: UIViewController {
             self.chessboardViewController.creatChessboardViewData()
             self.chessboardViewController.resetValueClosure = { point in
                 do{
-                    try FileManager.default.removeItem(atPath: self.getFilePath())
+                    try FileManager.default.removeItem(atPath: chessboardDocumentPath.getFilePath())
                     for baseWord in self.chessboardViewController.resultXArray {
                         baseWord.realm?.beginWrite()
                         baseWord.isRight = false

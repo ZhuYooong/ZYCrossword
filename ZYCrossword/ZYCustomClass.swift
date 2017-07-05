@@ -15,7 +15,7 @@ let chessboardColumns: Int = { () -> Int in
     return Int((screenWidth - 44) / 33)
 }()
 var chessboardEmptySymbol = "-"
-
+let chessboardDocumentPath = "Chessboard.plist"
 class ZYCustomClass: NSObject {
 
 }
@@ -60,6 +60,11 @@ extension String {
             textSize = stringRect.size
         }
         return textSize.height + 2
+    }
+    func getFilePath() -> String {
+        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let DBPath = (documentPath as NSString).appendingPathComponent(self)
+        return DBPath
     }
 }
 //MARK: - Array的扩展
