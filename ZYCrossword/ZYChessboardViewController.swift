@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 
 class ZYChessboardViewController: UIViewController {
+    var mainViewController: ZYMainViewController?
     var chessboard = ZYChessboard()
     var resultXArray = [ZYBaseWord]()
     var resultYArray = [ZYBaseWord]()
@@ -34,6 +35,7 @@ class ZYChessboardViewController: UIViewController {
         self.present(option, animated: true, completion: nil)
     }
     @IBAction func bookButtonClick(_ sender: UIButton) {
+        mainViewController?.performSegue(withIdentifier: "collectListSegueId", sender: sender)
     }
     @IBAction func moreButtonClick(_ sender: UIButton) {
     }
@@ -140,6 +142,7 @@ class ZYChessboardViewController: UIViewController {
         sender.isUserInteractionEnabled = false
     }
     @IBAction func allDataButtonClick(_ sender: UIButton) {
+        mainViewController?.performSegue(withIdentifier: "crosswordListSegueId", sender: sender)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

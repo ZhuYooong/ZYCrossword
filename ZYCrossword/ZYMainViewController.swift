@@ -115,6 +115,7 @@ class ZYMainViewController: UIViewController {
     }
     var chessboardViewController: ZYChessboardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID") as! ZYChessboardViewController
     func beganChessboard() {
+        chessboardViewController.mainViewController = self
         chessboardViewController.chessboard = chessboard
         chessboardViewController.resultXArray = tipXdataArr
         chessboardViewController.resultYArray = tipYdataArr

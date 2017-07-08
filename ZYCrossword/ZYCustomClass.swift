@@ -35,19 +35,6 @@ extension String {
         }
         return nil
     }
-//    var md5: String! {//md5加密
-//        let str = self.cString(using: String.Encoding.utf8)
-//        let strLen = CC_LONG(self.lengthOfBytes(using: String.Encoding.utf8))
-//        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-//        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
-//        CC_MD5(str!, strLen, result)
-//        let hash = NSMutableString()
-//        for i in 0..<digestLen {
-//            hash.appendFormat("%02x", result[i])
-//        }
-//        result.deallocate(capacity: digestLen)
-//        return String(hash).uppercased()
-//    }
     func textHeightWithFont(_ font: UIFont, constrainedToSize size:CGSize) -> CGFloat {
         var textSize:CGSize!
         if size.equalTo(CGSize.zero) {
@@ -80,6 +67,13 @@ extension UIView {
     func setAmphitheatral(cornerRadius: CGFloat) {
         layer.masksToBounds = true
         layer.cornerRadius = cornerRadius
+    }
+    func takeSnapshot(with fram: CGRect) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 1)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return UIImage(cgImage: img!.cgImage!.cropping(to: frame)!)
     }
 }
 //MARK: - HexColor的扩展
