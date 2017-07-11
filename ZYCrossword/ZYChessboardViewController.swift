@@ -111,24 +111,17 @@ class ZYChessboardViewController: UIViewController {
     }
     func setCrosswordDataTableViewString(with word: ZYBaseWord) -> String {
         if let poetryWord = word as? ZYPoetry {
-            return crosswordDataString(with: poetryWord.detail, showString: poetryWord.showString, typeString: poetryWord.wordType)
+            return poetryWord.showString.showContentString(with: poetryWord.detail, typeString: poetryWord.wordType)
         }else if let movieWord = word as? ZYMovie {
-            return crosswordDataString(with: movieWord.content_description, showString: movieWord.showString, typeString: movieWord.wordType)
+            return movieWord.showString.showContentString(with: movieWord.content_description, typeString: movieWord.wordType)
         }else if let bookWord = word as? ZYBook {
-            return crosswordDataString(with: bookWord.content_description, showString: bookWord.showString, typeString: bookWord.wordType)
+            return bookWord.showString.showContentString(with: bookWord.content_description, typeString: bookWord.wordType)
         }else if let idiomWord = word as? ZYIdiom {
-            return crosswordDataString(with: idiomWord.paraphrase ?? "", showString: idiomWord.showString, typeString: idiomWord.wordType)
+            return idiomWord.showString.showContentString(with: idiomWord.paraphrase ?? "", typeString: idiomWord.wordType)
         }else if let allegoricWord = word as? ZYAllegoric {
-            return crosswordDataString(with: allegoricWord.content ?? "", showString: allegoricWord.showString, typeString: allegoricWord.wordType)
+            return allegoricWord.showString.showContentString(with: allegoricWord.content ?? "", typeString: allegoricWord.wordType)
         }
         return ""
-    }
-    func crosswordDataString(with contentString: String, showString: String, typeString: String) -> String {
-        var replaceString = ""
-        for _ in 0 ..< showString.characters.count {
-            replaceString += "_"
-        }
-        return contentString.replacingOccurrences(of: showString, with: replaceString) + "\n----" + typeString
     }
     func seekHelpButtonClick(sender: UIButton) {
         let baseWord = crosswordDataArray[sender.tag]
@@ -145,7 +138,9 @@ class ZYChessboardViewController: UIViewController {
         mainViewController?.performSegue(withIdentifier: "crosswordListSegueId", sender: sender)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if let viewController = segue.destination as? ZYCrosswordListTableViewController, segue.identifier == "crosswordListSegueId" {
+            viewController.loadResult(with: resultXArray, YArray: resultYArray)
+        }
     }
     //MARK: - wordInputView
     @IBOutlet weak var wordInputView: UIView!

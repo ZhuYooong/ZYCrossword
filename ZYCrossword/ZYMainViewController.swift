@@ -10,6 +10,14 @@ import UIKit
 import RealmSwift
 
 class ZYMainViewController: UIViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(self.titleViewController.view)
@@ -110,6 +118,7 @@ class ZYMainViewController: UIViewController {
     var titleViewController: ZYTitleViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID") as! ZYTitleViewController
     func beganTitle(with originalPoint: CGPoint) {
         UIView.mdInflateTransition(from: chessboardViewController.view, toView: titleViewController.view, originalPoint: originalPoint, duration: 0.7) {
+            self.title = self.titleViewController.title
             self.loadData()
         }
     }
@@ -121,6 +130,7 @@ class ZYMainViewController: UIViewController {
         chessboardViewController.resultYArray = tipYdataArr
         titleViewController.stopLoading()
         UIView.mdInflateTransition(from: titleViewController.view, toView: chessboardViewController.view, originalPoint: titleViewController.loadingActivityIndicator.center, duration: 0.7) {
+            self.title = self.chessboardViewController.title
             self.chessboardViewController.creatChessboardViewData()
             self.chessboardViewController.resetValueClosure = { point in
                 do{
@@ -142,6 +152,11 @@ class ZYMainViewController: UIViewController {
                 }
                 self.beganTitle(with: point)
             }
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? ZYCrosswordListTableViewController, segue.identifier == "crosswordListSegueId" {
+            viewController.loadResult(with: chessboardViewController.resultXArray, YArray: chessboardViewController.resultYArray)
         }
     }
 }

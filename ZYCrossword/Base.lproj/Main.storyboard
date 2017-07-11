@@ -12,12 +12,16 @@
         <!--Navigation Controller-->
         <scene sceneID="vCS-od-XSN">
             <objects>
-                <navigationController navigationBarHidden="YES" id="CN4-0t-Wih" sceneMemberID="viewController">
+                <navigationController id="CN4-0t-Wih" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wCI-O7-0n7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wCI-O7-0n7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.1655770838" green="0.73253279920000003" blue="0.82625490430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hN1-ZR-fov"/>
@@ -27,10 +31,10 @@
             </objects>
             <point key="canvasLocation" x="-847" y="36"/>
         </scene>
-        <!--Main View Controller-->
+        <!--主页-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ZYMainViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="主页" id="BYZ-38-t0r" customClass="ZYMainViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -41,6 +45,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="287-Hv-h7s"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <segue destination="Tk6-eY-CaS" kind="show" identifier="crosswordListSegueId" id="bI0-34-f7h"/>
                         <segue destination="xEw-TK-Ik1" kind="show" identifier="collectListSegueId" id="hBs-pe-Qz6"/>
@@ -51,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="-38" y="36"/>
         </scene>
-        <!--Library View Controller-->
+        <!--词库-->
         <scene sceneID="CJQ-Jy-rSR">
             <objects>
-                <viewController id="CKD-r8-cHp" customClass="ZYLibraryViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="词库" id="CKD-r8-cHp" customClass="ZYLibraryViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4FQ-VK-tLh"/>
                         <viewControllerLayoutGuide type="bottom" id="86U-F3-efr"/>
@@ -64,15 +69,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYl-9P-EdT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="817" y="761"/>
         </scene>
-        <!--Title View Controller-->
+        <!--加载-->
         <scene sceneID="f0A-n8-eRc">
             <objects>
-                <viewController storyboardIdentifier="TitleID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ysI-eS-CNa" customClass="ZYTitleViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TitleID" title="加载" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ysI-eS-CNa" customClass="ZYTitleViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j3T-9P-2pg"/>
                         <viewControllerLayoutGuide type="bottom" id="7YF-bs-cSz"/>
@@ -123,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="1594" y="36"/>
         </scene>
-        <!--Chessboard View Controller-->
+        <!--棋盘-->
         <scene sceneID="qe7-jh-YLX">
             <objects>
-                <viewController storyboardIdentifier="ChessboardID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ONd-gF-gc7" customClass="ZYChessboardViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChessboardID" title="棋盘" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ONd-gF-gc7" customClass="ZYChessboardViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="brd-4M-2P6"/>
                         <viewControllerLayoutGuide type="bottom" id="KoI-Jc-SBY"/>
@@ -429,10 +435,10 @@
             </objects>
             <point key="canvasLocation" x="2412" y="36"/>
         </scene>
-        <!--Collect List Table View Controller-->
+        <!--收藏夹-->
         <scene sceneID="UgD-Dk-yGl">
             <objects>
-                <tableViewController id="xEw-TK-Ik1" customClass="ZYCollectListTableViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="收藏夹" id="xEw-TK-Ik1" customClass="ZYCollectListTableViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GQj-vN-uxh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -452,16 +458,17 @@
                             <outlet property="delegate" destination="xEw-TK-Ik1" id="hY0-R1-gjq"/>
                         </connections>
                     </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dHi-1o-nbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-39" y="762"/>
         </scene>
-        <!--Crossword List Table View Controller-->
+        <!--所有提示-->
         <scene sceneID="c4H-B6-TBy">
             <objects>
-                <tableViewController id="Tk6-eY-CaS" customClass="ZYCrosswordListTableViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wOF-GZ-yqB">
+                <tableViewController title="所有提示" id="Tk6-eY-CaS" customClass="ZYCrosswordListTableViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wOF-GZ-yqB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -482,15 +489,8 @@
                                                 <constraint firstAttribute="width" constant="4" id="Led-nF-Yj4"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8x-N8-4Vu">
-                                            <rect key="frame" x="321" y="6" width="44" height="83"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="44" id="s9v-hB-zSc"/>
-                                            </constraints>
-                                            <state key="normal" image="Oval"/>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKG-Km-uV0">
-                                            <rect key="frame" x="26" y="14" width="295" height="67"/>
+                                            <rect key="frame" x="26" y="14" width="327" height="67"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.24313725489999999" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -501,21 +501,17 @@
                                         <constraint firstAttribute="bottom" secondItem="uKG-Km-uV0" secondAttribute="bottom" constant="14" id="54T-j4-hQv"/>
                                         <constraint firstItem="ey4-a8-zqH" firstAttribute="bottom" secondItem="BpZ-jG-Kdc" secondAttribute="bottom" id="Aly-ez-DfM"/>
                                         <constraint firstAttribute="bottom" secondItem="BpZ-jG-Kdc" secondAttribute="bottom" constant="6" id="CPz-3w-cwL"/>
-                                        <constraint firstItem="r8x-N8-4Vu" firstAttribute="top" secondItem="BpZ-jG-Kdc" secondAttribute="top" id="Jb7-C0-ki0"/>
                                         <constraint firstItem="BpZ-jG-Kdc" firstAttribute="top" secondItem="aeh-b8-3OR" secondAttribute="top" constant="6" id="MrZ-iM-SFo"/>
-                                        <constraint firstItem="r8x-N8-4Vu" firstAttribute="leading" secondItem="uKG-Km-uV0" secondAttribute="trailing" id="PSK-15-z6I"/>
                                         <constraint firstAttribute="trailing" secondItem="BpZ-jG-Kdc" secondAttribute="trailing" constant="10" id="R2i-vo-mBc"/>
-                                        <constraint firstItem="r8x-N8-4Vu" firstAttribute="trailing" secondItem="BpZ-jG-Kdc" secondAttribute="trailing" id="Rkb-gz-qgt"/>
                                         <constraint firstItem="ey4-a8-zqH" firstAttribute="leading" secondItem="BpZ-jG-Kdc" secondAttribute="leading" id="Sbf-03-Gah"/>
                                         <constraint firstItem="uKG-Km-uV0" firstAttribute="leading" secondItem="ey4-a8-zqH" secondAttribute="trailing" constant="12" id="Tqp-fQ-Iru"/>
-                                        <constraint firstItem="r8x-N8-4Vu" firstAttribute="bottom" secondItem="BpZ-jG-Kdc" secondAttribute="bottom" id="Y0H-OY-L1G"/>
                                         <constraint firstItem="ey4-a8-zqH" firstAttribute="top" secondItem="BpZ-jG-Kdc" secondAttribute="top" id="Y99-qg-hHv"/>
                                         <constraint firstItem="BpZ-jG-Kdc" firstAttribute="leading" secondItem="aeh-b8-3OR" secondAttribute="leading" constant="10" id="emX-0t-EoK"/>
+                                        <constraint firstAttribute="trailing" secondItem="uKG-Km-uV0" secondAttribute="trailing" constant="22" id="xFE-rI-Z0a"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="crosswordDataLabel" destination="uKG-Km-uV0" id="Dhp-rE-Jyr"/>
-                                    <outlet property="moreFunctionButton" destination="r8x-N8-4Vu" id="2X4-Cs-9FE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -524,7 +520,7 @@
                             <outlet property="delegate" destination="Tk6-eY-CaS" id="owb-CB-LZ5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="RoX-Wh-95y"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezb-f6-Xoo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

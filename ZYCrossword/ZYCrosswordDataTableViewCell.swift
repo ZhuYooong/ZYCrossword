@@ -9,7 +9,6 @@
 import UIKit
 
 class ZYCrosswordDataTableViewCell: UITableViewCell {
-
     @IBOutlet weak var crosswordDataLabel: UILabel!
     @IBOutlet weak var moreFunctionButton: UIButton!
     override func awakeFromNib() {

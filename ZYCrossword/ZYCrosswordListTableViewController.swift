@@ -9,87 +9,90 @@
 import UIKit
 
 class ZYCrosswordListTableViewController: UITableViewController {
-
+    var resultXArray = [ZYBaseWord]()
+    var resultYArray = [ZYBaseWord]()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        tableView.tableFooterView = UIView()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func loadResult(with XArray: [ZYBaseWord], YArray: [ZYBaseWord]) {
+        resultXArray = XArray
+        resultYArray = YArray
+        tableView.reloadData()
     }
-
+    func setCrosswordDataTableViewContentHeight(with index: Int, resultArray: [ZYBaseWord]) -> CGFloat {
+        let contentString = setCrosswordDataTableViewContent(with: index, resultArray: resultArray)
+        return contentString.textHeightWithFont(UIFont.systemFont(ofSize: 14), constrainedToSize: CGSize(width: tableView.bounds.size.width - 48, height: 10000)) + 28
+    }
+    func setCrosswordDataTableViewContent(with index: Int, resultArray: [ZYBaseWord]) -> String {
+        if index < resultArray.count {
+            if let poetryWord = resultArray[index] as? ZYPoetry {
+                return poetryWord.showString.showContentString(with: poetryWord.detail, typeString: poetryWord.wordType)
+            }else if let movieWord = resultArray[index] as? ZYMovie {
+                return movieWord.showString.showContentString(with: movieWord.content_description, typeString: movieWord.wordType)
+            }else if let bookWord = resultArray[index] as? ZYBook {
+                return bookWord.showString.showContentString(with: bookWord.content_description, typeString: bookWord.wordType)
+            }else if let idiomWord = resultArray[index] as? ZYIdiom {
+                return idiomWord.showString.showContentString(with: idiomWord.paraphrase ?? "", typeString: idiomWord.wordType)
+            }else if let allegoricWord = resultArray[index] as? ZYAllegoric {
+                return allegoricWord.showString.showContentString(with: allegoricWord.content ?? "", typeString: allegoricWord.wordType)
+            }
+        }
+        return ""
+    }    
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 2
     }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        switch section {
+        case 0:
+            return resultXArray.count
+        case 1:
+            return resultYArray.count
+        default:
+            return 0
+        }
     }
-
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CrosswordListCellID", for: indexPath) as! ZYCrosswordListTableViewCell
+        if indexPath.section == 0 {
+            cell.crosswordDataLabel.text = setCrosswordDataTableViewContent(with: indexPath.row, resultArray: resultXArray)
+        }else if indexPath.section == 1 {
+            cell.crosswordDataLabel.text = setCrosswordDataTableViewContent(with: indexPath.row, resultArray: resultYArray)
+        }
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return setCrosswordDataTableViewContentHeight(with: indexPath.row, resultArray: resultXArray)
+        case 1:
+            return setCrosswordDataTableViewContentHeight(with: indexPath.row, resultArray: resultYArray)
+        default:
+            return 0
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 20))
+        headerView.backgroundColor = .white
+        let label = UILabel(frame: CGRect(x: 10, y: 0, width: headerView.frame.size.width - 20, height: 20))
+        label.textColor = UIColor(ZYCustomColor.textBlack.rawValue)
+        headerView.addSubview(label)
+        if section == 0 {
+            label.text = "横向提示"
+        }else if section == 1 {
+            label.text = "纵向提示"
+        }
+        return headerView
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.popViewController(animated: true)
     }
-    */
-
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
-
 }

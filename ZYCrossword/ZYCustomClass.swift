@@ -53,6 +53,13 @@ extension String {
         let DBPath = (documentPath as NSString).appendingPathComponent(self)
         return DBPath
     }
+    func showContentString(with contentString: String, typeString: String) -> String {
+        var replaceString = ""
+        for _ in 0 ..< self.characters.count {
+            replaceString += "_"
+        }
+        return contentString.replacingOccurrences(of: self, with: replaceString) + "\n----" + typeString
+    }
 }
 //MARK: - Array的扩展
 extension Array where Element: Equatable {
