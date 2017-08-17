@@ -9,8 +9,11 @@
 import UIKit
 
 class ZYCrosswordListTableViewController: UITableViewController {
+    var selectResultBlock: ((Int, Bool) -> Void)?
     var resultXArray = [ZYBaseWord]()
     var resultYArray = [ZYBaseWord]()
+    var tipXArr = Array<Word>()
+    var tipYArr = Array<Word>()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
@@ -90,6 +93,17 @@ class ZYCrosswordListTableViewController: UITableViewController {
         return headerView
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if let grid = tipXArr[indexPath.row].grid.first {
+                let tagIndex = grid[1] * chessboardColumns * 100 + grid[0] + 100000
+                selectResultBlock!(tagIndex, false)
+            }
+        }else if indexPath.section == 1 {
+            if let grid = tipYArr[indexPath.row].grid.first {
+                let tagIndex = grid[1] * chessboardColumns * 100 + grid[0] + 100000
+                selectResultBlock!(tagIndex, true)
+            }
+        }
         navigationController?.popViewController(animated: true)
     }
     // MARK: - Navigation

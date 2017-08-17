@@ -10,9 +10,12 @@ import UIKit
 
 class ZYCrosswordListTableViewCell: UITableViewCell {
     @IBOutlet weak var crosswordDataLabel: UILabel!
+    @IBOutlet weak var backroundImage: UIImageView!
+    @IBOutlet weak var lineImae: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        backroundImage.image = backroundImage.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 10, 20, 10), resizingMode: UIImageResizingMode.stretch)
+        lineImae.image = lineImae.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 0, 20, 0), resizingMode: UIImageResizingMode.stretch)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

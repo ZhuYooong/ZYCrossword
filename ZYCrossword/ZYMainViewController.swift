@@ -157,6 +157,14 @@ class ZYMainViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? ZYCrosswordListTableViewController, segue.identifier == "crosswordListSegueId" {
             viewController.loadResult(with: chessboardViewController.resultXArray, YArray: chessboardViewController.resultYArray)
+            viewController.tipXArr = chessboard.tipXArr
+            viewController.tipYArr = chessboard.tipYArr
+            viewController.selectResultBlock = { tag, isPortraitIntro in
+                if let button = self.chessboardViewController.chessboardView.viewWithTag(tag) as? ZYChessboardButton {
+                    self.chessboardViewController.chessboardView.didSelectedButton = button
+                    self.chessboardViewController.chessboardView.isPortraitIntro = isPortraitIntro
+                }
+            }
         }
     }
 }

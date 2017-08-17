@@ -41,6 +41,8 @@ class ZYChessboardViewController: UIViewController {
     }
     //MARK: - ChessboardView
     @IBOutlet weak var chessboardView: ZYChessboardView!
+    var landscapeIntro = [Array<Int>]()
+    var portraitIntro = [Array<Int>]()
     func creatChessboardViewData() {
         chessboardView.parientViewController = self
         chessboardView.creatButton(with: chessboard.grid, resultGrid: chessboard.resultGrid)
@@ -56,6 +58,8 @@ class ZYChessboardViewController: UIViewController {
             portraitResultIntro = y?.resultIntro
             portraitIntro = y?.intro ?? [Array<Int>]()
             self.reloadCrosswordData(landscape: landscapeResultIntro, portrait: portraitResultIntro)
+            self.landscapeIntro = landscapeIntro
+            self.portraitIntro = portraitIntro
             return (landscapeIntro, portraitIntro)
         }
         if let button = chessboardView.viewWithTag(100000) as? ZYChessboardButton {
@@ -138,9 +142,7 @@ class ZYChessboardViewController: UIViewController {
         mainViewController?.performSegue(withIdentifier: "crosswordListSegueId", sender: sender)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? ZYCrosswordListTableViewController, segue.identifier == "crosswordListSegueId" {
-            viewController.loadResult(with: resultXArray, YArray: resultYArray)
-        }
+        
     }
     //MARK: - wordInputView
     @IBOutlet weak var wordInputView: UIView!
@@ -201,6 +203,13 @@ extension ZYChessboardViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return setCrosswordDataTableViewContentHeight(with: indexPath.row)
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            chessboardView.isPortraitIntro = false
+        }else if indexPath.row == 1 {
+            chessboardView.isPortraitIntro = true
+        }
+    }
 }
 extension ZYChessboardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -208,6 +217,7 @@ extension ZYChessboardViewController: UITextFieldDelegate {
             changeWordRight()
             selectedAnotherWord()
         }
+        textField.text = ""
         textField.resignFirstResponder()
         return true;
     }

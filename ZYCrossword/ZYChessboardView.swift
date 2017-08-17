@@ -27,7 +27,16 @@ class ZYChessboardView: UIView {
         }
         initSelectedView()
     }
+    var isPortraitIntro = false {
+        didSet {
+            if let sender = didSelectedButton {
+                chessboardButtonClick(sender: sender)
+            }
+        }
+    }
+    var didSelectedButton: ZYChessboardButton?
     func chessboardButtonClick(sender: ZYChessboardButton) {
+        didSelectedButton = nil
         let gridArray = chessboardButtonClosure!(sender)
         var toFrame = CGRect()
         for view in subviews {
@@ -35,10 +44,11 @@ class ZYChessboardView: UIView {
                 button.selectedState = .normal
             }
         }
-        if gridArray.landscapeIntro.count > 0 {
+        if gridArray.landscapeIntro.count > 0 && !isPortraitIntro {
             toFrame = checkIsGroup(with: gridArray.landscapeIntro)
         }else {
             toFrame = checkIsGroup(with: gridArray.portraitIntro)
+            isPortraitIntro = false
         }
         if isFirst {
             changeSelectedView(from: twoSelectedView, to: oneSelectedView, toFrame: toFrame, toPoint: sender.center)
@@ -48,6 +58,7 @@ class ZYChessboardView: UIView {
         sender.selectedState = .selected
         oldGrid = [sender.column, sender.row]
         oldPoint = sender.center
+        didSelectedButton = sender
     }
     var oldPoint: CGPoint?
     var oldGrid: Array<Int>?
