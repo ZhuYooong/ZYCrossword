@@ -77,12 +77,12 @@ class ZYCrosswordListTableViewController: UITableViewController {
         }
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 30
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 20))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
         headerView.backgroundColor = .white
-        let label = UILabel(frame: CGRect(x: 10, y: 0, width: headerView.frame.size.width - 20, height: 20))
+        let label = UILabel(frame: CGRect(x: 10, y: 0, width: 74, height: 30))
         label.textColor = UIColor(ZYCustomColor.textBlack.rawValue)
         headerView.addSubview(label)
         if section == 0 {
@@ -90,6 +90,9 @@ class ZYCrosswordListTableViewController: UITableViewController {
         }else if section == 1 {
             label.text = "纵向提示"
         }
+        let lineView = UIView(frame:  CGRect(x: 84, y: 14.5, width: tableView.bounds.size.width - 100, height: 1))
+        lineView.backgroundColor = UIColor(ZYCustomColor.textBlack.rawValue)
+        headerView.addSubview(lineView)
         return headerView
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
