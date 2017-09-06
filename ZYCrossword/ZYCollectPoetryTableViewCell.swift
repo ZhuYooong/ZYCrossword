@@ -9,6 +9,19 @@
 import UIKit
 
 class ZYCollectPoetryTableViewCell: ZYFoldingTableViewCell {
+    @IBOutlet weak var containerViewHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var closeNameLabel: UILabel!
+    @IBOutlet weak var closeDetailLabel: UILabel!
+    @IBOutlet weak var closeTypeLabel: UILabel!
+    @IBOutlet weak var openTypeLabel: UILabel!
+    @IBOutlet weak var openNameLabel: UILabel!
+    @IBOutlet weak var firstShortLabel: UILabel!
+    @IBOutlet weak var secondShortLabel: UILabel!
+    @IBOutlet weak var translateButton: UIButton!
+    @IBOutlet weak var noteButton: UIButton!
+    @IBOutlet weak var appreciateButton: UIButton!
+    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var detailButton: UIButton!
     override func awakeFromNib() {
         foregroundView.layer.cornerRadius = 14
         foregroundView.layer.masksToBounds = true

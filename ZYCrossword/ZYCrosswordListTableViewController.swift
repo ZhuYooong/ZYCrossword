@@ -107,7 +107,7 @@ class ZYCrosswordListTableViewController: UITableViewController {
                 selectResultBlock!(tagIndex, true)
             }
         }
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
