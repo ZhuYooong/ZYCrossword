@@ -22,6 +22,19 @@ class ZYCollectPoetryTableViewCell: ZYFoldingTableViewCell {
     @IBOutlet weak var appreciateButton: UIButton!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var detailButton: UIButton!
+    var contentDic: [String: String]? {
+        didSet {
+            closeNameLabel.text = contentDic?["name"]
+            openNameLabel.text = contentDic?["name"]
+            detailButton.setTitle(contentDic?["name"], for: .normal)
+            closeTypeLabel.text = contentDic?["type"]
+            openTypeLabel.text = contentDic?["type"]
+            contentLabel.text = contentDic?["content"]
+            closeDetailLabel.text = contentDic?["secondShort"]
+            firstShortLabel.text = contentDic?["firstShort"]
+            secondShortLabel.text = contentDic?["secondShort"]
+        }
+    }
     override func awakeFromNib() {
         foregroundView.layer.cornerRadius = 14
         foregroundView.layer.masksToBounds = true

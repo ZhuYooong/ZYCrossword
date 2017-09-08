@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CN4-0t-Wih">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CN4-0t-Wih">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1063,6 +1063,9 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="K7G-FQ-MZa"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <segue destination="9QV-Jx-TIb" kind="show" identifier="poetryTranslateSegue" id="5Vd-WB-Fr2"/>
+                                                            </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9E-ke-Tuj">
                                                             <rect key="frame" x="8" y="69" width="343" height="1"/>
@@ -1086,6 +1089,9 @@
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2G-vN-Uw5">
                                                             <rect key="frame" x="8" y="70" width="343" height="30"/>
+                                                            <connections>
+                                                                <segue destination="9QV-Jx-TIb" kind="show" identifier="poetryNoteSegue" id="Z5q-gK-MUP"/>
+                                                            </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bzf-8v-GDa">
                                                             <rect key="frame" x="8" y="100" width="343" height="1"/>
@@ -1112,6 +1118,9 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="4ga-Hb-KX7"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <segue destination="9QV-Jx-TIb" kind="show" identifier="poetryAppreciateSegue" id="b2i-Ax-zaS"/>
+                                                            </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v53-IN-Gle">
                                                             <rect key="frame" x="8" y="131" width="343" height="1"/>
@@ -1272,6 +1281,24 @@
             </objects>
             <point key="canvasLocation" x="-39.200000000000003" y="761.46926536731644"/>
         </scene>
+        <!--Poetry Content Table View Controller-->
+        <scene sceneID="AoO-cP-sPw">
+            <objects>
+                <tableViewController id="9QV-Jx-TIb" customClass="ZYPoetryContentTableViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="k7p-hP-nie">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="9QV-Jx-TIb" id="hTm-H2-lBC"/>
+                            <outlet property="delegate" destination="9QV-Jx-TIb" id="2wX-6F-S4F"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gwZ-cu-R6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="756" y="761.46926536731644"/>
+        </scene>
         <!--所有提示-->
         <scene sceneID="c4H-B6-TBy">
             <objects>
@@ -1353,4 +1380,7 @@
         <image name="重置" width="22" height="22"/>
         <image name="金币" width="19" height="19"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="5Vd-WB-Fr2"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -7,25 +7,71 @@
 //
 
 import UIKit
+import SwiftyJSON
+import RealmSwift
 
 class ZYCollectListTableViewController: UITableViewController {
     let kCloseCellHeight: CGFloat = 78
     let kDictionaryCellHeight: CGFloat = 163
     let kDoubanCellHeight: CGFloat = 172
     let kPoetryCellHeight: CGFloat = 248
-    var cellContentArray: [CollectionContect] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
     private func setup() {
-        cellContentArray = [CollectionContect(type: .dictionary),CollectionContect(type: .poetry),CollectionContect(type: .douban),CollectionContect(type: .dictionary),CollectionContect(type: .douban),CollectionContect(type: .poetry),CollectionContect(type: .dictionary),CollectionContect(type: .douban),CollectionContect(type: .poetry),CollectionContect(type: .douban)]
+        initData()
         tableView.estimatedRowHeight = kCloseCellHeight
         tableView.rowHeight = UITableViewAutomaticDimension
     }
+    let realm = try! Realm()
+    var cellContentArray = Array<ZYCollectionInfo>()
+    var collectionDicArray = [[String: String]]()
+    private func initData() {
+        let collectionResult = realm.objects(ZYCollectionInfo.self)
+        for result in collectionResult {
+            cellContentArray.append(result)
+            let collectionWord = result.collectionWord
+            if let collectionWord  = collectionWord as? ZYAllegoric {
+                detailArray.append(collectionWord.url ?? "")
+                collectionDicArray.append(["name": collectionWord.content ?? "", "content": collectionWord.answer ?? "", "type": collectionWord.wordType])
+            }else if let collectionWord  = collectionWord as? ZYIdiom {
+                detailArray.append(collectionWord.url ?? "")
+                collectionDicArray.append(["name": collectionWord.title ?? "", "type": collectionWord.wordType, "content": collectionWord.paraphrase ?? ""])
+            }else if let collectionWord  = collectionWord as? ZYBook {
+                detailArray.append(collectionWord.link)
+                collectionDicArray.append(["name": collectionWord.name , "type": collectionWord.wordType, "content": collectionWord.content_description , "firstShort": collectionWord.score , "secondShort": collectionWord.author , "long": collectionWord.press])
+            }else if let collectionWord  = collectionWord as? ZYMovie {
+                detailArray.append(collectionWord.url)
+                collectionDicArray.append(["name": collectionWord.movie_name , "type": collectionWord.wordType, "content": collectionWord.content_description , "firstShort": collectionWord.place , "secondShort": collectionWord.direct , "long": collectionWord.date])
+            }else if let collectionWord  = collectionWord as? ZYMusic {
+                
+            }else if let collectionWord  = collectionWord as? ZYPoetry {
+                detailArray.append(collectionWord.url)
+                collectionDicArray.append(["name": collectionWord.title , "type": collectionWord.wordType, "content": collectionWord.detail , "firstShort": collectionWord.dynasty , "secondShort": collectionWord.author, "translate": collectionWord.translate , "note": collectionWord.note , "appreciation": collectionWord.appreciation])
+            }
+        }
+    }
+    var detailArray = [String]()
+    func detailButtonCliick(sender: UIButton) {
+        let webViewController = ZYWebViewController()
+        webViewController.httpURL = detailArray[sender.tag]
+        webViewController.title = sender.currentTitle
+        navigationController?.pushViewController(webViewController, animated: true)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if case let poetryContentTableViewController as ZYPoetryContentTableViewController = segue.destination, let button = sender as? UIButton, button.tag < collectionDicArray.count  {
+            poetryContentTableViewController.contentString = collectionDicArray[button.tag]["content"] ?? ""
+            poetryContentTableViewController.title = collectionDicArray[button.tag]["name"] ?? ""
+            if segue.identifier == "poetryTranslateSegue" {
+                poetryContentTableViewController.explainString = collectionDicArray[button.tag]["translate"] ?? ""
+            }else if segue.identifier == "poetryNoteSegue" {
+                poetryContentTableViewController.explainString = collectionDicArray[button.tag]["note"] ?? ""
+            }else if segue.identifier == "poetryAppreciateSegue" {
+                poetryContentTableViewController.explainString = collectionDicArray[button.tag]["appreciation"] ?? ""
+            }
+        }
     }
 }
 extension ZYCollectListTableViewController {
@@ -42,22 +88,40 @@ extension ZYCollectListTableViewController {
         } else {
             cell.unfold(true, animated: false, completion: nil)
         }
-//        cell.number = indexPath.row
+        if indexPath.row < collectionDicArray.count {
+            if case let cell as ZYCollectDictionaryTableViewCell = cell {
+                cell.contentDic = collectionDicArray[indexPath.row]
+                cell.detailButton.tag = indexPath.row
+                cell.detailButton.addTarget(self, action: #selector(detailButtonCliick(sender:)), for: .touchUpInside)
+            }else if case let cell as ZYCollectDoubanTableViewCell = cell {
+                cell.contentDic = collectionDicArray[indexPath.row]
+                cell.detailButton.tag = indexPath.row
+                cell.detailButton.addTarget(self, action: #selector(detailButtonCliick(sender:)), for: .touchUpInside)
+            }else if case let cell as ZYCollectPoetryTableViewCell = cell {
+                cell.contentDic = collectionDicArray[indexPath.row]
+                cell.translateButton.tag = indexPath.row
+                cell.noteButton.tag = indexPath.row
+                cell.appreciateButton.tag = indexPath.row
+                cell.detailButton.tag = indexPath.row
+                cell.detailButton.addTarget(self, action: #selector(detailButtonCliick(sender:)), for: .touchUpInside)
+            }
+        }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < cellContentArray.count {
             let durations: [TimeInterval] = [0.26, 0.2]
-            if cellContentArray[indexPath.row].type == .dictionary {
+            let collectionWord = cellContentArray[indexPath.row].collectionWord
+            if collectionWord.isKind(of: ZYAllegoric.self) || collectionWord.isKind(of: ZYIdiom.self) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDictionayCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations
                 return cell
-            }else if cellContentArray[indexPath.row].type == .douban {
+            }else if collectionWord.isKind(of: ZYBook.self) || collectionWord.isKind(of: ZYMovie.self) || collectionWord.isKind(of: ZYMusic.self) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDoubanCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations
                 return cell
-            }else if cellContentArray[indexPath.row].type == .poetry {
+            }else if collectionWord.isKind(of: ZYPoetry.self) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectPoetryCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations
@@ -101,18 +165,4 @@ extension ZYCollectListTableViewController {
             tableView.endUpdates()
         }, completion: nil)
     }
-}
-struct CollectionContect {
-    var type = CollectionType.dictionary
-    var height: CGFloat = 78
-    
-    init(type:CollectionType) {
-        self.type = type
-        self.height = 78
-    }
-}
-enum CollectionType {
-    case dictionary
-    case douban
-    case poetry
 }

@@ -136,6 +136,11 @@ class ZYChessboardViewController: UIViewController {
         baseWord.isCollect = true
         try! baseWord.realm?.commitWrite()
         sender.setImage(UIImage(named: "Oval 84"), for: .normal)
+        let collectionInfo = ZYCollectionInfo()
+        collectionInfo.collectionWord = baseWord
+        try! baseWord.realm?.write {
+            baseWord.realm?.add(collectionInfo, update: true)
+        }
         sender.isUserInteractionEnabled = false
     }
     @IBAction func allDataButtonClick(_ sender: UIButton) {

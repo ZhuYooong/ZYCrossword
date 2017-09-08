@@ -29,6 +29,7 @@
 		046B7C0F1F5D05220088D43D /* ZYCollectPoetryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B7C0E1F5D05220088D43D /* ZYCollectPoetryTableViewCell.swift */; };
 		047371831F0F657D005BE7A9 /* ZYCrosswordListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047371821F0F657D005BE7A9 /* ZYCrosswordListTableViewController.swift */; };
 		047371851F0F65AE005BE7A9 /* ZYCrosswordListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047371841F0F65AE005BE7A9 /* ZYCrosswordListTableViewCell.swift */; };
+		0489EE7F1F60F3D8005A8648 /* ZYCollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489EE7E1F60F3D8005A8648 /* ZYCollectionInfo.swift */; };
 		0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AA181EAEE0DB0051C47D /* AppDelegate.swift */; };
 		0490AA1E1EAEE0DB0051C47D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0490AA1C1EAEE0DB0051C47D /* Main.storyboard */; };
 		0490AA201EAEE0DB0051C47D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0490AA1F1EAEE0DB0051C47D /* Assets.xcassets */; };
@@ -363,6 +364,7 @@
 		0496F8FD1EE6504800F51542 /* ZYAllegoric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496F8FC1EE6504800F51542 /* ZYAllegoric.swift */; };
 		049E5A041EEE47CA00FC3560 /* ZYActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E5A031EEE47CA00FC3560 /* ZYActivityIndicator.swift */; };
 		049E5A061EEE482700FC3560 /* ZYTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E5A051EEE482600FC3560 /* ZYTitleViewController.swift */; };
+		04AC7A481F626F8A00C1593E /* ZYPoetryContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC7A471F626F8A00C1593E /* ZYPoetryContentTableViewController.swift */; };
 		04BD132A1EC2EA8F00B1DB9E /* ZYBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD13291EC2EA8F00B1DB9E /* ZYBook.swift */; };
 		04BD132C1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD132B1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift */; };
 		04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD132D1EC30DDB00B1DB9E /* ZYMovie.swift */; };
@@ -416,6 +418,7 @@
 		046B7C0E1F5D05220088D43D /* ZYCollectPoetryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYCollectPoetryTableViewCell.swift; sourceTree = "<group>"; };
 		047371821F0F657D005BE7A9 /* ZYCrosswordListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYCrosswordListTableViewController.swift; sourceTree = "<group>"; };
 		047371841F0F65AE005BE7A9 /* ZYCrosswordListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYCrosswordListTableViewCell.swift; sourceTree = "<group>"; };
+		0489EE7E1F60F3D8005A8648 /* ZYCollectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYCollectionInfo.swift; sourceTree = "<group>"; };
 		0490AA151EAEE0DB0051C47D /* ZYCrossword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYCrossword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490AA181EAEE0DB0051C47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0490AA1D1EAEE0DB0051C47D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -756,6 +759,7 @@
 		0496F8FC1EE6504800F51542 /* ZYAllegoric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYAllegoric.swift; sourceTree = "<group>"; };
 		049E5A031EEE47CA00FC3560 /* ZYActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYActivityIndicator.swift; sourceTree = "<group>"; };
 		049E5A051EEE482600FC3560 /* ZYTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYTitleViewController.swift; sourceTree = "<group>"; };
+		04AC7A471F626F8A00C1593E /* ZYPoetryContentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYPoetryContentTableViewController.swift; sourceTree = "<group>"; };
 		04BD13291EC2EA8F00B1DB9E /* ZYBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYBook.swift; sourceTree = "<group>"; };
 		04BD132B1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYNetwordViewModel.swift; sourceTree = "<group>"; };
 		04BD132D1EC30DDB00B1DB9E /* ZYMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYMovie.swift; sourceTree = "<group>"; };
@@ -1307,6 +1311,7 @@
 				046B7C0C1F5D04ED0088D43D /* ZYCollectDoubanTableViewCell.swift */,
 				046B7C0E1F5D05220088D43D /* ZYCollectPoetryTableViewCell.swift */,
 				0450C7501F5E763E00660CD5 /* ZYFoldingTableViewCell.swift */,
+				04AC7A471F626F8A00C1593E /* ZYPoetryContentTableViewController.swift */,
 			);
 			name = CollectList;
 			sourceTree = "<group>";
@@ -1367,6 +1372,7 @@
 		04BD13281EC2EA3000B1DB9E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0489EE7E1F60F3D8005A8648 /* ZYCollectionInfo.swift */,
 				04D2EEA51EB196D500BC24B0 /* ZYWord.swift */,
 				04C94ABE1EB3364E009F4381 /* ZYBaseWord.swift */,
 				046A86D01ECC4895001E7323 /* Dictionary */,
@@ -1464,6 +1470,7 @@
 				TargetAttributes = {
 					0490AA141EAEE0DA0051C47D = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = 94Y4S9DSKK;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1914,10 +1921,12 @@
 				049E5A061EEE482700FC3560 /* ZYTitleViewController.swift in Sources */,
 				040E95EF1ED6B3B900FC29E2 /* ZYChessboardView.swift in Sources */,
 				04928DB71EC93DAF002915BD /* ZYChessboard.swift in Sources */,
+				04AC7A481F626F8A00C1593E /* ZYPoetryContentTableViewController.swift in Sources */,
 				04968EE81F10DAEC004CB1F5 /* ZYLibraryViewController.swift in Sources */,
 				0496F3301EBB1CAA008D3285 /* ZYJsonViewModel.swift in Sources */,
 				04F8259F1EEA4DD200B62794 /* ZYMaterialDesignClass.swift in Sources */,
 				046A86D51ECC4C1B001E7323 /* ZYIdiom.swift in Sources */,
+				0489EE7F1F60F3D8005A8648 /* ZYCollectionInfo.swift in Sources */,
 				040E95F11ED6B3F500FC29E2 /* ZYChessboardButton.swift in Sources */,
 				04D2EEA61EB196D500BC24B0 /* ZYWord.swift in Sources */,
 				0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */,
@@ -2095,7 +2104,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 94Y4S9DSKK;
 				INFOPLIST_FILE = ZYCrossword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2114,7 +2123,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 94Y4S9DSKK;
 				INFOPLIST_FILE = ZYCrossword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

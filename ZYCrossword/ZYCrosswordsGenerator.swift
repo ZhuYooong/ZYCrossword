@@ -184,9 +184,9 @@ class ZYCrosswordsGenerator: NSObject {
     }
     func filterResult<T: Object>(with results: Results<T>, and type: T.Type, and findString: String?) -> Results<T> {
         if let findString = findString {
-            return results.filter(NSPredicate(format: "showString contains '\(findString)'")).sorted(byKeyPath: "selecttedCount")
+            return results.filter(NSPredicate(format: "showString contains '\(findString)'")).sorted(byKeyPath: "selecttedCount").sorted(byKeyPath: "isCollect")
         }else {
-            return results.sorted(byKeyPath: "selecttedCount")
+            return results.sorted(byKeyPath: "selecttedCount").sorted(byKeyPath: "isCollect")
         }
     }
     func findDetailWord(with detail:String, and findString: String?) -> String? {
