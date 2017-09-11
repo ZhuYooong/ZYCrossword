@@ -62,16 +62,32 @@ class ZYCollectListTableViewController: UITableViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if case let poetryContentTableViewController as ZYPoetryContentTableViewController = segue.destination, let button = sender as? UIButton, button.tag < collectionDicArray.count  {
-            poetryContentTableViewController.contentString = collectionDicArray[button.tag]["content"] ?? ""
+            poetryContentTableViewController.contentString = contentString(with: collectionDicArray[button.tag]["content"] ?? "")
             poetryContentTableViewController.title = collectionDicArray[button.tag]["name"] ?? ""
             if segue.identifier == "poetryTranslateSegue" {
+                poetryContentTableViewController.titleString = "译文"
                 poetryContentTableViewController.explainString = collectionDicArray[button.tag]["translate"] ?? ""
             }else if segue.identifier == "poetryNoteSegue" {
+                poetryContentTableViewController.titleString = "注释"
                 poetryContentTableViewController.explainString = collectionDicArray[button.tag]["note"] ?? ""
             }else if segue.identifier == "poetryAppreciateSegue" {
+                poetryContentTableViewController.titleString = "鉴赏"
                 poetryContentTableViewController.explainString = collectionDicArray[button.tag]["appreciation"] ?? ""
             }
         }
+    }
+    func contentString(with string: String) -> String {
+        var content = ""
+        let set = CharacterSet(charactersIn: "。！？；)")
+        let detailStrArray = string.components(separatedBy: set)
+        for str in detailStrArray {
+            if str == "" || str.contains("(") {
+                content += str
+            }else {
+                content += "\n\(str)"
+            }
+        }
+        return content
     }
 }
 extension ZYCollectListTableViewController {
@@ -110,28 +126,26 @@ extension ZYCollectListTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < cellContentArray.count {
             let durations: [TimeInterval] = [0.26, 0.2]
-            let collectionWord = cellContentArray[indexPath.row].collectionWord
-            if collectionWord.isKind(of: ZYAllegoric.self) || collectionWord.isKind(of: ZYIdiom.self) {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDictionayCellId", for: indexPath) as! ZYFoldingTableViewCell
-                cell.durationsForExpandedState = durations
-                cell.durationsForCollapsedState = durations
-                return cell
-            }else if collectionWord.isKind(of: ZYBook.self) || collectionWord.isKind(of: ZYMovie.self) || collectionWord.isKind(of: ZYMusic.self) {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDoubanCellId", for: indexPath) as! ZYFoldingTableViewCell
-                cell.durationsForExpandedState = durations
-                cell.durationsForCollapsedState = durations
-                return cell
-            }else if collectionWord.isKind(of: ZYPoetry.self) {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "CollectPoetryCellId", for: indexPath) as! ZYFoldingTableViewCell
-                cell.durationsForExpandedState = durations
-                cell.durationsForCollapsedState = durations
-                return cell
-            }else {
-                return UITableViewCell()
+            if let collectionWord = cellContentArray[indexPath.row].collectionWord {
+                if collectionWord.isKind(of: ZYAllegoric.self) || collectionWord.isKind(of: ZYIdiom.self) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDictionayCellId", for: indexPath) as! ZYFoldingTableViewCell
+                    cell.durationsForExpandedState = durations
+                    cell.durationsForCollapsedState = durations
+                    return cell
+                }else if collectionWord.isKind(of: ZYBook.self) || collectionWord.isKind(of: ZYMovie.self) || collectionWord.isKind(of: ZYMusic.self) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDoubanCellId", for: indexPath) as! ZYFoldingTableViewCell
+                    cell.durationsForExpandedState = durations
+                    cell.durationsForCollapsedState = durations
+                    return cell
+                }else if collectionWord.isKind(of: ZYPoetry.self) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "CollectPoetryCellId", for: indexPath) as! ZYFoldingTableViewCell
+                    cell.durationsForExpandedState = durations
+                    cell.durationsForCollapsedState = durations
+                    return cell
+                }
             }
-        }else {
-            return UITableViewCell()
         }
+        return UITableViewCell()
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellContentArray[indexPath.row].height

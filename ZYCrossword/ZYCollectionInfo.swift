@@ -6,13 +6,9 @@
 //  Copyright © 2017年 ZhuYong. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RealmSwift
 class ZYCollectionInfo: Object {
-    dynamic var collectionWord: ZYBaseWord = ZYBaseWord()
+    dynamic var collectionWord: ZYBaseWord? = ZYBaseWord()
     dynamic var height: CGFloat = 78
-    
-    override static func primaryKey() -> String {
-        return "collectionWord"
-    }
 }

@@ -82,6 +82,7 @@ class ZYChessboardViewController: UIViewController {
     var crosswordDataArray = [ZYBaseWord]()
     var crosswordShowDic = ["landscape":false, "portrait":false]
     func reloadCrosswordData(landscape: ZYBaseWord?, portrait: ZYBaseWord?) {
+        crosswordShowDic = ["landscape":false, "portrait":false]
         crosswordDataArray = [ZYBaseWord]()
         if let landscapeWord = landscape {
             crosswordShowDic.updateValue(true, forKey: "landscape")
@@ -135,12 +136,13 @@ class ZYChessboardViewController: UIViewController {
         baseWord.realm?.beginWrite()
         baseWord.isCollect = true
         try! baseWord.realm?.commitWrite()
-        sender.setImage(UIImage(named: "Oval 84"), for: .normal)
         let collectionInfo = ZYCollectionInfo()
         collectionInfo.collectionWord = baseWord
+        collectionInfo.height = 78
         try! baseWord.realm?.write {
-            baseWord.realm?.add(collectionInfo, update: true)
+            baseWord.realm?.add(collectionInfo)
         }
+        sender.setImage(UIImage(named: "Oval 84"), for: .normal)
         sender.isUserInteractionEnabled = false
     }
     @IBAction func allDataButtonClick(_ sender: UIButton) {
