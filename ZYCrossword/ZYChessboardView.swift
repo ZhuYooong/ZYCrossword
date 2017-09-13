@@ -13,6 +13,11 @@ class ZYChessboardView: UIView {
     //MARK: - button
     var chessboardButtonClosure: ((_ sender: ZYChessboardButton) -> (landscapeIntro: [Array<Int>], portraitIntro: [Array<Int>]))?
     func creatButton(with gridArray: Array2D, resultGrid: Array2D) {
+        for button in subviews {
+            if button.isKind(of: ZYChessboardButton.self) {
+                button.removeFromSuperview()
+            }
+        }
         for i in 0 ..< chessboardColumns {
             for j in 0 ..< chessboardColumns {
                 let str = gridArray[j, i]

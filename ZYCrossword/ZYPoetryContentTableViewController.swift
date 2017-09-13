@@ -23,8 +23,19 @@ class ZYPoetryContentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return contentString.textHeightWithFont(UIFont.systemFont(ofSize: 20), constrainedToSize: CGSize(width: UIScreen.main.bounds.size.width - 50, height: 10000))
+        }else if indexPath.section == 1 {
+            return explainString.textHeightWithFont(UIFont.systemFont(ofSize: 15), constrainedToSize: CGSize(width: UIScreen.main.bounds.size.width - 50, height: 10000))
+        }else {
+            return 0
+        }
+    }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
+        if section == 0 {
+            return 12
+        }else if section == 1 {
             return 30
         }else {
             return 0

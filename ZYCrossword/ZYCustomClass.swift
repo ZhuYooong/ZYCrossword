@@ -56,7 +56,7 @@ extension String {
     func showContentString(with contentString: String, typeString: String) -> String {
         var replaceString = ""
         for _ in 0 ..< self.characters.count {
-            replaceString += "_"
+            replaceString += "_ "
         }
         return contentString.replacingOccurrences(of: self, with: replaceString) + "\n----" + typeString
     }

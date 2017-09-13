@@ -10,26 +10,27 @@ import UIKit
 
 class ZYCollectDictionaryTableViewCell: ZYFoldingTableViewCell {
     @IBOutlet weak var containerViewHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var containerBackgroundImageView: UIImageView!
     @IBOutlet weak var closeNameLabel: UILabel!
     @IBOutlet weak var openNameLabel: UILabel!
     @IBOutlet weak var closeTypeLabel: UILabel!
     @IBOutlet weak var openTypeLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var detailButton: UIButton!
-    var contentDic: [String: String]? {
+    var contentDic: [String: Any]? {
         didSet {
-            closeNameLabel.text = contentDic?["name"]
-            openNameLabel.text = contentDic?["name"]
-            detailButton.setTitle(contentDic?["name"], for: .normal)
-            closeTypeLabel.text = contentDic?["type"]
-            openTypeLabel.text = contentDic?["type"]
-            contentLabel.text = contentDic?["content"]
+            closeNameLabel.text = contentDic?["name"] as? String
+            openNameLabel.text = contentDic?["name"] as? String
+            closeTypeLabel.text = contentDic?["type"] as? String
+            openTypeLabel.text = contentDic?["type"] as? String
+            contentLabel.text = contentDic?["content"] as? String
         }
     }
     override func awakeFromNib() {
         foregroundView.layer.cornerRadius = 14
         foregroundView.layer.masksToBounds = true
         super.awakeFromNib()
+        containerBackgroundImageView.image = containerBackgroundImageView.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 10, 20, 10), resizingMode: UIImageResizingMode.stretch)
     }
     override func animationDuration(_ itemIndex: NSInteger, type: ZYFoldingTableViewCell.AnimationType) -> TimeInterval {
         let durations = [0.26, 0.2]

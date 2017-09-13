@@ -85,6 +85,9 @@ class ZYMainViewController: UIViewController {
             let result = crosswordsGenerator.resultContentArray[i]
             result.realm?.beginWrite()
             result.isShow = true
+            if result.isKind(of: ZYPoetry.self) {
+                result.showString = word.word
+            }
             try! result.realm?.commitWrite()
             if word.direction == .vertical {
                 chessboard.tipYArr.append(word)
@@ -119,7 +122,9 @@ class ZYMainViewController: UIViewController {
     func beganTitle(with originalPoint: CGPoint) {
         UIView.mdInflateTransition(from: chessboardViewController.view, toView: titleViewController.view, originalPoint: originalPoint, duration: 0.7) {
             self.title = self.titleViewController.title
-            self.loadData()
+            DispatchQueue(label: "Crosswords").async { [weak self] in
+                self?.loadData()
+            }
         }
     }
     var chessboardViewController: ZYChessboardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID") as! ZYChessboardViewController
