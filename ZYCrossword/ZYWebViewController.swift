@@ -44,7 +44,7 @@ class ZYWebViewController: UIViewController {
     //MARK: - 加载数据
     func initData() {
         var request: URLRequest?
-        if let urlStr = httpURL {
+        if let urlStr = httpURL?.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) {
             if let url = URL(string: urlStr) {
                 request = URLRequest(url: url)
             }else if let url = URL(string: "http://\(urlStr)") {

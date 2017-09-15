@@ -25,30 +25,33 @@ class ZYCollectListTableViewController: UITableViewController {
     private func initData() {
         let allegoricResult = realm.objects(ZYAllegoric.self).filter("isCollect == true")
         for result in allegoricResult {
-            collectionDicArray.append(["name": result.content ?? "", "content": result.answer ?? "", "url": result.url ?? "", "type": result.wordType, "height": kCloseCellHeight])
+            collectionDicArray.append(["name": result.content ?? "", "content": result.answer ?? "", "url": result.url ?? "", "type": result.wordType, "collectDate": result.collectDate, "height": kCloseCellHeight])
         }
         let idiomResult = realm.objects(ZYIdiom.self).filter("isCollect == true")
         for result in idiomResult {
-            collectionDicArray.append(["name": result.title ?? "", "type": result.wordType, "content": result.paraphrase ?? "", "url": idiomUrl(with: result.url ?? "", and: result.wordType, and: result.title ?? "") , "height": kCloseCellHeight])
+            collectionDicArray.append(["name": result.title ?? "", "type": result.wordType, "collectDate": result.collectDate, "content": result.paraphrase ?? "", "url": idiomUrl(with: result.url ?? "", and: result.wordType, and: result.title ?? "") , "height": kCloseCellHeight])
         }
         let bookResult = realm.objects(ZYBook.self).filter("isCollect == true")
         for result in bookResult {
-            collectionDicArray.append(["name": result.name , "type": result.wordType, "content": result.content_description, "url": result.link, "firstShort": result.score , "secondShort": result.author , "long": result.press, "height": kCloseCellHeight])
+            collectionDicArray.append(["name": result.name , "type": result.wordType, "collectDate": result.collectDate, "content": result.content_description, "url": result.link, "firstShort": result.score , "secondShort": result.author , "long": result.press, "height": kCloseCellHeight])
         }
         let movieResult = realm.objects(ZYMovie.self).filter("isCollect == true")
         for result in movieResult {
-            collectionDicArray.append(["name": result.movie_name , "type": result.wordType, "content": result.content_description, "url": result.url , "firstShort": result.place , "secondShort": result.direct , "long": result.date, "height": kCloseCellHeight])
+            collectionDicArray.append(["name": result.movie_name , "type": result.wordType, "collectDate": result.collectDate, "content": result.content_description, "url": result.url , "firstShort": result.place , "secondShort": result.direct , "long": result.date, "height": kCloseCellHeight])
         }
         let musicResult = realm.objects(ZYMusic.self).filter("isCollect == true")
         for _ in musicResult { }
         let poetryResult = realm.objects(ZYPoetry.self).filter("isCollect == true")
         for result in poetryResult {
-            collectionDicArray.append(["name": result.title , "type": result.wordType, "content": poertryContent(with: result.detail), "url": result.url , "firstShort": result.dynasty , "secondShort": result.author, "translate": result.translate , "note": result.note , "appreciation": result.appreciation, "height": kCloseCellHeight])
+            collectionDicArray.append(["name": result.title , "type": result.wordType, "collectDate": result.collectDate, "content": poertryContent(with: result.detail), "url": result.url , "firstShort": result.dynasty , "secondShort": result.author, "translate": result.translate , "note": result.note , "appreciation": result.appreciation, "height": kCloseCellHeight])
+        }
+        collectionDicArray.sort { (first, second) -> Bool in
+            return (first["collectDate"] as? Date ?? Date()) >= (second["collectDate"] as? Date ?? Date())
         }
     }
     func idiomUrl(with url: String, and type: String, and name: String) -> String {
         if type == "汉语成语词典" {
-            return "https://baike.baidu.com/item/\(name)"
+            return "http://www.baike.com/wiki/\(name)"
         }else {
             return url
         }
@@ -148,17 +151,17 @@ extension ZYCollectListTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < collectionDicArray.count {
             let durations: [TimeInterval] = [0.26, 0.2]
-            if collectionDicArray[indexPath.row].count == 5 {
+            if collectionDicArray[indexPath.row].count == 6 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDictionayCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations
                 return cell
-            }else if collectionDicArray[indexPath.row].count == 8 {
+            }else if collectionDicArray[indexPath.row].count == 9 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDoubanCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations
                 return cell
-            }else if collectionDicArray[indexPath.row].count == 10 {
+            }else if collectionDicArray[indexPath.row].count == 11 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectPoetryCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations

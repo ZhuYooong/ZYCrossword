@@ -133,11 +133,13 @@ class ZYChessboardViewController: UIViewController {
     }
     func collectionButtonClick(sender: UIButton) {
         let baseWord = crosswordDataArray[sender.tag]
-        baseWord.realm?.beginWrite()
-        baseWord.isCollect = true
-        try! baseWord.realm?.commitWrite()
-        sender.setImage(UIImage(named: "Oval 84"), for: .normal)
-        sender.isUserInteractionEnabled = false
+        if baseWord.isCollect != true {
+            baseWord.realm?.beginWrite()
+            baseWord.isCollect = true
+            baseWord.collectDate = Date()
+            try! baseWord.realm?.commitWrite()
+            sender.setImage(UIImage(named: "Oval 84"), for: .normal)
+        }
     }
     @IBAction func allDataButtonClick(_ sender: UIButton) {
         mainViewController?.performSegue(withIdentifier: "crosswordListSegueId", sender: sender)
@@ -174,6 +176,10 @@ class ZYChessboardViewController: UIViewController {
         wordInputTextField.resignFirstResponder()
     }
     @IBAction func promptButtonClick(_ sender: UIButton) {
+        if let baseWord = crosswordDataArray.first, baseWord.isRight == false {
+            wordInputTextField.text = baseWord.showString
+            _ = textFieldShouldReturn(wordInputTextField)
+        }
     }
     @IBAction func sendButtonClick(_ sender: UIButton) {
         _ = textFieldShouldReturn(wordInputTextField)
@@ -223,23 +229,34 @@ extension ZYChessboardViewController: UITextFieldDelegate {
         return true;
     }
     func changeWordRight() {
-        if let isLandscape = crosswordShowDic["landscape"], isLandscape == true {
-            for i in 0 ..< resultXArray.count {
-                if resultXArray[i] == crosswordDataArray[0] {
-                    resultXArray[i].realm?.beginWrite()
-                    resultXArray[i].selecttedCount += 1
-                    resultXArray[i].isRight = true
-                    try! resultXArray[i].realm?.commitWrite()
+        for i in 0 ..< chessboard.tipXArr.count {
+            var isRight = true
+            for gridIndex in chessboard.tipXArr[i].grid {
+                let tagIndex = gridIndex[1] * chessboardColumns * 100 + gridIndex[0] + 100000
+                if let button = chessboardView.viewWithTag(tagIndex) as? ZYChessboardButton, button.contentState != .right {
+                    isRight = false
                 }
             }
-        }else if let isPortrait = crosswordShowDic["portrait"], isPortrait == true {
-            for i in 0 ..< resultYArray.count {
-                if resultYArray[i] == crosswordDataArray[0] {
-                    resultYArray[i].realm?.beginWrite()
-                    resultYArray[i].selecttedCount += 1
-                    resultYArray[i].isRight = true
-                    try! resultYArray[i].realm?.commitWrite()
+            if isRight && resultXArray[i].isRight == false {
+                resultXArray[i].realm?.beginWrite()
+                resultXArray[i].selecttedCount += 1
+                resultXArray[i].isRight = true
+                try! resultXArray[i].realm?.commitWrite()
+            }
+        }
+        for i in 0 ..< chessboard.tipYArr.count {
+            var isRight = true
+            for gridIndex in chessboard.tipYArr[i].grid {
+                let tagIndex = gridIndex[1] * chessboardColumns * 100 + gridIndex[0] + 100000
+                if let button = chessboardView.viewWithTag(tagIndex) as? ZYChessboardButton, button.contentState != .right {
+                    isRight = false
                 }
+            }
+            if isRight && resultYArray[i].isRight == false {
+                resultYArray[i].realm?.beginWrite()
+                resultYArray[i].selecttedCount += 1
+                resultYArray[i].isRight = true
+                try! resultYArray[i].realm?.commitWrite()
             }
         }
     }
@@ -256,10 +273,16 @@ extension ZYChessboardViewController: UITextFieldDelegate {
             }
         }
         if selectedWordArray.count > 0 {
-            if let selectedGrid = selectedWordArray[randomInt(selectedWordArray.count)].grid.first, selectedGrid.count >= 2 {
+            let selectedWord = selectedWordArray[randomInt(selectedWordArray.count)]
+            if let selectedGrid = selectedWord.grid.first, selectedGrid.count >= 2 {
                 let tagIndex = selectedGrid[1] * chessboardColumns * 100 + selectedGrid[0] + 100000
                 if let button = chessboardView.viewWithTag(tagIndex) as? ZYChessboardButton {
-                    chessboardView.chessboardButtonClick(sender: button)
+                    chessboardView.didSelectedButton = button
+                    if chessboard.tipYArr.contains(selectedWord) {
+                        chessboardView.isPortraitIntro = true
+                    }else {
+                        chessboardView.isPortraitIntro = false
+                    }
                 }
             }
         }else {
@@ -267,7 +290,7 @@ extension ZYChessboardViewController: UITextFieldDelegate {
         }
     }
     func allRight() {
-        let option = UIAlertController(title: nil, message: "", preferredStyle: .alert)
+        let option = UIAlertController(title: "温馨提示", message: "", preferredStyle: .alert)
         option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         option.addAction(UIAlertAction(title: "分享结果", style: .default) { (action) in
             
@@ -276,7 +299,7 @@ extension ZYChessboardViewController: UITextFieldDelegate {
             
         })
         option.addAction(UIAlertAction(title: "再来一次", style: .default) { (action) in
-            //            self.resetValueClosure!(sender.center)
+            self.resetValueClosure!(option.view.center)
         })
         self.present(option, animated: true, completion: nil)
     }

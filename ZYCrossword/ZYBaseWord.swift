@@ -11,6 +11,7 @@ import RealmSwift
 class ZYBaseWord: Object {
     dynamic var selecttedCount = 0
     dynamic var isCollect = false
+    dynamic var collectDate = Date()
     dynamic var isRight = false
     dynamic var isShow = false
     dynamic var showString = ""
