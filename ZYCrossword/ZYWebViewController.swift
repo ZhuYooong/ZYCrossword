@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SnapKit
 class ZYWebViewController: UIViewController {
     var httpURL: String?
     override func viewDidLoad() {
@@ -25,26 +26,33 @@ class ZYWebViewController: UIViewController {
     }
     var httpWebView = WKWebView()
     func addWebView() {
-        let webConfiguration = WKWebViewConfiguration()
-        httpWebView = WKWebView(frame: CGRect(x: 0, y: 64, width: view.bounds.size.width, height: view.bounds.size.height - 64), configuration: webConfiguration)
+        httpWebView = WKWebView()
         httpWebView.allowsBackForwardNavigationGestures = true
         httpWebView.sizeToFit()
         httpWebView.navigationDelegate = self
         httpWebView.uiDelegate = self
         view.addSubview(httpWebView)
+        httpWebView.snp.makeConstraints { (make) in
+            make.left.right.width.bottom.equalTo(view)
+            make.top.equalTo(view).offset(64)
+        }
     }
     var progressView: UIProgressView? = nil
     let keyPathForProgress : String = "estimatedProgress"
     func initProgressView() {
-        progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 4))
+        progressView = UIProgressView()
         progressView!.tintColor = UIColor(ZYCustomColor.inferiorBlue.rawValue)
         httpWebView.addSubview(progressView!)
+        progressView?.snp.makeConstraints({ (make) in
+            make.top.left.right.width.equalTo(httpWebView)
+            make.height.equalTo(2)
+        })
         httpWebView.addObserver(self, forKeyPath: keyPathForProgress, options: [NSKeyValueObservingOptions.new, NSKeyValueObservingOptions.old], context: nil)
     }
     //MARK: - 加载数据
     func initData() {
         var request: URLRequest?
-        if let urlStr = httpURL?.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) {
+        if let urlStr = httpURL?.replacingOccurrences(of: " ", with: "").addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) {
             if let url = URL(string: urlStr) {
                 request = URLRequest(url: url)
             }else if let url = URL(string: "http://\(urlStr)") {

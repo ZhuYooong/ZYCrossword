@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 class ZYChessboardButton: UIButton {
     // MARK: - Initialization
     public var column = 0
@@ -42,10 +42,12 @@ class ZYChessboardButton: UIButton {
     }
     fileprivate let tittleLabel = UILabel()
     fileprivate func creatTittleLabel(with resultWord: String) {
-        tittleLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height)
         tittleLabel.textAlignment = .center
         tittleLabel.font = UIFont.systemFont(ofSize: 20)
         self.addSubview(tittleLabel)
+        tittleLabel.snp.makeConstraints { (make) in
+            make.top.left.size.equalTo(self)
+        }
         if resultWord == chessboardEmptySymbol {
             currentWord = ""
         }else {

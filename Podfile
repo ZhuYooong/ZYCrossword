@@ -10,4 +10,5 @@ pod 'RealmSwift', '~> 2'
 pod 'PKHUD', '~> 4'
 pod 'Charts', '~> 3'
 pod 'Kingfisher', '~> 3'
+pod 'SnapKit', '~> 3'
 end
