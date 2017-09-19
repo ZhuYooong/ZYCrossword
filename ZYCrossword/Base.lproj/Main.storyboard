@@ -49,31 +49,45 @@
                     <connections>
                         <segue destination="Tk6-eY-CaS" kind="show" identifier="crosswordListSegueId" id="bI0-34-f7h"/>
                         <segue destination="xEw-TK-Ik1" kind="show" identifier="collectListSegueId" id="hBs-pe-Qz6"/>
-                        <segue destination="CKD-r8-cHp" kind="show" identifier="librarySegueId" id="g3o-TT-lpk"/>
+                        <segue destination="Egu-jg-KQe" kind="show" identifier="librarySegueId" id="oPv-t7-mqa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-38" y="36"/>
+            <point key="canvasLocation" x="-39" y="36"/>
         </scene>
         <!--词库-->
-        <scene sceneID="CJQ-Jy-rSR">
+        <scene sceneID="6cb-o0-coj">
             <objects>
-                <viewController title="词库" id="CKD-r8-cHp" customClass="ZYLibraryViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4FQ-VK-tLh"/>
-                        <viewControllerLayoutGuide type="bottom" id="86U-F3-efr"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Qxm-PH-Bkh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <collectionViewController title="词库" automaticallyAdjustsScrollViewInsets="NO" id="Egu-jg-KQe" customClass="ZYLibraryListViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="fVI-28-aoK">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                        <collectionViewLayout key="collectionViewLayout" id="Qjf-gz-E6n" customClass="TisprCardStackViewLayout" customModule="TisprCardStack"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LibraryCellIdentifier" id="Vx8-sG-6ao" customClass="ZYLibraryListCell" customModule="ZYCrossword" customModuleProvider="target">
+                                <rect key="frame" x="27.5" y="0.0" width="320" height="434"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="434"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="customSize" width="320" height="434"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Egu-jg-KQe" id="9yU-ZX-FFD"/>
+                            <outlet property="delegate" destination="Egu-jg-KQe" id="tRL-ub-VYG"/>
+                        </connections>
+                    </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mYl-9P-EdT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jAY-Lv-nHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="737" y="36"/>
+            <point key="canvasLocation" x="756" y="35.532233883058474"/>
         </scene>
         <!--加载-->
         <scene sceneID="f0A-n8-eRc">

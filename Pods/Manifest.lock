@@ -12,6 +12,7 @@ PODS:
     - Realm (= 2.10.0)
   - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
+  - TisprCardStack (1.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4)
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - RealmSwift (~> 2)
   - SnapKit (~> 3)
   - SwiftyJSON (~> 3)
+  - TisprCardStack (~> 1)
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -32,7 +34,8 @@ SPEC CHECKSUMS:
   RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  TisprCardStack: b1c4f14c9626f3a5ec4ab64c9159f61a3452a6d4
 
-PODFILE CHECKSUM: ff3b21f89424353efafcced069b4695694b3de1d
+PODFILE CHECKSUM: 977d33dee8fd8bd67d958e6a13c986d9273865b9
 
 COCOAPODS: 1.1.1

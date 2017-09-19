@@ -1,0 +1,6 @@
+framework module TisprCardStack {
+  umbrella header "TisprCardStack-umbrella.h"
+
+  export *
+  module * { export * }
+}

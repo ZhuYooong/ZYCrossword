@@ -38,6 +38,7 @@ class ZYChessboardViewController: UIViewController {
         mainViewController?.performSegue(withIdentifier: "collectListSegueId", sender: sender)
     }
     @IBAction func moreButtonClick(_ sender: UIButton) {
+        mainViewController?.performSegue(withIdentifier: "librarySegueId", sender: sender)
     }
     //MARK: - ChessboardView
     @IBOutlet weak var chessboardView: ZYChessboardView!

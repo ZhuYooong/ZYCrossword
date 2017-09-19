@@ -11,4 +11,5 @@ pod 'PKHUD', '~> 4'
 pod 'Charts', '~> 3'
 pod 'Kingfisher', '~> 3'
 pod 'SnapKit', '~> 3'
+pod 'TisprCardStack', '~> 1'
 end
