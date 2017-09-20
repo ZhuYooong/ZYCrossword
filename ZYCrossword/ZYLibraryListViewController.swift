@@ -33,7 +33,8 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
     }
     override func card(_ collectionView: UICollectionView, cardForItemAtIndexPath indexPath: IndexPath) -> TisprCardStackViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LibraryCellIdentifier", for: indexPath as IndexPath) as! ZYLibraryListCell
-        cell.backgroundColor = colors[indexPath.item % colors.count]
+        cell.backgroundColor = .white
+        cell.headerView.backgroundColor = colors[indexPath.item % colors.count]
         return cell
     }
     func cardDidChangeState(_ cardIndex: Int) {

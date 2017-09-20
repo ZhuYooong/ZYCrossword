@@ -12,6 +12,7 @@
 		040E95F11ED6B3F500FC29E2 /* ZYChessboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E95F01ED6B3F500FC29E2 /* ZYChessboardButton.swift */; };
 		040E95F31ED6B42C00FC29E2 /* ZYChessboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E95F21ED6B42C00FC29E2 /* ZYChessboardViewController.swift */; };
 		04141ADD1EC4690500A1A8A2 /* ZYMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04141ADC1EC4690500A1A8A2 /* ZYMusic.swift */; };
+		041DA1081F7260710044661A /* ZYLabraryCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DA1071F7260710044661A /* ZYLabraryCardTableViewCell.swift */; };
 		0447D8A31EB9D4FE001331AC /* 古诗三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8A21EB9D4FE001331AC /* 古诗三百首.json */; };
 		0447D8A51EB9D50A001331AC /* 宋词三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8A41EB9D50A001331AC /* 宋词三百首.json */; };
 		0447D8AB1EB9D56C001331AC /* 楚辞.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AA1EB9D56C001331AC /* 楚辞.json */; };
@@ -401,6 +402,7 @@
 		040E95F01ED6B3F500FC29E2 /* ZYChessboardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYChessboardButton.swift; sourceTree = "<group>"; };
 		040E95F21ED6B42C00FC29E2 /* ZYChessboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYChessboardViewController.swift; sourceTree = "<group>"; };
 		04141ADC1EC4690500A1A8A2 /* ZYMusic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYMusic.swift; sourceTree = "<group>"; };
+		041DA1071F7260710044661A /* ZYLabraryCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYLabraryCardTableViewCell.swift; sourceTree = "<group>"; };
 		0447D8A21EB9D4FE001331AC /* 古诗三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "古诗三百首.json"; sourceTree = "<group>"; };
 		0447D8A41EB9D50A001331AC /* 宋词三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "宋词三百首.json"; sourceTree = "<group>"; };
 		0447D8AA1EB9D56C001331AC /* 楚辞.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "楚辞.json"; sourceTree = "<group>"; };
@@ -1321,6 +1323,7 @@
 			children = (
 				048D049D1F70C81D00F42FED /* ZYLibraryListViewController.swift */,
 				048D049F1F70E14300F42FED /* ZYLibraryListCell.swift */,
+				041DA1071F7260710044661A /* ZYLabraryCardTableViewCell.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -1937,6 +1940,7 @@
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
 				046B7C0D1F5D04ED0088D43D /* ZYCollectDoubanTableViewCell.swift in Sources */,
+				041DA1081F7260710044661A /* ZYLabraryCardTableViewCell.swift in Sources */,
 				047371831F0F657D005BE7A9 /* ZYCrosswordListTableViewController.swift in Sources */,
 				04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */,
 				04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */,
