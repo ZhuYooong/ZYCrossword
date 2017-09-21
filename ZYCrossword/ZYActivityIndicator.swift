@@ -48,7 +48,9 @@ open class ZYActivityIndicator: UIView {
             return
         }
         self.animating = true
-        self.isHidden = false
+        DispatchQueue.main.sync { [weak self] in
+            self?.isHidden = false
+        }
         self.resetAnimations()
     }
     open func stopAnimating() {

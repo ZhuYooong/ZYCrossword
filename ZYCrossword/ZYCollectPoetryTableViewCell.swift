@@ -36,7 +36,7 @@ class ZYCollectPoetryTableViewCell: ZYFoldingTableViewCell {
         }
     }
     override func awakeFromNib() {
-        foregroundView.layer.cornerRadius = 14
+        foregroundView.layer.cornerRadius = 8
         foregroundView.layer.masksToBounds = true
         super.awakeFromNib()
         containerBackgroundImageView.image = containerBackgroundImageView.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 10, 20, 10), resizingMode: UIImageResizingMode.stretch)
