@@ -13,6 +13,7 @@ import RealmSwift
 class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
+        initData()
         initView()
     }
     fileprivate var countOfCards: Int = 3
@@ -68,6 +69,11 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         layout.bottomStackMaximumSize = 30
         layout.bottomStackCardHeight = 45
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? ZYCollectListTableViewController, let typeName = sender as? String, segue.identifier == "libraryContentSegueId" {
+            viewController.title = typeName
+        }
+    }
     //MARK: - TisprCardStackViewControllerDelegate
     override func numberOfCards() -> Int {
         return countOfCards
@@ -80,19 +86,20 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
             cell.headerView.backgroundColor = UIColor(red: 48.0/255.0, green: 173.0/255.0, blue: 99.0/255.0, alpha: 1.0)
             cell.headerTitleLabel.text = "汉语词典"
             cell.cardContentArray = dictionaryWordArray
-            cell.cardTableView.reloadData()
         case 1:
             cell.headerView.backgroundColor = UIColor(red: 141.0/255.0, green: 72.0/255.0, blue: 171.0/255.0, alpha: 1.0)
             cell.headerTitleLabel.text = "书影音"
             cell.cardContentArray = doubanWordArray
-            cell.cardTableView.reloadData()
         case 2:
             cell.headerView.backgroundColor = UIColor(red: 241.0/255.0, green: 155.0/255.0, blue: 44.0/255.0, alpha: 1.0)
             cell.headerTitleLabel.text = "诗词"
             cell.cardContentArray = poetryWordArray
-            cell.cardTableView.reloadData()
         default:
             break
+        }
+        cell.cardTableView.reloadData()
+        cell.libraryContentBlock = { typeName in
+            self.performSegue(withIdentifier: "libraryContentSegueId", sender: typeName)
         }
         return cell
     }

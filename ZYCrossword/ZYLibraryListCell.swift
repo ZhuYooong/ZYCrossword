@@ -9,6 +9,8 @@ import TisprCardStack
 import UIKit
 
 class ZYLibraryListCell: TisprCardStackViewCell {
+    var libraryContentBlock: ((String) -> Void)?
+    
     @IBOutlet weak var backgroundImageiVew: UIImageView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerTitleLabel: UILabel!
@@ -16,7 +18,9 @@ class ZYLibraryListCell: TisprCardStackViewCell {
     var cardContentArray = [ZYWord]()
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        initView()
+    }
+    func initView() {
         layer.cornerRadius = 8
         clipsToBounds = false
         layer.masksToBounds = true
@@ -48,6 +52,7 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LibraryCardCellId", for: indexPath) as! ZYLabraryCardTableViewCell
         if indexPath.row < cardContentArray.count {
             cell.titleLabel.text = cardContentArray[indexPath.row].wordType
+            cell.subTitleLabel.text = "共 \(cardContentArray[indexPath.row].number) 词"
         }
         return cell
     }
@@ -55,6 +60,8 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
         return 84
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if libraryContentBlock != nil {
+            libraryContentBlock!(cardContentArray[indexPath.row].wordType)
+        }
     }
 }

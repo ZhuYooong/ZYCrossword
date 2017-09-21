@@ -28,7 +28,41 @@ class ZYWordViewModel: NSObject {
         let wordInfo = ZYWord()
         wordInfo.wordType = type.rawValue
         switch type {
-        case .TangPoetry300, .Idiom, .Top250Movie, .Allegoric:
+        case .TangPoetry300:
+            wordInfo.number = 30971
+            wordInfo.isSelectted = true
+        case .SongPoetry300:
+            wordInfo.number = 30971
+            wordInfo.isSelectted = true
+        case .OldPoetry300:
+            wordInfo.number = 30971
+            wordInfo.isSelectted = false
+        case .ShiJing:
+            wordInfo.number = 30971
+            wordInfo.isSelectted = false
+        case .YueFu:
+            wordInfo.number = 30971
+            wordInfo.isSelectted = false
+        case .ChuCi:
+            wordInfo.number = 30971
+            wordInfo.isSelectted = false
+        case .TangPoetryAll:
+            wordInfo.number = 0
+            wordInfo.isSelectted = false
+        case .SongPoetryAll:
+            wordInfo.number = 0
+            wordInfo.isSelectted = false
+        case .Top250Movie:
+            wordInfo.number = 244
+            wordInfo.isSelectted = true
+        case .Top250Book:
+            wordInfo.number = 226
+            wordInfo.isSelectted = false
+        case .Idiom:
+            wordInfo.number = 30971
+            wordInfo.isSelectted = true
+        case .Allegoric:
+            wordInfo.number = 495
             wordInfo.isSelectted = true
         default:
             wordInfo.isSelectted = false
@@ -36,9 +70,7 @@ class ZYWordViewModel: NSObject {
         try! realm.write {
             realm.add(wordInfo, update: true)
         }
-        if wordInfo.isSelectted == true {
-            ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
-        }
+        ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
     }
     func changeWordData(with type: ZYWordType, and realm: Realm) {
         let predicate = NSPredicate(format: "wordType = '\(type.rawValue)'")

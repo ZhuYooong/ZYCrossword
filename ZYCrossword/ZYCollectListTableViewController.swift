@@ -23,30 +23,60 @@ class ZYCollectListTableViewController: UITableViewController {
     let realm = try! Realm()
     var collectionDicArray = [[String: Any]]()
     private func initData() {
-        let allegoricResult = realm.objects(ZYAllegoric.self).filter("isCollect == true")
-        for result in allegoricResult {
-            collectionDicArray.append(["name": result.content ?? "", "content": result.answer ?? "", "url": result.url ?? "", "type": result.wordType, "collectDate": result.collectDate, "height": kCloseCellHeight])
+        if title == "收藏夹" {
+            initCollectionData()
+        }else {
+            initLibraryContentData()
         }
-        let idiomResult = realm.objects(ZYIdiom.self).filter("isCollect == true")
-        for result in idiomResult {
-            collectionDicArray.append(["name": result.title ?? "", "type": result.wordType, "collectDate": result.collectDate, "content": result.paraphrase ?? "", "url": idiomUrl(with: result.url ?? "", and: result.wordType, and: result.title ?? "") , "height": kCloseCellHeight])
-        }
-        let bookResult = realm.objects(ZYBook.self).filter("isCollect == true")
-        for result in bookResult {
-            collectionDicArray.append(["name": result.name , "type": result.wordType, "collectDate": result.collectDate, "content": result.content_description, "url": result.link, "firstShort": result.score , "secondShort": result.author , "long": result.press, "height": kCloseCellHeight])
-        }
-        let movieResult = realm.objects(ZYMovie.self).filter("isCollect == true")
-        for result in movieResult {
-            collectionDicArray.append(["name": result.movie_name , "type": result.wordType, "collectDate": result.collectDate, "content": result.content_description, "url": result.url , "firstShort": result.place , "secondShort": result.direct , "long": result.date, "height": kCloseCellHeight])
-        }
+    }
+    func initCollectionData() {
+        appendContent(with: realm.objects(ZYAllegoric.self).filter("isCollect == true"))
+        appendContent(with: realm.objects(ZYIdiom.self).filter("isCollect == true"))
+        appendContent(with: realm.objects(ZYBook.self).filter("isCollect == true"))
+        appendContent(with: realm.objects(ZYMovie.self).filter("isCollect == true"))
         let musicResult = realm.objects(ZYMusic.self).filter("isCollect == true")
         for _ in musicResult { }
-        let poetryResult = realm.objects(ZYPoetry.self).filter("isCollect == true")
+        appendContent(with: realm.objects(ZYPoetry.self).filter("isCollect == true"))
+        collectionDicArray.sort { (first, second) -> Bool in
+            return (first["collectDate"] as? Date ?? Date()) >= (second["collectDate"] as? Date ?? Date())
+        }
+    }
+    func initLibraryContentData() {
+        if title == ZYWordType.TangPoetry300.rawValue || title == ZYWordType.SongPoetry300.rawValue || title == ZYWordType.OldPoetry300.rawValue || title == ZYWordType.ShiJing.rawValue || title == ZYWordType.YueFu.rawValue || title == ZYWordType.ChuCi.rawValue || title == ZYWordType.TangPoetryAll.rawValue || title == ZYWordType.SongPoetryAll.rawValue {
+            appendContent(with: realm.objects(ZYPoetry.self).filter("wordType == \(title ?? "")"))
+        }else if title == ZYWordType.Top250Movie.rawValue {
+            appendContent(with: realm.objects(ZYMovie.self))
+        }else if title == ZYWordType.Top250Book.rawValue {
+            appendContent(with: realm.objects(ZYBook.self))
+        }else if title == ZYWordType.Idiom.rawValue {
+            appendContent(with: realm.objects(ZYIdiom.self))
+        }else if title == ZYWordType.Allegoric.rawValue {
+            appendContent(with: realm.objects(ZYAllegoric.self))
+        }
+    }
+    func appendContent(with poetryResult: Results<ZYPoetry>) {
         for result in poetryResult {
             collectionDicArray.append(["name": result.title , "type": result.wordType, "collectDate": result.collectDate, "content": poertryContent(with: result.detail), "url": result.url , "firstShort": result.dynasty , "secondShort": result.author, "translate": result.translate , "note": result.note , "appreciation": result.appreciation, "height": kCloseCellHeight])
         }
-        collectionDicArray.sort { (first, second) -> Bool in
-            return (first["collectDate"] as? Date ?? Date()) >= (second["collectDate"] as? Date ?? Date())
+    }
+    func appendContent(with movieResult: Results<ZYMovie>) {
+        for result in movieResult {
+            collectionDicArray.append(["name": result.movie_name , "type": result.wordType, "collectDate": result.collectDate, "content": result.content_description, "url": result.url , "firstShort": result.place , "secondShort": result.direct , "long": result.date, "height": kCloseCellHeight])
+        }
+    }
+    func appendContent(with bookResult: Results<ZYBook>) {
+        for result in bookResult {
+            collectionDicArray.append(["name": result.name , "type": result.wordType, "collectDate": result.collectDate, "content": result.content_description, "url": result.link, "firstShort": result.score , "secondShort": result.author , "long": result.press, "height": kCloseCellHeight])
+        }
+    }
+    func appendContent(with idiomResult: Results<ZYIdiom>) {
+        for result in idiomResult {
+            collectionDicArray.append(["name": result.title ?? "", "type": result.wordType, "collectDate": result.collectDate, "content": result.paraphrase ?? "", "url": idiomUrl(with: result.url ?? "", and: result.wordType, and: result.title ?? "") , "height": kCloseCellHeight])
+        }
+    }
+    func appendContent(with allegoricResult: Results<ZYAllegoric>) {
+        for result in allegoricResult {
+            collectionDicArray.append(["name": result.content ?? "", "content": result.answer ?? "", "url": result.url ?? "", "type": result.wordType, "collectDate": result.collectDate, "height": kCloseCellHeight])
         }
     }
     func idiomUrl(with url: String, and type: String, and name: String) -> String {
