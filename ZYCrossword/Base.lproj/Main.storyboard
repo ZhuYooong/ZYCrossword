@@ -166,6 +166,7 @@
                                                     </tableViewCellContentView>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <connections>
+                                                        <outlet property="libraryContentButton" destination="TFa-gB-gg7" id="NzC-0i-ZhF"/>
                                                         <outlet property="subTitleLabel" destination="Euc-m5-orH" id="UNJ-rg-KFS"/>
                                                         <outlet property="titleLabel" destination="osz-5P-oa7" id="M8m-5X-UQT"/>
                                                     </connections>

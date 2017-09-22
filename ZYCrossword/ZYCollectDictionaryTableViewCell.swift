@@ -21,7 +21,11 @@ class ZYCollectDictionaryTableViewCell: ZYFoldingTableViewCell {
         didSet {
             closeNameLabel.text = contentDic?["name"] as? String
             openNameLabel.text = contentDic?["name"] as? String
-            closeTypeLabel.text = contentDic?["type"] as? String
+            if isCollection {
+                closeTypeLabel.text = contentDic?["type"] as? String
+            }else {
+                closeTypeLabel.text = "\(contentDic?["selecttedCount"] as? Int ?? 0) 次"
+            }
             openTypeLabel.text = contentDic?["type"] as? String
             contentLabel.text = contentDic?["content"] as? String
         }

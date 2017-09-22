@@ -29,22 +29,22 @@ class ZYWordViewModel: NSObject {
         wordInfo.wordType = type.rawValue
         switch type {
         case .TangPoetry300:
-            wordInfo.number = 30971
+            wordInfo.number = 286
             wordInfo.isSelectted = true
         case .SongPoetry300:
-            wordInfo.number = 30971
+            wordInfo.number = 289
             wordInfo.isSelectted = true
         case .OldPoetry300:
-            wordInfo.number = 30971
+            wordInfo.number = 248
             wordInfo.isSelectted = false
         case .ShiJing:
-            wordInfo.number = 30971
+            wordInfo.number = 298
             wordInfo.isSelectted = false
         case .YueFu:
-            wordInfo.number = 30971
+            wordInfo.number = 183
             wordInfo.isSelectted = false
         case .ChuCi:
-            wordInfo.number = 30971
+            wordInfo.number = 17
             wordInfo.isSelectted = false
         case .TangPoetryAll:
             wordInfo.number = 0

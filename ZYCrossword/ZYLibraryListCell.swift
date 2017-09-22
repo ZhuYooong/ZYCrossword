@@ -43,6 +43,11 @@ class ZYLibraryListCell: TisprCardStackViewCell {
     func updateSmileVote() {
         
     }
+    func libraryContentButtonCliick(sender: UIButton) {
+        if libraryContentBlock != nil {
+            libraryContentBlock!(cardContentArray[sender.tag].wordType)
+        }
+    }
 }
 extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,6 +58,8 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row < cardContentArray.count {
             cell.titleLabel.text = cardContentArray[indexPath.row].wordType
             cell.subTitleLabel.text = "共 \(cardContentArray[indexPath.row].number) 词"
+            cell.libraryContentButton.tag = indexPath.row
+            cell.libraryContentButton.addTarget(self, action: #selector(libraryContentButtonCliick(sender:)), for: .touchUpInside)
         }
         return cell
     }
@@ -60,8 +67,6 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
         return 84
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if libraryContentBlock != nil {
-            libraryContentBlock!(cardContentArray[indexPath.row].wordType)
-        }
+        
     }
 }

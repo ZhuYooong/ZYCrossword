@@ -20,7 +20,7 @@ open class ZYFoldingTableViewCell: UITableViewCell {
     @IBInspectable open var itemCount: NSInteger = 2
     /// The color of the back cell
     @IBInspectable open var backViewColor: UIColor = UIColor.brown
-    
+    var isCollection = true
     var animationItemViews: [RotatedView]?
     /**
      Folding animation types
