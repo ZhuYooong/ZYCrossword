@@ -11,11 +11,13 @@ import UIKit
 import RealmSwift
 
 class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackViewControllerDelegate {
+    var changeWordBlock:((Bool) -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
         initData()
         initView()
     }
+    //MARK: - 界面和数据
     fileprivate var countOfCards: Int = 3
     var dictionaryWordArray = [ZYWord]()
     var doubanWordArray = [ZYWord]()
@@ -68,6 +70,38 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         layout.topStackMaximumSize = 4
         layout.bottomStackMaximumSize = 30
         layout.bottomStackCardHeight = 45
+        
+        creatRightLabel()
+    }
+    open var rightCount = 0 {
+        didSet {
+            rightLabel.text = "已选择 \(rightCount) 本"
+        }
+    }
+    let rightLabel = UILabel()
+    func creatRightLabel() {
+        rightLabel.textColor = .white
+        rightLabel.textAlignment = .right
+        rightLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 21)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightLabel)
+        
+        var count = 0
+        for word in dictionaryWordArray {
+            if word.isSelectted {
+                count += 1
+            }
+        }
+        for word in doubanWordArray {
+            if word.isSelectted {
+                count += 1
+            }
+        }
+        for word in poetryWordArray {
+            if word.isSelectted {
+                count += 1
+            }
+        }
+        rightCount = count
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? ZYCollectListTableViewController, let typeName = sender as? String, segue.identifier == "libraryContentSegueId" {
@@ -81,6 +115,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
     override func card(_ collectionView: UICollectionView, cardForItemAtIndexPath indexPath: IndexPath) -> TisprCardStackViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LibraryCellIdentifier", for: indexPath as IndexPath) as! ZYLibraryListCell
         cell.backgroundColor = .white
+        cell.parientViewController = self
         switch indexPath.item {
         case 0:
             cell.headerView.backgroundColor = UIColor(red: 48.0/255.0, green: 173.0/255.0, blue: 99.0/255.0, alpha: 1.0)
@@ -100,6 +135,16 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         cell.cardTableView.reloadData()
         cell.libraryContentBlock = { typeName in
             self.performSegue(withIdentifier: "libraryContentSegueId", sender: typeName)
+        }
+        cell.changeWordBlock = { isChange in
+            if self.changeWordBlock != nil {
+                self.changeWordBlock!(true)
+                if isChange {
+                    self.rightCount += 1
+                }else {
+                    self.rightCount -= 1
+                }
+            }
         }
         return cell
     }

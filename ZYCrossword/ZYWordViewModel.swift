@@ -72,11 +72,11 @@ class ZYWordViewModel: NSObject {
         }
         ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
     }
-    func changeWordData(with type: ZYWordType, and realm: Realm) {
-        let predicate = NSPredicate(format: "wordType = '\(type.rawValue)'")
+    func changeWordData(with type: String, and realm: Realm) {
+        let predicate = NSPredicate(format: "wordType = '\(type)'")
         let word = realm.objects(ZYWord.self).filter(predicate)
         let wordInfo = ZYWord()
-        wordInfo.wordType = type.rawValue
+        wordInfo.wordType = type
         if word.first?.isSelectted == false {
             wordInfo.isSelectted = true
         }else {
@@ -84,9 +84,6 @@ class ZYWordViewModel: NSObject {
         }
         try! realm.write {
             realm.add(wordInfo, update: true)
-        }
-        if wordInfo.isSelectted == true {
-            ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
         }
     }
     //MARK: - 读取本地数据

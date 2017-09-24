@@ -13,6 +13,9 @@ class ZYMainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        if !isNotShouldReset {
+            resetValue(with: self.view.center)
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -117,6 +120,28 @@ class ZYMainViewController: UIViewController {
             }
         }
     }
+    //MARK: 重置资源
+    var isNotShouldReset = true
+    func resetValue(with point: CGPoint) {
+        do{
+            try FileManager.default.removeItem(atPath: chessboardDocumentPath.getFilePath())
+            for baseWord in self.chessboardViewController.resultXArray {
+                baseWord.realm?.beginWrite()
+                baseWord.isRight = false
+                baseWord.isShow = false
+                try baseWord.realm?.commitWrite()
+            }
+            for baseWord in self.chessboardViewController.resultYArray {
+                baseWord.realm?.beginWrite()
+                baseWord.isRight = false
+                baseWord.isShow = false
+                try baseWord.realm?.commitWrite()
+            }
+        }catch{
+            print("error")
+        }
+        self.beganTitle(with: point)
+    }
     //MARK: - ViewController
     var titleViewController: ZYTitleViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID") as! ZYTitleViewController
     func beganTitle(with originalPoint: CGPoint) {
@@ -138,24 +163,7 @@ class ZYMainViewController: UIViewController {
             self.title = self.chessboardViewController.title
             self.chessboardViewController.creatChessboardViewData()
             self.chessboardViewController.resetValueClosure = { point in
-                do{
-                    try FileManager.default.removeItem(atPath: chessboardDocumentPath.getFilePath())
-                    for baseWord in self.chessboardViewController.resultXArray {
-                        baseWord.realm?.beginWrite()
-                        baseWord.isRight = false
-                        baseWord.isShow = false
-                        try baseWord.realm?.commitWrite()
-                    }
-                    for baseWord in self.chessboardViewController.resultYArray {
-                        baseWord.realm?.beginWrite()
-                        baseWord.isRight = false
-                        baseWord.isShow = false
-                        try baseWord.realm?.commitWrite()
-                    }
-                }catch{
-                    print("error")
-                }
-                self.beganTitle(with: point)
+                self.resetValue(with: point)
             }
         }
     }
@@ -169,6 +177,10 @@ class ZYMainViewController: UIViewController {
                     self.chessboardViewController.chessboardView.didSelectedButton = button
                     self.chessboardViewController.chessboardView.isPortraitIntro = isPortraitIntro
                 }
+            }
+        }else if let viewController = segue.destination as? ZYLibraryListViewController, segue.identifier == "librarySegueId" {
+            viewController.changeWordBlock = { isChange in
+                self.isNotShouldReset = !isChange
             }
         }
     }

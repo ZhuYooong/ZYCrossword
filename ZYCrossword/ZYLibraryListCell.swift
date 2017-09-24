@@ -7,9 +7,13 @@
 //
 import TisprCardStack
 import UIKit
+import RealmSwift
 
 class ZYLibraryListCell: TisprCardStackViewCell {
+    var parientViewController: ZYLibraryListViewController?
     var libraryContentBlock: ((String) -> Void)?
+    var changeWordBlock:((Bool) -> Void)?
+    let realm = try! Realm()
     
     @IBOutlet weak var backgroundImageiVew: UIImageView!
     @IBOutlet weak var headerView: UIView!
@@ -60,6 +64,9 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
             cell.subTitleLabel.text = "共 \(cardContentArray[indexPath.row].number) 词"
             cell.libraryContentButton.tag = indexPath.row
             cell.libraryContentButton.addTarget(self, action: #selector(libraryContentButtonCliick(sender:)), for: .touchUpInside)
+            if cardContentArray[indexPath.row].isSelectted {
+                cell.isCollection = true
+            }
         }
         return cell
     }
@@ -67,6 +74,25 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
         return 84
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if let count = parientViewController?.rightCount {
+            guard case let cell as ZYLabraryCardTableViewCell = tableView.cellForRow(at: indexPath) else {
+                return
+            }
+            if count <= 2 && cell.isCollection {
+                
+            }else if count >= 6 && !cell.isCollection {
+                
+            }else {
+                cell.isCollection = !cell.isCollection
+                if changeWordBlock != nil {
+                    ZYWordViewModel.shareWord.changeWordData(with: cardContentArray[indexPath.row].wordType, and: realm)
+                    if cell.isCollection {
+                        changeWordBlock!(true)
+                    }else {
+                        changeWordBlock!(false)
+                    }
+                }
+            }
+        }
     }
 }
