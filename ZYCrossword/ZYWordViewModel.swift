@@ -18,8 +18,16 @@ class ZYWordViewModel: NSObject {
     func initData() {
         let realm = try! Realm()
         let allWordArray = ZYWordType.allValues
-        if realm.objects(ZYWord.self).count < allWordArray.count {
-            for type in allWordArray {
+        let wordArray = realm.objects(ZYWord.self)
+        
+        for type in allWordArray {
+            var isShouldUpdate = true
+            for word in wordArray {
+                if word.wordType == type.rawValue {
+                    isShouldUpdate = false
+                }
+            }
+            if isShouldUpdate {
                 initWordData(with: type, and: realm)
             }
         }
@@ -77,6 +85,7 @@ class ZYWordViewModel: NSObject {
         let word = realm.objects(ZYWord.self).filter(predicate)
         let wordInfo = ZYWord()
         wordInfo.wordType = type
+        wordInfo.number = word.first?.number ?? 0
         if word.first?.isSelectted == false {
             wordInfo.isSelectted = true
         }else {

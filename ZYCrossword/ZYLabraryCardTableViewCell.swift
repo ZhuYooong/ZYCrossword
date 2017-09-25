@@ -29,8 +29,8 @@ class ZYLabraryCardTableViewCell: UITableViewCell {
         pathRight.addLine(to: pointTurn)
         let pointEnd = CGPoint(x: width / 2 + (width * 3 / 7) * cos(.pi / 4), y: width / 2 - (width * 3 / 7) * sin(.pi / 4))
         pathRight.addLine(to: pointEnd)
-        layerRight.fillColor = UIColor.clear.cgColor
         layerRight.strokeColor = UIColor(ZYCustomColor.mainBlue.rawValue).cgColor
+        layerRight.fillColor = UIColor.clear.cgColor
         layerRight.lineWidth = 10
         layerRight.path = pathRight.cgPath
         
@@ -44,14 +44,18 @@ class ZYLabraryCardTableViewCell: UITableViewCell {
         layerLine.lineWidth = 12
         layerLine.path = pathLine.cgPath
     }
+    open var isCollectionSelected: Bool = false
     open var isCollection: Bool = false {
         didSet {
-            isUserInteractionEnabled = false
-            if isCollection {
-                startRightAnimation(with: NSNumber(value: 0), and: NSNumber(value: 1))
-            }else {
-                startRightAnimation(with: NSNumber(value: 1), and: NSNumber(value: 0))
-                startLineAnimation(with: NSNumber(value: 1), and: NSNumber(value: 0))
+            if isCollectionSelected {
+                isUserInteractionEnabled = false
+                if isCollection {
+                    startRightAnimation(with: NSNumber(value: 0), and: NSNumber(value: 1))
+                }else {
+                    startLineAnimation(with: NSNumber(value: 1), and: NSNumber(value: 0))
+                    startRightAnimation(with: NSNumber(value: 1), and: NSNumber(value: 0))
+                }
+                isCollectionSelected = false
             }
         }
     }

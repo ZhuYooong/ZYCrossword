@@ -65,7 +65,13 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
             cell.libraryContentButton.tag = indexPath.row
             cell.libraryContentButton.addTarget(self, action: #selector(libraryContentButtonCliick(sender:)), for: .touchUpInside)
             if cardContentArray[indexPath.row].isSelectted {
+                cell.backgroundImageView.layer.addSublayer(cell.layerRight)
+                cell.backgroundImageView.layer.addSublayer(cell.layerLine)
                 cell.isCollection = true
+            }else {
+                cell.layerRight.removeFromSuperlayer()
+                cell.layerLine.removeFromSuperlayer()
+                cell.isCollection = false
             }
         }
         return cell
@@ -83,6 +89,7 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
             }else if count >= 6 && !cell.isCollection {
                 
             }else {
+                cell.isCollectionSelected = true
                 cell.isCollection = !cell.isCollection
                 if changeWordBlock != nil {
                     ZYWordViewModel.shareWord.changeWordData(with: cardContentArray[indexPath.row].wordType, and: realm)

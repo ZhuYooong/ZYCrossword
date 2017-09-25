@@ -29,6 +29,7 @@ class ZYMainViewController: UIViewController {
         }
     }
     //MARK: - 加载资源
+    let realm = try! Realm()
     func loadData() {
         titleViewController.startLoading()
         titleViewController.loadingTitleLabel.text = "正在加载资源包……"
@@ -74,8 +75,12 @@ class ZYMainViewController: UIViewController {
     var tipXdataArr = [ZYBaseWord]()
     var tipYdataArr = [ZYBaseWord]()
     func creatChessboardData() {
+        let firstCount = realm.objects(ZYWord.self).count
         ZYWordViewModel.shareWord.initData()
         let crosswordsGenerator = ZYCrosswordsGenerator()
+        if firstCount == 0 {
+            performSegue(withIdentifier: "librarySegueId", sender: self)
+        }
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
         crosswordsGenerator.loadCrosswordsData()
         chessboard = ZYChessboard()
