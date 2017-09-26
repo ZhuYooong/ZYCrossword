@@ -24,6 +24,7 @@ class ZYChessboardViewController: UIViewController {
     //MARK: - Menu
     @IBOutlet weak var starLabel: UILabel!
     @IBAction func starButtonClick(_ sender: UIButton) {
+        
     }
     @IBOutlet weak var coinLabel: UILabel!
     @IBAction func coinButtonClick(_ sender: UIButton) {
@@ -59,7 +60,7 @@ class ZYChessboardViewController: UIViewController {
         ]
         moreDropDown.selectionAction = { [unowned self] (index, item) in
             if item == "词库" {
-                mainViewController?.performSegue(withIdentifier: "librarySegueId", sender: sender)
+                self.mainViewController?.performSegue(withIdentifier: "librarySegueId", sender: self.moreButton)
             }
         }
     }

@@ -13,6 +13,7 @@
 		040E95F31ED6B42C00FC29E2 /* ZYChessboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E95F21ED6B42C00FC29E2 /* ZYChessboardViewController.swift */; };
 		04141ADD1EC4690500A1A8A2 /* ZYMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04141ADC1EC4690500A1A8A2 /* ZYMusic.swift */; };
 		041DA1081F7260710044661A /* ZYLabraryCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DA1071F7260710044661A /* ZYLabraryCardTableViewCell.swift */; };
+		043556F71F7A444F009C1F1A /* ZYUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043556F61F7A444F009C1F1A /* ZYUserInfo.swift */; };
 		0447D8A31EB9D4FE001331AC /* 古诗三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8A21EB9D4FE001331AC /* 古诗三百首.json */; };
 		0447D8A51EB9D50A001331AC /* 宋词三百首.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8A41EB9D50A001331AC /* 宋词三百首.json */; };
 		0447D8AB1EB9D56C001331AC /* 楚辞.json in Resources */ = {isa = PBXBuildFile; fileRef = 0447D8AA1EB9D56C001331AC /* 楚辞.json */; };
@@ -403,6 +404,7 @@
 		040E95F21ED6B42C00FC29E2 /* ZYChessboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYChessboardViewController.swift; sourceTree = "<group>"; };
 		04141ADC1EC4690500A1A8A2 /* ZYMusic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYMusic.swift; sourceTree = "<group>"; };
 		041DA1071F7260710044661A /* ZYLabraryCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYLabraryCardTableViewCell.swift; sourceTree = "<group>"; };
+		043556F61F7A444F009C1F1A /* ZYUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInfo.swift; sourceTree = "<group>"; };
 		0447D8A21EB9D4FE001331AC /* 古诗三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "古诗三百首.json"; sourceTree = "<group>"; };
 		0447D8A41EB9D50A001331AC /* 宋词三百首.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "宋词三百首.json"; sourceTree = "<group>"; };
 		0447D8AA1EB9D56C001331AC /* 楚辞.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "楚辞.json"; sourceTree = "<group>"; };
@@ -802,6 +804,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043556F51F7A440D009C1F1A /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				043556F61F7A444F009C1F1A /* ZYUserInfo.swift */,
+			);
+			name = UserInfo;
+			sourceTree = "<group>";
+		};
 		046A86CA1ECC4840001E7323 /* Douban */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,6 +947,7 @@
 			children = (
 				0496F3311EBB1F71008D3285 /* CrosswordsGenerator */,
 				0490AA501EAEEFD40051C47D /* Word */,
+				043556F51F7A440D009C1F1A /* UserInfo */,
 				049E5A081EEE493A00FC3560 /* ViewController */,
 			);
 			name = Crossword;
@@ -1937,6 +1948,7 @@
 				0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */,
 				046A86D71ECD4987001E7323 /* ZYPoetry.swift in Sources */,
 				0496F8FD1EE6504800F51542 /* ZYAllegoric.swift in Sources */,
+				043556F71F7A444F009C1F1A /* ZYUserInfo.swift in Sources */,
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
 				046B7C0D1F5D04ED0088D43D /* ZYCollectDoubanTableViewCell.swift in Sources */,

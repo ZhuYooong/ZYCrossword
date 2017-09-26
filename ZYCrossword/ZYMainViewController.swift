@@ -76,10 +76,10 @@ class ZYMainViewController: UIViewController {
     func creatChessboardData() {
         let firstCount = realm.objects(ZYWord.self).count
         ZYWordViewModel.shareWord.initData()
-        let crosswordsGenerator = ZYCrosswordsGenerator()
         if firstCount == 0 {
             performSegue(withIdentifier: "librarySegueId", sender: self)
         }
+        let crosswordsGenerator = ZYCrosswordsGenerator()
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
         crosswordsGenerator.loadCrosswordsData()
         chessboard = ZYChessboard()
