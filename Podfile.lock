@@ -1,22 +1,20 @@
 PODS:
-  - Alamofire (4.5.0)
-  - Charts (3.0.2):
-    - Charts/Core (= 3.0.2)
-  - Charts/Core (3.0.2)
-  - Kingfisher (3.12.2)
+  - Alamofire (4.5.1)
+  - DropDown (2)
+  - Kingfisher (3.13.1)
   - PKHUD (4.2.3)
-  - Realm (2.10.0):
-    - Realm/Headers (= 2.10.0)
-  - Realm/Headers (2.10.0)
-  - RealmSwift (2.10.0):
-    - Realm (= 2.10.0)
+  - Realm (2.10.1):
+    - Realm/Headers (= 2.10.1)
+  - Realm/Headers (2.10.1)
+  - RealmSwift (2.10.1):
+    - Realm (= 2.10.1)
   - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
   - TisprCardStack (1.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4)
-  - Charts (~> 3)
+  - DropDown (~> 2)
   - Kingfisher (~> 3)
   - PKHUD (~> 4)
   - Realm (~> 2)
@@ -26,16 +24,16 @@ DEPENDENCIES:
   - TisprCardStack (~> 1)
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
-  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
-  Kingfisher: 320626678acadfcf47008b3c6841cd882050737b
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  DropDown: 744784d9c9aa505100e942c16acd05430cbb2f0a
+  Kingfisher: ed9707a409cc47fddafbcd12a43a9757e3600af5
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
-  Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
-  RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
+  Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
+  RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TisprCardStack: b1c4f14c9626f3a5ec4ab64c9159f61a3452a6d4
 
-PODFILE CHECKSUM: 977d33dee8fd8bd67d958e6a13c986d9273865b9
+PODFILE CHECKSUM: 5df53ba2657fac190b6271271d91198cdb82793d
 
 COCOAPODS: 1.1.1

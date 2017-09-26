@@ -12,6 +12,7 @@ class ZYTitleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        startLoading()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

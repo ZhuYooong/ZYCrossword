@@ -31,9 +31,8 @@ class ZYMainViewController: UIViewController {
     //MARK: - 加载资源
     let realm = try! Realm()
     func loadData() {
-        titleViewController.startLoading()
-        titleViewController.loadingTitleLabel.text = "正在加载资源包……"
         DispatchQueue.main.sync { [weak self] in
+            titleViewController.loadingTitleLabel.text = "正在加载资源包……"
             self?.initChessboardData()
             self?.chessboard.printGrid()
             self?.beganChessboard()
@@ -163,7 +162,6 @@ class ZYMainViewController: UIViewController {
         chessboardViewController.chessboard = chessboard
         chessboardViewController.resultXArray = tipXdataArr
         chessboardViewController.resultYArray = tipYdataArr
-        titleViewController.stopLoading()
         UIView.mdInflateTransition(from: titleViewController.view, toView: chessboardViewController.view, originalPoint: titleViewController.loadingActivityIndicator.center, duration: 0.7) {
             self.title = self.chessboardViewController.title
             self.chessboardViewController.creatChessboardViewData()

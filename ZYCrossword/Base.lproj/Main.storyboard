@@ -570,6 +570,7 @@
                         <outlet property="chessboardView" destination="COE-8k-evx" id="4Bx-jo-acd"/>
                         <outlet property="coinLabel" destination="fx1-MO-5dm" id="sZM-6X-VZP"/>
                         <outlet property="crosswordDataTableView" destination="4MV-1e-Hsz" id="PaK-ov-cVD"/>
+                        <outlet property="moreButton" destination="JMc-nO-VO6" id="pal-Hy-oM3"/>
                         <outlet property="starLabel" destination="xDE-mt-0om" id="dXI-QE-130"/>
                         <outlet property="wordInputTextField" destination="24k-gu-dgE" id="yNZ-1f-bC8"/>
                         <outlet property="wordInputView" destination="cry-Ha-Rtc" id="ulr-xD-5aw"/>

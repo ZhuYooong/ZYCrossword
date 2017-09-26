@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import DropDown
 
 class ZYChessboardViewController: UIViewController {
     var mainViewController: ZYMainViewController?
@@ -18,6 +19,7 @@ class ZYChessboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextfieldNotification()
+        creatMoreDropDown()
     }
     //MARK: - Menu
     @IBOutlet weak var starLabel: UILabel!
@@ -37,8 +39,29 @@ class ZYChessboardViewController: UIViewController {
     @IBAction func bookButtonClick(_ sender: UIButton) {
         mainViewController?.performSegue(withIdentifier: "collectListSegueId", sender: sender)
     }
+    @IBOutlet weak var moreButton: UIButton!
     @IBAction func moreButtonClick(_ sender: UIButton) {
-        mainViewController?.performSegue(withIdentifier: "librarySegueId", sender: sender)
+        moreDropDown.show()
+    }
+    let moreDropDown = DropDown()
+    func creatMoreDropDown() {
+        moreDropDown.anchorView = moreButton
+        moreDropDown.bottomOffset = CGPoint(x: -(moreDropDown.bounds.width / 2), y: moreButton.bounds.height / 2)
+        moreDropDown.dataSource = [
+            "词库",
+            "成就",
+            "全球排名",
+            "购买金币",
+            "设置",
+            "邀请好友",
+            "鼓励评分",
+            "关于我们"
+        ]
+        moreDropDown.selectionAction = { [unowned self] (index, item) in
+            if item == "词库" {
+                mainViewController?.performSegue(withIdentifier: "librarySegueId", sender: sender)
+            }
+        }
     }
     //MARK: - ChessboardView
     @IBOutlet weak var chessboardView: ZYChessboardView!
