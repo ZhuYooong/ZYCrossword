@@ -377,6 +377,7 @@
 		04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259C1EEA413000B62794 /* ZYMainViewController.swift */; };
 		04F8259F1EEA4DD200B62794 /* ZYMaterialDesignClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */; };
 		1D2D8092E042B60E396C39A3 /* Pods_ZYCrossword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */; };
+		DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -776,6 +777,7 @@
 		1EBD6372DBC0C4D850FF40C9 /* Pods-ZYCrossword.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.debug.xcconfig"; sourceTree = "<group>"; };
 		2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZYCrossword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5ACE0D0094E616FD0302C3 /* Pods-ZYCrossword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.release.xcconfig"; sourceTree = "<group>"; };
+		DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -808,6 +810,7 @@
 			isa = PBXGroup;
 			children = (
 				043556F61F7A444F009C1F1A /* ZYUserInfo.swift */,
+				DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */,
 			);
 			name = UserInfo;
 			sourceTree = "<group>";
@@ -1952,6 +1955,7 @@
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
 				046B7C0D1F5D04ED0088D43D /* ZYCollectDoubanTableViewCell.swift in Sources */,
+				DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */,
 				041DA1081F7260710044661A /* ZYLabraryCardTableViewCell.swift in Sources */,
 				047371831F0F657D005BE7A9 /* ZYCrosswordListTableViewController.swift in Sources */,
 				04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */,

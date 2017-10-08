@@ -19,7 +19,6 @@ class ZYWordViewModel: NSObject {
         let realm = try! Realm()
         let allWordArray = ZYWordType.allValues
         let wordArray = realm.objects(ZYWord.self)
-        
         for type in allWordArray {
             var isShouldUpdate = true
             for word in wordArray {

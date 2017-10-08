@@ -16,6 +16,7 @@ let chessboardColumns: Int = { () -> Int in
 }()
 var chessboardEmptySymbol = "-"
 let chessboardDocumentPath = "Chessboard.plist"
+let userInfoKey = "userInfoUserDefultKey"
 class ZYCustomClass: NSObject {
 
 }
