@@ -11,12 +11,12 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYIdiom: ZYBaseWord {
-    dynamic var url: String? = ""
-    dynamic var enunciation: String? = ""
-    dynamic var paraphrase: String? = ""
-    dynamic var derivation: String? = ""
-    dynamic var title: String? = ""
-    dynamic var wordType = ZYIdiomType.Base.rawValue
+    @objc dynamic var url: String? = ""
+    @objc dynamic var enunciation: String? = ""
+    @objc dynamic var paraphrase: String? = ""
+    @objc dynamic var derivation: String? = ""
+    @objc dynamic var title: String? = ""
+    @objc dynamic var wordType = ZYIdiomType.Base.rawValue
     
     override static func primaryKey() -> String {
         return "title"

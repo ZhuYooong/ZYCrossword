@@ -12,16 +12,16 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYPoetry: ZYBaseWord {
-    dynamic var detail = ""
-    dynamic var title = ""
-    dynamic var url = ""
-    dynamic var translate = ""
-    dynamic var note = ""
-    dynamic var author = ""
-    dynamic var appreciation = ""
-    dynamic var dynasty = ""
-    dynamic var background = ""
-    dynamic var wordType = ZYPoetryType.TangPoetry300.rawValue
+    @objc dynamic var detail = ""
+    @objc dynamic var title = ""
+    @objc dynamic var url = ""
+    @objc dynamic var translate = ""
+    @objc dynamic var note = ""
+    @objc dynamic var author = ""
+    @objc dynamic var appreciation = ""
+    @objc dynamic var dynasty = ""
+    @objc dynamic var background = ""
+    @objc dynamic var wordType = ZYPoetryType.TangPoetry300.rawValue
     
     override static func primaryKey() -> String {
         return "title"

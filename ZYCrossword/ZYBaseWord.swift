@@ -9,10 +9,10 @@
 import Foundation
 import RealmSwift
 class ZYBaseWord: Object {
-    dynamic var selecttedCount = 0
-    dynamic var isCollect = false
-    dynamic var collectDate = Date()
-    dynamic var isRight = false
-    dynamic var isShow = false
-    dynamic var showString = ""
+    @objc dynamic var selecttedCount = 0
+    @objc dynamic var isCollect = false
+    @objc dynamic var collectDate = Date()
+    @objc dynamic var isRight = false
+    @objc dynamic var isShow = false
+    @objc dynamic var showString = ""
 }

@@ -11,11 +11,11 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYAllegoric: ZYBaseWord {
-    dynamic var url: String? = ""
-    dynamic var content: String? = ""
-    dynamic var name: String? = ""
-    dynamic var answer: String? = ""
-    dynamic var wordType = ZYAllegoricType.Base.rawValue
+    @objc dynamic var url: String? = ""
+    @objc dynamic var content: String? = ""
+    @objc dynamic var name: String? = ""
+    @objc dynamic var answer: String? = ""
+    @objc dynamic var wordType = ZYAllegoricType.Base.rawValue
     
     override static func primaryKey() -> String {
         return "url"

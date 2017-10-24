@@ -40,7 +40,7 @@ class ZYChessboardView: UIView {
         }
     }
     var didSelectedButton: ZYChessboardButton?
-    func chessboardButtonClick(sender: ZYChessboardButton) {
+    @objc func chessboardButtonClick(sender: ZYChessboardButton) {
         didSelectedButton = nil
         let gridArray = chessboardButtonClosure!(sender)
         var toFrame = CGRect()

@@ -109,7 +109,7 @@ class ZYCollectListTableViewController: UITableViewController {
         return textHeight > 20 ? textHeight +  height - 20 : height
     }
     //MARK: - button
-    func detailButtonCliick(sender: UIButton) {
+    @objc func detailButtonCliick(sender: UIButton) {
         let webViewController = ZYWebViewController()
         webViewController.httpURL = collectionDicArray[sender.tag]["url"] as? String ?? ""
         webViewController.title = collectionDicArray[sender.tag]["name"] as? String ?? ""

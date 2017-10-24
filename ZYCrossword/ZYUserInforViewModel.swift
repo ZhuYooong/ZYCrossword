@@ -29,15 +29,35 @@ class ZYUserInforViewModel: NSObject {
     func changeStarCount(with level: ChangeStarLevel) {
         if let userId = UserDefaults.standard.string(forKey: userInfoKey) {
             let predicate = NSPredicate(format: "userIdentifier = '\(userId)'")
-            let user = realm.objects(ZYUserInfo.self).filter(predicate)
-            let userInfo = ZYUserInfo()
-            userInfo
-            try! realm.write {
-                realm.add(wordInfo, update: true)
+            if let user = realm.objects(ZYUserInfo.self).filter(predicate).first {
+                let userInfo = ZYUserInfo()
+                userInfo.userIdentifier = user.userIdentifier
+                userInfo.coinCount = user.coinCount
+                userInfo.starCount = user.starCount + level.rawValue
+                try! realm.write {
+                    realm.add(userInfo, update: true)
+                }
             }
         }
     }
-    
+    func changeCoin(with count: Int, add: Bool) {
+        if let userId = UserDefaults.standard.string(forKey: userInfoKey) {
+            let predicate = NSPredicate(format: "userIdentifier = '\(userId)'")
+            if let user = realm.objects(ZYUserInfo.self).filter(predicate).first {
+                let userInfo = ZYUserInfo()
+                userInfo.userIdentifier = user.userIdentifier
+                if add {
+                    userInfo.coinCount = user.coinCount + count
+                }else {
+                    userInfo.coinCount = user.coinCount - count
+                }
+                userInfo.starCount = user.starCount
+                try! realm.write {
+                    realm.add(userInfo, update: true)
+                }
+            }
+        }
+    }
     func creatUserIdentifier() -> String {
         let now = Date()
         return "\(now)"

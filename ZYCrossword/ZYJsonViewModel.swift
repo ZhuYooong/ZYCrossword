@@ -33,7 +33,7 @@ class ZYJsonViewModel: NSObject {
         if let path = Bundle.main.path(forResource: name, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-                let jsonObj = JSON(data: data)
+                let jsonObj = try! JSON(data: data)
                 if jsonObj != JSON.null {
                     if T.self == ZYPoetry.self { //诗歌
                         let rootDictionary = jsonObj.dictionaryValue

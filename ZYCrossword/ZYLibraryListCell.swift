@@ -47,7 +47,7 @@ class ZYLibraryListCell: TisprCardStackViewCell {
     func updateSmileVote() {
         
     }
-    func libraryContentButtonCliick(sender: UIButton) {
+    @objc func libraryContentButtonCliick(sender: UIButton) {
         if libraryContentBlock != nil {
             libraryContentBlock!(cardContentArray[sender.tag].wordType)
         }

@@ -120,7 +120,7 @@ open class ZYFoldingTableViewCell: UITableViewCell {
                 let newConstraint = NSLayoutConstraint( item: animationView, attribute: constraint.firstAttribute, relatedBy: constraint.relation, toItem: constraint.secondItem, attribute: constraint.secondAttribute, multiplier: constraint.multiplier, constant: constraint.constant)
                 newConstraints.append(newConstraint)
             } else if let item: UIView = constraint.secondItem as? UIView , item == containerView {
-                let newConstraint = NSLayoutConstraint(item: constraint.firstItem, attribute: constraint.firstAttribute, relatedBy: constraint.relation, toItem: animationView, attribute: constraint.secondAttribute, multiplier: constraint.multiplier, constant: constraint.constant)
+                let newConstraint = NSLayoutConstraint(item: constraint.firstItem as Any, attribute: constraint.firstAttribute, relatedBy: constraint.relation, toItem: animationView, attribute: constraint.secondAttribute, multiplier: constraint.multiplier, constant: constraint.constant)
                 newConstraints.append(newConstraint)
             }
         }

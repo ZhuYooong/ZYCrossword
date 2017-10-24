@@ -9,9 +9,9 @@
 import UIKit
 import RealmSwift
 class ZYUserInfo: Object {
-    dynamic var userIdentifier: String = ""
-    dynamic var starCount: Int = 0
-    dynamic var coinCount: Int = 0
+    @objc dynamic var userIdentifier: String = ""
+    @objc dynamic var starCount: Int = 0
+    @objc dynamic var coinCount: Int = 0
     
     override static func primaryKey() -> String {
         return "userIdentifier"

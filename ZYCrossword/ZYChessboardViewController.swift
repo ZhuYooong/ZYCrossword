@@ -153,10 +153,10 @@ class ZYChessboardViewController: UIViewController {
         }
         return ""
     }
-    func seekHelpButtonClick(sender: UIButton) {
+    @objc func seekHelpButtonClick(sender: UIButton) {
         let baseWord = crosswordDataArray[sender.tag]
     }
-    func collectionButtonClick(sender: UIButton) {
+    @objc func collectionButtonClick(sender: UIButton) {
         let baseWord = crosswordDataArray[sender.tag]
         if baseWord.isCollect != true {
             baseWord.realm?.beginWrite()
@@ -183,7 +183,7 @@ class ZYChessboardViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyWillHide), name: .UIKeyboardWillHide, object: nil)
     }
-    func keyWillShow(notification: Notification) -> Void {
+    @objc func keyWillShow(notification: Notification) -> Void {
         let keyboardF: CGRect = ((notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue)!
         let keyboardT: Double = ((notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey]) as? Double)!
         UIView.animate(withDuration: keyboardT) {
@@ -191,7 +191,7 @@ class ZYChessboardViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
-    func keyWillHide(notification: Notification) -> Void {
+    @objc func keyWillHide(notification: Notification) -> Void {
         UIView.animate(withDuration: 0.25) {
             self.wordInputViewBottomConstraint.constant = 0
             self.view.layoutIfNeeded()

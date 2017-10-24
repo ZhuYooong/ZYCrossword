@@ -75,8 +75,9 @@ class ZYMainViewController: UIViewController {
     func creatChessboardData() {
         ZYWordViewModel.shareWord.initData()
         guard let _ = UserDefaults.standard.string(forKey: userInfoKey) else {
-            
+            ZYUserInforViewModel.shareUserInfor.initData()
             performSegue(withIdentifier: "librarySegueId", sender: self)
+            return
         }
         let crosswordsGenerator = ZYCrosswordsGenerator()
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"

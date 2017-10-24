@@ -71,8 +71,6 @@ class ZYWordViewModel: NSObject {
         case .Allegoric:
             wordInfo.number = 495
             wordInfo.isSelectted = true
-        default:
-            wordInfo.isSelectted = false
         }
         try! realm.write {
             realm.add(wordInfo, update: true)

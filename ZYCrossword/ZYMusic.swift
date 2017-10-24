@@ -11,13 +11,13 @@ import SwiftyJSON
 import RealmSwift
 
 class ZYMusic: ZYBaseWord {
-    dynamic var id = ""
-    dynamic var singer = ""
-    dynamic var title = ""
-    dynamic var version = ""
-    dynamic var alt = ""
-    dynamic var pubdate = ""
-    dynamic var tracks = ""
+    @objc dynamic var id = ""
+    @objc dynamic var singer = ""
+    @objc dynamic var title = ""
+    @objc dynamic var version = ""
+    @objc dynamic var alt = ""
+    @objc dynamic var pubdate = ""
+    @objc dynamic var tracks = ""
     
     override static func primaryKey() -> String {
         return "id"
