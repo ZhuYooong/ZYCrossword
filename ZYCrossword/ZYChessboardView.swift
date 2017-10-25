@@ -123,8 +123,8 @@ class ZYChessboardView: UIView {
             }
         }
         if let string = text {
-            for word in string.characters {
-                for button in callButtonArray {
+            for button in callButtonArray {
+                for word in string.characters {
                     if button.contentState != .right {
                         button.currentWord = String(word)
                         if button.contentState == .right {
@@ -132,7 +132,7 @@ class ZYChessboardView: UIView {
                             NSKeyedArchiver.archiveRootObject(parientViewController.chessboard, toFile: chessboardDocumentPath.getFilePath())
                             break
                         }
-                    } 
+                    }
                 }
             }
         }

@@ -16,6 +16,7 @@ class ZYChessboardViewController: UIViewController {
     var resultXArray = [ZYBaseWord]()
     var resultYArray = [ZYBaseWord]()
     var resetValueClosure: ((_ point: CGPoint) -> Void)?
+    var alreadyCount = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextfieldNotification()
@@ -247,7 +248,7 @@ extension ZYChessboardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if chessboardView.textInput(with: textField.text) == true {
             changeWordRight()
-            selectedAnotherWord()
+            changeWordAfter()
         }
         textField.text = ""
         textField.resignFirstResponder()
@@ -285,7 +286,8 @@ extension ZYChessboardViewController: UITextFieldDelegate {
             }
         }
     }
-    func selectedAnotherWord() {
+    //MARK: changeWordAfter
+    func changeWordAfter() {
         var selectedWordArray = [Word]()
         for i in 0 ..< resultXArray.count {
             if resultXArray[i].isRight == false {
@@ -297,21 +299,38 @@ extension ZYChessboardViewController: UITextFieldDelegate {
                 selectedWordArray.append(chessboard.tipYArr[i])
             }
         }
+        changeStarCount(with: selectedWordArray)
         if selectedWordArray.count > 0 {
-            let selectedWord = selectedWordArray[randomInt(selectedWordArray.count)]
-            if let selectedGrid = selectedWord.grid.first, selectedGrid.count >= 2 {
-                let tagIndex = selectedGrid[1] * chessboardColumns * 100 + selectedGrid[0] + 100000
-                if let button = chessboardView.viewWithTag(tagIndex) as? ZYChessboardButton {
-                    chessboardView.didSelectedButton = button
-                    if chessboard.tipYArr.contains(selectedWord) {
-                        chessboardView.isPortraitIntro = true
-                    }else {
-                        chessboardView.isPortraitIntro = false
-                    }
-                }
-            }
+            selectedAnotherWord(with: selectedWordArray)
         }else {
             allRight()
+        }
+    }
+    func changeStarCount(with selectedWordArray: [Word]) {
+        let allWordCount = resultXArray.count + resultYArray.count
+        let nowCount = allWordCount - selectedWordArray.count
+        if nowCount > alreadyCount {
+            if nowCount >= allWordCount / 2 {
+                ZYUserInforViewModel.shareUserInfor.changeStarCount(with: .first)
+            }else if nowCount >= allWordCount * 2 / 3 {
+                ZYUserInforViewModel.shareUserInfor.changeStarCount(with: .second)
+            }else if selectedWordArray.count == 0 {
+                ZYUserInforViewModel.shareUserInfor.changeStarCount(with: .third)
+            }
+        }
+    }
+    func selectedAnotherWord(with selectedWordArray: [Word]) {
+        let selectedWord = selectedWordArray[randomInt(selectedWordArray.count)]
+        if let selectedGrid = selectedWord.grid.first, selectedGrid.count >= 2 {
+            let tagIndex = selectedGrid[1] * chessboardColumns * 100 + selectedGrid[0] + 100000
+            if let button = chessboardView.viewWithTag(tagIndex) as? ZYChessboardButton {
+                chessboardView.didSelectedButton = button
+                if chessboard.tipYArr.contains(selectedWord) {
+                    chessboardView.isPortraitIntro = true
+                }else {
+                    chessboardView.isPortraitIntro = false
+                }
+            }
         }
     }
     func allRight() {
