@@ -15,21 +15,33 @@ class ZYChessboardViewController: UIViewController {
     var chessboard = ZYChessboard()
     var resultXArray = [ZYBaseWord]()
     var resultYArray = [ZYBaseWord]()
-    var resetValueClosure: ((_ point: CGPoint) -> Void)?
-    var alreadyCount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextfieldNotification()
-        creatMoreDropDown()
+        creatMenuView()
     }
     //MARK: - Menu
+    func creatMenuView() {
+        initMenuData()
+        creatMoreDropDown()
+    }
+    var alreadyCount = 0
     @IBOutlet weak var starLabel: UILabel!
     @IBAction func starButtonClick(_ sender: UIButton) {
         
     }
     @IBOutlet weak var coinLabel: UILabel!
     @IBAction func coinButtonClick(_ sender: UIButton) {
+        
     }
+    func initMenuData() {
+        if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
+            starLabel.text = "\(user.starCount)"
+            coinLabel.text = "\(user.coinCount)"
+        }
+    }
+    var resetValueClosure: ((_ point: CGPoint) -> Void)?
     @IBAction func resetButtonClick(_ sender: UIButton) {
         let option = UIAlertController(title: nil, message: "您确定要重置本局游戏？", preferredStyle: .alert)
         option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
@@ -107,6 +119,7 @@ class ZYChessboardViewController: UIViewController {
     @IBOutlet weak var crosswordDataTableView: UITableView!
     var crosswordDataArray = [ZYBaseWord]()
     var crosswordShowDic = ["landscape":false, "portrait":false]
+    var isPortraitIntro = false
     func reloadCrosswordData(landscape: ZYBaseWord?, portrait: ZYBaseWord?) {
         crosswordShowDic = ["landscape":false, "portrait":false]
         crosswordDataArray = [ZYBaseWord]()
@@ -201,10 +214,42 @@ class ZYChessboardViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         wordInputTextField.resignFirstResponder()
     }
+    //MARK: prompt
     @IBAction func promptButtonClick(_ sender: UIButton) {
-        if let baseWord = crosswordDataArray.first, baseWord.isRight == false {
+        if let baseWord = crosswordDataArray.first, baseWord.isRight == false && !isPortraitIntro {
+            promptWord(with: baseWord)
+        }else if let baseWord = crosswordDataArray.last, baseWord.isRight == false && isPortraitIntro {
+            promptWord(with: baseWord)
+        }
+    }
+    var havePromptCount = 0
+    func deleteCoinCount() -> Int? {
+        var coinCount = 0
+        if havePromptCount == 0 {
+            coinCount = 4
+        }else if havePromptCount < 3 {
+            coinCount = 6
+        }else if havePromptCount < 5 {
+            coinCount = 8
+        }else if havePromptCount == resultXArray.count + resultYArray.count - 1 {
+            coinCount = 30
+        }else {
+            coinCount = 10
+        }
+        if coinCount > 0 && (Int(coinLabel.text ?? "0") ?? 0 - coinCount) >= 0 {
+            havePromptCount += 1
+            return coinCount
+        }else {
+            return nil
+        }
+    }
+    func promptWord(with baseWord: ZYBaseWord) {
+        if let coinCount = deleteCoinCount() {
+            ZYUserInforViewModel.shareUserInfor.changeCoin(with: coinCount, add: false)
             wordInputTextField.text = baseWord.showString
             _ = textFieldShouldReturn(wordInputTextField)
+        }else {
+            print("No Coin!")
         }
     }
     @IBAction func sendButtonClick(_ sender: UIButton) {
@@ -213,6 +258,7 @@ class ZYChessboardViewController: UIViewController {
 }
 extension ZYChessboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        isPortraitIntro = false
         return crosswordDataArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -241,6 +287,7 @@ extension ZYChessboardViewController: UITableViewDelegate, UITableViewDataSource
             chessboardView.isPortraitIntro = false
         }else if indexPath.row == 1 {
             chessboardView.isPortraitIntro = true
+            isPortraitIntro = true
         }
     }
 }
@@ -317,6 +364,8 @@ extension ZYChessboardViewController: UITextFieldDelegate {
             }else if selectedWordArray.count == 0 {
                 ZYUserInforViewModel.shareUserInfor.changeStarCount(with: .third)
             }
+            alreadyCount = nowCount
+            initMenuData()
         }
     }
     func selectedAnotherWord(with selectedWordArray: [Word]) {

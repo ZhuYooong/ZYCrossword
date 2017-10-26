@@ -27,36 +27,44 @@ class ZYUserInforViewModel: NSObject {
         UserDefaults.standard.set(userInfo.userIdentifier, forKey: userInfoKey)
     }
     func changeStarCount(with level: ChangeStarLevel) {
-        if let userId = UserDefaults.standard.string(forKey: userInfoKey) {
-            let predicate = NSPredicate(format: "userIdentifier = '\(userId)'")
-            if let user = realm.objects(ZYUserInfo.self).filter(predicate).first {
-                let userInfo = ZYUserInfo()
-                userInfo.userIdentifier = user.userIdentifier
-                userInfo.coinCount = user.coinCount
-                userInfo.starCount = user.starCount + level.rawValue
-                try! realm.write {
-                    realm.add(userInfo, update: true)
-                }
+        if let user = getUserInfo() {
+            let userInfo = ZYUserInfo()
+            userInfo.userIdentifier = user.userIdentifier
+            if level == .third {
+                userInfo.coinCount = user.coinCount + 30
+            }else {
+                userInfo.coinCount = user.coinCount + 10
+            }
+            userInfo.starCount = user.starCount + level.rawValue
+            try! realm.write {
+                realm.add(userInfo, update: true)
             }
         }
     }
     func changeCoin(with count: Int, add: Bool) {
-        if let userId = UserDefaults.standard.string(forKey: userInfoKey) {
-            let predicate = NSPredicate(format: "userIdentifier = '\(userId)'")
-            if let user = realm.objects(ZYUserInfo.self).filter(predicate).first {
-                let userInfo = ZYUserInfo()
-                userInfo.userIdentifier = user.userIdentifier
-                if add {
-                    userInfo.coinCount = user.coinCount + count
-                }else {
-                    userInfo.coinCount = user.coinCount - count
-                }
-                userInfo.starCount = user.starCount
-                try! realm.write {
-                    realm.add(userInfo, update: true)
-                }
+        if let user = getUserInfo(), count > 0 {
+            let userInfo = ZYUserInfo()
+            userInfo.userIdentifier = user.userIdentifier
+            if add {
+                userInfo.coinCount = user.coinCount + count
+            }else {
+                userInfo.coinCount = user.coinCount - count
+            }
+            userInfo.starCount = user.starCount
+            try! realm.write {
+                realm.add(userInfo, update: true)
             }
         }
+    }
+    //MARK: - Tools
+    func getUserInfo() -> ZYUserInfo? {
+        if let userId = UserDefaults.standard.string(forKey: userInfoKey) {
+            let predicate = NSPredicate(format: "userIdentifier = '\(userId)'")
+            if let user = self.realm.objects(ZYUserInfo.self).filter(predicate).first {
+                return user
+            }
+        }
+        return nil
     }
     func creatUserIdentifier() -> String {
         let now = Date()
