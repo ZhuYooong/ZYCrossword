@@ -377,6 +377,22 @@
 		04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259C1EEA413000B62794 /* ZYMainViewController.swift */; };
 		04F8259F1EEA4DD200B62794 /* ZYMaterialDesignClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */; };
 		1D2D8092E042B60E396C39A3 /* Pods_ZYCrossword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */; };
+		DE4C80A61FA326900034F199 /* TrelloAnimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80971FA3268E0034F199 /* TrelloAnimate.swift */; };
+		DE4C80A71FA326900034F199 /* TrelloDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80981FA3268E0034F199 /* TrelloDefine.swift */; };
+		DE4C80A81FA326900034F199 /* TrelloFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80991FA3268E0034F199 /* TrelloFunction.swift */; };
+		DE4C80A91FA326900034F199 /* TrelloListCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C809A1FA3268E0034F199 /* TrelloListCellItem.swift */; };
+		DE4C80AA1FA326900034F199 /* TrelloListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C809B1FA3268E0034F199 /* TrelloListCellViewModel.swift */; };
+		DE4C80AB1FA326900034F199 /* TrelloListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C809C1FA3268E0034F199 /* TrelloListSectionView.swift */; };
+		DE4C80AC1FA326900034F199 /* TrelloListTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C809D1FA3268E0034F199 /* TrelloListTabItem.swift */; };
+		DE4C80AD1FA326900034F199 /* TrelloListTabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C809E1FA3268E0034F199 /* TrelloListTabItemView.swift */; };
+		DE4C80AE1FA326900034F199 /* TrelloListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C809F1FA3268E0034F199 /* TrelloListTableView.swift */; };
+		DE4C80AF1FA326900034F199 /* TrelloListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80A01FA3268E0034F199 /* TrelloListTableViewCell.swift */; };
+		DE4C80B01FA326900034F199 /* TrelloListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80A11FA3268E0034F199 /* TrelloListTabView.swift */; };
+		DE4C80B11FA326900034F199 /* TrelloListTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80A21FA3268E0034F199 /* TrelloListTabViewModel.swift */; };
+		DE4C80B21FA326900034F199 /* TrelloListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80A31FA3268E0034F199 /* TrelloListView.swift */; };
+		DE4C80B31FA326900034F199 /* TrelloView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80A41FA3268E0034F199 /* TrelloView.swift */; };
+		DE4C80B41FA326900034F199 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80A51FA3268E0034F199 /* UIViewExt.swift */; };
+		DE4C80B61FA333E20034F199 /* TrelloViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4C80B51FA333E20034F199 /* TrelloViewController.swift */; };
 		DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -777,6 +793,22 @@
 		1EBD6372DBC0C4D850FF40C9 /* Pods-ZYCrossword.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.debug.xcconfig"; sourceTree = "<group>"; };
 		2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZYCrossword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5ACE0D0094E616FD0302C3 /* Pods-ZYCrossword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.release.xcconfig"; sourceTree = "<group>"; };
+		DE4C80971FA3268E0034F199 /* TrelloAnimate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloAnimate.swift; sourceTree = "<group>"; };
+		DE4C80981FA3268E0034F199 /* TrelloDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloDefine.swift; sourceTree = "<group>"; };
+		DE4C80991FA3268E0034F199 /* TrelloFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloFunction.swift; sourceTree = "<group>"; };
+		DE4C809A1FA3268E0034F199 /* TrelloListCellItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListCellItem.swift; sourceTree = "<group>"; };
+		DE4C809B1FA3268E0034F199 /* TrelloListCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListCellViewModel.swift; sourceTree = "<group>"; };
+		DE4C809C1FA3268E0034F199 /* TrelloListSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListSectionView.swift; sourceTree = "<group>"; };
+		DE4C809D1FA3268E0034F199 /* TrelloListTabItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListTabItem.swift; sourceTree = "<group>"; };
+		DE4C809E1FA3268E0034F199 /* TrelloListTabItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListTabItemView.swift; sourceTree = "<group>"; };
+		DE4C809F1FA3268E0034F199 /* TrelloListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListTableView.swift; sourceTree = "<group>"; };
+		DE4C80A01FA3268E0034F199 /* TrelloListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListTableViewCell.swift; sourceTree = "<group>"; };
+		DE4C80A11FA3268E0034F199 /* TrelloListTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListTabView.swift; sourceTree = "<group>"; };
+		DE4C80A21FA3268E0034F199 /* TrelloListTabViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListTabViewModel.swift; sourceTree = "<group>"; };
+		DE4C80A31FA3268E0034F199 /* TrelloListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloListView.swift; sourceTree = "<group>"; };
+		DE4C80A41FA3268E0034F199 /* TrelloView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloView.swift; sourceTree = "<group>"; };
+		DE4C80A51FA3268E0034F199 /* UIViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		DE4C80B51FA333E20034F199 /* TrelloViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrelloViewController.swift; sourceTree = "<group>"; };
 		DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -941,6 +973,7 @@
 		0490AA4E1EAEE8950051C47D /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				DE4C80961FA3268E0034F199 /* TrelloNavigation */,
 			);
 			name = ThirdPart;
 			sourceTree = "<group>";
@@ -1333,6 +1366,7 @@
 		04968EE61F10DA73004CB1F5 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				DE4C80B51FA333E20034F199 /* TrelloViewController.swift */,
 				048D049D1F70C81D00F42FED /* ZYLibraryListViewController.swift */,
 				048D049F1F70E14300F42FED /* ZYLibraryListCell.swift */,
 				041DA1071F7260710044661A /* ZYLabraryCardTableViewCell.swift */,
@@ -1412,6 +1446,28 @@
 				3A5ACE0D0094E616FD0302C3 /* Pods-ZYCrossword.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DE4C80961FA3268E0034F199 /* TrelloNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				DE4C80971FA3268E0034F199 /* TrelloAnimate.swift */,
+				DE4C80981FA3268E0034F199 /* TrelloDefine.swift */,
+				DE4C80991FA3268E0034F199 /* TrelloFunction.swift */,
+				DE4C809A1FA3268E0034F199 /* TrelloListCellItem.swift */,
+				DE4C809B1FA3268E0034F199 /* TrelloListCellViewModel.swift */,
+				DE4C809C1FA3268E0034F199 /* TrelloListSectionView.swift */,
+				DE4C809D1FA3268E0034F199 /* TrelloListTabItem.swift */,
+				DE4C809E1FA3268E0034F199 /* TrelloListTabItemView.swift */,
+				DE4C809F1FA3268E0034F199 /* TrelloListTableView.swift */,
+				DE4C80A01FA3268E0034F199 /* TrelloListTableViewCell.swift */,
+				DE4C80A11FA3268E0034F199 /* TrelloListTabView.swift */,
+				DE4C80A21FA3268E0034F199 /* TrelloListTabViewModel.swift */,
+				DE4C80A31FA3268E0034F199 /* TrelloListView.swift */,
+				DE4C80A41FA3268E0034F199 /* TrelloView.swift */,
+				DE4C80A51FA3268E0034F199 /* UIViewExt.swift */,
+			);
+			path = TrelloNavigation;
 			sourceTree = "<group>";
 		};
 		DEDF91881F9F2D5E00CA0B43 /* ViewModel */ = {
@@ -1966,9 +2022,12 @@
 				0496F3331EBB2084008D3285 /* ZYCrosswordsGenerator.swift in Sources */,
 				04BD132A1EC2EA8F00B1DB9E /* ZYBook.swift in Sources */,
 				04C94AC11EB33BC5009F4381 /* ZYWordViewModel.swift in Sources */,
+				DE4C80AC1FA326900034F199 /* TrelloListTabItem.swift in Sources */,
 				04C94ABF1EB3364E009F4381 /* ZYBaseWord.swift in Sources */,
+				DE4C80AE1FA326900034F199 /* TrelloListTableView.swift in Sources */,
 				049E5A061EEE482700FC3560 /* ZYTitleViewController.swift in Sources */,
 				040E95EF1ED6B3B900FC29E2 /* ZYChessboardView.swift in Sources */,
+				DE4C80AF1FA326900034F199 /* TrelloListTableViewCell.swift in Sources */,
 				04928DB71EC93DAF002915BD /* ZYChessboard.swift in Sources */,
 				04AC7A481F626F8A00C1593E /* ZYPoetryContentTableViewController.swift in Sources */,
 				0496F3301EBB1CAA008D3285 /* ZYJsonViewModel.swift in Sources */,
@@ -1980,19 +2039,32 @@
 				0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */,
 				04968EE31F10CB19004CB1F5 /* ZYCollectListTableViewController.swift in Sources */,
 				0450C7511F5E763F00660CD5 /* ZYFoldingTableViewCell.swift in Sources */,
+				DE4C80B21FA326900034F199 /* TrelloListView.swift in Sources */,
+				DE4C80A61FA326900034F199 /* TrelloAnimate.swift in Sources */,
 				0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */,
+				DE4C80AD1FA326900034F199 /* TrelloListTabItemView.swift in Sources */,
 				046A86D71ECD4987001E7323 /* ZYPoetry.swift in Sources */,
 				0496F8FD1EE6504800F51542 /* ZYAllegoric.swift in Sources */,
+				DE4C80B41FA326900034F199 /* UIViewExt.swift in Sources */,
+				DE4C80A81FA326900034F199 /* TrelloFunction.swift in Sources */,
+				DE4C80B31FA326900034F199 /* TrelloView.swift in Sources */,
 				043556F71F7A444F009C1F1A /* ZYUserInfo.swift in Sources */,
+				DE4C80B11FA326900034F199 /* TrelloListTabViewModel.swift in Sources */,
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
+				DE4C80B01FA326900034F199 /* TrelloListTabView.swift in Sources */,
 				046B7C0D1F5D04ED0088D43D /* ZYCollectDoubanTableViewCell.swift in Sources */,
 				DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */,
+				DE4C80A91FA326900034F199 /* TrelloListCellItem.swift in Sources */,
+				DE4C80B61FA333E20034F199 /* TrelloViewController.swift in Sources */,
 				041DA1081F7260710044661A /* ZYLabraryCardTableViewCell.swift in Sources */,
 				047371831F0F657D005BE7A9 /* ZYCrosswordListTableViewController.swift in Sources */,
+				DE4C80AA1FA326900034F199 /* TrelloListCellViewModel.swift in Sources */,
 				04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */,
 				04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */,
+				DE4C80AB1FA326900034F199 /* TrelloListSectionView.swift in Sources */,
 				048D04A01F70E14400F42FED /* ZYLibraryListCell.swift in Sources */,
+				DE4C80A71FA326900034F199 /* TrelloDefine.swift in Sources */,
 				047371851F0F65AE005BE7A9 /* ZYCrosswordListTableViewCell.swift in Sources */,
 				049E5A041EEE47CA00FC3560 /* ZYActivityIndicator.swift in Sources */,
 				04621BE71EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift in Sources */,

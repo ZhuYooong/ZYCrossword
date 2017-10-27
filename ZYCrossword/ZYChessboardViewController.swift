@@ -64,8 +64,6 @@ class ZYChessboardViewController: UIViewController {
         moreDropDown.dataSource = [
             "词库",
             "成就",
-            "全球排名",
-            "购买金币",
             "设置",
             "邀请好友",
             "鼓励评分",
