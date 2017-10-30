@@ -9,7 +9,9 @@
 import UIKit
 import WebKit
 import SnapKit
-class ZYWebViewController: UIViewController {
+import AMScrollingNavbar
+
+class ZYWebViewController: ScrollingNavigationViewController {
     var httpURL: String?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,10 @@ class ZYWebViewController: UIViewController {
         
         addWebView()
         initProgressView()
+        
+        if let navigationController = self.navigationController as? ScrollingNavigationController {
+            navigationController.followScrollView(httpWebView, delay: 50.0)
+        }
     }
     var httpWebView = WKWebView()
     func addWebView() {
@@ -34,7 +40,7 @@ class ZYWebViewController: UIViewController {
         view.addSubview(httpWebView)
         httpWebView.snp.makeConstraints { (make) in
             make.left.right.width.bottom.equalTo(view)
-            make.top.equalTo(view).offset(64)
+            make.top.equalTo(view).offset(0)
         }
     }
     var progressView: UIProgressView? = nil

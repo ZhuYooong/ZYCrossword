@@ -5,7 +5,6 @@
 //  Created by MAC on 2017/9/19.
 //  Copyright © 2017年 ZhuYong. All rights reserved.
 //
-import TisprCardStack
 import UIKit
 import RealmSwift
 

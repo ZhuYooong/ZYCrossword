@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import AMScrollingNavbar
 
-class ZYCrosswordListTableViewController: UITableViewController {
+class ZYCrosswordListTableViewController: ScrollingNavigationViewController {
     var selectResultBlock: ((Int, Bool) -> Void)?
     var resultXArray = [ZYBaseWord]()
     var resultYArray = [ZYBaseWord]()
     var tipXArr = Array<Word>()
     var tipYArr = Array<Word>()
+    @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
@@ -42,12 +44,16 @@ class ZYCrosswordListTableViewController: UITableViewController {
             }
         }
         return ""
-    }    
-    // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    }
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    }
+}
+extension ZYCrosswordListTableViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return resultXArray.count
@@ -57,7 +63,7 @@ class ZYCrosswordListTableViewController: UITableViewController {
             return 0
         }
     }
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CrosswordListCellID", for: indexPath) as! ZYCrosswordListTableViewCell
         if indexPath.section == 0 {
             cell.crosswordDataLabel.text = setCrosswordDataTableViewContent(with: indexPath.row, resultArray: resultXArray)
@@ -66,7 +72,7 @@ class ZYCrosswordListTableViewController: UITableViewController {
         }
         return cell
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             return setCrosswordDataTableViewContentHeight(with: indexPath.row, resultArray: resultXArray)
@@ -76,10 +82,10 @@ class ZYCrosswordListTableViewController: UITableViewController {
             return 0
         }
     }
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
         headerView.backgroundColor = .white
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: 74, height: 30))
@@ -95,7 +101,7 @@ class ZYCrosswordListTableViewController: UITableViewController {
         headerView.addSubview(lineView)
         return headerView
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if let grid = tipXArr[indexPath.row].grid.first {
                 let tagIndex = grid[1] * chessboardColumns * 100 + grid[0] + 100000
@@ -109,7 +115,9 @@ class ZYCrosswordListTableViewController: UITableViewController {
         }
         _ = navigationController?.popViewController(animated: true)
     }
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+}
+extension ZYCrosswordListTableViewController: ScrollingNavigationControllerDelegate {
+    func scrollingNavigationController(_ controller: ScrollingNavigationController, willChangeState state: NavigationBarState) {
+        view.needsUpdateConstraints()
     }
 }

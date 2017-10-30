@@ -10,7 +10,7 @@ pod 'RealmSwift', '~> 3'
 pod 'PKHUD', '~> 5'
 pod 'Kingfisher', '~> 4'
 pod 'SnapKit', '~> 4'
-pod 'TisprCardStack'
 pod 'Material', '~> 2'
 pod 'DropDown'
+pod 'AMScrollingNavbar', '~> 4'
 end

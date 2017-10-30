@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Scrolling Navigation Controller-->
         <scene sceneID="vCS-od-XSN">
             <objects>
-                <navigationController id="CN4-0t-Wih" sceneMemberID="viewController">
+                <navigationController id="CN4-0t-Wih" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wCI-O7-0n7">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1425,6 +1425,9 @@
                         </connections>
                     </tableView>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="GQj-vN-uxh" id="ePK-1F-18c"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dHi-1o-nbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1507,6 +1510,9 @@
                         </connections>
                     </tableView>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="wOF-GZ-yqB" id="Gff-Z7-1WE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezb-f6-Xoo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

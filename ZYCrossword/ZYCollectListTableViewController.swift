@@ -9,12 +9,14 @@
 import UIKit
 import SwiftyJSON
 import RealmSwift
+import AMScrollingNavbar
 
-class ZYCollectListTableViewController: UITableViewController {
+class ZYCollectListTableViewController: ScrollingNavigationViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
+    @IBOutlet var tableView: UITableView!
     private func setup() {
         initData()
         tableView.estimatedRowHeight = kCloseCellHeight
@@ -145,11 +147,11 @@ class ZYCollectListTableViewController: UITableViewController {
         return content
     }
 }
-extension ZYCollectListTableViewController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ZYCollectListTableViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionDicArray.count
     }
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard case let cell as ZYFoldingTableViewCell = cell else {
             return
         }
@@ -183,7 +185,7 @@ extension ZYCollectListTableViewController {
             }
         }
     }
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < collectionDicArray.count {
             let durations: [TimeInterval] = [0.26, 0.2]
             if collectionDicArray[indexPath.row].count == 6 {
@@ -205,10 +207,10 @@ extension ZYCollectListTableViewController {
         }
         return UITableViewCell()
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return collectionDicArray[indexPath.row]["height"] as? CGFloat ?? 0
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! ZYFoldingTableViewCell
         if cell.isAnimating() {
             return
@@ -245,5 +247,10 @@ extension ZYCollectListTableViewController {
             tableView.beginUpdates()
             tableView.endUpdates()
         }, completion: nil)
+    }
+}
+extension ZYCollectListTableViewController: ScrollingNavigationControllerDelegate {
+    func scrollingNavigationController(_ controller: ScrollingNavigationController, willChangeState state: NavigationBarState) {
+        view.needsUpdateConstraints()
     }
 }
