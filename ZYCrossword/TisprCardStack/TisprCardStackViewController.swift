@@ -10,6 +10,7 @@ public protocol TisprCardStackViewControllerDelegate  {
     func cardDidChangeState(_ cardIndex: Int)
 }
 open class TisprCardStackViewController: UICollectionViewController, UIGestureRecognizerDelegate {
+    /* The speed of animation. */
     fileprivate let animationSpeedDefault: Float = 0.9
     
     open var cardStackDelegate: TisprCardStackViewControllerDelegate? {
@@ -24,7 +25,6 @@ open class TisprCardStackViewController: UICollectionViewController, UIGestureRe
         layout.gesturesEnabled = true
         collectionView!.isScrollEnabled = false
         setCardSize(CGSize(width: collectionView!.bounds.width - 40, height: 2*collectionView!.bounds.height/3))
-    
     }
     override open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -39,7 +39,7 @@ open class TisprCardStackViewController: UICollectionViewController, UIGestureRe
     open func newCardWasAdded() {
         if layout.newCardShouldAppearOnTheBottom {
             layout.newCardDidAdd(numberOfCards() - 1)
-        } else {
+        }else {
             layout.newCardDidAdd(0)
         }
     }

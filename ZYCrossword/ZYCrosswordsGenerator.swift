@@ -77,7 +77,7 @@ class ZYCrosswordsGenerator: NSObject {
                         let word = self!.currentWords[self!.randomInt(0, max: self!.currentWords.count - 1)]
                         if word.length > 1 {
                             var strArray = [String]()
-                            for str in word.characters {
+                            for str in word {
                                 strArray.append(String(str))
                             }
                             var isRepeat = true

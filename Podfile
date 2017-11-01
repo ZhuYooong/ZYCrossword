@@ -12,5 +12,4 @@ pod 'Kingfisher', '~> 4'
 pod 'SnapKit', '~> 4'
 pod 'Material', '~> 2'
 pod 'DropDown'
-pod 'AMScrollingNavbar', '~> 4'
 end

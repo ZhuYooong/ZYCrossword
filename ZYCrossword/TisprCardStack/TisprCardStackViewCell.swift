@@ -3,7 +3,6 @@
 //
 //  Created by Andrei Pitsko on 07/12/15.
 //
-
 import UIKit
 
 open class TisprCardStackViewCell: UICollectionViewCell {
@@ -14,6 +13,7 @@ open class TisprCardStackViewCell: UICollectionViewCell {
         animation.duration = 0.3
         animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.8, 2.0, 1.0, 1.0)
         layer.add(animation, forKey: "position.y")
+
         super.apply(layoutAttributes)
     }
 }

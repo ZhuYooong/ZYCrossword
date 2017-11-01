@@ -17,6 +17,7 @@ open class TisprCardStackViewLayout: UICollectionViewLayout, UIGestureRecognizer
             if (cell != nil) {
                 collectionView?.bringSubview(toFront: cell!)
             }
+
             collectionView?.performBatchUpdates({
                     _ = self.invalidateLayout()
                 }, completion: { (Bool) in
@@ -67,7 +68,6 @@ open class TisprCardStackViewLayout: UICollectionViewLayout, UIGestureRecognizer
                 if let swipeUpRecog = swipeRecognizerUp {
                     collectionView?.removeGestureRecognizer(swipeUpRecog)
                 }
-                
             }
         }
     }
@@ -93,7 +93,6 @@ open class TisprCardStackViewLayout: UICollectionViewLayout, UIGestureRecognizer
     
     fileprivate let minimumXPanDistanceToSwipe: CGFloat = 100
     fileprivate let minimumYPanDistanceToSwipe: CGFloat = 60
-    
     // MARK: - Getting the Collection View Information
     override open var collectionViewContentSize : CGSize {
         return collectionView!.frame.size
@@ -103,7 +102,7 @@ open class TisprCardStackViewLayout: UICollectionViewLayout, UIGestureRecognizer
         var result :UICollectionViewLayoutAttributes?
         if ((newCardShouldAppearOnTheBottom && itemIndexPath.item == collectionView!.numberOfItems(inSection: 0) - 1) || (!newCardShouldAppearOnTheBottom && itemIndexPath.item == 0)) && newCardAnimationInProgress {
             result = UICollectionViewLayoutAttributes(forCellWith: itemIndexPath)
-            let yPosition = collectionViewContentSize.height - cardSize.height            //Random direction
+            let yPosition = collectionViewContentSize.height - cardSize.height //Random direction
             let directionFromRight = arc4random() % 2 == 0
             let xPosition = directionFromRight ? collectionViewContentSize.width : -cardSize.width
             
@@ -168,7 +167,7 @@ open class TisprCardStackViewLayout: UICollectionViewLayout, UIGestureRecognizer
             //New card has to be displayed if there are no topStackMaximumSize cards in the top stack
             if attributes.indexPath.item >= index && attributes.indexPath.item < index + topStackMaximumSize {
                 yPosition = centralCardYPosition - verticalOffsetBetweenCardsInTopStack*(attributes.indexPath.row - index)
-            }else {
+            } else {
                 attributes.isHidden = true
                 yPosition = centralCardYPosition
             }
@@ -197,17 +196,17 @@ open class TisprCardStackViewLayout: UICollectionViewLayout, UIGestureRecognizer
         case UISwipeGestureRecognizerDirection.up:
             // Take the card at the current index
             // and process the swipe up only if it occurs below it
-//            var temIndex = index
-//            if temIndex >= collectionView!.numberOfItemsInSection(0) {
-//                temIndex--
-//            }
-//            let currentCard = collectionView!.cellForItemAtIndexPath(NSIndexPath(forItem: temIndex , inSection: 0))!
-//            let point = sender.locationInView(collectionView)
-//            if (point.y > CGRectGetMaxY(currentCard.frame) && index > 0) {
-            if index > 0 {
-                index -= 1
+            var temIndex = index
+            if temIndex >= collectionView!.numberOfItems(inSection: 0) {
+                temIndex -= 1
             }
-//            }
+            let currentCard = collectionView!.cellForItem(at: IndexPath(item: temIndex, section: 0))!
+            let point = sender.location(in: collectionView)
+            if (point.y > currentCard.frame.maxY && index > 0) {
+                if index > 0 {
+                    index -= 1
+                }
+            }
         case UISwipeGestureRecognizerDirection.down:
             if index + 1 < collectionView!.numberOfItems(inSection: 0) {
                 index += 1
@@ -245,6 +244,7 @@ open class TisprCardStackViewLayout: UICollectionViewLayout, UIGestureRecognizer
             //workaround for fix issue with zIndex
             let cell = collectionView!.cellForItem(at: draggedCellPath!)
             collectionView?.bringSubview(toFront: cell!)
+            
         }
     }
     //Change position of dragged card

@@ -9,14 +9,12 @@
 import UIKit
 import SwiftyJSON
 import RealmSwift
-import AMScrollingNavbar
 
-class ZYCollectListTableViewController: ScrollingNavigationViewController {
+class ZYCollectListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
-    @IBOutlet var tableView: UITableView!
     private func setup() {
         initData()
         tableView.estimatedRowHeight = kCloseCellHeight
@@ -30,6 +28,7 @@ class ZYCollectListTableViewController: ScrollingNavigationViewController {
         }else {
             initLibraryContentData()
         }
+        tableView.reloadData()
     }
     func initCollectionData() {
         appendContent(with: realm.objects(ZYAllegoric.self).filter("isCollect == true"))
@@ -147,18 +146,18 @@ class ZYCollectListTableViewController: ScrollingNavigationViewController {
         return content
     }
 }
-extension ZYCollectListTableViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ZYCollectListTableViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionDicArray.count
     }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard case let cell as ZYFoldingTableViewCell = cell else {
             return
         }
         cell.backgroundColor = .clear
         if collectionDicArray[indexPath.row]["height"] as? CGFloat ?? 0 == kCloseCellHeight {
             cell.unfold(false, animated: false, completion: nil)
-        } else {
+        }else {
             cell.unfold(true, animated: false, completion: nil)
         }
         if title == "收藏夹" {
@@ -185,20 +184,20 @@ extension ZYCollectListTableViewController: UITableViewDelegate, UITableViewData
             }
         }
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < collectionDicArray.count {
             let durations: [TimeInterval] = [0.26, 0.2]
-            if collectionDicArray[indexPath.row].count == 6 {
+            if collectionDicArray[indexPath.row].count == 7 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDictionayCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations
                 return cell
-            }else if collectionDicArray[indexPath.row].count == 9 {
+            }else if collectionDicArray[indexPath.row].count == 10 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectDoubanCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations
                 return cell
-            }else if collectionDicArray[indexPath.row].count == 11 {
+            }else if collectionDicArray[indexPath.row].count == 12 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CollectPoetryCellId", for: indexPath) as! ZYFoldingTableViewCell
                 cell.durationsForExpandedState = durations
                 cell.durationsForCollapsedState = durations
@@ -207,10 +206,10 @@ extension ZYCollectListTableViewController: UITableViewDelegate, UITableViewData
         }
         return UITableViewCell()
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return collectionDicArray[indexPath.row]["height"] as? CGFloat ?? 0
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (collectionDicArray[indexPath.row]["height"] as? CGFloat) ?? 0
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! ZYFoldingTableViewCell
         if cell.isAnimating() {
             return
@@ -238,7 +237,7 @@ extension ZYCollectListTableViewController: UITableViewDelegate, UITableViewData
             }
             cell.unfold(true, animated: true, completion: nil)
             duration = 0.5
-        } else {
+        }else {
             collectionDicArray[indexPath.row]["height"] = kCloseCellHeight
             cell.unfold(false, animated: true, completion: nil)
             duration = 0.8
@@ -247,10 +246,5 @@ extension ZYCollectListTableViewController: UITableViewDelegate, UITableViewData
             tableView.beginUpdates()
             tableView.endUpdates()
         }, completion: nil)
-    }
-}
-extension ZYCollectListTableViewController: ScrollingNavigationControllerDelegate {
-    func scrollingNavigationController(_ controller: ScrollingNavigationController, willChangeState state: NavigationBarState) {
-        view.needsUpdateConstraints()
     }
 }
