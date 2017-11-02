@@ -30,36 +30,8 @@ class ZYChessboardViewController: UIViewController {
     var alreadyCount = 0
     @IBOutlet weak var starLabel: UILabel!
     @IBAction func starButtonClick(_ sender: UIButton) {
-        prepareUndoButton()
-    }
-    fileprivate var undoButton: FlatButton!
-    fileprivate func prepareUndoButton() {
-        undoButton = FlatButton(title: "Undo", titleColor: Color.yellow.base)
-        undoButton.pulseAnimation = .backing
-        undoButton.titleLabel?.font = snackbarController?.snackbar.textLabel.font
-    }
-    
-    fileprivate func prepareSnackbar() {
-        guard let snackbar = snackbarController?.snackbar else {
-            return
-        }
         
-        snackbar.text = "Reminder saved."
-        snackbar.rightViews = [undoButton]
     }
-    
-    fileprivate func scheduleAnimation() {
-        Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(animateSnackbar), userInfo: nil, repeats: true)
-    }
-    @objc fileprivate func animateSnackbar() {
-        guard let sc = snackbarController else {
-            return
-        }
-        
-        _ = sc.animate(snackbar: .visible, delay: 1)
-        _ = sc.animate(snackbar: .hidden, delay: 4)
-    }
-    
     @IBOutlet weak var coinLabel: UILabel!
     @IBAction func coinButtonClick(_ sender: UIButton) {
         
@@ -264,7 +236,8 @@ class ZYChessboardViewController: UIViewController {
         }else {
             coinCount = 10
         }
-        if coinCount > 0 && (Int(coinLabel.text ?? "0") ?? 0 - coinCount) >= 0 {
+        let num = Int(coinLabel.text ?? "0") ?? 0 - coinCount
+        if coinCount > 0 && num >= 0 {
             havePromptCount += 1
             return coinCount
         }else {
@@ -277,7 +250,7 @@ class ZYChessboardViewController: UIViewController {
             wordInputTextField.text = baseWord.showString
             _ = textFieldShouldReturn(wordInputTextField)
         }else {
-            print("No Coin!")
+            ZYCustomClass.shareCustom.showSnackbar(with: "No Coin!", snackbarController: snackbarController)
         }
     }
     @IBAction func sendButtonClick(_ sender: UIButton) {

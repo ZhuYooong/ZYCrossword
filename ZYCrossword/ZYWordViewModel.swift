@@ -38,39 +38,63 @@ class ZYWordViewModel: NSObject {
         case .TangPoetry300:
             wordInfo.number = 286
             wordInfo.isSelectted = true
+            wordInfo.isUnlocked = true
+            wordInfo.price = 250
         case .SongPoetry300:
             wordInfo.number = 289
-            wordInfo.isSelectted = true
+            wordInfo.isSelectted = false
+            wordInfo.isUnlocked = true
+            wordInfo.price = 250
         case .OldPoetry300:
             wordInfo.number = 248
             wordInfo.isSelectted = false
+            wordInfo.isUnlocked = false
+            wordInfo.price = 200
         case .ShiJing:
             wordInfo.number = 298
             wordInfo.isSelectted = false
+            wordInfo.isUnlocked = false
+            wordInfo.price = 300
         case .YueFu:
             wordInfo.number = 183
             wordInfo.isSelectted = false
+            wordInfo.isUnlocked = false
+            wordInfo.price = 200
         case .ChuCi:
             wordInfo.number = 17
             wordInfo.isSelectted = false
+            wordInfo.isUnlocked = false
+            wordInfo.price = 100
         case .TangPoetryAll:
             wordInfo.number = 0
             wordInfo.isSelectted = false
+            wordInfo.isUnlocked = false
+            wordInfo.price = 100
         case .SongPoetryAll:
             wordInfo.number = 0
             wordInfo.isSelectted = false
+            wordInfo.isUnlocked = false
+            wordInfo.price = 100
         case .Top250Movie:
             wordInfo.number = 244
             wordInfo.isSelectted = true
+            wordInfo.isUnlocked = true
+            wordInfo.price = 300
         case .Top250Book:
             wordInfo.number = 226
             wordInfo.isSelectted = false
+            wordInfo.isUnlocked = false
+            wordInfo.price = 300
         case .Idiom:
             wordInfo.number = 30971
             wordInfo.isSelectted = true
+            wordInfo.isUnlocked = true
+            wordInfo.price = 500
         case .Allegoric:
             wordInfo.number = 495
             wordInfo.isSelectted = true
+            wordInfo.isUnlocked = true
+            wordInfo.price = 400
         }
         try! realm.write {
             realm.add(wordInfo, update: true)

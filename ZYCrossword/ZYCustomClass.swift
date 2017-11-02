@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Material
+
 //MARK: - 宏定义
 let screenHeight = UIScreen.main.bounds.height
 let screenWidth = UIScreen.main.bounds.width
@@ -18,13 +20,20 @@ var chessboardEmptySymbol = "-"
 let chessboardDocumentPath = "Chessboard.plist"
 let userInfoKey = "userInfoUserDefultKey"
 class ZYCustomClass: NSObject {
-
+    static let shareCustom = ZYCustomClass()
+    fileprivate override init() { }
+    
+    func showSnackbar(with text: String, snackbarController: SnackbarController?) {
+        guard let snack = snackbarController else {
+            return
+        }
+        snack.snackbar.text = text
+        _ = snack.animate(snackbar: .visible)
+        _ = snack.animate(snackbar: .hidden, delay: 4)
+    }
 }
 //MARK: - 字符串的扩展
 extension String {
-    var length: Int {
-        return characters.count
-    }
     func rangeFromNSRange(_ nsRange : NSRange) -> Range<String.Index>? {
         if let from16 = utf16.index(utf16.startIndex, offsetBy: nsRange.location, limitedBy: utf16.endIndex) {
             if let to16 = utf16.index(from16, offsetBy: nsRange.length, limitedBy: utf16.endIndex) {
@@ -56,7 +65,7 @@ extension String {
     }
     func showContentString(with contentString: String, typeString: String) -> String {
         var replaceString = ""
-        for _ in 0 ..< self.characters.count {
+        for _ in 0 ..< self.count {
             replaceString += "_ "
         }
         return contentString.replacingOccurrences(of: self, with: replaceString) + "\n----" + typeString

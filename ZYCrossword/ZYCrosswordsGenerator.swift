@@ -75,7 +75,7 @@ class ZYCrosswordsGenerator: NSObject {
                         }
                     }else {
                         let word = self!.currentWords[self!.randomInt(0, max: self!.currentWords.count - 1)]
-                        if word.length > 1 {
+                        if word.count > 1 {
                             var strArray = [String]()
                             for str in word {
                                 strArray.append(String(str))
@@ -247,7 +247,7 @@ class ZYCrosswordsGenerator: NSObject {
     fileprivate func suggestCoord(_ word: String) -> Array<(Int, Int, Int, Int, Int)> {
         var coordlist = Array<(Int, Int, Int, Int, Int)>()
         var glc = -1
-        for letter in word.characters {
+        for letter in word {
             glc += 1
             var rowc = 0
             for row: Int in 0 ..< columns {
@@ -258,12 +258,12 @@ class ZYCrosswordsGenerator: NSObject {
                     let cell = grid[column, row]
                     if String(letter) == cell {
                         if rowc - glc > 0 {
-                            if ((rowc - glc) + word.length) <= columns {
+                            if ((rowc - glc) + word.count) <= columns {
                                 coordlist.append((colc, rowc - glc, 1, colc + (rowc - glc), 0))
                             }
                         }
                         if colc - glc > 0 {
-                            if ((colc - glc) + word.length) <= columns {
+                            if ((colc - glc) + word.count) <= columns {
                                 coordlist.append((colc - glc, rowc, 0, rowc + (colc - glc), 0))
                             }
                         }
@@ -297,7 +297,7 @@ class ZYCrosswordsGenerator: NSObject {
         }
         var count = 1
         var score = 1
-        for letter in word.characters {
+        for letter in word {
             let activeCell = getCell(c, row: r)
             if activeCell == emptySymbol || activeCell == String(letter) {
                 if activeCell == String(letter) {
@@ -375,7 +375,7 @@ class ZYCrosswordsGenerator: NSObject {
             var c = column
             var r = row
             var grid = [Array<Int>]()
-            for letter in word.characters {
+            for letter in word {
                 setCell(c, row: r, value: String(letter))
                 grid.append([c - 1, r - 1])
                 if direction == 0 {

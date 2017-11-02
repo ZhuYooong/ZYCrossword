@@ -124,7 +124,7 @@ class ZYChessboardView: UIView {
         }
         if let string = text {
             for button in callButtonArray {
-                for word in string.characters {
+                for word in string {
                     if button.contentState != .right {
                         button.currentWord = String(word)
                         if button.contentState == .right {

@@ -8,11 +8,16 @@
 
 import UIKit
 import RealmSwift
+import Material
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         realmSchemaVersion()
+        window = UIWindow(frame: Screen.bounds)
+        window!.rootViewController = SnackbarController(rootViewController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainID"))
+        window!.makeKeyAndVisible()
         return true
     }
     //MARK: Realm 版本控制

@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import Material
 
 class ZYMainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
@@ -157,7 +156,7 @@ class ZYMainViewController: UIViewController {
             }
         }
     }
-    var chessboardViewController: ZYChessboardViewController = SnackbarController(rootViewController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID")).rootViewController  as! ZYChessboardViewController
+    var chessboardViewController: ZYChessboardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID")  as! ZYChessboardViewController
     func beganChessboard() {
         chessboardViewController.mainViewController = self
         chessboardViewController.chessboard = chessboard

@@ -381,6 +381,7 @@
 		DE3CA54D1FA8784E00700A96 /* TisprCardStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA54A1FA8784E00700A96 /* TisprCardStackViewController.swift */; };
 		DE3CA54E1FA8784E00700A96 /* TisprCardStackViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */; };
 		DE8358DF1FA7295000DF478A /* ZYFlipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */; };
+		DEDAAA421FAB143D002521FA /* ZYShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */; };
 		DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -785,6 +786,7 @@
 		DE3CA54A1FA8784E00700A96 /* TisprCardStackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewController.swift; sourceTree = "<group>"; };
 		DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewLayout.swift; sourceTree = "<group>"; };
 		DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYFlipButton.swift; sourceTree = "<group>"; };
+		DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYShopListViewController.swift; sourceTree = "<group>"; };
 		DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1391,6 +1393,7 @@
 				04928DB51EC93D5D002915BD /* Chessboard */,
 				047371811F0F64D5005BE7A9 /* CrosswordList */,
 				04968EE11F10CAC7004CB1F5 /* CollectList */,
+				DEDAAA401FAB13B4002521FA /* Shop */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1432,6 +1435,14 @@
 				DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */,
 			);
 			path = TisprCardStack;
+			sourceTree = "<group>";
+		};
+		DEDAAA401FAB13B4002521FA /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */,
+			);
+			name = Shop;
 			sourceTree = "<group>";
 		};
 		DEDF91881F9F2D5E00CA0B43 /* ViewModel */ = {
@@ -2026,6 +2037,7 @@
 				04621BE71EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift in Sources */,
 				040E95F31ED6B42C00FC29E2 /* ZYChessboardViewController.swift in Sources */,
 				046B7C0B1F5D04B70088D43D /* ZYCollectDictionaryTableViewCell.swift in Sources */,
+				DEDAAA421FAB143D002521FA /* ZYShopListViewController.swift in Sources */,
 				04141ADD1EC4690500A1A8A2 /* ZYMusic.swift in Sources */,
 				0496F3371EBB20E7008D3285 /* ZYArrayShuffle.swift in Sources */,
 				0490AA4B1EAEE85B0051C47D /* NetDataManager.swift in Sources */,
