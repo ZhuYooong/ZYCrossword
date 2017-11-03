@@ -30,6 +30,7 @@ class ZYWordViewModel: NSObject {
                 initWordData(with: type, and: realm)
             }
         }
+        UserDefaults.standard.set(0, forKey: unlockedKey)
     }
     func initWordData(with type: ZYWordType, and realm: Realm) {
         let wordInfo = ZYWord()
@@ -101,17 +102,30 @@ class ZYWordViewModel: NSObject {
         }
         ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
     }
-    func changeWordData(with type: String, and realm: Realm) {
-        let predicate = NSPredicate(format: "wordType = '\(type)'")
-        let word = realm.objects(ZYWord.self).filter(predicate)
+    func clickWordData(with type: String, and realm: Realm) {
+        let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(type)'"))
         let wordInfo = ZYWord()
         wordInfo.wordType = type
         wordInfo.number = word.first?.number ?? 0
+        wordInfo.price = word.first?.price ?? 0
+        wordInfo.isUnlocked = word.first?.isUnlocked ?? false
         if word.first?.isSelectted == false {
             wordInfo.isSelectted = true
         }else {
             wordInfo.isSelectted = false
         }
+        try! realm.write {
+            realm.add(wordInfo, update: true)
+        }
+    }
+    func unlockWordData(with type: String, and realm: Realm) {
+        let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(type)'"))
+        let wordInfo = ZYWord()
+        wordInfo.wordType = type
+        wordInfo.number = word.first?.number ?? 0
+        wordInfo.price = word.first?.price ?? 0
+        wordInfo.isSelectted = word.first?.isSelectted ?? false
+        wordInfo.isUnlocked = true
         try! realm.write {
             realm.add(wordInfo, update: true)
         }
