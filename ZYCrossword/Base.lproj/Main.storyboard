@@ -239,6 +239,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="xEw-TK-Ik1" kind="show" identifier="libraryContentSegueId" id="5eo-bT-ZJZ"/>
+                        <segue destination="sAg-43-p1P" kind="show" identifier="libraryToShopSegueId" id="cW1-GU-9Hy"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAY-Lv-nHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1568,5 +1569,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="b2i-Ax-zaS"/>
         <segue reference="5eo-bT-ZJZ"/>
+        <segue reference="cW1-GU-9Hy"/>
     </inferredMetricsTieBreakers>
 </document>

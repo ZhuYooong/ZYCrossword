@@ -72,6 +72,8 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         
         creatRightLabel()
     }
+    //MARK: right item
+    //right label
     open var rightCount = 0 {
         didSet {
             rightLabel.text = "已选择 \(rightCount) 本"
@@ -82,7 +84,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         rightLabel.textColor = .white
         rightLabel.textAlignment = .right
         rightLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 21)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightLabel)
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightLabel)
         
         var count = 0
         for word in dictionaryWordArray {
@@ -101,6 +103,29 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
             }
         }
         rightCount = count
+    }
+    // coin
+    open var coinCount = 0 {
+        didSet {
+            coinButton.setTitle("\(coinCount)", for: .normal)
+        }
+    }
+    let coinButton = UIButton()
+    func creatCoinButton() {
+        coinButton.setImage(UIImage(named: "金币"), for: .normal)
+        coinButton.setTitleColor(.white, for: .normal)
+        coinButton.frame = CGRect(x: 0, y: 0, width: 100, height: 21)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: coinButton)
+        
+        initCoinData()
+    }
+    func initCoinData() {
+        if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
+            coinCount = user.coinCount
+        }
+    }
+    func coinButttonClick(sender: UIButton) {
+        performSegue(withIdentifier: "libraryToShopSegueId", sender: sender)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? ZYCollectListTableViewController, let typeName = sender as? String, segue.identifier == "libraryContentSegueId" {
@@ -143,6 +168,11 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
                 }else {
                     self.rightCount -= 1
                 }
+            }
+        }
+        cell.unlockBlock = { isUnlock in
+            if isUnlock {
+                self.initCoinData()
             }
         }
         return cell

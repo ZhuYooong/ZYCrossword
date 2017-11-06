@@ -12,6 +12,7 @@ class ZYLibraryListCell: TisprCardStackViewCell {
     var parientViewController: ZYLibraryListViewController?
     var libraryContentBlock: ((String) -> Void)?
     var changeWordBlock:((Bool) -> Void)?
+    var unlockBlock:((Bool) -> Void)?
     let realm = try! Realm()
     
     @IBOutlet weak var backgroundImageiVew: UIImageView!
@@ -51,13 +52,24 @@ class ZYLibraryListCell: TisprCardStackViewCell {
             libraryContentBlock!(cardContentArray[sender.tag].wordType)
         }
     }
-    func showLockAlert(with wordType: String, cell: ZYLabraryCardTableViewCell) {
-        let option = UIAlertController(title: "您确定要解锁《\(wordType)》吗？", message: "需要  金币", preferredStyle: .alert)
-        option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        option.addAction(UIAlertAction(title: "确定", style: .default) { (action) in
-            
-        })
-        parientViewController.present(option, animated: true, completion: nil)
+    func showLockAlert(with wordType: String, index: Int, cell: ZYLabraryCardTableViewCell) {
+        if let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(wordType)'")).first {
+            let truePrice = word.price + UserDefaults.standard.integer(forKey: unlockedKey)
+            let option = UIAlertController(title: "您确定要解锁《\(wordType)》吗？", message: "需要 \(truePrice) 金币", preferredStyle: .alert)
+            option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+            option.addAction(UIAlertAction(title: "确定", style: .default) { (action) in
+                if truePrice < self.parientViewController!.coinCount {
+                    ZYWordViewModel.shareWord.unlockWordData(with: word, and: self.realm)
+                    ZYUserInforViewModel.shareUserInfor.changeCoin(with: truePrice, add: false)
+                    self.unlockBlock!(true)
+                    self.cardContentArray[index].isUnlocked = true
+                    cell.lockImageView.isHidden = true
+                }else {
+                    ZYCustomClass.shareCustom.showSnackbar(with: "coin count lack!", snackbarController: self.parientViewController?.snackbarController)
+                }
+            })
+            parientViewController?.present(option, animated: true, completion: nil)
+        }
     }
 }
 extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
@@ -81,9 +93,9 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
                     cell.layerLine.removeFromSuperlayer()
                     cell.isCollection = false
                 }
-                cell.lockImageView.isHide = true
+                cell.lockImageView.isHidden = true
             }else {
-                cell.lockImageView.isHide = false
+                cell.lockImageView.isHidden = false
             }
         }
         return cell
@@ -96,25 +108,22 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
             guard case let cell as ZYLabraryCardTableViewCell = tableView.cellForRow(at: indexPath) else {
                 return
             }
-            if cell.isUnlocked {
+            if cardContentArray[indexPath.row].isUnlocked {
                 if count <= 2 && cell.isCollection {
-                    ZYCustomClass.shareCustom.showSnackbar(with: "less 2!", snackbarController: snackbarController)
+                    ZYCustomClass.shareCustom.showSnackbar(with: "less 2!", snackbarController: parientViewController?.snackbarController)
                 }else if count >= 6 && !cell.isCollection {
-                    ZYCustomClass.shareCustom.showSnackbar(with: "most 6!", snackbarController: snackbarController)
+                    ZYCustomClass.shareCustom.showSnackbar(with: "most 6!", snackbarController: parientViewController?.snackbarController)
                 }else {
                     cell.isCollectionSelected = true
                     cell.isCollection = !cell.isCollection
                     if changeWordBlock != nil {
                         ZYWordViewModel.shareWord.clickWordData(with: cardContentArray[indexPath.row].wordType, and: realm)
-                        if cell.isCollection {
-                            changeWordBlock!(true)
-                        }else {
-                            changeWordBlock!(false)
-                        }
+                        cardContentArray[indexPath.row].isSelectted = cell.isCollection
+                        changeWordBlock!(true)
                     }
                 }
             }else {
-                showLockAlert(with: cardContentArray[indexPath.row].wordType,cell: cell)
+                showLockAlert(with: cardContentArray[indexPath.row].wordType, index: indexPath.row, cell: cell)
             }
         }
     }

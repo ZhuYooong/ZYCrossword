@@ -118,13 +118,12 @@ class ZYWordViewModel: NSObject {
             realm.add(wordInfo, update: true)
         }
     }
-    func unlockWordData(with type: String, and realm: Realm) {
-        let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(type)'"))
+    func unlockWordData(with word: ZYWord, and realm: Realm) {
         let wordInfo = ZYWord()
-        wordInfo.wordType = type
-        wordInfo.number = word.first?.number ?? 0
-        wordInfo.price = word.first?.price ?? 0
-        wordInfo.isSelectted = word.first?.isSelectted ?? false
+        wordInfo.wordType = word.wordType
+        wordInfo.number = word.number
+        wordInfo.price = word.price
+        wordInfo.isSelectted = word.isSelectted
         wordInfo.isUnlocked = true
         try! realm.write {
             realm.add(wordInfo, update: true)

@@ -34,7 +34,7 @@ class ZYChessboardViewController: UIViewController {
     }
     @IBOutlet weak var coinLabel: UILabel!
     @IBAction func coinButtonClick(_ sender: UIButton) {
-        
+        mainViewController?.performSegue(withIdentifier: "shopListSegeId", sender: sender)
     }
     func initMenuData() {
         if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
