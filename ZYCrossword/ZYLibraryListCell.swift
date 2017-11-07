@@ -84,16 +84,15 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
             cell.libraryContentButton.tag = indexPath.row
             cell.libraryContentButton.addTarget(self, action: #selector(libraryContentButtonCliick(sender:)), for: .touchUpInside)
             if cardContentArray[indexPath.row].isUnlocked {
+                cell.lockImageView.isHidden = true
                 if cardContentArray[indexPath.row].isSelectted {
                     cell.backgroundImageView.layer.addSublayer(cell.layerRight)
                     cell.backgroundImageView.layer.addSublayer(cell.layerLine)
-                    cell.isCollection = true
                 }else {
                     cell.layerRight.removeFromSuperlayer()
                     cell.layerLine.removeFromSuperlayer()
-                    cell.isCollection = false
                 }
-                cell.lockImageView.isHidden = true
+                cell.isCollection = cardContentArray[indexPath.row].isSelectted
             }else {
                 cell.lockImageView.isHidden = false
             }

@@ -71,6 +71,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         layout.bottomStackCardHeight = 45
         
         creatRightLabel()
+        creatCoinButton()
     }
     //MARK: right item
     //right label
@@ -107,7 +108,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
     // coin
     open var coinCount = 0 {
         didSet {
-            coinButton.setTitle("\(coinCount)", for: .normal)
+            coinButton.setTitle(" \(coinCount)", for: .normal)
         }
     }
     let coinButton = UIButton()

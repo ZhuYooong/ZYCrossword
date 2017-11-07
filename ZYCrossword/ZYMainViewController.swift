@@ -32,9 +32,10 @@ class ZYMainViewController: UIViewController {
     func loadData() {
         DispatchQueue.main.sync { [weak self] in
             titleViewController.loadingTitleLabel.text = "正在加载资源包……"
-            self?.initChessboardData()
-            self?.chessboard.printGrid()
-            self?.beganChessboard()
+            if self!.initChessboardData() {
+                self?.chessboard.printGrid()
+                self?.beganChessboard()
+            }
         }
     }
     func idString() -> String {
@@ -42,7 +43,7 @@ class ZYMainViewController: UIViewController {
         df.dateFormat = "yyyyMMddHmmssS"
         return df.string(from: Date())
     }
-    func initChessboardData() {
+    func initChessboardData() -> Bool {
         do {
             let realm = try Realm()
             if let data = NSKeyedUnarchiver.unarchiveObject(withFile: chessboardDocumentPath.getFilePath()) as? ZYChessboard {
@@ -61,23 +62,24 @@ class ZYMainViewController: UIViewController {
                 loadChessboardData(realm: realm, type: ZYBook.self)
                 loadChessboardData(realm: realm, type: ZYIdiom.self)
                 loadChessboardData(realm: realm, type: ZYAllegoric.self)
+                return true
             }else {
-                creatChessboardData()
+                return creatChessboardData()
             }
         }catch {
-            creatChessboardData()
+            return creatChessboardData()
         }
     }
     //MARK: 创建资源
     var chessboard = ZYChessboard()
     var tipXdataArr = [ZYBaseWord]()
     var tipYdataArr = [ZYBaseWord]()
-    func creatChessboardData() {
+    func creatChessboardData() -> Bool {
         ZYWordViewModel.shareWord.initData()
         guard let _ = UserDefaults.standard.string(forKey: userInfoKey) else {
             ZYUserInforViewModel.shareUserInfor.initData()
             performSegue(withIdentifier: "librarySegueId", sender: self)
-            return
+            return false
         }
         let crosswordsGenerator = ZYCrosswordsGenerator()
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
@@ -105,6 +107,7 @@ class ZYMainViewController: UIViewController {
             }
         }
         NSKeyedArchiver.archiveRootObject(chessboard, toFile: chessboardDocumentPath.getFilePath())
+        return true
     }
     //MARK: 加载资源
     func loadChessboardData<T: ZYBaseWord>(realm: Realm, type: T.Type) {

@@ -128,7 +128,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LibraryLock" translatesAutoresizingMaskIntoConstraints="NO" id="x45-FN-ApN">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle background" translatesAutoresizingMaskIntoConstraints="NO" id="x45-FN-ApN">
                                                                 <rect key="frame" x="10" y="4" width="300" height="76"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osz-5P-oa7">
@@ -164,12 +164,12 @@
                                                                 </constraints>
                                                             </view>
                                                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LibraryLock" translatesAutoresizingMaskIntoConstraints="NO" id="eEW-QR-x5r">
-                                                                <rect key="frame" x="10" y="4" width="300" height="76"/>
+                                                                <rect key="frame" x="13" y="6" width="295" height="71"/>
                                                             </imageView>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="Euc-m5-orH" firstAttribute="trailing" secondItem="osz-5P-oa7" secondAttribute="trailing" id="6pc-mM-lzQ"/>
-                                                            <constraint firstItem="eEW-QR-x5r" firstAttribute="trailing" secondItem="x45-FN-ApN" secondAttribute="trailing" id="6qB-qa-NEY"/>
+                                                            <constraint firstItem="eEW-QR-x5r" firstAttribute="trailing" secondItem="x45-FN-ApN" secondAttribute="trailing" constant="-2" id="6qB-qa-NEY"/>
                                                             <constraint firstAttribute="bottom" secondItem="NFc-wF-Fxb" secondAttribute="bottom" constant="18" id="9kz-1P-8m6"/>
                                                             <constraint firstItem="TFa-gB-gg7" firstAttribute="top" secondItem="x45-FN-ApN" secondAttribute="top" id="BND-oB-FEi"/>
                                                             <constraint firstItem="osz-5P-oa7" firstAttribute="leading" secondItem="x45-FN-ApN" secondAttribute="leading" constant="12" id="Bxr-xD-L4p"/>
@@ -177,16 +177,16 @@
                                                             <constraint firstItem="Euc-m5-orH" firstAttribute="leading" secondItem="osz-5P-oa7" secondAttribute="leading" id="Knv-QH-EUi"/>
                                                             <constraint firstItem="Euc-m5-orH" firstAttribute="top" secondItem="osz-5P-oa7" secondAttribute="bottom" constant="2" id="Mkl-tP-Cbp"/>
                                                             <constraint firstItem="osz-5P-oa7" firstAttribute="centerY" secondItem="uuV-rJ-W61" secondAttribute="centerY" constant="-12" id="NoC-yx-dpU"/>
-                                                            <constraint firstItem="eEW-QR-x5r" firstAttribute="leading" secondItem="x45-FN-ApN" secondAttribute="leading" id="RV5-2p-3Gs"/>
+                                                            <constraint firstItem="eEW-QR-x5r" firstAttribute="leading" secondItem="x45-FN-ApN" secondAttribute="leading" constant="3" id="RV5-2p-3Gs"/>
                                                             <constraint firstItem="NFc-wF-Fxb" firstAttribute="top" secondItem="uuV-rJ-W61" secondAttribute="top" constant="18" id="Whn-rN-JCW"/>
                                                             <constraint firstAttribute="trailing" secondItem="x45-FN-ApN" secondAttribute="trailing" constant="10" id="WwV-sA-kAG"/>
                                                             <constraint firstAttribute="bottom" secondItem="x45-FN-ApN" secondAttribute="bottom" constant="4" id="iNk-we-HFl"/>
                                                             <constraint firstAttribute="trailing" secondItem="TFa-gB-gg7" secondAttribute="trailing" constant="4" id="oHm-aN-44X"/>
-                                                            <constraint firstItem="eEW-QR-x5r" firstAttribute="bottom" secondItem="x45-FN-ApN" secondAttribute="bottom" id="ovE-0t-GQw"/>
+                                                            <constraint firstItem="eEW-QR-x5r" firstAttribute="bottom" secondItem="x45-FN-ApN" secondAttribute="bottom" constant="-3" id="ovE-0t-GQw"/>
                                                             <constraint firstItem="x45-FN-ApN" firstAttribute="top" secondItem="uuV-rJ-W61" secondAttribute="top" constant="4" id="pQ4-ZH-f5n"/>
                                                             <constraint firstItem="x45-FN-ApN" firstAttribute="leading" secondItem="uuV-rJ-W61" secondAttribute="leading" constant="10" id="qt4-dd-M8f"/>
                                                             <constraint firstItem="TFa-gB-gg7" firstAttribute="bottom" secondItem="x45-FN-ApN" secondAttribute="bottom" id="rxa-BH-xtN"/>
-                                                            <constraint firstItem="eEW-QR-x5r" firstAttribute="top" secondItem="x45-FN-ApN" secondAttribute="top" id="wtc-C5-cFE"/>
+                                                            <constraint firstItem="eEW-QR-x5r" firstAttribute="top" secondItem="x45-FN-ApN" secondAttribute="top" constant="2" id="wtc-C5-cFE"/>
                                                             <constraint firstItem="NFc-wF-Fxb" firstAttribute="leading" secondItem="osz-5P-oa7" secondAttribute="trailing" constant="4" id="xSe-Q8-VTb"/>
                                                         </constraints>
                                                     </tableViewCellContentView>
