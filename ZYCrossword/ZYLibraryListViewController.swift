@@ -116,6 +116,8 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         coinButton.setImage(UIImage(named: "金币"), for: .normal)
         coinButton.setTitleColor(.white, for: .normal)
         coinButton.frame = CGRect(x: 0, y: 0, width: 100, height: 21)
+        coinButton.addTarget(self, action: #selector(coinButttonClick(sender:)), for: .touchUpInside)
+        coinButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -15)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: coinButton)
         
         initCoinData()
@@ -125,7 +127,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
             coinCount = user.coinCount
         }
     }
-    func coinButttonClick(sender: UIButton) {
+    @objc func coinButttonClick(sender: UIButton) {
         performSegue(withIdentifier: "libraryToShopSegueId", sender: sender)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
