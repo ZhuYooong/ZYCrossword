@@ -13,6 +13,10 @@ class ZYShopListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        NotificationCenter.default.addObserver(self, selector: #selector(initCoinData), name: NSNotification.Name(rawValue: coinCountKey), object: nil)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     //MARK: - views
     @IBOutlet weak var shopBackgroundScrollView: UIScrollView!
@@ -45,25 +49,49 @@ class ZYShopListViewController: UIViewController {
         
         initCoinData()
     }
-    func initCoinData() {
+    @objc func initCoinData() {
         if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
             coinCount = user.coinCount
         }
     }
     //MARK: - button
     @IBOutlet weak var firstShopButton: UIButton!
-    @IBAction func firstShopButtonClick(_ sender: UIButton) {
+    @IBAction func firstShopButtonClick(_ sender: UIButton) {//1200
+        clickShopButton(with: sender)
+        buyCoinCount = 1200
     }
     @IBOutlet weak var secondShopButton: UIButton!
-    @IBAction func secondShopButtonClick(_ sender: UIButton) {
+    @IBAction func secondShopButtonClick(_ sender: UIButton) {//4500
+        clickShopButton(with: sender)
+        buyCoinCount = 4500
     }
     @IBOutlet weak var thirdShopButton: UIButton!
-    @IBAction func thirdShopButtonClick(_ sender: UIButton) {
+    @IBAction func thirdShopButtonClick(_ sender: UIButton) {//20000
+        clickShopButton(with: sender)
+        buyCoinCount = 20000
     }
-    
+    func clickShopButton(with sender: UIButton) {
+        if !sender.isSelected {
+            firstShopButton.isSelected = false
+            secondShopButton.isSelected = false
+            thirdShopButton.isSelected = false
+            
+            sender.isSelected = true
+        }
+    }
     @IBAction func advertisementButtonClick(_ sender: UIButton) {
+        buyCoin(with: 100)
     }
     @IBAction func sureButtonClick(_ sender: RaisedButton) {
+        if buyCoinCount == 1200 || buyCoinCount == 4500 || buyCoinCount == 20000 {
+            buyCoin(with: buyCoinCount)
+        }else {
+            ZYCustomClass.shareCustom.showSnackbar(with: "coin count wrong!", snackbarController: self.snackbarController)
+        }
+    }
+    var buyCoinCount = 0
+    func buyCoin(with count: Int) {
+        ZYUserInforViewModel.shareUserInfor.changeCoin(with: count, add: true)
     }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

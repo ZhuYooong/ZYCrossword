@@ -17,14 +17,15 @@ class ZYChessboardViewController: UIViewController {
     var resultXArray = [ZYBaseWord]()
     var resultYArray = [ZYBaseWord]()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        initMenuData()
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextfieldNotification()
         creatMoreDropDown()
+        initMenuData()
+        NotificationCenter.default.addObserver(self, selector: #selector(initMenuData), name: NSNotification.Name(rawValue: coinCountKey), object: nil)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     //MARK: - Menu
     var alreadyCount = 0
@@ -36,7 +37,7 @@ class ZYChessboardViewController: UIViewController {
     @IBAction func coinButtonClick(_ sender: UIButton) {
         mainViewController?.performSegue(withIdentifier: "shopListSegeId", sender: sender)
     }
-    func initMenuData() {
+    @objc func initMenuData() {
         if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
             starLabel.text = "\(user.starCount)"
             coinLabel.text = "\(user.coinCount)"
@@ -189,9 +190,6 @@ class ZYChessboardViewController: UIViewController {
     @IBOutlet weak var wordInputView: UIView!
     @IBOutlet weak var wordInputViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var wordInputTextField: UITextField!
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
     func setupTextfieldNotification() -> Void {
         NotificationCenter.default.addObserver(self, selector: #selector(keyWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyWillHide), name: .UIKeyboardWillHide, object: nil)
@@ -236,7 +234,7 @@ class ZYChessboardViewController: UIViewController {
         }else {
             coinCount = 10
         }
-        let num = Int(coinLabel.text ?? "0") ?? 0 - coinCount
+        let num = (Int(coinLabel.text ?? "0") ?? 0) - coinCount
         if coinCount > 0 && num >= 0 {
             havePromptCount += 1
             return coinCount
@@ -366,7 +364,6 @@ extension ZYChessboardViewController: UITextFieldDelegate {
                 ZYUserInforViewModel.shareUserInfor.changeStarCount(with: .third)
             }
             alreadyCount = nowCount
-            initMenuData()
         }
     }
     func selectedAnotherWord(with selectedWordArray: [Word]) {

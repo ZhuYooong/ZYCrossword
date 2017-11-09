@@ -38,6 +38,7 @@ class ZYUserInforViewModel: NSObject {
             userInfo.starCount = user.starCount + level.rawValue
             try! realm.write {
                 realm.add(userInfo, update: true)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: coinCountKey), object: nil)
             }
         }
     }
@@ -53,6 +54,7 @@ class ZYUserInforViewModel: NSObject {
             userInfo.starCount = user.starCount
             try! realm.write {
                 realm.add(userInfo, update: true)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: coinCountKey), object: nil)
             }
         }
     }

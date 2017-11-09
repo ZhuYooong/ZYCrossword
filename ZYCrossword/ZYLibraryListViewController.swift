@@ -15,6 +15,10 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         super.viewDidLoad()
         initData()
         initView()
+        NotificationCenter.default.addObserver(self, selector: #selector(initCoinData), name: NSNotification.Name(rawValue: coinCountKey), object: nil)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     //MARK: - 界面和数据
     fileprivate var countOfCards: Int = 3
@@ -122,7 +126,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         
         initCoinData()
     }
-    func initCoinData() {
+    @objc func initCoinData() {
         if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
             coinCount = user.coinCount
         }
@@ -171,11 +175,6 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
                 }else {
                     self.rightCount -= 1
                 }
-            }
-        }
-        cell.unlockBlock = { isUnlock in
-            if isUnlock {
-                self.initCoinData()
             }
         }
         return cell

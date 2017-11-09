@@ -12,7 +12,6 @@ class ZYLibraryListCell: TisprCardStackViewCell {
     var parientViewController: ZYLibraryListViewController?
     var libraryContentBlock: ((String) -> Void)?
     var changeWordBlock:((Bool) -> Void)?
-    var unlockBlock:((Bool) -> Void)?
     let realm = try! Realm()
     
     @IBOutlet weak var backgroundImageiVew: UIImageView!
@@ -61,7 +60,6 @@ class ZYLibraryListCell: TisprCardStackViewCell {
                 if truePrice < self.parientViewController!.coinCount {
                     ZYWordViewModel.shareWord.unlockWordData(with: word, and: self.realm)
                     ZYUserInforViewModel.shareUserInfor.changeCoin(with: truePrice, add: false)
-                    self.unlockBlock!(true)
                     self.cardContentArray[index].isUnlocked = true
                     cell.lockImageView.isHidden = true
                 }else {
