@@ -381,6 +381,7 @@
 		DE3CA54D1FA8784E00700A96 /* TisprCardStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA54A1FA8784E00700A96 /* TisprCardStackViewController.swift */; };
 		DE3CA54E1FA8784E00700A96 /* TisprCardStackViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */; };
 		DE8358DF1FA7295000DF478A /* ZYFlipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */; };
+		DE8914BB1FB5A6C000277963 /* ZYAboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */; };
 		DE920C3C1FB1A8F4006F1A93 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */; };
 		DEDAAA421FAB143D002521FA /* ZYShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */; };
 		DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */; };
@@ -787,6 +788,7 @@
 		DE3CA54A1FA8784E00700A96 /* TisprCardStackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewController.swift; sourceTree = "<group>"; };
 		DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewLayout.swift; sourceTree = "<group>"; };
 		DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYFlipButton.swift; sourceTree = "<group>"; };
+		DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYAboutUsViewController.swift; sourceTree = "<group>"; };
 		DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYShopListViewController.swift; sourceTree = "<group>"; };
 		DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforViewModel.swift; sourceTree = "<group>"; };
@@ -1397,6 +1399,7 @@
 				047371811F0F64D5005BE7A9 /* CrosswordList */,
 				04968EE11F10CAC7004CB1F5 /* CollectList */,
 				DEDAAA401FAB13B4002521FA /* Shop */,
+				DE8914B91FB5A61300277963 /* AboutUs */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1439,6 +1442,14 @@
 				DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */,
 			);
 			path = TisprCardStack;
+			sourceTree = "<group>";
+		};
+		DE8914B91FB5A61300277963 /* AboutUs */ = {
+			isa = PBXGroup;
+			children = (
+				DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */,
+			);
+			name = AboutUs;
 			sourceTree = "<group>";
 		};
 		DEDAAA401FAB13B4002521FA /* Shop */ = {
@@ -2016,6 +2027,7 @@
 				04F8259F1EEA4DD200B62794 /* ZYMaterialDesignClass.swift in Sources */,
 				046A86D51ECC4C1B001E7323 /* ZYIdiom.swift in Sources */,
 				040E95F11ED6B3F500FC29E2 /* ZYChessboardButton.swift in Sources */,
+				DE8914BB1FB5A6C000277963 /* ZYAboutUsViewController.swift in Sources */,
 				04D2EEA61EB196D500BC24B0 /* ZYWord.swift in Sources */,
 				048D049E1F70C81D00F42FED /* ZYLibraryListViewController.swift in Sources */,
 				0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */,
