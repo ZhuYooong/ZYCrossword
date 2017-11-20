@@ -383,6 +383,7 @@
 		DE8358DF1FA7295000DF478A /* ZYFlipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */; };
 		DE8914BB1FB5A6C000277963 /* ZYAboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */; };
 		DE920C3C1FB1A8F4006F1A93 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */; };
+		DE9B30151FC2C85700134A14 /* ZYHandbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9B30141FC2C85700134A14 /* ZYHandbookViewController.swift */; };
 		DEDAAA421FAB143D002521FA /* ZYShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */; };
 		DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -790,6 +791,7 @@
 		DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYFlipButton.swift; sourceTree = "<group>"; };
 		DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYAboutUsViewController.swift; sourceTree = "<group>"; };
 		DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		DE9B30141FC2C85700134A14 /* ZYHandbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYHandbookViewController.swift; sourceTree = "<group>"; };
 		DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYShopListViewController.swift; sourceTree = "<group>"; };
 		DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1448,6 +1450,7 @@
 			isa = PBXGroup;
 			children = (
 				DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */,
+				DE9B30141FC2C85700134A14 /* ZYHandbookViewController.swift */,
 			);
 			name = AboutUs;
 			sourceTree = "<group>";
@@ -2040,6 +2043,7 @@
 				043556F71F7A444F009C1F1A /* ZYUserInfo.swift in Sources */,
 				0490AA4C1EAEE85B0051C47D /* ZYCustomClass.swift in Sources */,
 				0490AA4D1EAEE85B0051C47D /* ZYWebViewController.swift in Sources */,
+				DE9B30151FC2C85700134A14 /* ZYHandbookViewController.swift in Sources */,
 				046B7C0D1F5D04ED0088D43D /* ZYCollectDoubanTableViewCell.swift in Sources */,
 				DE3CA54C1FA8784E00700A96 /* TisprCardStackViewCell.swift in Sources */,
 				DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */,

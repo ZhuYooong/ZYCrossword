@@ -67,13 +67,17 @@ class ZYChessboardViewController: UIViewController {
             "词库",
             "成就",
             "设置",
-            "邀请好友",
-            "鼓励评分",
             "关于我们"
         ]
         moreDropDown.selectionAction = { [unowned self] (index, item) in
             if item == "词库" {
                 self.mainViewController?.performSegue(withIdentifier: "librarySegueId", sender: self.moreButton)
+            }else if item == "成就" {
+                
+            }else if item == "设置" {
+                
+            }else if item == "关于我们" {
+                self.mainViewController?.performSegue(withIdentifier: "aboultUsSegurId", sender: self.moreButton)
             }
         }
     }

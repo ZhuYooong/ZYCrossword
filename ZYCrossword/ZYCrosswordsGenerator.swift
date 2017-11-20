@@ -223,7 +223,7 @@ class ZYCrosswordsGenerator: NSObject {
                 let column = 1
                 let row = 1
                 if checkFitScore(column, row: row, direction: direction, word: word) > 0 {
-                    fit = true
+                    fit = true 
                     setWord(column, row: row, direction: direction, word: word, force: true)
                 }
             }else {
