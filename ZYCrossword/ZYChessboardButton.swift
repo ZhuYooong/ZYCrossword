@@ -60,7 +60,7 @@ class ZYChessboardButton: UIButton {
             case .normal:
                 self.setBackgroundImage(UIImage(named: "Rectangle"), for: .normal)
             case .selected:
-                self.setBackgroundImage(UIImage(named: "Rectangle Selected"), for: .normal)
+                self.theme_setBackgroundImage("rectangleSelctedImage", forState: .normal)
             case .call:
                 self.setBackgroundImage(UIImage(named: "Rectangle"), for: .normal)
             }

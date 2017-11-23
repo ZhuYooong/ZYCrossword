@@ -15,6 +15,7 @@ class ZYCrosswordListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backroundImage.image = backroundImage.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 10, 20, 10), resizingMode: UIImageResizingMode.stretch)
+        lineImae.theme_image = "rectangleLineImage"
         lineImae.image = lineImae.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 0, 20, 0), resizingMode: UIImageResizingMode.stretch)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

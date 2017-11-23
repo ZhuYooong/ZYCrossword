@@ -13,7 +13,7 @@ open class ZYActivityIndicator: UIView {
     fileprivate let drawableLayer = CAShapeLayer()
     fileprivate var animating = false
     
-    @IBInspectable open var color: UIColor = UIColor(ZYCustomColor.inferiorBlue.rawValue) {
+    @IBInspectable open var color: UIColor = .white {
         didSet {
             drawableLayer.strokeColor = self.color.cgColor
         }

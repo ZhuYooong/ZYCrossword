@@ -20,6 +20,9 @@ class ZYChessboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextfieldNotification()
+        navigationMenuView.theme_backgroundColor = "mainColor"
+        chessboardImageView.theme_image = "appBarImage"
+        sendButton.theme_setBackgroundImage("shapeimage", forState: .normal)
         creatMoreDropDown()
         initMenuData()
         NotificationCenter.default.addObserver(self, selector: #selector(initMenuData), name: NSNotification.Name(rawValue: coinCountKey), object: nil)
@@ -28,6 +31,7 @@ class ZYChessboardViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     //MARK: - Menu
+    @IBOutlet weak var navigationMenuView: UIView!
     var alreadyCount = 0
     @IBOutlet weak var starLabel: UILabel!
     @IBAction func starButtonClick(_ sender: UIButton) {
@@ -83,6 +87,7 @@ class ZYChessboardViewController: UIViewController {
     }
     //MARK: - ChessboardView
     @IBOutlet weak var chessboardView: ZYChessboardView!
+    @IBOutlet weak var chessboardImageView: UIImageView!
     var landscapeIntro = [Array<Int>]()
     var portraitIntro = [Array<Int>]()
     func creatChessboardViewData() {
@@ -216,6 +221,7 @@ class ZYChessboardViewController: UIViewController {
         wordInputTextField.resignFirstResponder()
     }
     //MARK: prompt
+    @IBOutlet weak var promptButton: ZYFlipButton!
     @IBAction func promptButtonClick(_ sender: ZYFlipButton) {
         sender.select()
         if let baseWord = crosswordDataArray.first, baseWord.isRight == false && !isPortraitIntro {
@@ -255,6 +261,7 @@ class ZYChessboardViewController: UIViewController {
             ZYCustomClass.shareCustom.showSnackbar(with: "No Coin!", snackbarController: snackbarController)
         }
     }
+    @IBOutlet weak var sendButton: IconButton!
     @IBAction func sendButtonClick(_ sender: UIButton) {
         _ = textFieldShouldReturn(wordInputTextField)
     }

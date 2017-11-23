@@ -16,6 +16,7 @@ class ZYCrosswordDataTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundImageView.image = backgroundImageView.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 10, 20, 10), resizingMode: UIImageResizingMode.stretch)
+        lineImageView.theme_image = "rectangleLineImage"
         lineImageView.image = lineImageView.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 0, 20, 0), resizingMode: UIImageResizingMode.stretch)
     }
 

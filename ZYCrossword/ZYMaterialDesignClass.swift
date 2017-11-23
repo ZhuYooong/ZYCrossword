@@ -17,7 +17,7 @@ extension UIView {
         if let containerView = fromView.superview {
             let convertedPoint = fromView.convert(originalPoint, from: fromView)
             containerView.layer.masksToBounds = true
-            containerView.mdAnimate(at: convertedPoint, backgroundColor: toView.backgroundColor ?? UIColor(ZYCustomColor.mainBlue.rawValue), duration: duration * UIViewMaterialDesignTransitionDurationCoeff, inflating: true, zTopPosition: true, shapeLayer: nil, completion: {
+            containerView.mdAnimate(at: convertedPoint, backgroundColor: toView.backgroundColor ?? UIColor.blue, duration: duration * UIViewMaterialDesignTransitionDurationCoeff, inflating: true, zTopPosition: true, shapeLayer: nil, completion: {
                 toView.alpha = 0.0
                 toView.frame = fromView.frame
                 containerView.addSubview(toView)
@@ -46,7 +46,7 @@ extension UIView {
             UIView.animate(withDuration: animationDuration, animations: {
                 toView.alpha = 1.0
             }, completion: { (finished) in
-                toView.mdAnimate(at: convertedPoint, backgroundColor: fromView.backgroundColor ?? UIColor(ZYCustomColor.mainBlue.rawValue), duration: duration * UIViewMaterialDesignTransitionDurationCoeff, inflating: false, zTopPosition: true, shapeLayer: layer, completion: {
+                toView.mdAnimate(at: convertedPoint, backgroundColor: fromView.backgroundColor ?? UIColor.blue, duration: duration * UIViewMaterialDesignTransitionDurationCoeff, inflating: false, zTopPosition: true, shapeLayer: layer, completion: {
                     block()
                 })
             })

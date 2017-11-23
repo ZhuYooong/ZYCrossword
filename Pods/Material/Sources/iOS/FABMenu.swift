@@ -181,6 +181,10 @@ public protocol FABMenuDelegate {
 
 @objc(FABMenu)
 open class FABMenu: View {
+    /// A flag to avoid the double tap.
+    fileprivate var shouldAvoidHitTest = false
+    
+    
     /// A reference to the SpringAnimation object.
     internal let spring = SpringAnimation()
     
@@ -312,7 +316,9 @@ open class FABMenu: View {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        fabButton?.frame.size = bounds.size
+        fabButton?.frame = bounds
+        fabButton?.setNeedsLayout()
+        fabButton?.layoutIfNeeded()
         spring.baseSize = bounds.size
     }
     
@@ -438,7 +444,10 @@ extension FABMenu {
         for v in subviews {
             let p = v.convert(point, from: self)
             if v.bounds.contains(p) {
-                delegate?.fabMenu?(fabMenu: self, tappedAt: point, isOutside: false)
+                if !shouldAvoidHitTest {
+                    delegate?.fabMenu?(fabMenu: self, tappedAt: point, isOutside: false)
+                }
+                shouldAvoidHitTest = !shouldAvoidHitTest
                 return v.hitTest(p, with: event)
             }
         }

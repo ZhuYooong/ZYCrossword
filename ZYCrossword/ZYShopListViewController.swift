@@ -32,6 +32,7 @@ class ZYShopListViewController: UIViewController {
         
         creatCoinButton()
         shopExplainLabel.text = "1、苹果公司规定，虚拟商品必须使用苹果系统充值购买，充值金额不可自定义，且不能用于安卓、网页等其他平台；\n2、金币充值成功后无法退款、不可提现；\n3、充值任意额度后将免费去除广告。"
+        sureButton.theme_backgroundColor = "buttonColor"
     }
     // coin
     open var coinCount = 0 {
@@ -82,6 +83,7 @@ class ZYShopListViewController: UIViewController {
     @IBAction func advertisementButtonClick(_ sender: UIButton) {
         buyCoin(with: 100)
     }
+    @IBOutlet weak var sureButton: RaisedButton!
     @IBAction func sureButtonClick(_ sender: RaisedButton) {
         if buyCoinCount == 1200 || buyCoinCount == 4500 || buyCoinCount == 20000 {
             buyCoin(with: buyCoinCount)

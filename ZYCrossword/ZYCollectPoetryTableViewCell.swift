@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Material
 
 class ZYCollectPoetryTableViewCell: ZYFoldingTableViewCell {
     @IBOutlet weak var containerViewHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var containerBackgroundImageView: UIImageView!
+    @IBOutlet weak var openTitleView: UIView!
+    @IBOutlet weak var closeLineImageView: UIImageView!
     @IBOutlet weak var closeNameLabel: UILabel!
     @IBOutlet weak var closeDetailLabel: UILabel!
     @IBOutlet weak var closeTypeLabel: UILabel!
@@ -39,7 +42,10 @@ class ZYCollectPoetryTableViewCell: ZYFoldingTableViewCell {
         foregroundView.layer.cornerRadius = 8
         foregroundView.layer.masksToBounds = true
         super.awakeFromNib()
+        openTitleView.theme_backgroundColor = "inferiorColor"
+        closeLineImageView.theme_image = "rectangleLineImage"
         containerBackgroundImageView.image = containerBackgroundImageView.image?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 10, 20, 10), resizingMode: UIImageResizingMode.stretch)
+        detailButton.theme_backgroundColor = "buttonColor"
     }
     override func animationDuration(_ itemIndex: NSInteger, type: ZYFoldingTableViewCell.AnimationType) -> TimeInterval {
         let durations = [0.26, 0.2]

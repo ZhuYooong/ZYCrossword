@@ -1,27 +1,28 @@
 PODS:
   - Alamofire (4.5.1)
-  - AMScrollingNavbar (4.0.4)
+  - CryptoSwift (0.8.0)
   - DropDown (2)
-  - Kingfisher (4.2.0)
-  - Material (2.12.12):
-    - Material/Core (= 2.12.12)
-  - Material/Core (2.12.12):
+  - Kingfisher (4.3.1)
+  - Material (2.12.16):
+    - Material/Core (= 2.12.16)
+  - Material/Core (2.12.16):
     - Motion (~> 1.2.5)
   - Motion (1.2.5):
     - Motion/Core (= 1.2.5)
   - Motion/Core (1.2.5)
   - PKHUD (5.0.0)
-  - Realm (3.0.1):
-    - Realm/Headers (= 3.0.1)
-  - Realm/Headers (3.0.1)
-  - RealmSwift (3.0.1):
-    - Realm (= 3.0.1)
+  - Realm (3.0.2):
+    - Realm/Headers (= 3.0.2)
+  - Realm/Headers (3.0.2)
+  - RealmSwift (3.0.2):
+    - Realm (= 3.0.2)
   - SnapKit (4.0.0)
-  - SwiftyJSON (4.0.0-alpha.1)
+  - SwiftTheme (0.4.0)
+  - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
-  - AMScrollingNavbar (~> 4)
+  - CryptoSwift
   - DropDown
   - Kingfisher (~> 4)
   - Material (~> 2)
@@ -29,21 +30,23 @@ DEPENDENCIES:
   - Realm (~> 3)
   - RealmSwift (~> 3)
   - SnapKit (~> 4)
-  - SwiftyJSON (~> 4.0.0-alpha.1)
+  - SwiftTheme
+  - SwiftyJSON (~> 4)
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  AMScrollingNavbar: 3f35e65f5c97918c31be2179bda9ecb25dc5a3df
+  CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   DropDown: 744784d9c9aa505100e942c16acd05430cbb2f0a
-  Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
-  Material: 05824a78b7eef3bb3d247168d3a0906a48d9d236
+  Kingfisher: 75541c4b62f02e1fde6f9772303de3d9ebe8f5b3
+  Material: 00fdeb39f5d97dc19f09b160e8b95c47e2ed708d
   Motion: 88a8bee21926af792333f4b9e7170f710e9e48f3
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
-  Realm: ba6144c74f835f7497791f6599d63a7755377b83
-  RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
+  Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
+  RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SwiftyJSON: dc88934f85fb50b263b1632b9cbad3402505783e
+  SwiftTheme: 548eff28a606d0975e04b2e708b879d7eea660f6
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 2481197d453890a1072cef616195b0ce9d98c285
+PODFILE CHECKSUM: 2564bab1d251a53ecfde559f67cab2783ad05ab8
 
 COCOAPODS: 1.3.1

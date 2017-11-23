@@ -122,11 +122,8 @@ extension UIColor {
     }
 }
 enum ZYCustomColor: Int {//特定色值
-    case mainBlue = 0x00BBD3
-    case inferiorBlue = 0x009688
     case buttonTittleGray = 0x7a7a7a
     case buttonTittleRed = 0xFF7070
-    case buttonBlue = 0x02B5CC
     case buttonSelectedGray = 0xD8D8D8
     case textBlack = 0x3E3E3E
     case textGray = 0xC1C1C1

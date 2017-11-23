@@ -42,7 +42,7 @@ class ZYWebViewController: UIViewController {
     let keyPathForProgress : String = "estimatedProgress"
     func initProgressView() {
         progressView = UIProgressView()
-        progressView!.tintColor = UIColor(ZYCustomColor.inferiorBlue.rawValue)
+        progressView!.tintColor = navigationController?.navigationBar.barTintColor
         httpWebView.addSubview(progressView!)
         progressView?.snp.makeConstraints({ (make) in
             make.top.left.right.width.equalTo(httpWebView)

@@ -635,12 +635,10 @@ fileprivate extension Layout {
      - Parameter for view: A UIView.
      */
     class func updateConstraints(for view: UIView) {
-        Motion.async {
-            view.updateConstraintsIfNeeded()
-            view.updateConstraints()
-            view.setNeedsLayout()
-            view.layoutIfNeeded()
-        }
+        view.updateConstraintsIfNeeded()
+        view.updateConstraints()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     
     /**

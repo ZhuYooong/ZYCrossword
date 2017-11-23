@@ -152,6 +152,7 @@ class ZYMainViewController: UIViewController {
     //MARK: - ViewController
     var titleViewController: ZYTitleViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID") as! ZYTitleViewController
     func beganTitle(with originalPoint: CGPoint) {
+        titleViewController.mainViewController = self
         UIView.mdInflateTransition(from: chessboardViewController.view, toView: titleViewController.view, originalPoint: originalPoint, duration: 0.7) {
             self.title = self.titleViewController.title
             DispatchQueue(label: "Crosswords").async { [weak self] in

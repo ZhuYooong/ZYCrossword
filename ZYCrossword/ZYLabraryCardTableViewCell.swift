@@ -21,6 +21,7 @@ class ZYLabraryCardTableViewCell: UITableViewCell {
     }
     var layerRight = CAShapeLayer()
     var layerLine = CAShapeLayer()
+    var color: UIColor?
     func addAnimationPath() {
         let width = Double(contentView.bounds.size.height)
         let pathRight = UIBezierPath()
@@ -30,7 +31,7 @@ class ZYLabraryCardTableViewCell: UITableViewCell {
         pathRight.addLine(to: pointTurn)
         let pointEnd = CGPoint(x: width / 2 + (width * 3 / 7) * cos(.pi / 4), y: width / 2 - (width * 3 / 7) * sin(.pi / 4))
         pathRight.addLine(to: pointEnd)
-        layerRight.strokeColor = UIColor(ZYCustomColor.mainBlue.rawValue).cgColor
+        layerRight.strokeColor = color?.cgColor
         layerRight.fillColor = UIColor.clear.cgColor
         layerRight.lineWidth = 10
         layerRight.path = pathRight.cgPath

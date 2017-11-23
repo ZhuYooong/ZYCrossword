@@ -401,6 +401,7 @@
                         <outlet property="shopExplainLabel" destination="tLb-Bl-UxR" id="evk-Ya-q9a"/>
                         <outlet property="shopViewHeightConstraint" destination="eqQ-hR-dLQ" id="2jr-f8-VNO"/>
                         <outlet property="shopViewWidthConstraint" destination="6O8-rS-vbC" id="ZS5-Yb-Ese"/>
+                        <outlet property="sureButton" destination="zjh-HN-bJk" id="hZC-di-THw"/>
                         <outlet property="thirdShopButton" destination="G6g-fq-33j" id="iBZ-gl-3eR"/>
                     </connections>
                 </viewController>
@@ -420,7 +421,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app bar bg" translatesAutoresizingMaskIntoConstraints="NO" id="0pS-wk-KDm">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="0pS-wk-KDm">
                                 <rect key="frame" x="137" y="64" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0pS-wk-KDm" secondAttribute="height" multiplier="1:1" id="B0C-IW-xf5"/>
@@ -930,7 +931,7 @@
                                     <constraint firstItem="xDE-mt-0om" firstAttribute="centerY" secondItem="iQl-y4-YHo" secondAttribute="centerY" id="xIs-fm-4la"/>
                                 </constraints>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="app bar bg" translatesAutoresizingMaskIntoConstraints="NO" id="8Nn-Oe-HQ9">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="app bar bg cyan" translatesAutoresizingMaskIntoConstraints="NO" id="8Nn-Oe-HQ9">
                                 <rect key="frame" x="0.0" y="64" width="375" height="355"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8Nn-Oe-HQ9" secondAttribute="height" multiplier="75:71" id="1aI-ZT-Kcb"/>
@@ -957,7 +958,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle background" translatesAutoresizingMaskIntoConstraints="NO" id="WVJ-iS-otC">
                                                     <rect key="frame" x="0.0" y="6" width="320" height="83"/>
                                                 </imageView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line" translatesAutoresizingMaskIntoConstraints="NO" id="fPg-cV-fkQ">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line cyan" translatesAutoresizingMaskIntoConstraints="NO" id="fPg-cV-fkQ">
                                                     <rect key="frame" x="0.0" y="9" width="4" height="77"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="4" id="iwm-s8-sAU"/>
@@ -1023,14 +1024,15 @@
                                             <constraint firstAttribute="height" constant="34" id="QmG-KP-reL"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bey-PE-t2e" customClass="ZYFlipButton" customModule="ZYCrossword" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bey-PE-t2e" customClass="ZYFlipButton" customModule="ZYCrossword" customModuleProvider="target">
                                         <rect key="frame" x="9" y="3.6666666666666288" width="33" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="33" id="PAZ-9q-7Dt"/>
                                             <constraint firstAttribute="height" constant="33" id="y7f-76-1xe"/>
                                         </constraints>
+                                        <state key="normal" image="fab cyan"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="fab"/>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="fab cyan"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="promptButtonClick:" destination="ONd-gF-gc7" eventType="touchUpInside" id="svT-Ub-BvS"/>
@@ -1042,7 +1044,7 @@
                                             <constraint firstAttribute="height" constant="40" id="8fh-AG-cxM"/>
                                             <constraint firstAttribute="width" constant="40" id="gAI-NU-QU4"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="ShapeButton"/>
+                                        <state key="normal" backgroundImage="ShapeButton cyan"/>
                                         <connections>
                                             <action selector="sendButtonClick:" destination="ONd-gF-gc7" eventType="touchUpInside" id="9QK-dh-Y2H"/>
                                         </connections>
@@ -1102,10 +1104,14 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="chessboardImageView" destination="8Nn-Oe-HQ9" id="ADP-1h-8nr"/>
                         <outlet property="chessboardView" destination="COE-8k-evx" id="4Bx-jo-acd"/>
                         <outlet property="coinLabel" destination="fx1-MO-5dm" id="sZM-6X-VZP"/>
                         <outlet property="crosswordDataTableView" destination="4MV-1e-Hsz" id="PaK-ov-cVD"/>
                         <outlet property="moreButton" destination="JMc-nO-VO6" id="pal-Hy-oM3"/>
+                        <outlet property="navigationMenuView" destination="ZzZ-u1-e1Q" id="d8d-q2-2xb"/>
+                        <outlet property="promptButton" destination="bey-PE-t2e" id="5QG-8V-Pzy"/>
+                        <outlet property="sendButton" destination="DwJ-39-grb" id="wXd-le-7nz"/>
                         <outlet property="starLabel" destination="xDE-mt-0om" id="dXI-QE-130"/>
                         <outlet property="wordInputTextField" destination="24k-gu-dgE" id="yNZ-1f-bC8"/>
                         <outlet property="wordInputView" destination="cry-Ha-Rtc" id="ulr-xD-5aw"/>
@@ -1138,7 +1144,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle background" translatesAutoresizingMaskIntoConstraints="NO" id="I70-V4-BHP">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="66"/>
                                                 </imageView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line" translatesAutoresizingMaskIntoConstraints="NO" id="ZyO-TY-Jfk">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line cyan" translatesAutoresizingMaskIntoConstraints="NO" id="ZyO-TY-Jfk">
                                                     <rect key="frame" x="0.0" y="0.0" width="4" height="63"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="4" id="wAu-hm-v3m"/>
@@ -1251,7 +1257,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKj-Cj-WlI">
                                                     <rect key="frame" x="0.0" y="88" width="359" height="44"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTS-uK-T5E">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTS-uK-T5E" customClass="RaisedButton" customModule="Material">
                                                             <rect key="frame" x="22" y="4" width="314" height="28"/>
                                                             <color key="backgroundColor" red="0.0078431372550000003" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -1261,8 +1267,18 @@
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                     <integer key="value" value="10"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
+                                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                    <color key="value" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="详  情"/>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </button>
@@ -1314,6 +1330,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="closeLineImageView" destination="ZyO-TY-Jfk" id="WCp-wH-d67"/>
                                     <outlet property="closeNameLabel" destination="Hhi-YM-DSq" id="VhE-gb-nlt"/>
                                     <outlet property="closeTypeLabel" destination="p3X-jU-jaU" id="Nd2-NT-7D3"/>
                                     <outlet property="containerBackgroundImageView" destination="b37-Db-cNm" id="DsK-xQ-4yw"/>
@@ -1321,10 +1338,11 @@
                                     <outlet property="containerViewHeightConstraints" destination="dsn-rh-Q3v" id="alj-W2-b4p"/>
                                     <outlet property="containerViewTop" destination="cR1-MD-p4F" id="SJZ-Ju-mHm"/>
                                     <outlet property="contentLabel" destination="tMj-3R-AmA" id="uWw-OQ-c2k"/>
-                                    <outlet property="detailButton" destination="lTS-uK-T5E" id="rLG-tY-DZg"/>
+                                    <outlet property="detailButton" destination="lTS-uK-T5E" id="fab-iS-iP8"/>
                                     <outlet property="foregroundView" destination="iC3-V0-iy0" id="veZ-xK-S3j"/>
                                     <outlet property="foregroundViewTop" destination="FBz-Tt-6R4" id="SKm-dg-0Ll"/>
                                     <outlet property="openNameLabel" destination="oQH-qY-Y8h" id="GAD-yT-74t"/>
+                                    <outlet property="openTitleView" destination="aEW-70-WEs" id="e44-dk-lza"/>
                                     <outlet property="openTypeLabel" destination="UPR-YD-wTC" id="F5O-Vy-5TH"/>
                                 </connections>
                             </tableViewCell>
@@ -1341,7 +1359,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle background" translatesAutoresizingMaskIntoConstraints="NO" id="22D-De-XIE">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="66"/>
                                                 </imageView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line" translatesAutoresizingMaskIntoConstraints="NO" id="BOI-ay-GNy">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line cyan" translatesAutoresizingMaskIntoConstraints="NO" id="BOI-ay-GNy">
                                                     <rect key="frame" x="0.0" y="0.0" width="4" height="63"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="4" id="l0Q-0k-464"/>
@@ -1496,7 +1514,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="etp-0V-RF8">
                                                     <rect key="frame" x="0.0" y="116" width="359" height="44"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBN-v1-IfP">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBN-v1-IfP" customClass="RaisedButton" customModule="Material">
                                                             <rect key="frame" x="22" y="4" width="314" height="28"/>
                                                             <color key="backgroundColor" red="0.0078431372550000003" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -1506,9 +1524,19 @@
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                     <integer key="value" value="10"/>
                                                                 </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
+                                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                    <color key="value" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="详  情"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </button>
                                                     </subviews>
@@ -1560,6 +1588,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="closeDetailLabel" destination="j5M-a6-tkZ" id="Tcc-LV-jaP"/>
+                                    <outlet property="closeLineImageView" destination="BOI-ay-GNy" id="88t-Gj-DFy"/>
                                     <outlet property="closeNameLabel" destination="6ay-pW-06h" id="Vca-t3-XvF"/>
                                     <outlet property="closeTypeLabel" destination="rEM-11-Q8V" id="I8h-Ft-RXT"/>
                                     <outlet property="containerBackgroundImageView" destination="6iY-MK-7TC" id="TKN-c0-Z5e"/>
@@ -1567,12 +1596,13 @@
                                     <outlet property="containerViewHeightConstraints" destination="fgd-BT-SJ1" id="fFU-9s-6RW"/>
                                     <outlet property="containerViewTop" destination="Qn0-7l-vUu" id="8rJ-55-w3d"/>
                                     <outlet property="contentLabel" destination="HOm-sg-7S8" id="qWH-4q-FYs"/>
-                                    <outlet property="detailButton" destination="rBN-v1-IfP" id="2jG-HU-ysE"/>
+                                    <outlet property="detailButton" destination="rBN-v1-IfP" id="dIP-wf-uoo"/>
                                     <outlet property="firstShortLabel" destination="w4g-5V-xaJ" id="uBB-aJ-IF8"/>
                                     <outlet property="foregroundView" destination="AWG-2g-0Md" id="38k-mX-EPs"/>
                                     <outlet property="foregroundViewTop" destination="hqd-z4-iQy" id="j3P-Ax-qhq"/>
                                     <outlet property="longLabel" destination="Ijk-nu-o6A" id="ZrY-gU-iSN"/>
                                     <outlet property="openNameLabel" destination="Pl2-2h-inC" id="79h-Ix-Chf"/>
+                                    <outlet property="openTitleView" destination="Fgx-s1-VGY" id="fn9-8O-1it"/>
                                     <outlet property="openTypeLabel" destination="K0a-vr-EcB" id="XVV-ok-xq7"/>
                                     <outlet property="secondShortLabel" destination="Ucy-Td-u9z" id="rRj-ld-m85"/>
                                 </connections>
@@ -1590,7 +1620,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle background" translatesAutoresizingMaskIntoConstraints="NO" id="JTF-bB-AkW">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="66"/>
                                                 </imageView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line" translatesAutoresizingMaskIntoConstraints="NO" id="s2z-WQ-HwJ">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line cyan" translatesAutoresizingMaskIntoConstraints="NO" id="s2z-WQ-HwJ">
                                                     <rect key="frame" x="0.0" y="0.0" width="4" height="63"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="4" id="ybv-dd-vkO"/>
@@ -1870,7 +1900,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edy-Kk-LFK">
                                                     <rect key="frame" x="0.0" y="192" width="359" height="44"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3k-Kb-rVu">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3k-Kb-rVu" customClass="RaisedButton" customModule="Material">
                                                             <rect key="frame" x="22" y="4" width="314" height="28"/>
                                                             <color key="backgroundColor" red="0.0078431372550000003" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -1880,8 +1910,18 @@
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                     <integer key="value" value="10"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="详  情"/>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                    <color key="value" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
+                                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </button>
@@ -1935,6 +1975,7 @@
                                 <connections>
                                     <outlet property="appreciateButton" destination="pTr-Cp-kGb" id="Ovr-Gh-Szs"/>
                                     <outlet property="closeDetailLabel" destination="akl-XK-eQ7" id="f6S-sN-iZn"/>
+                                    <outlet property="closeLineImageView" destination="s2z-WQ-HwJ" id="PAq-Nf-ydh"/>
                                     <outlet property="closeNameLabel" destination="OX7-wu-KWE" id="ww4-ZA-75r"/>
                                     <outlet property="closeTypeLabel" destination="ocf-f5-OYe" id="tL9-Jm-auu"/>
                                     <outlet property="containerBackgroundImageView" destination="wBI-hJ-mWI" id="cyQ-MX-9IE"/>
@@ -1942,12 +1983,13 @@
                                     <outlet property="containerViewHeightConstraints" destination="4dh-2T-8gf" id="XJc-mD-rpT"/>
                                     <outlet property="containerViewTop" destination="RY8-jf-JR5" id="dEQ-I7-4DW"/>
                                     <outlet property="contentLabel" destination="b28-jM-jFa" id="hqa-8A-sXQ"/>
-                                    <outlet property="detailButton" destination="x3k-Kb-rVu" id="trK-ua-rcD"/>
+                                    <outlet property="detailButton" destination="x3k-Kb-rVu" id="6jR-c3-mPb"/>
                                     <outlet property="firstShortLabel" destination="WnU-Y8-jnC" id="zUy-AA-2b5"/>
                                     <outlet property="foregroundView" destination="1Ah-bU-NXg" id="kAb-hl-ADL"/>
                                     <outlet property="foregroundViewTop" destination="gvG-EB-76r" id="2wc-gt-OzL"/>
                                     <outlet property="noteButton" destination="d2G-vN-Uw5" id="hTq-d0-Wtn"/>
                                     <outlet property="openNameLabel" destination="sIW-pt-4Dr" id="DXa-gh-qJd"/>
+                                    <outlet property="openTitleView" destination="Ccd-Rk-SYM" id="8bU-IP-kOm"/>
                                     <outlet property="openTypeLabel" destination="YmH-U8-ule" id="zVV-on-ECG"/>
                                     <outlet property="secondShortLabel" destination="ehL-eU-E4I" id="3gf-82-1Sx"/>
                                     <outlet property="translateButton" destination="sEY-ak-HAl" id="jMZ-Iz-iva"/>
@@ -2005,7 +2047,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle background" translatesAutoresizingMaskIntoConstraints="NO" id="BpZ-jG-Kdc">
                                             <rect key="frame" x="10" y="6" width="355" height="83"/>
                                         </imageView>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line" translatesAutoresizingMaskIntoConstraints="NO" id="ey4-a8-zqH">
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Rectangle Line cyan" translatesAutoresizingMaskIntoConstraints="NO" id="ey4-a8-zqH">
                                             <rect key="frame" x="10" y="9" width="4" height="76"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="4" id="Led-nF-Yj4"/>
@@ -2055,17 +2097,18 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AppIcon" width="16" height="16"/>
         <image name="LibraryLock" width="320" height="80"/>
         <image name="Oval" width="18" height="18"/>
         <image name="Rectangle 2" width="322" height="46"/>
         <image name="Rectangle 4" width="375" height="80"/>
-        <image name="Rectangle Line" width="4" height="81"/>
+        <image name="Rectangle Line cyan" width="4" height="81"/>
         <image name="Rectangle background" width="326" height="87"/>
         <image name="Shape" width="4" height="16"/>
-        <image name="ShapeButton" width="40" height="43"/>
+        <image name="ShapeButton cyan" width="40" height="43"/>
         <image name="Star" width="24" height="23"/>
-        <image name="app bar bg" width="375" height="424"/>
-        <image name="fab" width="33" height="33"/>
+        <image name="app bar bg cyan" width="375" height="424"/>
+        <image name="fab cyan" width="33" height="33"/>
         <image name="right arrow" width="12" height="34"/>
         <image name="shopDiscount" width="48" height="21"/>
         <image name="shopItemSelectted" width="160" height="78"/>
@@ -2077,7 +2120,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="b2i-Ax-zaS"/>
-        <segue reference="hBs-pe-Qz6"/>
+        <segue reference="5eo-bT-ZJZ"/>
         <segue reference="cW1-GU-9Hy"/>
     </inferredMetricsTieBreakers>
 </document>

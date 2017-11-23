@@ -9,14 +9,18 @@
 import UIKit
 import RealmSwift
 import Material
+import SwiftTheme
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         realmSchemaVersion()
+        ThemeManager.setTheme(plistName: "Cyan", path: .mainBundle)
         window = UIWindow(frame: Screen.bounds)
         window!.rootViewController = SnackbarController(rootViewController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainID"))
+        let navigationBar = UINavigationBar.appearance()
+        navigationBar.theme_barTintColor = "mainColor"
         window!.makeKeyAndVisible()
         return true
     }
