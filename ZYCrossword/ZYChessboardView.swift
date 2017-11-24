@@ -108,7 +108,7 @@ class ZYChessboardView: UIView {
         })
         if let grid = oldGrid, let point = oldPoint {
             _ = setButtonState(with: grid, selectedState: .normal)
-            fromView.mdDeflateAnimated(to: point, backgroundColor: (parientViewController.navigationController?.navigationBar.barTintColor)!, duration: 0.3, completion: {
+            fromView.mdDeflateAnimated(to: point, backgroundColor: twoSelectedView.backgroundColor!, duration: 0.3, completion: {
                 fromView.removeFromSuperview()
             })
         }

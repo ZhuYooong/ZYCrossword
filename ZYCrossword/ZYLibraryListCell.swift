@@ -78,7 +78,6 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LibraryCardCellId", for: indexPath) as! ZYLabraryCardTableViewCell
         if indexPath.row < cardContentArray.count {
             cell.titleLabel.text = cardContentArray[indexPath.row].wordType
-            cell.color = parientViewController?.navigationController?.navigationBar.barTintColor
             cell.subTitleLabel.text = "共 \(cardContentArray[indexPath.row].number) 词"
             cell.libraryContentButton.tag = indexPath.row
             cell.libraryContentButton.addTarget(self, action: #selector(libraryContentButtonCliick(sender:)), for: .touchUpInside)
@@ -116,7 +115,9 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
                     cell.isCollection = !cell.isCollection
                     if changeWordBlock != nil {
                         ZYWordViewModel.shareWord.clickWordData(with: cardContentArray[indexPath.row].wordType, and: realm)
+                        realm.beginWrite()
                         cardContentArray[indexPath.row].isSelectted = cell.isCollection
+                        try! realm.commitWrite()
                         changeWordBlock!(true)
                     }
                 }

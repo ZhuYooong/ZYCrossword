@@ -9,11 +9,15 @@
 import UIKit
 
 class ZYTitleViewController: UIViewController {
-    var mainViewController: ZYMainViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
+        initView()
+    }
+    open func initView() {
         view.theme_backgroundColor = "loadColor"
-        loadingActivityIndicator.color = (mainViewController?.navigationController?.navigationBar.barTintColor)!
+        let colorView = UIView()
+        colorView.theme_backgroundColor = "mainColor"
+        loadingActivityIndicator.color = colorView.backgroundColor!
         startLoading()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
