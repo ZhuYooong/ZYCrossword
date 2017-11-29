@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appBarImage</key>
+	<string>app bar bg pink</string>
+	<key>fabImage</key>
+	<string>fab pink</string>
+	<key>rectangleLineImage</key>
+	<string>Rectangle Line pink</string>
+	<key>rectangleSelctedImage</key>
+	<string>Rectangle Selected pink</string>
+	<key>shapeimage</key>
+	<string>ShapeButton pink</string>
+	<key>loadColor</key>
+	<string>#F48FB1</string>
+	<key>mainColor</key>
+	<string>#E91E63</string>
+	<key>inferiorColor</key>
+	<string>#AD1457</string>
+	<key>buttonColor</key>
+	<string>#C2185B</string>
+</dict>
+</plist>

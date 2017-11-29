@@ -377,6 +377,20 @@
 		04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259C1EEA413000B62794 /* ZYMainViewController.swift */; };
 		04F8259F1EEA4DD200B62794 /* ZYMaterialDesignClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */; };
 		1D2D8092E042B60E396C39A3 /* Pods_ZYCrossword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */; };
+		DE1CD9CA1FCE59550080AF82 /* Blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9BC1FCE59530080AF82 /* Blue.plist */; };
+		DE1CD9CB1FCE59550080AF82 /* Light Blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9BD1FCE59530080AF82 /* Light Blue.plist */; };
+		DE1CD9CC1FCE59550080AF82 /* Brown.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9BE1FCE59530080AF82 /* Brown.plist */; };
+		DE1CD9CD1FCE59550080AF82 /* Blue Grrey.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9BF1FCE59530080AF82 /* Blue Grrey.plist */; };
+		DE1CD9CE1FCE59550080AF82 /* Light Geen.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C01FCE59540080AF82 /* Light Geen.plist */; };
+		DE1CD9CF1FCE59550080AF82 /* Purple.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C11FCE59540080AF82 /* Purple.plist */; };
+		DE1CD9D01FCE59550080AF82 /* Pink.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C21FCE59540080AF82 /* Pink.plist */; };
+		DE1CD9D11FCE59550080AF82 /* Teal.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C31FCE59540080AF82 /* Teal.plist */; };
+		DE1CD9D21FCE59550080AF82 /* Deep Purple.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C41FCE59540080AF82 /* Deep Purple.plist */; };
+		DE1CD9D31FCE59550080AF82 /* Deep Orange.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C51FCE59540080AF82 /* Deep Orange.plist */; };
+		DE1CD9D41FCE59550080AF82 /* Green.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C61FCE59540080AF82 /* Green.plist */; };
+		DE1CD9D51FCE59550080AF82 /* Indigo.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C71FCE59550080AF82 /* Indigo.plist */; };
+		DE1CD9D61FCE59550080AF82 /* Red.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C81FCE59550080AF82 /* Red.plist */; };
+		DE1CD9D71FCE59550080AF82 /* Orange.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9C91FCE59550080AF82 /* Orange.plist */; };
 		DE3CA54C1FA8784E00700A96 /* TisprCardStackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA5491FA8784E00700A96 /* TisprCardStackViewCell.swift */; };
 		DE3CA54D1FA8784E00700A96 /* TisprCardStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA54A1FA8784E00700A96 /* TisprCardStackViewController.swift */; };
 		DE3CA54E1FA8784E00700A96 /* TisprCardStackViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */; };
@@ -786,6 +800,20 @@
 		1EBD6372DBC0C4D850FF40C9 /* Pods-ZYCrossword.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.debug.xcconfig"; sourceTree = "<group>"; };
 		2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZYCrossword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5ACE0D0094E616FD0302C3 /* Pods-ZYCrossword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.release.xcconfig"; sourceTree = "<group>"; };
+		DE1CD9BC1FCE59530080AF82 /* Blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Blue.plist; sourceTree = "<group>"; };
+		DE1CD9BD1FCE59530080AF82 /* Light Blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Light Blue.plist"; sourceTree = "<group>"; };
+		DE1CD9BE1FCE59530080AF82 /* Brown.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Brown.plist; sourceTree = "<group>"; };
+		DE1CD9BF1FCE59530080AF82 /* Blue Grrey.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Blue Grrey.plist"; sourceTree = "<group>"; };
+		DE1CD9C01FCE59540080AF82 /* Light Geen.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Light Geen.plist"; sourceTree = "<group>"; };
+		DE1CD9C11FCE59540080AF82 /* Purple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Purple.plist; sourceTree = "<group>"; };
+		DE1CD9C21FCE59540080AF82 /* Pink.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pink.plist; sourceTree = "<group>"; };
+		DE1CD9C31FCE59540080AF82 /* Teal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Teal.plist; sourceTree = "<group>"; };
+		DE1CD9C41FCE59540080AF82 /* Deep Purple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Deep Purple.plist"; sourceTree = "<group>"; };
+		DE1CD9C51FCE59540080AF82 /* Deep Orange.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Deep Orange.plist"; sourceTree = "<group>"; };
+		DE1CD9C61FCE59540080AF82 /* Green.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Green.plist; sourceTree = "<group>"; };
+		DE1CD9C71FCE59550080AF82 /* Indigo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Indigo.plist; sourceTree = "<group>"; };
+		DE1CD9C81FCE59550080AF82 /* Red.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Red.plist; sourceTree = "<group>"; };
+		DE1CD9C91FCE59550080AF82 /* Orange.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Orange.plist; sourceTree = "<group>"; };
 		DE3CA5491FA8784E00700A96 /* TisprCardStackViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewCell.swift; sourceTree = "<group>"; };
 		DE3CA54A1FA8784E00700A96 /* TisprCardStackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewController.swift; sourceTree = "<group>"; };
 		DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewLayout.swift; sourceTree = "<group>"; };
@@ -1439,6 +1467,28 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DE1CD9BB1FCE59230080AF82 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DE699D1E1FC579760037F986 /* Cyan.plist */,
+				DE1CD9BF1FCE59530080AF82 /* Blue Grrey.plist */,
+				DE1CD9BC1FCE59530080AF82 /* Blue.plist */,
+				DE1CD9BE1FCE59530080AF82 /* Brown.plist */,
+				DE1CD9C51FCE59540080AF82 /* Deep Orange.plist */,
+				DE1CD9C41FCE59540080AF82 /* Deep Purple.plist */,
+				DE1CD9C61FCE59540080AF82 /* Green.plist */,
+				DE1CD9C71FCE59550080AF82 /* Indigo.plist */,
+				DE1CD9BD1FCE59530080AF82 /* Light Blue.plist */,
+				DE1CD9C01FCE59540080AF82 /* Light Geen.plist */,
+				DE1CD9C91FCE59550080AF82 /* Orange.plist */,
+				DE1CD9C21FCE59540080AF82 /* Pink.plist */,
+				DE1CD9C11FCE59540080AF82 /* Purple.plist */,
+				DE1CD9C81FCE59550080AF82 /* Red.plist */,
+				DE1CD9C31FCE59540080AF82 /* Teal.plist */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		DE3CA5481FA8784E00700A96 /* TisprCardStack */ = {
 			isa = PBXGroup;
 			children = (
@@ -1452,7 +1502,7 @@
 		DE699D1D1FC577FF0037F986 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				DE699D1E1FC579760037F986 /* Cyan.plist */,
+				DE1CD9BB1FCE59230080AF82 /* Data */,
 			);
 			name = Theme;
 			sourceTree = "<group>";
@@ -1628,6 +1678,7 @@
 				0490AB9D1EAEF0F30051C47D /* poet.song.107000.json in Resources */,
 				0490AC571EAEF0F40051C47D /* poet.song.46000.json in Resources */,
 				0490ABD21EAEF0F30051C47D /* poet.song.155000.json in Resources */,
+				DE1CD9D11FCE59550080AF82 /* Teal.plist in Resources */,
 				0490ACB41EAEF0F40051C47D /* poet.tang.4000.json in Resources */,
 				0490ABF01EAEF0F30051C47D /* poet.song.182000.json in Resources */,
 				0490ABC11EAEF0F30051C47D /* poet.song.14000.json in Resources */,
@@ -1653,6 +1704,7 @@
 				0490AC2C1EAEF0F40051C47D /* poet.song.236000.json in Resources */,
 				0490ACB21EAEF0F40051C47D /* poet.tang.38000.json in Resources */,
 				0490ABFB1EAEF0F40051C47D /* poet.song.192000.json in Resources */,
+				DE1CD9CE1FCE59550080AF82 /* Light Geen.plist in Resources */,
 				0490AC151EAEF0F40051C47D /* poet.song.215000.json in Resources */,
 				0490AC2E1EAEF0F40051C47D /* poet.song.238000.json in Resources */,
 				0490AC591EAEF0F40051C47D /* poet.song.48000.json in Resources */,
@@ -1662,6 +1714,7 @@
 				0490AC751EAEF0F40051C47D /* poet.song.73000.json in Resources */,
 				0490AC7A1EAEF0F40051C47D /* poet.song.78000.json in Resources */,
 				0490AC331EAEF0F40051C47D /* poet.song.242000.json in Resources */,
+				DE1CD9CA1FCE59550080AF82 /* Blue.plist in Resources */,
 				0490ABF31EAEF0F30051C47D /* poet.song.185000.json in Resources */,
 				0490AC361EAEF0F40051C47D /* poet.song.245000.json in Resources */,
 				0490ABFD1EAEF0F40051C47D /* poet.song.194000.json in Resources */,
@@ -1675,6 +1728,7 @@
 				0490ABC81EAEF0F30051C47D /* poet.song.146000.json in Resources */,
 				0490AC1D1EAEF0F40051C47D /* poet.song.222000.json in Resources */,
 				0490AC8E1EAEF0F40051C47D /* poet.song.96000.json in Resources */,
+				DE1CD9CF1FCE59550080AF82 /* Purple.plist in Resources */,
 				0490AC3E1EAEF0F40051C47D /* poet.song.252000.json in Resources */,
 				0490AB951EAEF0F30051C47D /* poet.song.10000.json in Resources */,
 				0490ACAB1EAEF0F40051C47D /* poet.tang.31000.json in Resources */,
@@ -1723,6 +1777,7 @@
 				0490AB9C1EAEF0F30051C47D /* poet.song.106000.json in Resources */,
 				0490ABAF1EAEF0F30051C47D /* poet.song.123000.json in Resources */,
 				0490ABA91EAEF0F30051C47D /* poet.song.118000.json in Resources */,
+				DE1CD9D31FCE59550080AF82 /* Deep Orange.plist in Resources */,
 				0490AC5C1EAEF0F40051C47D /* poet.song.50000.json in Resources */,
 				0490AC671EAEF0F40051C47D /* poet.song.60000.json in Resources */,
 				04D2EEA41EB18A8300BC24B0 /* 唐诗三百首.json in Resources */,
@@ -1733,6 +1788,7 @@
 				0490ABC01EAEF0F30051C47D /* poet.song.139000.json in Resources */,
 				0490ABC31EAEF0F30051C47D /* poet.song.141000.json in Resources */,
 				0490ABEF1EAEF0F30051C47D /* poet.song.181000.json in Resources */,
+				DE1CD9CB1FCE59550080AF82 /* Light Blue.plist in Resources */,
 				0490ACB01EAEF0F40051C47D /* poet.tang.36000.json in Resources */,
 				0490AC391EAEF0F40051C47D /* poet.song.248000.json in Resources */,
 				0490AB941EAEF0F30051C47D /* poet.song.1000.json in Resources */,
@@ -1766,6 +1822,7 @@
 				0490ABF91EAEF0F40051C47D /* poet.song.190000.json in Resources */,
 				0490ABAB1EAEF0F30051C47D /* poet.song.12000.json in Resources */,
 				0490AC731EAEF0F40051C47D /* poet.song.71000.json in Resources */,
+				DE1CD9D71FCE59550080AF82 /* Orange.plist in Resources */,
 				0490AA231EAEE0DB0051C47D /* LaunchScreen.storyboard in Resources */,
 				0490ABEC1EAEF0F30051C47D /* poet.song.179000.json in Resources */,
 				0490AC0E1EAEF0F40051C47D /* poet.song.209000.json in Resources */,
@@ -1804,18 +1861,21 @@
 				0490AC221EAEF0F40051C47D /* poet.song.227000.json in Resources */,
 				0490ACB71EAEF0F40051C47D /* poet.tang.42000.json in Resources */,
 				0490ABC41EAEF0F30051C47D /* poet.song.142000.json in Resources */,
+				DE1CD9D41FCE59550080AF82 /* Green.plist in Resources */,
 				0490ABA51EAEF0F30051C47D /* poet.song.114000.json in Resources */,
 				0490AC9B1EAEF0F40051C47D /* poet.tang.17000.json in Resources */,
 				0490ABC61EAEF0F30051C47D /* poet.song.144000.json in Resources */,
 				0490AB931EAEF0F30051C47D /* poet.song.0.json in Resources */,
 				0490AC3F1EAEF0F40051C47D /* poet.song.253000.json in Resources */,
 				0490AC381EAEF0F40051C47D /* poet.song.247000.json in Resources */,
+				DE1CD9D51FCE59550080AF82 /* Indigo.plist in Resources */,
 				0490AC041EAEF0F40051C47D /* poet.song.20000.json in Resources */,
 				0490AC891EAEF0F40051C47D /* poet.song.91000.json in Resources */,
 				0490AC501EAEF0F40051C47D /* poet.song.4000.json in Resources */,
 				0490ABED1EAEF0F30051C47D /* poet.song.18000.json in Resources */,
 				0490AC661EAEF0F40051C47D /* poet.song.6000.json in Resources */,
 				0490AC491EAEF0F40051C47D /* poet.song.33000.json in Resources */,
+				DE1CD9D61FCE59550080AF82 /* Red.plist in Resources */,
 				0490ABBA1EAEF0F30051C47D /* poet.song.133000.json in Resources */,
 				0490ABBB1EAEF0F30051C47D /* poet.song.134000.json in Resources */,
 				0490AC881EAEF0F40051C47D /* poet.song.90000.json in Resources */,
@@ -1826,8 +1886,10 @@
 				0490AC201EAEF0F40051C47D /* poet.song.225000.json in Resources */,
 				0490AC1E1EAEF0F40051C47D /* poet.song.223000.json in Resources */,
 				0490ABE81EAEF0F30051C47D /* poet.song.175000.json in Resources */,
+				DE1CD9D01FCE59550080AF82 /* Pink.plist in Resources */,
 				0490AC871EAEF0F40051C47D /* poet.song.9000.json in Resources */,
 				0490ACC71EAEF0F40051C47D /* poet.tang.57000.json in Resources */,
+				DE1CD9CD1FCE59550080AF82 /* Blue Grrey.plist in Resources */,
 				0447D8AF1EB9D578001331AC /* 诗经.json in Resources */,
 				0490AC9E1EAEF0F40051C47D /* poet.tang.2000.json in Resources */,
 				0490AC5B1EAEF0F40051C47D /* poet.song.5000.json in Resources */,
@@ -1874,6 +1936,7 @@
 				0490AC091EAEF0F40051C47D /* poet.song.204000.json in Resources */,
 				0490ACB91EAEF0F40051C47D /* poet.tang.44000.json in Resources */,
 				0490AC1A1EAEF0F40051C47D /* poet.song.22000.json in Resources */,
+				DE1CD9D21FCE59550080AF82 /* Deep Purple.plist in Resources */,
 				0490AC9F1EAEF0F40051C47D /* poet.tang.20000.json in Resources */,
 				0490AB9B1EAEF0F30051C47D /* poet.song.105000.json in Resources */,
 				0490AC1F1EAEF0F40051C47D /* poet.song.224000.json in Resources */,
@@ -1915,6 +1978,7 @@
 				0490AC1B1EAEF0F40051C47D /* poet.song.220000.json in Resources */,
 				0490AC9A1EAEF0F40051C47D /* poet.tang.16000.json in Resources */,
 				0490AB981EAEF0F30051C47D /* poet.song.102000.json in Resources */,
+				DE1CD9CC1FCE59550080AF82 /* Brown.plist in Resources */,
 				0490ABC91EAEF0F30051C47D /* poet.song.147000.json in Resources */,
 				0490ABEE1EAEF0F30051C47D /* poet.song.180000.json in Resources */,
 				0490ACA31EAEF0F40051C47D /* poet.tang.24000.json in Resources */,
