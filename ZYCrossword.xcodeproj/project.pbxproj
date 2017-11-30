@@ -395,6 +395,9 @@
 		DE3CA54D1FA8784E00700A96 /* TisprCardStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA54A1FA8784E00700A96 /* TisprCardStackViewController.swift */; };
 		DE3CA54E1FA8784E00700A96 /* TisprCardStackViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */; };
 		DE699D1F1FC579760037F986 /* Cyan.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE699D1E1FC579760037F986 /* Cyan.plist */; };
+		DE764F361FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */; };
+		DE764F381FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F371FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift */; };
+		DE764F3A1FCFF7D1009126E3 /* ZYThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F391FCFF7D1009126E3 /* ZYThemes.swift */; };
 		DE8358DF1FA7295000DF478A /* ZYFlipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */; };
 		DE8914BB1FB5A6C000277963 /* ZYAboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */; };
 		DE920C3C1FB1A8F4006F1A93 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */; };
@@ -818,6 +821,9 @@
 		DE3CA54A1FA8784E00700A96 /* TisprCardStackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewController.swift; sourceTree = "<group>"; };
 		DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TisprCardStackViewLayout.swift; sourceTree = "<group>"; };
 		DE699D1E1FC579760037F986 /* Cyan.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cyan.plist; sourceTree = "<group>"; };
+		DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemeSelectCollectionViewController.swift; sourceTree = "<group>"; };
+		DE764F371FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemeSelectCollectionViewCell.swift; sourceTree = "<group>"; };
+		DE764F391FCFF7D1009126E3 /* ZYThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemes.swift; sourceTree = "<group>"; };
 		DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYFlipButton.swift; sourceTree = "<group>"; };
 		DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYAboutUsViewController.swift; sourceTree = "<group>"; };
 		DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1503,6 +1509,9 @@
 			isa = PBXGroup;
 			children = (
 				DE1CD9BB1FCE59230080AF82 /* Data */,
+				DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */,
+				DE764F371FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift */,
+				DE764F391FCFF7D1009126E3 /* ZYThemes.swift */,
 			);
 			name = Theme;
 			sourceTree = "<group>";
@@ -2096,6 +2105,7 @@
 				DE3CA54E1FA8784E00700A96 /* TisprCardStackViewLayout.swift in Sources */,
 				04BD132C1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift in Sources */,
 				0496F3331EBB2084008D3285 /* ZYCrosswordsGenerator.swift in Sources */,
+				DE764F381FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift in Sources */,
 				DE8358DF1FA7295000DF478A /* ZYFlipButton.swift in Sources */,
 				04BD132A1EC2EA8F00B1DB9E /* ZYBook.swift in Sources */,
 				04C94AC11EB33BC5009F4381 /* ZYWordViewModel.swift in Sources */,
@@ -2116,6 +2126,7 @@
 				0450C7511F5E763F00660CD5 /* ZYFoldingTableViewCell.swift in Sources */,
 				0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */,
 				046A86D71ECD4987001E7323 /* ZYPoetry.swift in Sources */,
+				DE764F361FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift in Sources */,
 				0496F8FD1EE6504800F51542 /* ZYAllegoric.swift in Sources */,
 				DE3CA54D1FA8784E00700A96 /* TisprCardStackViewController.swift in Sources */,
 				043556F71F7A444F009C1F1A /* ZYUserInfo.swift in Sources */,
@@ -2135,6 +2146,7 @@
 				04621BE71EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift in Sources */,
 				040E95F31ED6B42C00FC29E2 /* ZYChessboardViewController.swift in Sources */,
 				046B7C0B1F5D04B70088D43D /* ZYCollectDictionaryTableViewCell.swift in Sources */,
+				DE764F3A1FCFF7D1009126E3 /* ZYThemes.swift in Sources */,
 				DEDAAA421FAB143D002521FA /* ZYShopListViewController.swift in Sources */,
 				04141ADD1EC4690500A1A8A2 /* ZYMusic.swift in Sources */,
 				0496F3371EBB20E7008D3285 /* ZYArrayShuffle.swift in Sources */,
