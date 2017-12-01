@@ -489,10 +489,10 @@
             </objects>
             <point key="canvasLocation" x="-2455.1999999999998" y="-501.49925037481262"/>
         </scene>
-        <!--Theme Select Collection View Controller-->
+        <!--选择皮肤-->
         <scene sceneID="0a8-S0-kTz">
             <objects>
-                <collectionViewController id="qpg-1W-hOF" customClass="ZYThemeSelectCollectionViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController title="选择皮肤" id="qpg-1W-hOF" customClass="ZYThemeSelectCollectionViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="wrl-ed-2R2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -634,6 +634,7 @@
                         <segue destination="Egu-jg-KQe" kind="show" identifier="librarySegueId" id="oPv-t7-mqa"/>
                         <segue destination="sAg-43-p1P" kind="show" identifier="shopListSegeId" id="DeQ-83-DPd"/>
                         <segue destination="GXB-im-eJd" kind="show" identifier="aboultUsSegurId" id="1EX-ty-Pfi"/>
+                        <segue destination="qpg-1W-hOF" kind="show" identifier="themeSelectSegueId" id="AHl-Am-p95"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

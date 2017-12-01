@@ -51,5 +51,10 @@ enum ZYThemes: String {
         case .blueGrrey : ThemeManager.setTheme(plistName: "Blue Grrey", path: .mainBundle)
         }
     }
-    static let allValues = [red,pink,purple,deepPurple,indigo,blue,lightBlue,cyan,teal,green,lightGreen,orange,deepOrange,brown,blueGrrey]
+    static let allValues = [ThemeContent(themes: red, themeTitle: "#E51C23", themeColor: ""),ThemeContent(themes: pink, themeTitle: "#E91E63", themeColor: ""),ThemeContent(themes: purple, themeTitle: "#9C27B0", themeColor: ""),ThemeContent(themes: deepPurple, themeTitle: "#673AB7", themeColor: ""),ThemeContent(themes: indigo, themeTitle: "#3F51B5", themeColor: ""),ThemeContent(themes: blue, themeTitle: "#5677FC", themeColor: ""),ThemeContent(themes: lightBlue, themeTitle: "#03A9F4", themeColor: ""),ThemeContent(themes: cyan, themeTitle: "#00BCD4", themeColor: ""),ThemeContent(themes: teal, themeTitle: "#009688", themeColor: ""),ThemeContent(themes: green, themeTitle: "#259B24", themeColor: ""),ThemeContent(themes: lightGreen, themeTitle: "#8BC34A", themeColor: ""),ThemeContent(themes: orange, themeTitle: "#FF9800", themeColor: ""),ThemeContent(themes: deepOrange, themeTitle: "#FF5722", themeColor: ""),ThemeContent(themes: brown, themeTitle: "#795548", themeColor: ""),ThemeContent(themes: blueGrrey, themeTitle: "#607D8B", themeColor: "")]
+}
+struct ThemeContent {
+    var themes: ZYThemes
+    var themeTitle: String
+    var themeColor: String
 }

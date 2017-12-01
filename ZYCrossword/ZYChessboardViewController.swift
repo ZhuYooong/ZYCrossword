@@ -70,7 +70,7 @@ class ZYChessboardViewController: UIViewController {
         moreDropDown.dataSource = [
             "词库",
             "成就",
-            "设置",
+            "选择皮肤",
             "关于我们"
         ]
         moreDropDown.selectionAction = { [unowned self] (index, item) in
@@ -78,8 +78,8 @@ class ZYChessboardViewController: UIViewController {
                 self.mainViewController?.performSegue(withIdentifier: "librarySegueId", sender: self.moreButton)
             }else if item == "成就" {
                 
-            }else if item == "设置" {
-                
+            }else if item == "选择皮肤" {
+                self.mainViewController?.performSegue(withIdentifier: "themeSelectSegueId", sender: self.moreButton)
             }else if item == "关于我们" {
                 self.mainViewController?.performSegue(withIdentifier: "aboultUsSegurId", sender: self.moreButton)
             }
