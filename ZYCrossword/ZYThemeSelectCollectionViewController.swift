@@ -13,7 +13,6 @@ class ZYThemeSelectCollectionViewController: UICollectionViewController {
     let themesDataArray = ZYThemes.allValues
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView!.register(ZYThemeSelectCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -39,4 +38,5 @@ class ZYThemeSelectCollectionViewController: UICollectionViewController {
             ZYThemes.switchTo(themesDataArray[indexPath.row].themes)
         }
     }
+    
 }

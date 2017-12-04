@@ -51,10 +51,24 @@ enum ZYThemes: String {
         case .blueGrrey : ThemeManager.setTheme(plistName: "Blue Grrey", path: .mainBundle)
         }
     }
-    static let allValues = [ThemeContent(themes: red, themeTitle: "#E51C23", themeColor: ""),ThemeContent(themes: pink, themeTitle: "#E91E63", themeColor: ""),ThemeContent(themes: purple, themeTitle: "#9C27B0", themeColor: ""),ThemeContent(themes: deepPurple, themeTitle: "#673AB7", themeColor: ""),ThemeContent(themes: indigo, themeTitle: "#3F51B5", themeColor: ""),ThemeContent(themes: blue, themeTitle: "#5677FC", themeColor: ""),ThemeContent(themes: lightBlue, themeTitle: "#03A9F4", themeColor: ""),ThemeContent(themes: cyan, themeTitle: "#00BCD4", themeColor: ""),ThemeContent(themes: teal, themeTitle: "#009688", themeColor: ""),ThemeContent(themes: green, themeTitle: "#259B24", themeColor: ""),ThemeContent(themes: lightGreen, themeTitle: "#8BC34A", themeColor: ""),ThemeContent(themes: orange, themeTitle: "#FF9800", themeColor: ""),ThemeContent(themes: deepOrange, themeTitle: "#FF5722", themeColor: ""),ThemeContent(themes: brown, themeTitle: "#795548", themeColor: ""),ThemeContent(themes: blueGrrey, themeTitle: "#607D8B", themeColor: "")]
+    static let allValues = [ThemeContent(themes: red, themeTitle: "红色", themeColor: 0xE51C23),
+                            ThemeContent(themes: pink, themeTitle: "粉红色", themeColor: 0xE91E63),
+                            ThemeContent(themes: purple, themeTitle: "紫色", themeColor: 0x9C27B0),
+                            ThemeContent(themes: deepPurple, themeTitle: "深紫色", themeColor: 0x673AB7),
+                            ThemeContent(themes: indigo, themeTitle: "靛蓝色", themeColor: 0x3F51B5),
+                            ThemeContent(themes: blue, themeTitle: "蓝色", themeColor: 0x5677FC),
+                            ThemeContent(themes: lightBlue, themeTitle: "淡蓝色", themeColor: 0x03A9F4),
+                            ThemeContent(themes: cyan, themeTitle: "蓝绿色", themeColor: 0x00BCD4),
+                            ThemeContent(themes: teal, themeTitle: "墨绿色", themeColor: 0x009688),
+                            ThemeContent(themes: green, themeTitle: "绿色", themeColor: 0x259B24),
+                            ThemeContent(themes: lightGreen, themeTitle: "淡绿色", themeColor: 0x8BC34A),
+                            ThemeContent(themes: orange, themeTitle: "橙色", themeColor: 0xFF9800),
+                            ThemeContent(themes: deepOrange, themeTitle: "深桔黄色", themeColor: 0xFF5722),
+                            ThemeContent(themes: brown, themeTitle: "褐色", themeColor: 0x795548),
+                            ThemeContent(themes: blueGrrey, themeTitle: "蓝灰色", themeColor: 0x607D8B)]
 }
 struct ThemeContent {
     var themes: ZYThemes
     var themeTitle: String
-    var themeColor: String
+    var themeColor: Int
 }
