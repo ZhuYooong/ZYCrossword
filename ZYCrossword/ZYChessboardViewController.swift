@@ -17,6 +17,12 @@ class ZYChessboardViewController: UIViewController {
     var resultXArray = [ZYBaseWord]()
     var resultYArray = [ZYBaseWord]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let imageView = UIImageView()
+        imageView.theme_image = "fabImage"
+        promptButton.image = imageView.image
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextfieldNotification()

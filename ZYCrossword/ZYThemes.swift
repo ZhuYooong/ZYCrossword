@@ -34,22 +34,26 @@ enum ZYThemes: String {
         current = theme
         
         switch theme {
-        case .red : ThemeManager.setTheme(plistName: "Red", path: .mainBundle)
-        case .pink : ThemeManager.setTheme(plistName: "Pink", path: .mainBundle)
-        case .purple : ThemeManager.setTheme(plistName: "Purple", path: .mainBundle)
-        case .deepPurple : ThemeManager.setTheme(plistName: "Deep Purple", path: .mainBundle)
-        case .indigo : ThemeManager.setTheme(plistName: "Indigo", path: .mainBundle)
-        case .blue : ThemeManager.setTheme(plistName: "Blue", path: .mainBundle)
-        case .lightBlue : ThemeManager.setTheme(plistName: "Light Blue", path: .mainBundle)
-        case .cyan : ThemeManager.setTheme(plistName: "Cyan", path: .mainBundle)
-        case .teal : ThemeManager.setTheme(plistName: "Teal", path: .mainBundle)
-        case .green : ThemeManager.setTheme(plistName: "Green", path: .mainBundle)
-        case .lightGreen : ThemeManager.setTheme(plistName: "Light Geen", path: .mainBundle)
-        case .orange : ThemeManager.setTheme(plistName: "Orange", path: .mainBundle)
-        case .deepOrange : ThemeManager.setTheme(plistName: "Deep Orange", path: .mainBundle)
-        case .brown : ThemeManager.setTheme(plistName: "Brown", path: .mainBundle)
-        case .blueGrrey : ThemeManager.setTheme(plistName: "Blue Grrey", path: .mainBundle)
+        case .red : setTheme(with: "Red")
+        case .pink : setTheme(with: "Pink")
+        case .purple : setTheme(with: "Purple")
+        case .deepPurple : setTheme(with: "Deep Purple")
+        case .indigo : setTheme(with: "Indigo")
+        case .blue : setTheme(with: "Blue")
+        case .lightBlue : setTheme(with: "Light Blue")
+        case .cyan : setTheme(with: "Cyan")
+        case .teal : setTheme(with: "Teal")
+        case .green : setTheme(with: "Green")
+        case .lightGreen : setTheme(with: "Light Geen")
+        case .orange : setTheme(with: "Orange")
+        case .deepOrange : setTheme(with: "Deep Orange")
+        case .brown : setTheme(with: "Brown")
+        case .blueGrrey : setTheme(with: "Blue Grrey")
         }
+    }
+    static func setTheme(with name: String) {
+        ThemeManager.setTheme(plistName: name, path: .mainBundle)
+        UserDefaults.standard.set(name, forKey: themeKey)
     }
     static let allValues = [ThemeContent(themes: red, themeTitle: "红色", themeColor: 0xE51C23),
                             ThemeContent(themes: pink, themeTitle: "粉红色", themeColor: 0xE91E63),

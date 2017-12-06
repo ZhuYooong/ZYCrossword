@@ -16,6 +16,11 @@ class ZYMainViewController: UIViewController {
         if !isNotShouldReset {
             resetValue(with: self.view.center)
         }
+        let imageView = UIImageView()
+        imageView.theme_image = "fabImage"
+        if (chessboardViewController.promptButton != nil) {
+            chessboardViewController.promptButton.image = imageView.image
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

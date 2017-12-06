@@ -1089,10 +1089,6 @@
                                             <constraint firstAttribute="width" constant="33" id="PAZ-9q-7Dt"/>
                                             <constraint firstAttribute="height" constant="33" id="y7f-76-1xe"/>
                                         </constraints>
-                                        <state key="normal" image="fab cyan"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="fab cyan"/>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="promptButtonClick:" destination="ONd-gF-gc7" eventType="touchUpInside" id="svT-Ub-BvS"/>
                                         </connections>
@@ -2167,7 +2163,6 @@
         <image name="ShapeButton cyan" width="40" height="43"/>
         <image name="Star" width="24" height="23"/>
         <image name="app bar bg cyan" width="375" height="424"/>
-        <image name="fab cyan" width="33" height="33"/>
         <image name="right arrow" width="12" height="34"/>
         <image name="shopDiscount" width="48" height="21"/>
         <image name="shopItemSelectted" width="160" height="78"/>
