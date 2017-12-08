@@ -401,6 +401,7 @@
 		DE8358DF1FA7295000DF478A /* ZYFlipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */; };
 		DE8914BB1FB5A6C000277963 /* ZYAboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */; };
 		DE920C3C1FB1A8F4006F1A93 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */; };
+		DE9A9A411FDA7BF500FB8BF3 /* ZYSecretClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9A9A401FDA7BF500FB8BF3 /* ZYSecretClass.swift */; };
 		DE9B30151FC2C85700134A14 /* ZYHandbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9B30141FC2C85700134A14 /* ZYHandbookViewController.swift */; };
 		DEDAAA421FAB143D002521FA /* ZYShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */; };
 		DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */; };
@@ -827,6 +828,7 @@
 		DE8358DE1FA7295000DF478A /* ZYFlipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYFlipButton.swift; sourceTree = "<group>"; };
 		DE8914BA1FB5A6C000277963 /* ZYAboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYAboutUsViewController.swift; sourceTree = "<group>"; };
 		DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		DE9A9A401FDA7BF500FB8BF3 /* ZYSecretClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYSecretClass.swift; sourceTree = "<group>"; };
 		DE9B30141FC2C85700134A14 /* ZYHandbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYHandbookViewController.swift; sourceTree = "<group>"; };
 		DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYShopListViewController.swift; sourceTree = "<group>"; };
 		DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforViewModel.swift; sourceTree = "<group>"; };
@@ -985,6 +987,7 @@
 			children = (
 				0490AA481EAEE85B0051C47D /* NetDataManager.swift */,
 				0490AA491EAEE85B0051C47D /* ZYCustomClass.swift */,
+				DE9A9A401FDA7BF500FB8BF3 /* ZYSecretClass.swift */,
 				04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */,
 				0490AA4A1EAEE85B0051C47D /* ZYWebViewController.swift */,
 			);
@@ -2141,6 +2144,7 @@
 				04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */,
 				04BD132E1EC30DDB00B1DB9E /* ZYMovie.swift in Sources */,
 				048D04A01F70E14400F42FED /* ZYLibraryListCell.swift in Sources */,
+				DE9A9A411FDA7BF500FB8BF3 /* ZYSecretClass.swift in Sources */,
 				047371851F0F65AE005BE7A9 /* ZYCrosswordListTableViewCell.swift in Sources */,
 				049E5A041EEE47CA00FC3560 /* ZYActivityIndicator.swift in Sources */,
 				04621BE71EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift in Sources */,

@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         realmSchemaVersion()
-        if let themeName = UserDefaults.standard.string(forKey: themeKey) {
+        if let themeName = ZYSecretClass.shareSecret.getUserDefaults(with: themeKey) {
+//        if let themeName = UserDefaults.standard.string(forKey: themeKey) {
             ThemeManager.setTheme(plistName: themeName, path: .mainBundle)
         }else {
             ThemeManager.setTheme(plistName: "Cyan", path: .mainBundle)

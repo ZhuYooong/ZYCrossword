@@ -82,7 +82,8 @@ class ZYMainViewController: UIViewController {
     var tipYdataArr = [ZYBaseWord]()
     func creatChessboardData() -> Bool {
         ZYWordViewModel.shareWord.initData()
-        guard let _ = UserDefaults.standard.string(forKey: userInfoKey) else {
+        guard let _ = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) else {
+//        guard let _ = UserDefaults.standard.string(forKey: userInfoKey) else {
             ZYUserInforViewModel.shareUserInfor.initData()
             performSegue(withIdentifier: "librarySegueId", sender: self)
             return false

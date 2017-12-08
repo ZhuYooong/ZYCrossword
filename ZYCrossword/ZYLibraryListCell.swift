@@ -53,7 +53,8 @@ class ZYLibraryListCell: TisprCardStackViewCell {
     }
     func showLockAlert(with wordType: String, index: Int, cell: ZYLabraryCardTableViewCell) {
         if let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(wordType)'")).first {
-            let truePrice = word.price + UserDefaults.standard.integer(forKey: unlockedKey)
+            let unlockedCount = UserDefaults.standard.integer(forKey: unlockedKey)
+            let truePrice = word.price + unlockedCount
             let option = UIAlertController(title: "您确定要解锁《\(wordType)》吗？", message: "需要 \(truePrice) 金币", preferredStyle: .alert)
             option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
             option.addAction(UIAlertAction(title: "确定", style: .default) { (action) in
@@ -61,6 +62,7 @@ class ZYLibraryListCell: TisprCardStackViewCell {
                     ZYWordViewModel.shareWord.unlockWordData(with: word, and: self.realm)
                     ZYUserInforViewModel.shareUserInfor.changeCoin(with: truePrice, add: false)
                     self.cardContentArray[index].isUnlocked = true
+                    UserDefaults.standard.set(unlockedCount + 1, forKey: unlockedKey)
                     cell.lockImageView.isHidden = true
                 }else {
                     ZYCustomClass.shareCustom.showSnackbar(with: "coin count lack!", snackbarController: self.parientViewController?.snackbarController)

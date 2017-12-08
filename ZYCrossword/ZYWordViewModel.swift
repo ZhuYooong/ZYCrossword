@@ -30,7 +30,7 @@ class ZYWordViewModel: NSObject {
                 initWordData(with: type, and: realm)
             }
         }
-        UserDefaults.standard.set(0, forKey: unlockedKey)
+        UserDefaults.standard.set(5, forKey: unlockedKey)
     }
     func initWordData(with type: ZYWordType, and realm: Realm) {
         let wordInfo = ZYWord()

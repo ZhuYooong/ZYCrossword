@@ -24,7 +24,8 @@ class ZYUserInforViewModel: NSObject {
         try! realm.write {
             realm.add(userInfo, update: true)
         }
-        UserDefaults.standard.set(userInfo.userIdentifier, forKey: userInfoKey)
+        ZYSecretClass.shareSecret.creatUserDefaults(with: userInfo.userIdentifier, defultKey: userInfoKey)
+//        UserDefaults.standard.set(userInfo.userIdentifier, forKey: userInfoKey)
     }
     func changeStarCount(with level: ChangeStarLevel) {
         if let user = getUserInfo() {
@@ -60,7 +61,8 @@ class ZYUserInforViewModel: NSObject {
     }
     //MARK: - Tools
     func getUserInfo() -> ZYUserInfo? {
-        if let userId = UserDefaults.standard.string(forKey: userInfoKey) {
+        if let userId = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) {
+//        if let userId = UserDefaults.standard.string(forKey: userInfoKey) {
             let predicate = NSPredicate(format: "userIdentifier = '\(userId)'")
             if let user = self.realm.objects(ZYUserInfo.self).filter(predicate).first {
                 return user

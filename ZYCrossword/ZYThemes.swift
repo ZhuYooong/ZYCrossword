@@ -53,7 +53,8 @@ enum ZYThemes: String {
     }
     static func setTheme(with name: String) {
         ThemeManager.setTheme(plistName: name, path: .mainBundle)
-        UserDefaults.standard.set(name, forKey: themeKey)
+        ZYSecretClass.shareSecret.creatUserDefaults(with: name, defultKey: themeKey)
+//        UserDefaults.standard.set(name, forKey: themeKey)
     }
     static let allValues = [ThemeContent(themes: red, themeTitle: "红色", themeColor: 0xE51C23),
                             ThemeContent(themes: pink, themeTitle: "粉红色", themeColor: 0xE91E63),
