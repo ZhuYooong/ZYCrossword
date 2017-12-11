@@ -10,6 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "ThemeSelectCellId"
 class ZYThemeSelectCollectionViewController: UICollectionViewController {
+    var changeThemeBlock:((Bool) -> Void)?
     let themesDataArray = ZYThemes.allValues
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,9 @@ class ZYThemeSelectCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row < themesDataArray.count {
             ZYThemes.switchTo(themesDataArray[indexPath.row].themes)
+            if self.changeThemeBlock != nil {
+                self.changeThemeBlock!(true)
+            }
         }
     }
     

@@ -16,9 +16,19 @@ class ZYMainViewController: UIViewController {
         if !isNotShouldReset {
             resetValue(with: self.view.center)
         }
-        let imageView = UIImageView()
-        imageView.theme_image = "fabImage"
+        // changeTheme
+        if (isChangeTheme && chessboardViewController.crosswordDataTableView != nil) {
+            chessboardViewController.tableView(chessboardViewController.crosswordDataTableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+            isChangeTheme = false
+        }
+        if (titleViewController.loadingActivityIndicator != nil) {
+            let colorView = UIView()
+            colorView.theme_backgroundColor = "mainColor"
+            titleViewController.loadingActivityIndicator.color = colorView.backgroundColor!
+        }
         if (chessboardViewController.promptButton != nil) {
+            let imageView = UIImageView()
+            imageView.theme_image = "fabImage"
             chessboardViewController.promptButton.image = imageView.image
         }
     }
@@ -85,6 +95,7 @@ class ZYMainViewController: UIViewController {
         guard let _ = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) else {
 //        guard let _ = UserDefaults.standard.string(forKey: userInfoKey) else {
             ZYUserInforViewModel.shareUserInfor.initData()
+            isNotShouldReset = false
             performSegue(withIdentifier: "librarySegueId", sender: self)
             return false
         }
@@ -154,6 +165,7 @@ class ZYMainViewController: UIViewController {
         }catch{
             print("error")
         }
+        isNotShouldReset = true
         self.beganTitle(with: point)
     }
     //MARK: - ViewController
@@ -167,6 +179,7 @@ class ZYMainViewController: UIViewController {
         }
     }
     var chessboardViewController: ZYChessboardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID")  as! ZYChessboardViewController
+    var isChangeTheme = false
     func beganChessboard() {
         chessboardViewController.mainViewController = self
         chessboardViewController.chessboard = chessboard
@@ -194,6 +207,10 @@ class ZYMainViewController: UIViewController {
         }else if let viewController = segue.destination as? ZYLibraryListViewController, segue.identifier == "librarySegueId" {
             viewController.changeWordBlock = { isChange in
                 self.isNotShouldReset = !isChange
+            }
+        }else if let viewController = segue.destination as? ZYThemeSelectCollectionViewController, segue.identifier == "themeSelectSegueId" {
+            viewController.changeThemeBlock = { isChange in
+                self.isChangeTheme = isChange
             }
         }
     }

@@ -17,7 +17,7 @@ class ZYSecretClass: NSObject {
     static let shareSecret = ZYSecretClass()
     fileprivate override init() { }
     
-    let aes = try! AES(key: "crossword.com123456", iv: "1234567890123456")
+    let aes = try! AES(key: Padding.zeroPadding.add(to: "crossword123".bytes, blockSize: AES.blockSize), blockMode: .CBC(iv:"1234567890123456".bytes))
     
     func creatUserDefaults(with string: String, defultKey: String) {
         let encrypted = try! aes.encrypt(string.bytes)
@@ -26,7 +26,7 @@ class ZYSecretClass: NSObject {
     func getUserDefaults(with defultKey: String) -> String? {
         if let encrypted = UserDefaults.standard.object(forKey: defultKey) as? [UInt8] {
             let decrypted = try! aes.decrypt(encrypted)
-            return "\(String(data: Data(decrypted), encoding: .utf8)!)"
+            return "\(String(data: Data(decrypted), encoding: String.Encoding.utf8)!)"
         }else {
             return nil
         }
