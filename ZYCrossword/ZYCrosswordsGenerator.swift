@@ -10,11 +10,14 @@ import UIKit
 import RealmSwift
 
 class ZYCrosswordsGenerator: NSObject {
+    static let shareCrosswordsGenerator = ZYCrosswordsGenerator()
+    fileprivate override init() {}
+    
     open var orientationOptimization = false
     // MARK: - Logic properties
-    open var grid = Array2D()
+    open var grid: Array2D?
     open var resultData: Array<Word> = Array<Word>()
-    open var resultContentArray = Array<ZYBaseWord>()
+    open var resultContentArray: Array<ZYBaseWord> = Array<ZYBaseWord>()
     // MARK: - Initialization
     func loadCrosswordsData() {
         let realm = try! Realm()
@@ -23,7 +26,7 @@ class ZYCrosswordsGenerator: NSObject {
     }
     // MARK: - 加载数据
     fileprivate var contentArray = [AnyObject]()
-    fileprivate var resultContentSet = Set<ZYBaseWord>()
+    fileprivate var resultContentSet: Set<ZYBaseWord> = Set<ZYBaseWord>()
     fileprivate var currentWords: Array<String> = Array<String>()
     
     func loadData(with realm: Realm) {
@@ -53,134 +56,148 @@ class ZYCrosswordsGenerator: NSObject {
     }()
     var emptySymbol = "-"
     open func generate() {
-        DispatchQueue(label: "Crosswords").sync { [weak self] in
-            var isSuccess = false
-            while !isSuccess {
-                self?.grid = Array2D(columns: self!.columns, rows: self!.columns, defaultValue: self!.emptySymbol)
-                self?.resultData = Array<Word>()
-                self?.resultContentArray = Array<ZYBaseWord>()
-                
-                self?.currentContent = nil
-                self?.currentWords = Array<String>()
-                self?.resultContentSet = Set<ZYBaseWord>()
-                var isContininue = true
-                var count = 0
-                var oldFindWord = ""
-                while isContininue {
-                    if self?.currentWords.count == 0 {
-                        if let foundWord = self?.findWord(with: nil) {
-                            _ = self?.fitAndAdd(foundWord)
-                        }else {
-                            count += 1
-                        }
-                    }else {
-                        let word = self!.currentWords[self!.randomInt(0, max: self!.currentWords.count - 1)]
-                        if word.count > 1 {
-                            var strArray = [String]()
-                            for str in word {
-                                strArray.append(String(str))
-                            }
-                            var isRepeat = true
-                            while isRepeat {
-                                let findWord = strArray[self!.randomInt(0, max: strArray.count - 1)]
-                                if findWord != oldFindWord {
-                                    oldFindWord = findWord
-                                    isRepeat = false
-                                }
-                            }
-                            if let foundWord = self?.findWord(with: oldFindWord) {
-                                if self?.fitAndAdd(foundWord) == false {
-                                    count += 1
-                                }
-                            }else {
-                                count += 1
-                            }
-                        }else {
-                            count += 1
-                        }
-                    }
-                    if count == 200 {
-                        isContininue = false
-                    }
+        var isSuccess = false
+        while !isSuccess {
+            grid = Array2D(columns: columns, rows: columns, defaultValue: emptySymbol)
+            resultData.removeAll()
+            resultContentArray.removeAll()
+            
+            currentContent = nil
+            currentWords.removeAll()
+            resultContentSet.removeAll()
+            generateOnce()
+            if currentWords.count > 15 {
+                isSuccess = true
+            }
+        }
+    }
+    func generateOnce() {
+        var isContininue = true
+        var count = 0
+        var oldFindWord = ""
+        while isContininue {
+            if currentWords.count == 0 {
+                if findWord(with: nil) == false {
+                    count += 1
                 }
-                if self!.currentWords.count > 10 {
-                    isSuccess = true
+            }else {
+                if let selectedWord = generateAnother(word: currentWords[randomInt(0, max: currentWords.count - 1)], oldFindWord: oldFindWord) {
+                    oldFindWord = selectedWord
+                }else {
+                    count += 1
                 }
             }
+            if count == 200 {
+                isContininue = false
+            }
+        }
+    }
+    func generateAnother(word: String, oldFindWord: String) -> String? {// 添加词
+        if word.count > 1 {
+            var selectedWord = ""
+            var strArray = [String]()
+            for str in word {
+                strArray.append(String(str))
+            }
+            var isRepeat = true
+            while isRepeat {
+                let findWord = strArray[randomInt(0, max: strArray.count - 1)]
+                if findWord != oldFindWord {
+                    selectedWord = findWord
+                    isRepeat = false
+                }
+            }
+            if findWord(with: selectedWord) == false {
+                return nil
+            }
+            return selectedWord
+        }else {
+            return nil
         }
     }
     // MARK: findWord
-    func findWord(with name: String?) -> String? {
+    func findWord(with name: String?) -> Bool {
         if contentArray.count > 1 {
-            let content = contentArray[randomInt(0, max: contentArray.count - 1)]
-            return findWord(with: content, and: name)
+            var thisContentArray = contentArray
+            var isFail = false
+            while !isFail {
+                let index = randomInt(0, max: thisContentArray.count - 1)
+                let content = thisContentArray[index]
+                if findWord(with: content, and: name) == true {
+                    return true
+                }else {
+                    if thisContentArray.count == 1 {
+                        isFail = true
+                    }else {
+                        thisContentArray.remove(at: index)
+                    }
+                }
+            }
+        }else {
+            let realm = try! Realm()
+            loadData(with: realm)
         }
-        return nil
+        return false
     }
     var currentContent: AnyObject?
-    func findWord(with content: AnyObject, and findString: String?) -> String? {
+    func findWord(with content: AnyObject, and findString: String?) -> Bool {
         if let results: Results<ZYPoetry> = content as? Results<ZYPoetry> {
-            var detailResult: ZYPoetry?
             for item in filterResult(with: results, and: ZYPoetry.self, and: findString) {
                 if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
+                    currentContent = item
+                    if let foundWord = findDetailWord(with: item.detail, and: findString) {
+                        if fitAndAdd(foundWord) == true {
+                            return true
+                        }
+                    }
                 }
-            }
-            if let deatil = detailResult?.detail {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
             }
         }else if let results: Results<ZYMovie> = content as? Results<ZYMovie> {
-            var detailResult: ZYMovie?
             for item in filterResult(with: results, and: ZYMovie.self, and: findString) {
                 if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
+                    currentContent = item
+                    if let foundWord = findDetailWord(with: item.movie_name, and: findString) {
+                        if fitAndAdd(foundWord) == true {
+                            return true
+                        }
+                    }
                 }
-            }
-            if let deatil = detailResult?.movie_name {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
             }
         }else if let results: Results<ZYBook> = content as? Results<ZYBook> {
-            var detailResult: ZYBook?
             for item in filterResult(with: results, and: ZYBook.self, and: findString) {
                 if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
+                    currentContent = item
+                    if let foundWord = findDetailWord(with: item.name, and: findString) {
+                        if fitAndAdd(foundWord) == true {
+                            return true
+                        }
+                    }
                 }
-            }
-            if let deatil = detailResult?.name {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
             }
         }else if let results: Results<ZYIdiom> = content as? Results<ZYIdiom> {
-            var detailResult: ZYIdiom?
             for item in filterResult(with: results, and: ZYIdiom.self, and: findString) {
                 if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
+                    currentContent = item
+                    if let foundWord = findDetailWord(with: item.title ?? "", and: findString) {
+                        if fitAndAdd(foundWord) == true {
+                            return true
+                        }
+                    }
                 }
-            }
-            if let deatil = detailResult?.title {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
             }
         }else if let results: Results<ZYAllegoric> = content as? Results<ZYAllegoric> {
-            var detailResult: ZYAllegoric?
             for item in filterResult(with: results, and: ZYAllegoric.self, and: findString) {
                 if !resultContentSet.contains(item) {
-                    detailResult = item
-                    break
+                    currentContent = item
+                    if let foundWord = findDetailWord(with: item.name ?? "", and: findString) {
+                        if fitAndAdd(foundWord) == true {
+                            return true
+                        }
+                    }
                 }
             }
-            if let deatil = detailResult?.name {
-                currentContent = detailResult
-                return findDetailWord(with: deatil, and: findString)
-            }
         }
-        return nil
+        return false
     }
     func filterResult<T: Object>(with results: Results<T>, and type: T.Type, and findString: String?) -> Results<T> {
         if let findString = findString {
@@ -255,7 +272,7 @@ class ZYCrosswordsGenerator: NSObject {
                 var colc = 0
                 for column: Int in 0 ..< columns {
                     colc += 1
-                    let cell = grid[column, row]
+                    let cell = grid![column, row]
                     if String(letter) == cell {
                         if rowc - glc > 0 {
                             if ((rowc - glc) + word.count) <= columns {
@@ -358,10 +375,10 @@ class ZYCrosswordsGenerator: NSObject {
         return score
     }
     func setCell(_ column: Int, row: Int, value: String) {
-        grid[column - 1, row - 1] = value
+        grid![column - 1, row - 1] = value
     }
     func getCell(_ column: Int, row: Int) -> String{
-        return grid[column - 1, row - 1]
+        return grid![column - 1, row - 1]
     }
     func checkIfCellClear(_ column: Int, row: Int) -> Bool {
         if column > 0 && row > 0 && column < columns && row < columns {

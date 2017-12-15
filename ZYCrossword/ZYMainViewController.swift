@@ -40,7 +40,7 @@ class ZYMainViewController: UIViewController {
         super.viewDidLoad()
         view.theme_backgroundColor = "loadColor"
         view.addSubview(self.titleViewController.view)
-        DispatchQueue(label: "Crosswords").async { [weak self] in
+        DispatchQueue(label: "CrosswordsFirst").async { [weak self] in
             self?.loadData()
         }
     }
@@ -99,11 +99,11 @@ class ZYMainViewController: UIViewController {
             performSegue(withIdentifier: "librarySegueId", sender: self)
             return false
         }
-        let crosswordsGenerator = ZYCrosswordsGenerator()
+        let crosswordsGenerator = ZYCrosswordsGenerator.shareCrosswordsGenerator
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
         crosswordsGenerator.loadCrosswordsData()
         chessboard = ZYChessboard()
-        chessboard.grid = crosswordsGenerator.grid
+        chessboard.grid = crosswordsGenerator.grid!
         chessboard.resultGrid = Array2D(columns: chessboardColumns, rows: chessboardColumns, defaultValue: chessboardEmptySymbol)
         tipXdataArr = [ZYBaseWord]()
         tipYdataArr = [ZYBaseWord]()
@@ -173,7 +173,7 @@ class ZYMainViewController: UIViewController {
     func beganTitle(with originalPoint: CGPoint) {
         UIView.mdInflateTransition(from: chessboardViewController.view, toView: titleViewController.view, originalPoint: originalPoint, duration: 0.7) {
             self.title = self.titleViewController.title
-            DispatchQueue(label: "Crosswords").async { [weak self] in
+            DispatchQueue(label: "CrosswordsAnother").async { [weak self] in
                 self?.loadData()
             }
         }

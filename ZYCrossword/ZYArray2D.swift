@@ -17,6 +17,7 @@ open class Array2D: NSObject, NSCoding {
         self.init()
         self.columns = columns
         self.rows = rows
+        matrix.removeAll()
         matrix = Array(repeating: defaultValue, count: columns * rows)
     }
     public func encode(with aCoder: NSCoder) {

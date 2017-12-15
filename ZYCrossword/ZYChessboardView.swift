@@ -87,7 +87,9 @@ class ZYChessboardView: UIView {
         guard let button = viewWithTag(tagIndex) as? ZYChessboardButton else {
             return nil
         }
-        button.selectedState = selectedState
+        if !(button.selectedState == .call && selectedState == .normal) {
+            button.selectedState = selectedState
+        }
         return button.frame.origin
     }
     //MARK: - view
