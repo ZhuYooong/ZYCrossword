@@ -30,6 +30,7 @@ class ZYCrosswordsGenerator: NSObject {
     fileprivate var currentWords: Array<String> = Array<String>()
     
     func loadData(with realm: Realm) {
+        contentArray.removeAll()
         let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
         for word in allWordArray {
             if word.isSelectted == true {
@@ -66,7 +67,7 @@ class ZYCrosswordsGenerator: NSObject {
             currentWords.removeAll()
             resultContentSet.removeAll()
             generateOnce()
-            if currentWords.count > 15 {
+            if currentWords.count > 10 {
                 isSuccess = true
             }
         }
@@ -145,7 +146,7 @@ class ZYCrosswordsGenerator: NSObject {
             for item in filterResult(with: results, and: ZYPoetry.self, and: findString) {
                 if !resultContentSet.contains(item) {
                     currentContent = item
-                    if let foundWord = findDetailWord(with: item.detail, and: findString) {
+                    if let foundWord = findDetailWord(with: item.detail, and: findString, isPoetry: true) {
                         if fitAndAdd(foundWord) == true {
                             return true
                         }
@@ -156,7 +157,7 @@ class ZYCrosswordsGenerator: NSObject {
             for item in filterResult(with: results, and: ZYMovie.self, and: findString) {
                 if !resultContentSet.contains(item) {
                     currentContent = item
-                    if let foundWord = findDetailWord(with: item.movie_name, and: findString) {
+                    if let foundWord = findDetailWord(with: item.movie_name, and: findString, isPoetry: false) {
                         if fitAndAdd(foundWord) == true {
                             return true
                         }
@@ -167,7 +168,7 @@ class ZYCrosswordsGenerator: NSObject {
             for item in filterResult(with: results, and: ZYBook.self, and: findString) {
                 if !resultContentSet.contains(item) {
                     currentContent = item
-                    if let foundWord = findDetailWord(with: item.name, and: findString) {
+                    if let foundWord = findDetailWord(with: item.name, and: findString, isPoetry: false) {
                         if fitAndAdd(foundWord) == true {
                             return true
                         }
@@ -178,7 +179,7 @@ class ZYCrosswordsGenerator: NSObject {
             for item in filterResult(with: results, and: ZYIdiom.self, and: findString) {
                 if !resultContentSet.contains(item) {
                     currentContent = item
-                    if let foundWord = findDetailWord(with: item.title ?? "", and: findString) {
+                    if let foundWord = findDetailWord(with: item.title ?? "", and: findString, isPoetry: false) {
                         if fitAndAdd(foundWord) == true {
                             return true
                         }
@@ -189,7 +190,7 @@ class ZYCrosswordsGenerator: NSObject {
             for item in filterResult(with: results, and: ZYAllegoric.self, and: findString) {
                 if !resultContentSet.contains(item) {
                     currentContent = item
-                    if let foundWord = findDetailWord(with: item.name ?? "", and: findString) {
+                    if let foundWord = findDetailWord(with: item.name ?? "", and: findString, isPoetry: false) {
                         if fitAndAdd(foundWord) == true {
                             return true
                         }
@@ -206,18 +207,30 @@ class ZYCrosswordsGenerator: NSObject {
             return results.sorted(byKeyPath: "selecttedCount").sorted(byKeyPath: "isCollect")
         }
     }
-    func findDetailWord(with detail:String, and findString: String?) -> String? {
+    func findDetailWord(with detail:String, and findString: String?, isPoetry: Bool) -> String? {
         let set = CharacterSet(charactersIn: "，。！？；)")
         var detailStrArray = detail.components(separatedBy: set)
+        var detailStr = ""
         for str in detailStrArray {
             if str == "" || str.contains("(") {
                 detailStrArray.remove(object: str)
+            }else if !isPoetry {
+                detailStr.append(str)
             }
+        }
+        if !isPoetry {
+            detailStrArray = [detailStr]
         }
         if let str = findString {
             for detailString in detailStrArray {
-                if detailString.contains(str) && !currentWords.contains(detailString) {
-                    return detailString
+                if currentWords.count > 1 {
+                    if detailString.contains(str) && !currentWords.contains(detailString) {
+                        return detailString
+                    }
+                }else if currentWords.count == 1 {
+                    if String(detailString.first!) == str && !currentWords.contains(detailString) {
+                        return detailString
+                    }
                 }
             }
         }else {
@@ -231,35 +244,31 @@ class ZYCrosswordsGenerator: NSObject {
     }
     // MARK: addWord
     fileprivate func fitAndAdd(_ word: String) -> Bool {
-        var fit = false
-        var count = 0
-        var coordlist = suggestCoord(word)
-        while !fit && count < 2000 {
-            if currentWords.count == 0 {
-                let direction = randomValue()
-                let column = 1
-                let row = 1
-                if checkFitScore(column, row: row, direction: direction, word: word) > 0 {
-                    fit = true 
+        if currentWords.count == 0 {
+            let direction = randomValue()
+            let column = 1
+            let row = 1
+            if checkFitScore(column, row: row, direction: direction, word: word) > 0 {
+                setWord(column, row: row, direction: direction, word: word, force: true)
+            }
+            return true
+        }else {
+            var fit = false
+            var count = 0
+            var coordlist = suggestCoord(word)
+            while !fit && count < coordlist.count {
+                let column = coordlist[count].0
+                let row = coordlist[count].1
+                let direction = coordlist[count].2
+                
+                if coordlist[count].4 > 0 {
+                    fit = true
                     setWord(column, row: row, direction: direction, word: word, force: true)
                 }
-            }else {
-                if count >= 0 && count < coordlist.count {
-                    let column = coordlist[count].0
-                    let row = coordlist[count].1
-                    let direction = coordlist[count].2
-                    
-                    if coordlist[count].4 > 0 {
-                        fit = true
-                        setWord(column, row: row, direction: direction, word: word, force: true)
-                    }
-                }else {
-                    return false
-                }
+                count += 1
             }
-            count += 1
+            return false
         }
-        return true
     }
     fileprivate func suggestCoord(_ word: String) -> Array<(Int, Int, Int, Int, Int)> {
         var coordlist = Array<(Int, Int, Int, Int, Int)>()
@@ -293,17 +302,19 @@ class ZYCrosswordsGenerator: NSObject {
     }
     fileprivate func sortCoordlist(_ coordlist: Array<(Int, Int, Int, Int, Int)>, word: String) -> Array<(Int, Int, Int, Int, Int)> {
         var newCoordlist = Array<(Int, Int, Int, Int, Int)>()
-        for var coord in coordlist {
-            let column = coord.0
-            let row = coord.1
-            let direction = coord.2
-            coord.4 = checkFitScore(column, row: row, direction: direction, word: word)
-            if coord.4 > 0 {
-                newCoordlist.append(coord)
+        if coordlist.count > 0 {
+            for var coord in coordlist {
+                let column = coord.0
+                let row = coord.1
+                let direction = coord.2
+                coord.4 = checkFitScore(column, row: row, direction: direction, word: word)
+                if coord.4 > 0 {
+                    newCoordlist.append(coord)
+                }
             }
+            newCoordlist.shuffle()
+            newCoordlist.sort(by: {$0.4 > $1.4})
         }
-        newCoordlist.shuffle()
-        newCoordlist.sort(by: {$0.4 > $1.4})
         return newCoordlist
     }
     fileprivate func checkFitScore(_ column: Int, row: Int, direction: Int, word: String) -> Int {

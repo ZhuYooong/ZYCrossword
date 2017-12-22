@@ -40,6 +40,7 @@ class ZYMainViewController: UIViewController {
         super.viewDidLoad()
         view.theme_backgroundColor = "loadColor"
         view.addSubview(self.titleViewController.view)
+        titleViewController.loadingTitleLabel.text = "正在加载资源包……"
         DispatchQueue(label: "CrosswordsFirst").async { [weak self] in
             self?.loadData()
         }
@@ -47,10 +48,12 @@ class ZYMainViewController: UIViewController {
     //MARK: - 加载资源
     func loadData() {
         DispatchQueue.main.sync { [weak self] in
-            titleViewController.loadingTitleLabel.text = "正在加载资源包……"
             if self!.initChessboardData() {
                 self?.chessboard.printGrid()
                 self?.beganChessboard()
+                DispatchQueue(label: "LoadOther").async {
+                    ZYWordViewModel.shareWord.initOtherData()
+                }
             }
         }
     }
@@ -91,7 +94,7 @@ class ZYMainViewController: UIViewController {
     var tipXdataArr = [ZYBaseWord]()
     var tipYdataArr = [ZYBaseWord]()
     func creatChessboardData() -> Bool {
-        ZYWordViewModel.shareWord.initData()
+        ZYWordViewModel.shareWord.initFirstData()
         guard let _ = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) else {
 //        guard let _ = UserDefaults.standard.string(forKey: userInfoKey) else {
             ZYUserInforViewModel.shareUserInfor.initData()
@@ -101,6 +104,9 @@ class ZYMainViewController: UIViewController {
         }
         let crosswordsGenerator = ZYCrosswordsGenerator.shareCrosswordsGenerator
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
+//        DispatchQueue(label: "LoadAnother").async {
+//            ZYWordViewModel.shareWord.initUnlockedData()
+//        }
         crosswordsGenerator.loadCrosswordsData()
         chessboard = ZYChessboard()
         chessboard.grid = crosswordsGenerator.grid!

@@ -15,7 +15,7 @@ class ZYWordViewModel: NSObject {
     fileprivate override init() { }
     
     //MARK: - 存储本地数据
-    func initData() {
+    func initFirstData() {
         let realm = try! Realm()
         let allWordArray = ZYWordType.allValues
         let wordArray = realm.objects(ZYWord.self)
@@ -100,8 +100,37 @@ class ZYWordViewModel: NSObject {
         try! realm.write {
             realm.add(wordInfo, update: true)
         }
-        ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
+        if wordInfo.isUnlocked == true {
+            ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
+        }
     }
+    func initUnlockedData() {
+        let realm = try! Realm()
+        let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
+        for word in allWordArray {
+            if word.isSelectted == false && word.isUnlocked == true {
+                for wordType in ZYWordType.allValues {
+                    if wordType.rawValue == word.wordType {
+                        ZYJsonViewModel.shareJson.saveJsonData(with: wordType, and: realm)
+                    }
+                }
+            }
+        }
+    }
+    func initOtherData() {
+        let realm = try! Realm()
+        let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
+        for word in allWordArray {
+            if word.isUnlocked == false {
+                for wordType in ZYWordType.allValues {
+                    if wordType.rawValue == word.wordType {
+                        ZYJsonViewModel.shareJson.saveJsonData(with: wordType, and: realm)
+                    }
+                }
+            }
+        }
+    }
+    //MARK: 修改本地数据
     func clickWordData(with type: String, and realm: Realm) {
         let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(type)'"))
         let wordInfo = ZYWord()
