@@ -38,17 +38,21 @@ extension NSObject {
             let setState = unsafeBitCast(method(for: sel), to: setValueForStateIMP.self)
             statePicker.values.forEach { setState(self, sel, $1.value()! as AnyObject, UIControlState(rawValue: $0)) }
         }
-            
+        
         else if let statusBarStylePicker = picker as? ThemeStatusBarStylePicker {
+            #if os(iOS)
             let setStatusBarStyle = unsafeBitCast(method(for: sel), to: setStatusBarStyleValueIMP.self)
             setStatusBarStyle(self, sel, value as! UIStatusBarStyle, statusBarStylePicker.animated)
+            #endif
         }
             
         else if picker is ThemeBarStylePicker {
+            #if os(iOS)
             let setBarStyle = unsafeBitCast(method(for: sel), to: setBarStyleValueIMP.self)
             setBarStyle(self, sel, value as! UIBarStyle)
+            #endif
         }
-            
+        
         else if picker is ThemeKeyboardAppearancePicker {
             let setKeyboard = unsafeBitCast(method(for: sel), to: setKeyboardValueIMP.self)
             setKeyboard(self, sel, value as! UIKeyboardAppearance)
@@ -77,15 +81,16 @@ extension NSObject {
     fileprivate typealias setValueForStateIMP       = @convention(c) (NSObject, Selector, AnyObject, UIControlState) -> Void
     fileprivate typealias setKeyboardValueIMP       = @convention(c) (NSObject, Selector, UIKeyboardAppearance) -> Void
     fileprivate typealias setActivityStyleValueIMP  = @convention(c) (NSObject, Selector, UIActivityIndicatorViewStyle) -> Void
+    #if os(iOS)
     fileprivate typealias setBarStyleValueIMP       = @convention(c) (NSObject, Selector, UIBarStyle) -> Void
     fileprivate typealias setStatusBarStyleValueIMP = @convention(c) (NSObject, Selector, UIStatusBarStyle, Bool) -> Void
-    
+    #endif
 }
 
 extension NSObject {
     
     fileprivate func _setupThemeNotification() {
-        if #available(iOS 9.0, *) {
+        if #available(iOS 9.0, tvOS 9.0, *) {
             NotificationCenter.default.addObserver(self, selector: #selector(_updateTheme), name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
         } else {
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in self?._updateTheme() })

@@ -14,4 +14,5 @@ pod 'Material', '~> 2'
 pod 'DropDown'
 pod 'SwiftTheme'
 pod 'CryptoSwift'
+pod 'KSGuideController'
 end

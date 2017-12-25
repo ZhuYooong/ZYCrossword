@@ -47,14 +47,7 @@ extension UIViewController {
      through child UIViewControllers.
      */
     public var collectionViewController: CollectionViewController? {
-        var viewController: UIViewController? = self
-        while nil != viewController {
-            if viewController is CollectionViewController {
-                return viewController as? CollectionViewController
-            }
-            viewController = viewController?.parent
-        }
-        return nil
+        return traverseViewControllerHierarchyForClassType()
     }
 }
 
@@ -99,7 +92,7 @@ extension CollectionViewController {
     fileprivate func prepareCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        view.addSubview(collectionView)
+        view.layout(collectionView).edges()
     }
 }
 

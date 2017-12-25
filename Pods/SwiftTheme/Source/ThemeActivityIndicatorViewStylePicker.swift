@@ -39,12 +39,20 @@ import UIKit
     }
     
     class func getStyle(stringStyle: String) -> UIActivityIndicatorViewStyle {
+        #if os(tvOS)
+        switch stringStyle.lowercased() {
+        case "white"        : return .white
+        case "whitelarge"   : return .whiteLarge
+        default: return .white
+        }
+        #else
         switch stringStyle.lowercased() {
         case "gray"         : return .gray
         case "white"        : return .white
         case "whitelarge"   : return .whiteLarge
         default: return .gray
         }
+        #endif
     }
     
 }

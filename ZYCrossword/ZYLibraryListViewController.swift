@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import KSGuideController
 
 class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackViewControllerDelegate {
     var changeWordBlock:((Bool) -> Void)?
