@@ -17,6 +17,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         initData()
         initView()
         NotificationCenter.default.addObserver(self, selector: #selector(initCoinData), name: NSNotification.Name(rawValue: coinCountKey), object: nil)
+        showGuides()
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -63,13 +64,11 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         view.addSubview(headerView)
         //set animation speed
         setAnimationSpeed(0.85)
-        
         //set size of cards
         let size = CGSize(width: view.bounds.width - 40, height: 2*view.bounds.height/3)
         setCardSize(size)
         
         cardStackDelegate = self
-        
         //configuration of stacks
         layout.topStackMaximumSize = 4
         layout.bottomStackMaximumSize = 30
@@ -77,6 +76,22 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         
         creatRightLabel()
         creatCoinButton()
+    }
+    //Guides
+    func showGuides() {
+        KSGuideDataManager.reset(for: "MainGuide")
+        
+        var items = [KSGuideItem]()
+        
+        let libraryCell = card(collectionView!, cardForItemAtIndexPath: IndexPath(row: 0, section: 0)) as! ZYLibraryListCell
+        items.append(KSGuideItem(sourceView: libraryCell, arrowImage: UIImage(named: "短箭头"), text: "library cell"))
+        items.append(KSGuideItem(sourceView: (libraryCell.cardTableView.cellForRow(at: IndexPath(row: 0, section: 0)))!, arrowImage: UIImage(named: "长箭头"), text: "book cell"))
+        items.append(KSGuideItem(sourceView: coinButton, text: "coin"))
+        
+        let guideVC = KSGuideController(items: items, key: "MainGuide")
+        guideVC.setIndexWillChangeBlock { (index, item) in }
+        guideVC.setIndexDidChangeBlock { (index, item) in }
+        guideVC.show(from: self) { }
     }
     //MARK: right item
     //right label

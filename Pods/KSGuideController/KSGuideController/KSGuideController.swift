@@ -43,7 +43,7 @@ public class KSGuideController: UIViewController {
     
     public var maskCornerRadius: CGFloat = 5
     public var backgroundAlpha: CGFloat = 0.7
-    public var spacing: CGFloat = 20
+    public var spacing: CGFloat = 10
     public var padding: CGFloat = 50
     public var maskInsets = UIEdgeInsets(top: -8, left: -8, bottom: -8, right: -8)
     public var font = UIFont.systemFont(ofSize: 14)
