@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import DropDown
 import Material
+import KSGuideController
 
 class ZYChessboardViewController: UIViewController {
     var mainViewController: ZYMainViewController?
@@ -36,14 +37,42 @@ class ZYChessboardViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    //MARK: - Guides
+    func showGuides() {
+        KSGuideDataManager.reset(for: "MainGuide")
+        
+        var items = [KSGuideItem]()
+        
+//        items.append(KSGuideItem(sourceView: libraryCell, arrowImage: UIImage(named: "短箭头"), text: "library cell"))
+//        items.append(KSGuideItem(sourceView: (libraryCell.cardTableView.cellForRow(at: IndexPath(row: 0, section: 0)))!, arrowImage: UIImage(named: "长箭头"), text: "book cell"))
+        items.append(KSGuideItem(sourceView: chessboardView, text: "chessboardView"))
+        items.append(KSGuideItem(sourceView: chessboardView.oneSelectedView, text: "SelectedView"))
+        let crosswordDataCell = tableView(crosswordDataTableView, cellForRowAt: IndexPath(row: 0, section: 0)) as! ZYCrosswordDataTableViewCell
+        items.append(KSGuideItem(sourceView: crosswordDataCell, text: "crosswordData"))
+        items.append(KSGuideItem(sourceView: crosswordDataCell.moreFunctionButton, text: "helpOthers"))
+        items.append(KSGuideItem(sourceView: allDataButton, text: "allData"))
+        items.append(KSGuideItem(sourceView: wordInputBackgroundImageView, text: "wordInput"))
+        items.append(KSGuideItem(sourceView: promptButton, text: "prompt"))
+        items.append(KSGuideItem(sourceView: starButton, text: "star"))
+        items.append(KSGuideItem(sourceView: coinButton, text: "coin"))
+        items.append(KSGuideItem(sourceView: resetButton, text: "reset"))
+        items.append(KSGuideItem(sourceView: bookButton, text: "book"))
+        
+        let guideVC = KSGuideController(items: items, key: "MainGuide")
+        guideVC.setIndexWillChangeBlock { (index, item) in }
+        guideVC.setIndexDidChangeBlock { (index, item) in }
+        guideVC.show(from: self) { }
+    }
     //MARK: - Menu
     @IBOutlet weak var navigationMenuView: UIView!
     var alreadyCount = 0
     @IBOutlet weak var starLabel: UILabel!
+    @IBOutlet weak var starButton: UIButton!
     @IBAction func starButtonClick(_ sender: UIButton) {
         
     }
     @IBOutlet weak var coinLabel: UILabel!
+    @IBOutlet weak var coinButton: UIButton!
     @IBAction func coinButtonClick(_ sender: UIButton) {
         mainViewController?.performSegue(withIdentifier: "shopListSegeId", sender: sender)
     }
@@ -54,6 +83,7 @@ class ZYChessboardViewController: UIViewController {
         }
     }
     var resetValueClosure: ((_ point: CGPoint) -> Void)?
+    @IBOutlet weak var resetButton: IconButton!
     @IBAction func resetButtonClick(_ sender: UIButton) {
         let option = UIAlertController(title: nil, message: "您确定要重置本局游戏？", preferredStyle: .alert)
         option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
@@ -62,6 +92,7 @@ class ZYChessboardViewController: UIViewController {
         })
         self.present(option, animated: true, completion: nil)
     }
+    @IBOutlet weak var bookButton: IconButton!
     @IBAction func bookButtonClick(_ sender: UIButton) {
         mainViewController?.performSegue(withIdentifier: "collectListSegueId", sender: sender)
     }
@@ -195,6 +226,7 @@ class ZYChessboardViewController: UIViewController {
             sender.setImage(UIImage(named: "Oval 84"), for: .normal)
         }
     }
+    @IBOutlet weak var allDataButton: UIButton!
     @IBAction func allDataButtonClick(_ sender: UIButton) {
         mainViewController?.performSegue(withIdentifier: "crosswordListSegueId", sender: sender)
     }
@@ -203,6 +235,7 @@ class ZYChessboardViewController: UIViewController {
     }
     //MARK: - wordInputView
     @IBOutlet weak var wordInputView: UIView!
+    @IBOutlet weak var wordInputBackgroundImageView: UIImageView!
     @IBOutlet weak var wordInputViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var wordInputTextField: UITextField!
     func setupTextfieldNotification() -> Void {

@@ -96,7 +96,6 @@ class ZYMainViewController: UIViewController {
     func creatChessboardData() -> Bool {
         ZYWordViewModel.shareWord.initFirstData()
         guard let _ = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) else {
-//        guard let _ = UserDefaults.standard.string(forKey: userInfoKey) else {
             ZYUserInforViewModel.shareUserInfor.initData()
             isNotShouldReset = false
             performSegue(withIdentifier: "librarySegueId", sender: self)
@@ -104,9 +103,6 @@ class ZYMainViewController: UIViewController {
         }
         let crosswordsGenerator = ZYCrosswordsGenerator.shareCrosswordsGenerator
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
-//        DispatchQueue(label: "LoadAnother").async {
-//            ZYWordViewModel.shareWord.initUnlockedData()
-//        }
         crosswordsGenerator.loadCrosswordsData()
         chessboard = ZYChessboard()
         chessboard.grid = crosswordsGenerator.grid!
@@ -194,6 +190,7 @@ class ZYMainViewController: UIViewController {
         UIView.mdInflateTransition(from: titleViewController.view, toView: chessboardViewController.view, originalPoint: titleViewController.loadingActivityIndicator.center, duration: 0.7) {
             self.title = self.chessboardViewController.title
             self.chessboardViewController.creatChessboardViewData()
+            self.chessboardViewController.showGuides()
             self.chessboardViewController.resetValueClosure = { point in
                 self.resetValue(with: point)
             }

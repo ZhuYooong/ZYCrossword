@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -591,6 +591,54 @@
             </objects>
             <point key="canvasLocation" x="-2455" y="-1186"/>
         </scene>
+        <!--Guide View Controller-->
+        <scene sceneID="ceT-1k-gYb">
+            <objects>
+                <viewController storyboardIdentifier="GuideViewController" id="xVa-vV-HP3" customClass="ZYGuideViewController" customModule="ZYCrossword" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fo4-nv-BQC"/>
+                        <viewControllerLayoutGuide type="bottom" id="th1-6u-KdA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xRb-Ll-EPt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="c7Z-eb-DPT">
+                                <rect key="frame" x="168" y="721" width="39" height="37"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTl-2e-EvQ">
+                                <rect key="frame" x="147.66666666666666" y="671" width="80" height="30"/>
+                                <color key="backgroundColor" red="0.23921568630000001" green="0.61960784310000006" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="ReW-J3-SNf"/>
+                                    <constraint firstAttribute="height" constant="30" id="eo2-B1-sWJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="开始体验">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="startButtonClick:" destination="xVa-vV-HP3" eventType="touchUpInside" id="rdQ-Wp-w8s"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="c7Z-eb-DPT" firstAttribute="centerX" secondItem="xRb-Ll-EPt" secondAttribute="centerX" id="7eG-S0-Hqf"/>
+                            <constraint firstItem="th1-6u-KdA" firstAttribute="top" secondItem="c7Z-eb-DPT" secondAttribute="bottom" constant="20" id="ANV-Qj-fzD"/>
+                            <constraint firstItem="c7Z-eb-DPT" firstAttribute="top" secondItem="XTl-2e-EvQ" secondAttribute="bottom" constant="20" id="Hbf-kZ-TW4"/>
+                            <constraint firstItem="XTl-2e-EvQ" firstAttribute="centerX" secondItem="xRb-Ll-EPt" secondAttribute="centerX" id="w1Z-ob-mY0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pageControl" destination="c7Z-eb-DPT" id="2v9-DZ-FBR"/>
+                        <outlet property="startButton" destination="XTl-2e-EvQ" id="yEw-oz-185"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tja-BH-0V4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4073" y="200"/>
+        </scene>
         <!--Scrolling Navigation Controller-->
         <scene sceneID="vCS-od-XSN">
             <objects>
@@ -1159,15 +1207,21 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="allDataButton" destination="9f1-9U-lWd" id="1IH-yP-Dnx"/>
+                        <outlet property="bookButton" destination="FB9-fY-cY5" id="ubX-ew-WVL"/>
                         <outlet property="chessboardImageView" destination="8Nn-Oe-HQ9" id="ADP-1h-8nr"/>
                         <outlet property="chessboardView" destination="COE-8k-evx" id="4Bx-jo-acd"/>
+                        <outlet property="coinButton" destination="4sU-so-Oll" id="rTt-yK-PRb"/>
                         <outlet property="coinLabel" destination="fx1-MO-5dm" id="sZM-6X-VZP"/>
                         <outlet property="crosswordDataTableView" destination="4MV-1e-Hsz" id="PaK-ov-cVD"/>
                         <outlet property="moreButton" destination="JMc-nO-VO6" id="pal-Hy-oM3"/>
                         <outlet property="navigationMenuView" destination="ZzZ-u1-e1Q" id="d8d-q2-2xb"/>
                         <outlet property="promptButton" destination="bey-PE-t2e" id="5QG-8V-Pzy"/>
+                        <outlet property="resetButton" destination="JWH-Ax-2nj" id="N2G-2G-pmF"/>
                         <outlet property="sendButton" destination="DwJ-39-grb" id="wXd-le-7nz"/>
+                        <outlet property="starButton" destination="iQl-y4-YHo" id="5Kr-un-wj5"/>
                         <outlet property="starLabel" destination="xDE-mt-0om" id="dXI-QE-130"/>
+                        <outlet property="wordInputBackgroundImageView" destination="f6U-IM-IAl" id="Hbg-8A-3g5"/>
                         <outlet property="wordInputTextField" destination="24k-gu-dgE" id="yNZ-1f-bC8"/>
                         <outlet property="wordInputView" destination="cry-Ha-Rtc" id="ulr-xD-5aw"/>
                         <outlet property="wordInputViewBottomConstraint" destination="McX-Qk-i52" id="PUc-7b-Fkt"/>

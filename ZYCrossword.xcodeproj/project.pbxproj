@@ -377,6 +377,7 @@
 		04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259C1EEA413000B62794 /* ZYMainViewController.swift */; };
 		04F8259F1EEA4DD200B62794 /* ZYMaterialDesignClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */; };
 		1D2D8092E042B60E396C39A3 /* Pods_ZYCrossword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */; };
+		DE1A61D31FF6416E0064DBBE /* ZYGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1A61D21FF6416E0064DBBE /* ZYGuideViewController.swift */; };
 		DE1CD9CA1FCE59550080AF82 /* Blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9BC1FCE59530080AF82 /* Blue.plist */; };
 		DE1CD9CB1FCE59550080AF82 /* Light Blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9BD1FCE59530080AF82 /* Light Blue.plist */; };
 		DE1CD9CC1FCE59550080AF82 /* Brown.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1CD9BE1FCE59530080AF82 /* Brown.plist */; };
@@ -804,6 +805,7 @@
 		1EBD6372DBC0C4D850FF40C9 /* Pods-ZYCrossword.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.debug.xcconfig"; sourceTree = "<group>"; };
 		2562770A55F2E1219913E663 /* Pods_ZYCrossword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZYCrossword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5ACE0D0094E616FD0302C3 /* Pods-ZYCrossword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYCrossword.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYCrossword/Pods-ZYCrossword.release.xcconfig"; sourceTree = "<group>"; };
+		DE1A61D21FF6416E0064DBBE /* ZYGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYGuideViewController.swift; sourceTree = "<group>"; };
 		DE1CD9BC1FCE59530080AF82 /* Blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Blue.plist; sourceTree = "<group>"; };
 		DE1CD9BD1FCE59530080AF82 /* Light Blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Light Blue.plist"; sourceTree = "<group>"; };
 		DE1CD9BE1FCE59530080AF82 /* Brown.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Brown.plist; sourceTree = "<group>"; };
@@ -1434,6 +1436,7 @@
 			isa = PBXGroup;
 			children = (
 				04F8259C1EEA413000B62794 /* ZYMainViewController.swift */,
+				DE1A61D21FF6416E0064DBBE /* ZYGuideViewController.swift */,
 				049E5A071EEE490900FC3560 /* Title */,
 				04968EE61F10DA73004CB1F5 /* Library */,
 				04928DB51EC93D5D002915BD /* Chessboard */,
@@ -2129,6 +2132,7 @@
 				0496F3351EBB20D3008D3285 /* ZYArray2D.swift in Sources */,
 				04968EE31F10CB19004CB1F5 /* ZYCollectListTableViewController.swift in Sources */,
 				0450C7511F5E763F00660CD5 /* ZYFoldingTableViewCell.swift in Sources */,
+				DE1A61D31FF6416E0064DBBE /* ZYGuideViewController.swift in Sources */,
 				0490AA191EAEE0DB0051C47D /* AppDelegate.swift in Sources */,
 				046A86D71ECD4987001E7323 /* ZYPoetry.swift in Sources */,
 				DE764F361FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift in Sources */,
