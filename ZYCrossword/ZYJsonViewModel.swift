@@ -32,9 +32,10 @@ class ZYJsonViewModel: NSObject {
     func readJson<T: Object>(with name: String, and type: T.Type, and realm: Realm) {
         if let path = Bundle.main.path(forResource: name, ofType: "json") {
             do {
+                let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(name)'"))
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 let jsonObj = try! JSON(data: data)
-                if jsonObj != JSON.null {
+                if let isLoad = word.first?.isLoad, isLoad == false, jsonObj != JSON.null {
                     if T.self == ZYPoetry.self { //诗歌
                         let rootDictionary = jsonObj.dictionaryValue
                         let fatherArray = rootDictionary["father"]!.arrayValue
@@ -83,6 +84,7 @@ class ZYJsonViewModel: NSObject {
                             }
                         }
                     }
+                    ZYWordViewModel.shareWord.alreadyLoadWordData(with: word.first!, and: realm)
                 }else {
                     print("Could not get json from file, make sure that file contains valid json.")
                 }

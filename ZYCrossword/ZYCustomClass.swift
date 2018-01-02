@@ -19,6 +19,7 @@ let chessboardColumns: Int = { () -> Int in
 var chessboardEmptySymbol = "-"
 let chessboardDocumentPath = "Chessboard.plist"
 let coinCountKey = "coinCountChangeNotificationCenterKey"
+let baseWordKey = "baseWordLoadedNotificationCenterKey"
 
 class ZYCustomClass: NSObject {
     static let shareCustom = ZYCustomClass()

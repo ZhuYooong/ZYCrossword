@@ -11,6 +11,7 @@ import RealmSwift
 class ZYWord: Object {
     @objc dynamic var isSelectted: Bool = false
     @objc dynamic var isUnlocked: Bool = false
+    @objc dynamic var isLoad: Bool = false
     @objc dynamic var wordType: String = ""
     @objc dynamic var number: Int = 0
     @objc dynamic var price: Int = 0

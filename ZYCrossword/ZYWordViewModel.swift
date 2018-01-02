@@ -35,6 +35,7 @@ class ZYWordViewModel: NSObject {
     func initWordData(with type: ZYWordType, and realm: Realm) {
         let wordInfo = ZYWord()
         wordInfo.wordType = type.rawValue
+        wordInfo.isLoad = false
         switch type {
         case .TangPoetry300:
             wordInfo.number = 286
@@ -125,6 +126,7 @@ class ZYWordViewModel: NSObject {
         wordInfo.number = word.first?.number ?? 0
         wordInfo.price = word.first?.price ?? 0
         wordInfo.isUnlocked = word.first?.isUnlocked ?? false
+        wordInfo.isLoad = word.first?.isLoad ?? false
         if word.first?.isSelectted == false {
             wordInfo.isSelectted = true
         }else {
@@ -140,7 +142,20 @@ class ZYWordViewModel: NSObject {
         wordInfo.number = word.number
         wordInfo.price = word.price
         wordInfo.isSelectted = word.isSelectted
+        wordInfo.isLoad = word.isLoad
         wordInfo.isUnlocked = true
+        try! realm.write {
+            realm.add(wordInfo, update: true)
+        }
+    }
+    func alreadyLoadWordData(with word: ZYWord, and realm: Realm) {
+        let wordInfo = ZYWord()
+        wordInfo.wordType = word.wordType
+        wordInfo.number = word.number
+        wordInfo.price = word.price
+        wordInfo.isUnlocked = word.isUnlocked
+        wordInfo.isLoad = true
+        wordInfo.isSelectted = word.isSelectted
         try! realm.write {
             realm.add(wordInfo, update: true)
         }

@@ -9,6 +9,7 @@
 import UIKit
 
 class ZYGuideViewController: UIViewController {
+    var startAnimateBlock: ((Bool) -> Void)?
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var startButton: UIButton!
     
@@ -28,7 +29,7 @@ class ZYGuideViewController: UIViewController {
         //将 scrollView 的 contentSize 设为屏幕宽度的3倍(根据实际情况改变)
         scrollView.contentSize = CGSize(width: frame.size.width * CGFloat(numOfPages), height: frame.size.height)
         scrollView.delegate = self
-        for index  in 0..<numOfPages {
+        for index  in 0 ..< numOfPages {
             let imageView = UIImageView(image: UIImage(named: "GuideImage\(index + 1)"))
             imageView.frame = CGRect(x: frame.size.width * CGFloat(index), y: 0, width: frame.size.width, height: frame.size.height)
             scrollView.addSubview(imageView)
@@ -43,7 +44,9 @@ class ZYGuideViewController: UIViewController {
         return true
     }
     @IBAction func startButtonClick(_ sender: UIButton) {
-        
+        if startAnimateBlock != nil {
+            startAnimateBlock!(true)
+        }
     }
 }
 extension ZYGuideViewController: UIScrollViewDelegate {

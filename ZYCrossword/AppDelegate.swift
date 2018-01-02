@@ -15,7 +15,7 @@ import SwiftTheme
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        realmSchemaVersion()
+        setRealmData()
         if let themeName = ZYSecretClass.shareSecret.getUserDefaults(with: themeKey) {
             ThemeManager.setTheme(plistName: themeName, path: .mainBundle)
         }else {
@@ -28,7 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setRootController()
         return true
     }
-    //MARK: Realm 版本控制
+    //MARK: Realm
+    func setRealmData() {
+        realmSchemaVersion()
+        
+        DispatchQueue(label: "LoadBaseWord").async {
+            ZYWordViewModel.shareWord.initFirstData()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: baseWordKey), object: nil)
+        }
+    }
     let schemaVersion: UInt64 = 1
     func realmSchemaVersion() {
         let config = Realm.Configuration(
@@ -52,13 +60,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 保存最新的版本号
             userDefaults.setValue(currentAppVersion, forKey: "appVersion")
             let guideViewController = storyboard.instantiateViewController(withIdentifier: "GuideViewController") as! ZYGuideViewController
-            self.window?.rootViewController = guideViewController
+            guideViewController.startAnimateBlock = { isStart in
+                if isStart {
+                    self.initAnimation()
+                }
+            }
+            window?.rootViewController = guideViewController
         }else {
-            window!.rootViewController = SnackbarController(rootViewController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainID"))
             initAnimation()
         }
     }
     func initAnimation() {
+        window?.rootViewController = SnackbarController(rootViewController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainID"))
+        
         let backgroupView = UIView.init(frame: (window?.bounds)!)
         backgroupView.backgroundColor = UIColor.black
         window?.addSubview(backgroupView)
@@ -67,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.addSubview(imageView)
         
         let maskLayer = CALayer()
-        maskLayer.contents = UIImage.init(named:"nike")?.cgImage
+        maskLayer.contents = UIImage.init(named:"图标")?.cgImage
         maskLayer.position = (window?.center)!
         maskLayer.bounds = CGRect(x: 0, y: 0, width: 60,height: 60)
         imageView.layer.mask = maskLayer
