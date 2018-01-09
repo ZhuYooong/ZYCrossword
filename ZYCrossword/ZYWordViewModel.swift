@@ -22,7 +22,7 @@ class ZYWordViewModel: NSObject {
         for type in allWordArray {
             var isShouldUpdate = true
             for word in wordArray {
-                if word.wordType == type.rawValue {
+                if word.wordType == type.rawValue && word.isLoad == true {
                     isShouldUpdate = false
                 }
             }
@@ -101,7 +101,7 @@ class ZYWordViewModel: NSObject {
         try! realm.write {
             realm.add(wordInfo, update: true)
         }
-        if wordInfo.isUnlocked == true {
+        if wordInfo.isUnlocked == true && wordInfo.isLoad == false {
             ZYJsonViewModel.shareJson.saveJsonData(with: type, and: realm)
         }
     }
@@ -109,7 +109,7 @@ class ZYWordViewModel: NSObject {
         let realm = try! Realm()
         let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
         for word in allWordArray {
-            if word.isUnlocked == false {
+            if word.isUnlocked == false && word.isLoad == false {
                 for wordType in ZYWordType.allValues {
                     if wordType.rawValue == word.wordType {
                         ZYJsonViewModel.shareJson.saveJsonData(with: wordType, and: realm)

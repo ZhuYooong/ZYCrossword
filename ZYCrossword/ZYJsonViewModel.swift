@@ -35,7 +35,7 @@ class ZYJsonViewModel: NSObject {
                 let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(name)'"))
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 let jsonObj = try! JSON(data: data)
-                if let isLoad = word.first?.isLoad, isLoad == false, jsonObj != JSON.null {
+                if jsonObj != JSON.null {
                     if T.self == ZYPoetry.self { //诗歌
                         let rootDictionary = jsonObj.dictionaryValue
                         let fatherArray = rootDictionary["father"]!.arrayValue

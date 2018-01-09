@@ -41,8 +41,40 @@ class ZYMainViewController: UIViewController {
         view.theme_backgroundColor = "loadColor"
         view.addSubview(self.titleViewController.view)
         titleViewController.loadingTitleLabel.text = "正在加载资源包……"
-        loadData()
-        NotificationCenter.default.addObserver(self, selector: #selector(creatData), name: NSNotification.Name(rawValue: baseWordKey), object: nil)
+        updateVersion()
+    }
+    //MARK: - 检测版本
+    func updateVersion() {
+        ZYVersion.shareVersion.checkNewVersion(appId: nil, bundelId: nil) { (currentVersion, storeVersion, openUrl, isUpdate) in
+            if isUpdate {
+                self.showAlertView(title: "温馨提示", subTitle: "检测到新版本\(storeVersion),是否更新？", openUrl: openUrl)
+            }else {
+                self.loadData()
+            }
+        }
+    }
+    func showAlertView(title: String, subTitle: String, openUrl: String) {
+        let alertVC = UIAlertController(title: title, message: subTitle, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            self.loadData()
+        }
+        let sure = UIAlertAction(title: "更新", style: .default) { (action) in
+            if let url = URL(string: openUrl) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [String: Any](), completionHandler: { (success) in
+                        self.loadData()
+                    })
+                }else {
+                    UIApplication.shared.openURL(url)
+                }
+            }else {
+                ZYCustomClass.shareCustom.showSnackbar(with: "update false!", snackbarController: self.snackbarController)
+                self.loadData()
+            }
+        }
+        alertVC.addAction(cancel)
+        alertVC.addAction(sure)
+        present(alertVC, animated: true) { }
     }
     //MARK: - 加载资源
     let realm = try! Realm()
@@ -66,6 +98,10 @@ class ZYMainViewController: UIViewController {
             loadChessboardData(realm: realm, type: ZYBook.self)
             loadChessboardData(realm: realm, type: ZYIdiom.self)
             loadChessboardData(realm: realm, type: ZYAllegoric.self)
+            
+            beganChessboard()
+        }else {
+            NotificationCenter.default.addObserver(self, selector: #selector(creatData), name: NSNotification.Name(rawValue: baseWordKey), object: nil)
         }
     }
     @objc func creatData() {
@@ -74,9 +110,6 @@ class ZYMainViewController: UIViewController {
                 if self.creatChessboardData() {
                     self.chessboard?.printGrid()
                     self.beganChessboard()
-                    DispatchQueue(label: "LoadOther").async {
-                        ZYWordViewModel.shareWord.initOtherData()
-                    }
                 }
             }
         }
@@ -177,6 +210,10 @@ class ZYMainViewController: UIViewController {
     var chessboardViewController: ZYChessboardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID")  as! ZYChessboardViewController
     var isChangeTheme = false
     func beganChessboard() {
+        DispatchQueue(label: "LoadOther").async {
+            ZYWordViewModel.shareWord.initOtherData()
+        }
+        
         chessboardViewController.mainViewController = self
         chessboardViewController.chessboard = chessboard!
         chessboardViewController.resultXArray = tipXdataArr
