@@ -41,7 +41,7 @@ extension UIView {
             let layer = toView.mdShapeLayerForAnimation(at: convertedPoint)
             layer.fillColor = fromView.backgroundColor?.cgColor
             toView.layer.addSublayer(layer)
-            toView.layer.masksToBounds = true;
+            toView.layer.masksToBounds = true
             let animationDuration = TimeInterval(duration - duration * UIViewMaterialDesignTransitionDurationCoeff)
             UIView.animate(withDuration: animationDuration, animations: {
                 toView.alpha = 1.0
