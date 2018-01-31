@@ -400,8 +400,6 @@
 		DE45A169201195BC00A52E91 /* ZYTrickyShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE45A168201195BC00A52E91 /* ZYTrickyShareView.swift */; };
 		DE45A16B2011969600A52E91 /* ZYTrickyTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE45A16A2011969600A52E91 /* ZYTrickyTipsView.swift */; };
 		DE699D1F1FC579760037F986 /* Cyan.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE699D1E1FC579760037F986 /* Cyan.plist */; };
-		DE6BD589200475D200919469 /* ZYScreenshotsPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6BD588200475D200919469 /* ZYScreenshotsPopView.swift */; };
-		DE6D8BE12005FA5C00C79998 /* ZYShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6D8BE02005FA5C00C79998 /* ZYShareButton.swift */; };
 		DE764F361FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */; };
 		DE764F381FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F371FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift */; };
 		DE764F3A1FCFF7D1009126E3 /* ZYThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F391FCFF7D1009126E3 /* ZYThemes.swift */; };
@@ -835,8 +833,6 @@
 		DE45A168201195BC00A52E91 /* ZYTrickyShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYTrickyShareView.swift; sourceTree = "<group>"; };
 		DE45A16A2011969600A52E91 /* ZYTrickyTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYTrickyTipsView.swift; sourceTree = "<group>"; };
 		DE699D1E1FC579760037F986 /* Cyan.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cyan.plist; sourceTree = "<group>"; };
-		DE6BD588200475D200919469 /* ZYScreenshotsPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYScreenshotsPopView.swift; sourceTree = "<group>"; };
-		DE6D8BE02005FA5C00C79998 /* ZYShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYShareButton.swift; sourceTree = "<group>"; };
 		DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemeSelectCollectionViewController.swift; sourceTree = "<group>"; };
 		DE764F371FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemeSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE764F391FCFF7D1009126E3 /* ZYThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemes.swift; sourceTree = "<group>"; };
@@ -1557,10 +1553,8 @@
 		DE6BD5872004752000919469 /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				DE6BD588200475D200919469 /* ZYScreenshotsPopView.swift */,
 				DE45A1662011957600A52E91 /* ZYScreenShotTools.swift */,
 				DE45A168201195BC00A52E91 /* ZYTrickyShareView.swift */,
-				DE6D8BE02005FA5C00C79998 /* ZYShareButton.swift */,
 				DE45A16A2011969600A52E91 /* ZYTrickyTipsView.swift */,
 			);
 			path = Screenshots;
@@ -2154,7 +2148,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE3CA54E1FA8784E00700A96 /* TisprCardStackViewLayout.swift in Sources */,
-				DE6BD589200475D200919469 /* ZYScreenshotsPopView.swift in Sources */,
 				04BD132C1EC2F8EB00B1DB9E /* ZYNetwordViewModel.swift in Sources */,
 				0496F3331EBB2084008D3285 /* ZYCrosswordsGenerator.swift in Sources */,
 				DE764F381FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift in Sources */,
@@ -2203,7 +2196,6 @@
 				DE45A16B2011969600A52E91 /* ZYTrickyTipsView.swift in Sources */,
 				04621BE71EF13360006F41EF /* ZYCrosswordDataTableViewCell.swift in Sources */,
 				040E95F31ED6B42C00FC29E2 /* ZYChessboardViewController.swift in Sources */,
-				DE6D8BE12005FA5C00C79998 /* ZYShareButton.swift in Sources */,
 				046B7C0B1F5D04B70088D43D /* ZYCollectDictionaryTableViewCell.swift in Sources */,
 				DE764F3A1FCFF7D1009126E3 /* ZYThemes.swift in Sources */,
 				DEDAAA421FAB143D002521FA /* ZYShopListViewController.swift in Sources */,

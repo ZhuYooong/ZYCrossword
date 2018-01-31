@@ -7,22 +7,15 @@
 //
 
 import UIKit
-public struct ZYPlatform {
-    public static let isSimulator: Bool = {
-        var isSim = false
-        #if arch(i386) || arch(x86_64)
-            isSim = true
-        #endif
-        return isSim
-    }()
-}
+
 public protocol ZYScreenShotToolsDelegate {
-    func screenShotTools(_tools:ZYScreenShotTools, didClickShareBtn withShareType: ZYShareType, withIcon: UIImage ,in shareView: ZYTrickyShareView)
+    func screenShotTools(_ tools: ZYScreenShotTools, didClickShareBtn shareType: ZYShareType, icon: UIImage ,shareView: ZYTrickyShareView)
 }
-class ZYScreenShotTools: NSObject {
+public class ZYScreenShotTools: NSObject {
+    static let shareScreenShotTools = ZYScreenShotTools()
+    fileprivate override init() { }
+    
     public var delegate:ZYScreenShotToolsDelegate?
-    /// 全局唯一实例
-    public static let shared = ZYScreenShotTools()
     /// 监听截图事件开关
     public var enable = false {
         didSet {
@@ -41,10 +34,10 @@ class ZYScreenShotTools: NSObject {
 }
 // MARK: - 响应事件
 extension ZYScreenShotTools {
-    func shareView(_ shareView: ZYTrickyShareView, didClickShareBtn withShareType: ZYShareType, withIcon: UIImage) {
-        delegate?.screenShotTools(_tools: self, didClickShareBtn: withShareType, withIcon: withIcon, in: shareView)
+    func shareView(_ shareView: ZYTrickyShareView, didClickShareBtn shareType: ZYShareType, icon: UIImage) {
+        delegate?.screenShotTools(self, didClickShareBtn: shareType, icon: icon, shareView: shareView)
     }
-    func tipsShow(title:String?,message:String?){
+    func tipsShow(title:String?,message:String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -52,9 +45,11 @@ extension ZYScreenShotTools {
         }
     }
     @objc func screenShot() {
-        ZYTrickyShareView.shared.showTips()
+        ZYTrickyTipsView.shareTrickyTipsView.showTips()
     }
 }
 extension ZYScreenShotToolsDelegate {
-    public func screenShotTools(_tools:ZYScreenShotTools, didClickShareBtn withShareType: ZYShareType, withIcon: UIImage ,in shareView: ZYTrickyShareView){}
+    public func screenShotTools(_ tools: ZYScreenShotTools, didClickShareBtn shareType: ZYShareType, icon: UIImage ,shareView: ZYTrickyShareView) {
+        
+    }
 }

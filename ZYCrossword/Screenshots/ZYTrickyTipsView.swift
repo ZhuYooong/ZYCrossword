@@ -15,11 +15,7 @@ let tipSViewH :CGFloat  = 70.0
 
 class ZYTrickyTipsView: UIWindow {
     var bgWindows : [UIWindow] = []
-    open static let shared: ZYTrickyTipsView = {
-        let instance = ZYTrickyTipsView()
-        return instance
-    }()
-    
+    static let shareTrickyTipsView = ZYTrickyTipsView()
     convenience init() {
         self.init(frame: CGRect(x: 0, y: -tipSViewH, width: screenWidth, height: tipSViewH))
         buildUI()
@@ -46,6 +42,7 @@ class ZYTrickyTipsView: UIWindow {
     }()
     lazy var shareBtn: RaisedButton = {
         let btn = RaisedButton(title: "分享", titleColor: UIColor(0xffffff))
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         btn.pulseColor = .white
         btn.theme_backgroundColor = "buttonColor"
         btn.addTarget(self, action: #selector(shareButtonClick), for: UIControlEvents.touchUpInside)
@@ -55,9 +52,20 @@ class ZYTrickyTipsView: UIWindow {
         let leftView = UIView()
         leftView.backgroundColor = .white
         leftView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleSwipeFrom(recognizer:))))
+        leftView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        leftView.layer.shadowColor = UIColor.black.cgColor
+        leftView.layer.shadowRadius = 2
+        leftView.layer.shadowOpacity = 0.4
         return leftView
     }()
-    lazy var rightView = UIView()
+    lazy var rightView: UIView = {
+        let rightView = UIView()
+        rightView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        rightView.layer.shadowColor = UIColor.black.cgColor
+        rightView.layer.shadowRadius = 2
+        rightView.layer.shadowOpacity = 0.4
+        return rightView
+    }()
     
     var timer : Timer?
 }
@@ -71,7 +79,7 @@ extension ZYTrickyTipsView {
         rightView.backgroundColor = UIColor(0xed5c4d)
         addSubview(rightView)
         rightView.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(self)
+            make.top.right.equalTo(self)
             make.height.equalTo(tipSViewH)
             make.width.equalTo(100)
         }
@@ -88,7 +96,7 @@ extension ZYTrickyTipsView {
         leftView.addSubview(tipLabel)
         tipLabel.snp.makeConstraints { (make) in
             make.height.equalTo(20)
-            make.bottom.equalTo(leftView.snp.centerY).offset(-10)
+            make.bottom.equalTo(leftView.snp.centerY).offset(-4)
             make.left.equalTo(leftView).offset(40)
             make.right.equalTo(leftView).offset(-10)
         }
@@ -96,17 +104,6 @@ extension ZYTrickyTipsView {
         bottomTips.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(tipLabel)
             make.top.equalTo(tipLabel.snp.bottom).offset(4)
-        }
-        
-        let bottomLine = UIView()
-        bottomLine.backgroundColor = UIColor(0x808080)
-        bottomLine.layer.cornerRadius = 1
-        bottomLine.clipsToBounds = true
-        addSubview(bottomLine)
-        bottomLine.snp.makeConstraints { (make) in
-            make.bottom.centerX.equalTo(self)
-            make.height.equalTo(2)
-            make.width.equalTo(50)
         }
     }
 }
@@ -132,7 +129,7 @@ extension ZYTrickyTipsView {
     }
     @objc func handleSwipeFrom(recognizer:UIPanGestureRecognizer) {
         if recognizer.state == .cancelled || recognizer.state == .ended || recognizer.state == .failed{
-            if center.y >= tipSViewH/2 {
+            if center.y >= tipSViewH / 2 {
                 showTips()
             }else{
                 hiddenTips()

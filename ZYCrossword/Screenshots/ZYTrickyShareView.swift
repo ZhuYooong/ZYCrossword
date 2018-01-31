@@ -10,18 +10,18 @@ import UIKit
 import SnapKit
 import Material
 
-public enum ZYShareType: String {
-    case WeiChat = "微信"
-    case WeiChatCircle = "朋友圈"
-    case QQ = "QQ"
-    case QZone = "QQ空间"
-    case Sina = "新浪微博"
-    case Zhiu = "知乎"
-    case Douban = "豆瓣"
+public enum ZYShareType: Int {
+    case WeiChat = 0
+    case WeiChatCircle = 1
+    case QQ = 2
+    case QZone = 3
+    case Sina = 4
+    case Zhiu = 5
+    case Douban = 6
     
     static let allValues = [WeiChat,WeiChatCircle,QQ,QZone,Sina,Zhiu,Douban]
 }
-class ZYTrickyShareView: UIView {
+public class ZYTrickyShareView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
@@ -31,12 +31,12 @@ class ZYTrickyShareView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     deinit {// 释放当前window
-        ZYTrickyTipsView.shared.bgWindows.removeLast()
+        ZYTrickyTipsView.shareTrickyTipsView.bgWindows.removeLast()
     }
     
     //MARk: - 控件
-    @objc func shareBtnClick(btn: UIButton) {// 分享按钮点击事件
-        ZYScreenShotTools.shared.shareView(self, didClickShareBtn : ZYShareType.init(rawValue: btn.tag)!, withIcon: shareIcon!)
+    @objc func shareBtnClick(sender: UIButton) {// 分享按钮点击事件
+        ZYScreenShotTools.shareScreenShotTools.shareView(self, didClickShareBtn: ZYShareType.init(rawValue: sender.tag)!, icon: shareIcon!)
     }
     var shareIcon: UIImage? {
         didSet{
@@ -64,10 +64,11 @@ class ZYTrickyShareView: UIView {
         return lbl
     }()
     lazy var iconView = UIImageView(frame: UIScreen.main.bounds)
-    lazy var cancelBtn: RaisedButton = {
-        let btn = RaisedButton(title: "取消", titleColor: UIColor(0xed5c4d))
-        btn.pulseColor = .white
+    lazy var cancelBtn: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("取消", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btn.setTitleColor(UIColor(0xed5c4d), for: .normal)
         btn.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
         btn.sizeToFit()
         btn.isHidden = true
@@ -82,12 +83,13 @@ class ZYTrickyShareView: UIView {
         window.backgroundColor = UIColor.black
         window.addSubview(shareView)
         window.isHidden = false
-        ZYTrickyTipsView.shared.bgWindows.append(window)
+        ZYTrickyTipsView.shareTrickyTipsView.bgWindows.append(window)
+        let iconHeight = screenHeight - 70 - 16 - 30 - 120
         shareView.iconView.snp.makeConstraints { (make) in
             make.top.equalTo(shareView.titleLabel.snp.bottom).offset(16)
             make.centerX.equalTo(shareView)
-            make.width.equalTo(shareView.bounds.width * 0.7)
-            make.height.equalTo(shareView.bounds.height * 0.7)
+            make.width.equalTo(iconHeight * screenWidth / screenHeight)
+            make.height.equalTo(iconHeight)
         }
         UIView.animate(withDuration: 0.2, animations: {
             shareView.layoutIfNeeded()
@@ -98,7 +100,7 @@ class ZYTrickyShareView: UIView {
         }
     }
     // 关闭当前视图
- @objc func dismiss() {
+    @objc func dismiss() {
         // 隐藏其他控件让IconView落到截图之前的View上，形成景深视觉效果
         _ = subviews.map { (subv) in subv.isHidden = subv != iconView }
         UIWindow.animate(withDuration: 0.2, animations: {
@@ -123,11 +125,15 @@ extension ZYTrickyShareView {
         }
         iconView.backgroundColor = .gray
         addSubview(iconView)
+        //MARK: shareButton
+        let leftMargin :CGFloat = 20
+        let sharH : CGFloat = 40
+        let space =  (self.bounds.width - leftMargin * 2 - sharH * 5) / 4
         let line = UIView()
         line.backgroundColor = UIColor(0x8b8b8b)
         addSubview(line)
         line.snp.makeConstraints { (make) in
-            make.centerY.equalTo(titleLabel.snp.bottom).offset(50 + bounds.height * 0.7)
+            make.bottom.equalTo(self).offset(-(sharH * 2 + leftMargin * 2))
             make.left.equalTo(self).offset(30)
             make.right.equalTo(self).offset(-30)
             make.height.equalTo(1)
@@ -138,45 +144,32 @@ extension ZYTrickyShareView {
             make.centerX.equalTo(self)
             make.width.equalTo(80)
         }
-        //MARK: shareButton
-        let leftMargin :CGFloat = 20
-        let sharH : CGFloat = 40
-        let space =  (self.bounds.width - leftMargin * 2 - sharH * 5) / 4
-        let sharebottomView = UIScrollView()
-        sharebottomView.backgroundColor = .white
-        addSubview(sharebottomView)
-        sharebottomView.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(20)
-            make.left.equalTo(self).offset(leftMargin)
-            make.right.equalTo(self).offset(-leftMargin)
-            make.height.equalTo(sharH)
-        }
         for type in ZYShareType.allValues {
-            let shareButton = ZYShareButton()
+            let shareButton = IconButton()
             switch type {
             case .WeiChat:
-                shareButton.setContent(imageNamed: "")
+                shareButton.setImage(UIImage(named: "wechat"), for: .normal)
             case .WeiChatCircle:
-                shareButton.setContent(imageNamed: "")
+                shareButton.setImage(UIImage(named: "wechat_timeline"), for: .normal)
             case .QQ:
-                shareButton.setContent(imageNamed: "")
+                shareButton.setImage(UIImage(named: "qq"), for: .normal)
             case .QZone:
-                shareButton.setContent(imageNamed: "")
+                shareButton.setImage(UIImage(named: "qzone"), for: .normal)
             case .Sina:
-                shareButton.setContent(imageNamed: "")
+                shareButton.setImage(UIImage(named: "sina"), for: .normal)
             case .Zhiu:
-                shareButton.setContent(imageNamed: "")
+                shareButton.setImage(UIImage(named: "知乎"), for: .normal)
             case .Douban:
-                shareButton.setContent(imageNamed: "")
+                shareButton.setImage(UIImage(named: "豆瓣"), for: .normal)
             }
-            shareButton.setContent(title: type.rawValue, shareType: type)
-            shareButton.addTarget(self, action: #selector(buttonDidClick(sender:)), for: .touchUpInside)
-            bottomView?.addSubview(shareButton)
+            shareButton.tag = type.rawValue
+            shareButton.addTarget(self, action: #selector(shareBtnClick(sender:)), for: .touchUpInside)
+            addSubview(shareButton)
             shareButton.snp.makeConstraints({ (make) in
-                make.height.equalTo(ZYScreenshotsTools.share.setAdaptation(fixedValue: 70, isHeight: true))
-                make.width.equalTo(ZYScreenshotsTools.share.setAdaptation(fixedValue: 58, isHeight: false))
-                make.top.equalTo(bottomView!).offset((type.hashValue > 3) ? ZYScreenshotsTools.share.setAdaptation(fixedValue: 70, isHeight: true) : 0)
-                make.left.equalTo(bottomView!).offset(CGFloat(type.hashValue % 3) * ZYScreenshotsTools.share.setAdaptation(fixedValue: 58, isHeight: false))
+                make.height.equalTo(sharH)
+                make.width.equalTo(sharH)
+                make.top.equalTo(line.snp.bottom).offset((type.rawValue > 4) ? (sharH + leftMargin + 8) : leftMargin)
+                make.left.equalTo(self).offset(leftMargin + CGFloat(type.rawValue % 5) * (space + sharH))
             })
         }
     }
