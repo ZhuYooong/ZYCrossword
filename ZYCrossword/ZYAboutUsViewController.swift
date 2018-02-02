@@ -47,7 +47,7 @@ extension ZYAboutUsViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {// 游戏指南
             performSegue(withIdentifier: "handbookSegurId", sender: tableView)
         }else if indexPath.row == 1 {// 邀请好友
-            
+            ZYShareClass.share.showShareMenu(text: "分享内容 http://www.mob.com/", images: UIImage(named: "AppIcon")!, url: URL(string: "http://wiki.mob.com")!, title: "分享标题", type: SSDKContentType.auto, view: tableView)
         }else if indexPath.row == 2 {// 鼓励评分
             
         }

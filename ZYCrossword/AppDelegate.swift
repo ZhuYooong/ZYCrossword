@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         ZYScreenShotTools.shareScreenShotTools.enable = true
         ZYScreenShotTools.shareScreenShotTools.delegate = self
+        registeShareSDK()
         window = UIWindow(frame: Screen.bounds)
         let navigationBar = UINavigationBar.appearance()
         navigationBar.theme_barTintColor = "mainColor"
@@ -47,6 +48,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if (oldSchemaVersion < self.schemaVersion) { }
         })
         Realm.Configuration.defaultConfiguration = config
+    }
+    //MARK: ShareSDK
+    func registeShareSDK() {
+        ShareSDK.registerActivePlatforms(
+            [SSDKPlatformType.typeWechat.rawValue,
+             SSDKPlatformType.typeQQ.rawValue,
+             SSDKPlatformType.typeSinaWeibo.rawValue,
+             SSDKPlatformType.typeDouBan.rawValue,
+             SSDKPlatformType.typeFacebook.rawValue,
+             SSDKPlatformType.typeTwitter.rawValue,
+             SSDKPlatformType.typeInstagram.rawValue,
+             SSDKPlatformType.typeGooglePlus.rawValue],
+            onImport: {(platform : SSDKPlatformType) -> Void in
+                switch platform {
+                case SSDKPlatformType.typeSinaWeibo:
+                    ShareSDKConnector.connectWeibo(WeiboSDK.classForCoder())
+                case SSDKPlatformType.typeWechat:
+                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
+                case SSDKPlatformType.typeQQ:
+                    ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
+                default:
+                    break
+                }
+        }, onConfiguration: {(platform : SSDKPlatformType, appInfo : NSMutableDictionary?) -> Void in
+                switch platform {
+                case SSDKPlatformType.typeSinaWeibo:
+                    //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
+                    appInfo?.ssdkSetupSinaWeibo(byAppKey: "568898243", appSecret: "38a4f8204cc784f81f9f0daaf31e02e3", redirectUri: "http://www.sharesdk.cn", authType: SSDKAuthTypeBoth)
+                case SSDKPlatformType.typeWechat:
+                    //设置微信应用信息
+                    appInfo?.ssdkSetupWeChat(byAppId: "wx4868b35061f87885", appSecret: "64020361b8ec4c99936c0e3999a9f249")
+                case SSDKPlatformType.typeQQ:
+                    //设置QQ应用信息
+                    appInfo?.ssdkSetupQQ(byAppId: "100371282", appKey: "aed9b0303e3ed1e27bae87c33761161d", authType: SSDKAuthTypeWeb)
+                case SSDKPlatformType.typeFacebook:
+                    //设置Facebook应用信息，其中authType设置为只用SSO形式授权
+                    appInfo?.ssdkSetupFacebook(byApiKey: "107704292745179", appSecret: "38053202e1a5fe26c80c753071f0b573", displayName: "ShareSDK", authType: SSDKAuthTypeBoth)
+                case SSDKPlatformType.typeTwitter:
+                    //设置Twitter应用信息
+                    appInfo?.ssdkSetupTwitter(byConsumerKey: "LRBM0H75rWrU9gNHvlEAA2aOy", consumerSecret: "gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G", redirectUri: "http://mob.com")
+                case SSDKPlatformType.typeDouBan:
+                    //设置豆瓣应用信息
+                    appInfo?.ssdkSetupDouBan(byApiKey: "02e2cbe5ca06de5908a863b15e149b0b", secret: "9f1e7b4f71304f2f", redirectUri: "http://www.sharesdk.cn")
+                case SSDKPlatformType.typeInstagram:
+                    //设置Instagram应用信息
+                    appInfo?.ssdkSetupInstagram(byClientID: "ff68e3216b4f4f989121aa1c2962d058", clientSecret: "1b2e82f110264869b3505c3fe34e31a1", redirectUri: "http://sharesdk.cn")
+                default:
+                    break
+                }
+        })
     }
     //MARK: 跳转页面
     func setRootController() {
@@ -132,6 +183,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIGraphicsEndImageContext()
         return image!
     }
+    //MARK: 生命周期
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
