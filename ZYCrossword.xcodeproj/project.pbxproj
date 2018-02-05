@@ -908,6 +908,8 @@
 		DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		DE9A9A401FDA7BF500FB8BF3 /* ZYSecretClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYSecretClass.swift; sourceTree = "<group>"; };
 		DE9B30141FC2C85700134A14 /* ZYHandbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYHandbookViewController.swift; sourceTree = "<group>"; };
+		DEA2DCA62028584A0075D2C4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		DEA2DCA72028584F0075D2C4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYShopListViewController.swift; sourceTree = "<group>"; };
 		DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2465,6 +2467,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0490AA1D1EAEE0DB0051C47D /* Base */,
+				DEA2DCA62028584A0075D2C4 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2473,6 +2476,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0490AA221EAEE0DB0051C47D /* Base */,
+				DEA2DCA72028584F0075D2C4 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2484,6 +2488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2541,6 +2546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

@@ -16,10 +16,13 @@ public enum ZYShareType: Int {
     case QQ = 2
     case QZone = 3
     case Sina = 4
-    case Zhiu = 5
-    case Douban = 6
+    case Douban = 5
+    case Facebook = 6
+    case Twitter = 7
+    case Instagram = 8
+    case GooglePlus = 9
     
-    static let allValues = [WeiChat,WeiChatCircle,QQ,QZone,Sina,Zhiu,Douban]
+    static let allValues = [WeiChat,WeiChatCircle,QQ,QZone,Sina,Douban,Facebook,Twitter,Instagram,GooglePlus]
 }
 public class ZYTrickyShareView: UIView {
     override init(frame: CGRect) {
@@ -157,10 +160,16 @@ extension ZYTrickyShareView {
                 shareButton.setImage(UIImage(named: "qzone"), for: .normal)
             case .Sina:
                 shareButton.setImage(UIImage(named: "sina"), for: .normal)
-            case .Zhiu:
-                shareButton.setImage(UIImage(named: "知乎"), for: .normal)
             case .Douban:
                 shareButton.setImage(UIImage(named: "豆瓣"), for: .normal)
+            case .Facebook:
+                shareButton.setImage(UIImage(named: "facebook"), for: .normal)
+            case .Twitter:
+                shareButton.setImage(UIImage(named: "twitter"), for: .normal)
+            case .Instagram:
+                shareButton.setImage(UIImage(named: "instagram"), for: .normal)
+            case .GooglePlus:
+                shareButton.setImage(UIImage(named: "googlePlus"), for: .normal)
             }
             shareButton.tag = type.rawValue
             shareButton.addTarget(self, action: #selector(shareBtnClick(sender:)), for: .touchUpInside)

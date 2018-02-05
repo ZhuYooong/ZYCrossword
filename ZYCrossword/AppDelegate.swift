@@ -204,6 +204,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 extension AppDelegate: ZYScreenShotToolsDelegate {
     func screenShotTools(_ tools: ZYScreenShotTools, didClickShareBtn shareType: ZYShareType, icon: UIImage, shareView: ZYTrickyShareView) {
-        
+        var platformType = SSDKPlatformType.subTypeWechatSession
+        switch shareType {
+        case .WeiChat:
+            platformType = .subTypeWechatSession
+        case .WeiChatCircle:
+            platformType = .subTypeWechatTimeline
+        case .QQ:
+            platformType = .subTypeQQFriend
+        case .QZone:
+            platformType = .subTypeQZone
+        case .Sina:
+            platformType = .typeSinaWeibo
+        case .Douban:
+            platformType = .typeDouBan
+        case .Facebook:
+            platformType = .typeFacebook
+        case .Twitter:
+            platformType = .typeTwitter
+        case .Instagram:
+            platformType = .typeInstagram
+        case .GooglePlus:
+            platformType = .typeGooglePlus
+        }
+        ZYShareClass.share.simpleShare(text: "分享内容 http://www.mob.com/", images: icon, url: URL(string: "http://wiki.mob.com")!, title: "分享标题", platformType: platformType)
     }
 }

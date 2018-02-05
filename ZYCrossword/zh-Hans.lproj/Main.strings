@@ -1,0 +1,198 @@
+
+/* Class = "UITextField"; placeholder = "输入答案后提交"; ObjectID = "24k-gu-dgE"; */
+"24k-gu-dgE.placeholder" = "输入答案后提交";
+
+/* Class = "UILabel"; text = "观看广告"; ObjectID = "2eN-XJ-uEF"; */
+"2eN-XJ-uEF.text" = "观看广告";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6ay-pW-06h"; */
+"6ay-pW-06h.text" = "Label";
+
+/* Class = "UILabel"; text = "请选择充值金额"; ObjectID = "AQ3-kB-YKE"; */
+"AQ3-kB-YKE.text" = "请选择充值金额";
+
+/* Class = "UILabel"; text = "5 折"; ObjectID = "BOP-Ya-4TZ"; */
+"BOP-Ya-4TZ.text" = "5 折";
+
+/* Class = "UIViewController"; title = "主页"; ObjectID = "BYZ-38-t0r"; */
+"BYZ-38-t0r.title" = "主页";
+
+/* Class = "UILabel"; text = "Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label LabelLabel Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Labelv"; ObjectID = "EeJ-zx-TxL"; */
+"EeJ-zx-TxL.text" = "Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label LabelLabel Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Labelv";
+
+/* Class = "UICollectionViewController"; title = "词库"; ObjectID = "Egu-jg-KQe"; */
+"Egu-jg-KQe.title" = "词库";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Euc-m5-orH"; */
+"Euc-m5-orH.text" = "Label";
+
+/* Class = "UIViewController"; title = "关于我们"; ObjectID = "GXB-im-eJd"; */
+"GXB-im-eJd.title" = "关于我们";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "GjH-4m-EA4"; */
+"GjH-4m-EA4.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "HOm-sg-7S8"; */
+"HOm-sg-7S8.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Hhi-YM-DSq"; */
+"Hhi-YM-DSq.text" = "Label";
+
+/* Class = "UILabel"; text = "充值说明"; ObjectID = "IXP-DG-MWP"; */
+"IXP-DG-MWP.text" = "充值说明";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ijk-nu-o6A"; */
+"Ijk-nu-o6A.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "K0a-vr-EcB"; */
+"K0a-vr-EcB.text" = "Label";
+
+/* Class = "UIViewController"; title = "棋盘"; ObjectID = "ONd-gF-gc7"; */
+"ONd-gF-gc7.title" = "棋盘";
+
+/* Class = "UILabel"; text = "20000 金币"; ObjectID = "OWy-MS-eWl"; */
+"OWy-MS-eWl.text" = "20000 金币";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "OX7-wu-KWE"; */
+"OX7-wu-KWE.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Pl2-2h-inC"; */
+"Pl2-2h-inC.text" = "Label";
+
+/* Class = "UITableViewController"; title = "所有提示"; ObjectID = "Tk6-eY-CaS"; */
+"Tk6-eY-CaS.title" = "所有提示";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "UPR-YD-wTC"; */
+"UPR-YD-wTC.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ucy-Td-u9z"; */
+"Ucy-Td-u9z.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "WnU-Y8-jnC"; */
+"WnU-Y8-jnC.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "开始体验"; ObjectID = "XTl-2e-EvQ"; */
+"XTl-2e-EvQ.normalTitle" = "开始体验";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "Xai-Cg-PIM"; */
+"Xai-Cg-PIM.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "YmH-U8-ule"; */
+"YmH-U8-ule.text" = "Label";
+
+/* Class = "UILabel"; text = "译文"; ObjectID = "Zj9-qF-tpe"; */
+"Zj9-qF-tpe.text" = "译文";
+
+/* Class = "UIViewController"; title = "游戏指南"; ObjectID = "ZzA-Kg-D8T"; */
+"ZzA-Kg-D8T.title" = "游戏指南";
+
+/* Class = "UILabel"; text = "鉴赏"; ObjectID = "aQy-xc-XoA"; */
+"aQy-xc-XoA.text" = "鉴赏";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "akl-XK-eQ7"; */
+"akl-XK-eQ7.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "b28-jM-jFa"; */
+"b28-jM-jFa.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "cAd-Ro-wPp"; */
+"cAd-Ro-wPp.text" = "Label";
+
+/* Class = "UILabel"; text = "4500 金币"; ObjectID = "cac-kA-iS8"; */
+"cac-kA-iS8.text" = "4500 金币";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ehL-eU-E4I"; */
+"ehL-eU-E4I.text" = "Label";
+
+/* Class = "UILabel"; text = "¥ 50.00"; ObjectID = "erl-wp-f7y"; */
+"erl-wp-f7y.text" = "¥ 50.00";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "fx1-MO-5dm"; */
+"fx1-MO-5dm.text" = "0";
+
+/* Class = "UILabel"; text = "1200 金币"; ObjectID = "igX-Dl-Z5I"; */
+"igX-Dl-Z5I.text" = "1200 金币";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "j5M-a6-tkZ"; */
+"j5M-a6-tkZ.text" = "Label";
+
+/* Class = "UILabel"; text = "去广告"; ObjectID = "l5Y-NQ-p7L"; */
+"l5Y-NQ-p7L.text" = "去广告";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lNa-HF-sen"; */
+"lNa-HF-sen.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "详  情"; ObjectID = "lTS-uK-T5E"; */
+"lTS-uK-T5E.normalTitle" = "详  情";
+
+/* Class = "UILabel"; text = "注释"; ObjectID = "oIs-vP-CrM"; */
+"oIs-vP-CrM.text" = "注释";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "oQH-qY-Y8h"; */
+"oQH-qY-Y8h.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ocf-f5-OYe"; */
+"ocf-f5-OYe.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "osz-5P-oa7"; */
+"osz-5P-oa7.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "p3X-jU-jaU"; */
+"p3X-jU-jaU.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qbV-sx-wlF"; */
+"qbV-sx-wlF.text" = "Label";
+
+/* Class = "UICollectionViewController"; title = "选择皮肤"; ObjectID = "qpg-1W-hOF"; */
+"qpg-1W-hOF.title" = "选择皮肤";
+
+/* Class = "UIButton"; normalTitle = "详  情"; ObjectID = "rBN-v1-IfP"; */
+"rBN-v1-IfP.normalTitle" = "详  情";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "rEM-11-Q8V"; */
+"rEM-11-Q8V.text" = "Label";
+
+/* Class = "UIViewController"; title = "金币商店"; ObjectID = "sAg-43-p1P"; */
+"sAg-43-p1P.title" = "金币商店";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "sIW-pt-4Dr"; */
+"sIW-pt-4Dr.text" = "Label";
+
+/* Class = "UILabel"; text = "100 金币"; ObjectID = "suu-BL-Jkc"; */
+"suu-BL-Jkc.text" = "100 金币";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "tMj-3R-AmA"; */
+"tMj-3R-AmA.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "uKG-Km-uV0"; */
+"uKG-Km-uV0.text" = "Label";
+
+/* Class = "UILabel"; text = "免费"; ObjectID = "ucx-8T-6DO"; */
+"ucx-8T-6DO.text" = "免费";
+
+/* Class = "UILabel"; text = "8 折"; ObjectID = "uu7-SG-Uss"; */
+"uu7-SG-Uss.text" = "8 折";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "w4g-5V-xaJ"; */
+"w4g-5V-xaJ.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "详  情"; ObjectID = "x3k-Kb-rVu"; */
+"x3k-Kb-rVu.normalTitle" = "详  情";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "xDE-mt-0om"; */
+"xDE-mt-0om.text" = "0";
+
+/* Class = "UITableViewController"; title = "收藏夹"; ObjectID = "xEw-TK-Ik1"; */
+"xEw-TK-Ik1.title" = "收藏夹";
+
+/* Class = "UILabel"; text = "¥ 6.00"; ObjectID = "yJs-et-3zG"; */
+"yJs-et-3zG.text" = "¥ 6.00";
+
+/* Class = "UILabel"; text = "¥ 18.00"; ObjectID = "yLO-bS-wbS"; */
+"yLO-bS-wbS.text" = "¥ 18.00";
+
+/* Class = "UIViewController"; title = "加载"; ObjectID = "ysI-eS-CNa"; */
+"ysI-eS-CNa.title" = "加载";
+
+/* Class = "UIButton"; normalTitle = "确 认 购 买"; ObjectID = "zjh-HN-bJk"; */
+"zjh-HN-bJk.normalTitle" = "确 认 购 买";
