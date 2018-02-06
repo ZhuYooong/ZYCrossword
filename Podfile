@@ -15,4 +15,5 @@ pod 'DropDown'
 pod 'SwiftTheme'
 pod 'CryptoSwift'
 pod 'KSGuideController'
+pod 'Google-Mobile-Ads-SDK'
 end

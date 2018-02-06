@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import Material
 import SwiftTheme
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ZYScreenShotTools.shareScreenShotTools.enable = true
         ZYScreenShotTools.shareScreenShotTools.delegate = self
         registeShareSDK()
+        GADMobileAds.configure(withApplicationID: "YOUR_ADMOB_APP_ID")
         window = UIWindow(frame: Screen.bounds)
         let navigationBar = UINavigationBar.appearance()
         navigationBar.theme_barTintColor = "mainColor"

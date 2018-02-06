@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class ZYCrosswordListTableViewController: UITableViewController {
     var selectResultBlock: ((Int, Bool) -> Void)?
@@ -99,6 +100,17 @@ extension ZYCrosswordListTableViewController {
         headerView.addSubview(lineView)
         return headerView
     }
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 50
+    }
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-6938332798224330/9023870805"
+        bannerView.delegate = self
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        return bannerView
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if let grid = tipXArr[indexPath.row].grid.first {
@@ -113,4 +125,7 @@ extension ZYCrosswordListTableViewController {
         }
         _ = navigationController?.popViewController(animated: true)
     }
+}
+extension ZYCrosswordListTableViewController: GADBannerViewDelegate {
+    
 }

@@ -215,6 +215,7 @@ class ZYChessboardViewController: UIViewController {
     }
     @objc func seekHelpButtonClick(sender: UIButton) {
         let baseWord = crosswordDataArray[sender.tag]
+        ZYShareClass.share.showShareMenu(text: "分享内容 http://www.mob.com/", images: UIImage(named: "AppIcon")!, url: URL(string: "http://wiki.mob.com")!, title: "分享标题", type: SSDKContentType.auto, view: sender)
     }
     @objc func collectionButtonClick(sender: UIButton) {
         let baseWord = crosswordDataArray[sender.tag]
@@ -434,7 +435,7 @@ extension ZYChessboardViewController: UITextFieldDelegate {
         let option = UIAlertController(title: "温馨提示", message: "", preferredStyle: .alert)
         option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         option.addAction(UIAlertAction(title: "分享结果", style: .default) { (action) in
-            
+            ZYShareClass.share.showShareMenu(text: "分享内容 http://www.mob.com/", images: UIImage(named: "AppIcon")!, url: URL(string: "http://wiki.mob.com")!, title: "分享标题", type: SSDKContentType.auto, view: action)
         })
         option.addAction(UIAlertAction(title: "请给予评分", style: .default) { (action) in
             

@@ -225,12 +225,11 @@ extension ZYTrickyTipsView {
                 resultsOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
                 resultsOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
                 let c = collection[i]
-                let title = "Screenshots"
-                if c.localizedTitle == title{
+                if c.localizedTitle == "Screenshots" || c.localizedTitle == "屏幕快照" {
                     let assetsFetchResult = PHAsset.fetchAssets(in: c , options: resultsOptions)
                     if assetsFetchResult.count == 0{
                         completion(nil)
-                    }else{
+                    }else {
                         PHImageManager.default().requestImage(for: assetsFetchResult[0], targetSize: PHImageManagerMaximumSize , contentMode: .default, options: nil, resultHandler: { (image, _: [AnyHashable : Any]?) in
                             completion(image)
                         })
