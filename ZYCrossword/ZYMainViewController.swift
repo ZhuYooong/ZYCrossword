@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
 class ZYMainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
@@ -42,39 +43,6 @@ class ZYMainViewController: UIViewController {
         view.addSubview(self.titleViewController.view)
         titleViewController.loadingTitleLabel.text = "正在加载资源包……"
         updateVersion()
-    }
-    //MARK: - 检测版本
-    func updateVersion() {
-        ZYVersion.shareVersion.checkNewVersion(appId: nil, bundelId: nil) { (currentVersion, storeVersion, openUrl, isUpdate) in
-            if isUpdate {
-                self.showAlertView(title: "温馨提示", subTitle: "检测到新版本\(storeVersion),是否更新？", openUrl: openUrl)
-            }else {
-                self.loadData()
-            }
-        }
-    }
-    func showAlertView(title: String, subTitle: String, openUrl: String) {
-        let alertVC = UIAlertController(title: title, message: subTitle, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
-            self.loadData()
-        }
-        let sure = UIAlertAction(title: "更新", style: .default) { (action) in
-            if let url = URL(string: openUrl) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, options: [String: Any](), completionHandler: { (success) in
-                        self.loadData()
-                    })
-                }else {
-                    UIApplication.shared.openURL(url)
-                }
-            }else {
-                ZYCustomClass.shareCustom.showSnackbar(with: "update false!", snackbarController: self.snackbarController)
-                self.loadData()
-            }
-        }
-        alertVC.addAction(cancel)
-        alertVC.addAction(sure)
-        present(alertVC, animated: true) { }
     }
     //MARK: - 加载资源
     let realm = try! Realm()
@@ -175,7 +143,7 @@ class ZYMainViewController: UIViewController {
     }
     //MARK: 重置资源
     var isNotShouldReset = true
-    func resetValue(with point: CGPoint) {
+    func resetValue(with point: CGPoint, isShowInterstitial: Bool = false) {
         do{
             try FileManager.default.removeItem(atPath: chessboardDocumentPath.getFilePath())
             for baseWord in self.chessboardViewController.resultXArray {
@@ -194,16 +162,19 @@ class ZYMainViewController: UIViewController {
             print("error")
         }
         isNotShouldReset = true
-        self.beganTitle(with: point)
+        self.beganTitle(with: point, isShowInterstitial: isShowInterstitial)
     }
     //MARK: - ViewController
     var titleViewController: ZYTitleViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID") as! ZYTitleViewController
-    func beganTitle(with originalPoint: CGPoint) {
+    func beganTitle(with originalPoint: CGPoint, isShowInterstitial: Bool) {
         UIView.mdInflateTransition(from: chessboardViewController.view, toView: titleViewController.view, originalPoint: originalPoint, duration: 0.7) {
             self.title = self.titleViewController.title
             self.chessboard = nil
             DispatchQueue(label: "CrosswordsAnother").async { [weak self] in
                 self?.creatData()
+            }
+            if isShowInterstitial {
+                self.interstitial = self.createAndLoadInterstitial()
             }
         }
     }
@@ -223,7 +194,7 @@ class ZYMainViewController: UIViewController {
             self.chessboardViewController.creatChessboardViewData()
             self.chessboardViewController.showGuides()
             self.chessboardViewController.resetValueClosure = { point in
-                self.resetValue(with: point)
+                self.resetValue(with: point, isShowInterstitial: true)
             }
         }
     }
@@ -247,5 +218,55 @@ class ZYMainViewController: UIViewController {
                 self.isChangeTheme = isChange
             }
         }
+    }
+    //MARK: - 检测版本
+    func updateVersion() {
+        ZYVersion.shareVersion.checkNewVersion(appId: nil, bundelId: nil) { (currentVersion, storeVersion, openUrl, isUpdate) in
+            if isUpdate {
+                self.showAlertView(title: "温馨提示", subTitle: "检测到新版本\(storeVersion),是否更新？", openUrl: openUrl)
+            }else {
+                self.loadData()
+            }
+        }
+    }
+    func showAlertView(title: String, subTitle: String, openUrl: String) {
+        let alertVC = UIAlertController(title: title, message: subTitle, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            self.loadData()
+        }
+        let sure = UIAlertAction(title: "更新", style: .default) { (action) in
+            if let url = URL(string: openUrl) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [String: Any](), completionHandler: { (success) in
+                        self.loadData()
+                    })
+                }else {
+                    UIApplication.shared.openURL(url)
+                }
+            }else {
+                ZYCustomClass.shareCustom.showSnackbar(with: "update false!", snackbarController: self.snackbarController)
+                self.loadData()
+            }
+        }
+        alertVC.addAction(cancel)
+        alertVC.addAction(sure)
+        present(alertVC, animated: true) { }
+    }
+    //MARK: - Interstitial
+    var interstitial: GADInterstitial?
+    func createAndLoadInterstitial() -> GADInterstitial {
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-6938332798224330/6206234808")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        
+        return interstitial
+    }
+}
+extension ZYMainViewController: GADInterstitialDelegate {
+    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+        interstitial = createAndLoadInterstitial()
+    }
+    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadInterstitial()
     }
 }

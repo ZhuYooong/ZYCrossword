@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import RealmSwift
+import GoogleMobileAds
 
 class ZYCollectListTableViewController: UITableViewController {
     override func viewDidLoad() {
@@ -19,7 +20,9 @@ class ZYCollectListTableViewController: UITableViewController {
         initData()
         tableView.estimatedRowHeight = kCloseCellHeight
         tableView.rowHeight = UITableViewAutomaticDimension
+        createAndLoadBanner()
     }
+    //MARK: - Data
     let realm = try! Realm()
     var collectionDicArray = [[String: Any]]()
     private func initData() {
@@ -145,6 +148,15 @@ class ZYCollectListTableViewController: UITableViewController {
         }
         return content
     }
+    //MARK: - Banner
+    func createAndLoadBanner() {
+        let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-6938332798224330/9023870805"
+        bannerView.delegate = self
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        self.tableView.tableHeaderView = bannerView
+    }
 }
 extension ZYCollectListTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -247,4 +259,7 @@ extension ZYCollectListTableViewController {
             tableView.endUpdates()
         }, completion: nil)
     }
+}
+extension ZYCollectListTableViewController: GADBannerViewDelegate {
+    
 }
