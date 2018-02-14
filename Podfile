@@ -16,4 +16,5 @@ pod 'SwiftTheme'
 pod 'CryptoSwift'
 pod 'KSGuideController'
 pod 'Google-Mobile-Ads-SDK'
+pod 'KeychainAccess'
 end

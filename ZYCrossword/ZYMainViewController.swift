@@ -43,6 +43,7 @@ class ZYMainViewController: UIViewController {
         view.addSubview(self.titleViewController.view)
         titleViewController.loadingTitleLabel.text = "正在加载资源包……"
         updateVersion()
+        interstitial = createAndLoadInterstitial()
     }
     //MARK: - 加载资源
     let realm = try! Realm()
@@ -174,7 +175,9 @@ class ZYMainViewController: UIViewController {
                 self?.creatData()
             }
             if isShowInterstitial {
-                self.interstitial = self.createAndLoadInterstitial()
+                if let _ = self.interstitial?.isReady {
+                    self.interstitial?.present(fromRootViewController: self)
+                }
             }
         }
     }

@@ -8,12 +8,22 @@
 
 import UIKit
 import Material
+import GoogleMobileAds
 
 class ZYShopListViewController: UIViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        SKPaymentQueue.default().add(self)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        SKPaymentQueue.default().remove(self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
         NotificationCenter.default.addObserver(self, selector: #selector(initCoinData), name: NSNotification.Name(rawValue: coinCountKey), object: nil)
+        createAndLoadVideoAd()
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -81,7 +91,9 @@ class ZYShopListViewController: UIViewController {
         }
     }
     @IBAction func advertisementButtonClick(_ sender: UIButton) {
-        buyCoin(with: 100)
+        if GADRewardBasedVideoAd.sharedInstance().isReady == true {
+            GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
+        }
     }
     @IBOutlet weak var sureButton: RaisedButton!
     @IBAction func sureButtonClick(_ sender: RaisedButton) {
@@ -91,12 +103,88 @@ class ZYShopListViewController: UIViewController {
             ZYCustomClass.shareCustom.showSnackbar(with: "coin count wrong!", snackbarController: self.snackbarController)
         }
     }
+    // MARK: - Buy
     var buyCoinCount = 0
     func buyCoin(with count: Int) {
-        ZYUserInforViewModel.shareUserInfor.changeCoin(with: count, add: true)
+        if ZYJailbreakDetectTool.share.detectCurrentDeviceIsJailbroken() {
+            ZYCustomClass.shareCustom.showSnackbar(with: "当前设备已经越狱，不支持支付操作!", snackbarController: self.snackbarController)
+        }else {
+            if SKPaymentQueue.canMakePayments() {
+                let identifiers: Set<String> = ["\(count)"]
+                let request = SKProductsRequest(productIdentifiers: identifiers)
+                request.delegate = self
+                request.start()
+            }
+        }
+    }
+    // TranscationState
+    func transcationPurchasing(transcation: SKPaymentTransaction) { // 交易中
+        let receiptURL = Bundle.main.appStoreReceiptURL
+        do {
+            let receipt = try Data(contentsOf: receiptURL!)
+        }catch {
+            return
+        }
+        SKPaymentQueue.default().finishTransaction(transcation)
+    }
+    func transcationPurchased(transcation: SKPaymentTransaction) { // 交易成功
+        ZYUserInforViewModel.shareUserInfor.changeCoin(with: buyCoinCount, add: true)
+        SKPaymentQueue.default().finishTransaction(transcation)
+    }
+    func transcationFailed(transcation: SKPaymentTransaction) { // 交易失败
+        SKPaymentQueue.default().finishTransaction(transcation)
+    }
+    func transcationRestored(transcation: SKPaymentTransaction) { // 已经购买过该商品
+        SKPaymentQueue.default().finishTransaction(transcation)
+    }
+    func transcationDeferred(transcation: SKPaymentTransaction) { // 交易延期
+        
     }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+    }
+    // MARK: - VideoAd
+    func createAndLoadVideoAd() {
+        GADRewardBasedVideoAd.sharedInstance().delegate = self
+        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: "ca-app-pub-3940256099942544/1712485313")
+    }
+}
+extension ZYShopListViewController: GADRewardBasedVideoAdDelegate {
+    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
+        print("Reward received with currency: \(reward.type), amount \(reward.amount).")
+        buyCoin(with: 100)
+    }
+    func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Reward based video ad is closed.")
+    }
+}
+extension ZYShopListViewController: SKProductsRequestDelegate, SKPaymentTransactionObserver {
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) { // 查询成功后的回调
+        if let product = response.products.first {
+            let payment = SKPayment(product: product)
+            SKPaymentQueue.default().add(payment)
+        }
+    }
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) { // 购买操作后的回调
+        for transcation in transactions {
+            switch transcation.transactionState {
+            case .deferred:
+                transcationDeferred(transcation: transcation)
+                break
+            case .failed:
+                transcationFailed(transcation: transcation)
+                break
+            case .purchased:
+                transcationPurchased(transcation: transcation)
+                break
+            case .purchasing:
+                transcationPurchasing(transcation: transcation)
+                break
+            case .restored:
+                transcationRestored(transcation: transcation)
+                break
+            }
+        }
     }
 }

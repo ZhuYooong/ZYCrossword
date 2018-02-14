@@ -400,6 +400,7 @@
 		DE45A1672011957600A52E91 /* ZYScreenShotTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE45A1662011957600A52E91 /* ZYScreenShotTools.swift */; };
 		DE45A169201195BC00A52E91 /* ZYTrickyShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE45A168201195BC00A52E91 /* ZYTrickyShareView.swift */; };
 		DE45A16B2011969600A52E91 /* ZYTrickyTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE45A16A2011969600A52E91 /* ZYTrickyTipsView.swift */; };
+		DE45B25E2032C4BA008D789C /* ZYJailbreakDetectTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE45B25D2032C4BA008D789C /* ZYJailbreakDetectTool.swift */; };
 		DE4D8F8F2022E7AC0010997D /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4D8F6B2022E7A70010997D /* MOBFoundation.framework */; };
 		DE4D8F902022E7AC0010997D /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4D8F6D2022E7AC0010997D /* ShareSDK.framework */; };
 		DE4D8F912022E7AC0010997D /* ShareSDKConfigFile.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE4D8F702022E7AC0010997D /* ShareSDKConfigFile.bundle */; };
@@ -440,6 +441,7 @@
 		DE920C3C1FB1A8F4006F1A93 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE920C3B1FB1A8E3006F1A93 /* MobileCoreServices.framework */; };
 		DE9A9A411FDA7BF500FB8BF3 /* ZYSecretClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9A9A401FDA7BF500FB8BF3 /* ZYSecretClass.swift */; };
 		DE9B30151FC2C85700134A14 /* ZYHandbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9B30141FC2C85700134A14 /* ZYHandbookViewController.swift */; };
+		DEB9DCE020303EE50051C930 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEB9DCDF20303EE50051C930 /* StoreKit.framework */; };
 		DEDAAA421FAB143D002521FA /* ZYShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */; };
 		DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -864,6 +866,7 @@
 		DE45A1662011957600A52E91 /* ZYScreenShotTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYScreenShotTools.swift; sourceTree = "<group>"; };
 		DE45A168201195BC00A52E91 /* ZYTrickyShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYTrickyShareView.swift; sourceTree = "<group>"; };
 		DE45A16A2011969600A52E91 /* ZYTrickyTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYTrickyTipsView.swift; sourceTree = "<group>"; };
+		DE45B25D2032C4BA008D789C /* ZYJailbreakDetectTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYJailbreakDetectTool.swift; sourceTree = "<group>"; };
 		DE4D8F6B2022E7A70010997D /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
 		DE4D8F6D2022E7AC0010997D /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		DE4D8F702022E7AC0010997D /* ShareSDKConfigFile.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKConfigFile.bundle; sourceTree = "<group>"; };
@@ -910,6 +913,7 @@
 		DE9B30141FC2C85700134A14 /* ZYHandbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYHandbookViewController.swift; sourceTree = "<group>"; };
 		DEA2DCA62028584A0075D2C4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		DEA2DCA72028584F0075D2C4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		DEB9DCDF20303EE50051C930 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		DEDAAA411FAB143D002521FA /* ZYShopListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYShopListViewController.swift; sourceTree = "<group>"; };
 		DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -919,6 +923,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB9DCE020303EE50051C930 /* StoreKit.framework in Frameworks */,
 				DE4D8FB4202312290010997D /* Photos.framework in Frameworks */,
 				DE4D8FB22023121B0010997D /* AssetsLibrary.framework in Frameworks */,
 				DE4D8FB02023120C0010997D /* libsqlite3.tbd in Frameworks */,
@@ -1102,6 +1107,7 @@
 		0490AA4E1EAEE8950051C47D /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				DE45B25C2032C459008D789C /* Payment */,
 				DE4D8F692022E7910010997D /* Share */,
 				DE6BD5872004752000919469 /* Screenshots */,
 				DE343BE11FFE28F300FF2360 /* Version */,
@@ -1570,6 +1576,7 @@
 		3A6FF91212327038D9969E08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEB9DCDF20303EE50051C930 /* StoreKit.framework */,
 				DE4D8FB3202312290010997D /* Photos.framework */,
 				DE4D8FB12023121B0010997D /* AssetsLibrary.framework */,
 				DE4D8FAF2023120C0010997D /* libsqlite3.tbd */,
@@ -1640,6 +1647,14 @@
 				DE3CA54B1FA8784E00700A96 /* TisprCardStackViewLayout.swift */,
 			);
 			path = TisprCardStack;
+			sourceTree = "<group>";
+		};
+		DE45B25C2032C459008D789C /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				DE45B25D2032C4BA008D789C /* ZYJailbreakDetectTool.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		DE4D8F692022E7910010997D /* Share */ = {
@@ -2407,6 +2422,7 @@
 				046B7C0D1F5D04ED0088D43D /* ZYCollectDoubanTableViewCell.swift in Sources */,
 				DE3CA54C1FA8784E00700A96 /* TisprCardStackViewCell.swift in Sources */,
 				DEEF359B1F7C969500F54EAC /* ZYUserInforViewModel.swift in Sources */,
+				DE45B25E2032C4BA008D789C /* ZYJailbreakDetectTool.swift in Sources */,
 				041DA1081F7260710044661A /* ZYLabraryCardTableViewCell.swift in Sources */,
 				047371831F0F657D005BE7A9 /* ZYCrosswordListTableViewController.swift in Sources */,
 				04F8259D1EEA413000B62794 /* ZYMainViewController.swift in Sources */,
@@ -2618,7 +2634,7 @@
 					"$(PROJECT_DIR)/ZYCrossword/Share/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/ZYCrossword/Share/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ZhuYong.ZYCrossword;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZhuYong.ZYCrossword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZYCrossword/ZYCrossword-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2652,7 +2668,7 @@
 					"$(PROJECT_DIR)/ZYCrossword/Share/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/ZYCrossword/Share/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ZhuYong.ZYCrossword;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZhuYong.ZYCrossword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZYCrossword/ZYCrossword-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
