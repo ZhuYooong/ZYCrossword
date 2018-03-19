@@ -42,53 +42,77 @@ class ZYMainViewController: UIViewController {
         view.theme_backgroundColor = "loadColor"
         view.addSubview(self.titleViewController.view)
         titleViewController.loadingTitleLabel.text = "正在加载资源包……"
-        updateVersion()
+        updateVersionOrLoadData()
         interstitial = createAndLoadInterstitial()
     }
-    //MARK: - 加载资源
+    //MARK: - 资源
     let realm = try! Realm()
     var chessboard: ZYChessboard?
     var tipXdataArr = [ZYBaseWord]()
     var tipYdataArr = [ZYBaseWord]()
+    //MARK: 加载资源
     func loadData() {
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: chessboardDocumentPath.getFilePath()) as? ZYChessboard {
-            titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
-            chessboard = data
-            tipXdataArr = [ZYBaseWord]()
-            for _ in 0 ..< chessboard!.tipXArr.count {
-                tipXdataArr.append(ZYBaseWord())
-            }
-            tipYdataArr = [ZYBaseWord]()
-            for _ in 0 ..< chessboard!.tipYArr.count {
-                tipYdataArr.append(ZYBaseWord())
-            }
-            loadChessboardData(realm: realm, type: ZYPoetry.self)
-            loadChessboardData(realm: realm, type: ZYMovie.self)
-            loadChessboardData(realm: realm, type: ZYBook.self)
-            loadChessboardData(realm: realm, type: ZYIdiom.self)
-            loadChessboardData(realm: realm, type: ZYAllegoric.self)
-            
-            beganChessboard()
+            loadCurentChessboardData(data: data)
+        }else if let data = NSKeyedUnarchiver.unarchiveObject(withFile: ZYCustomClass.shareCustom.anotherChessboardPath(isUpdate: true).getFilePath()) as? ZYChessboard {
+            loadCurentChessboardData(data: data)
         }else {
             NotificationCenter.default.addObserver(self, selector: #selector(creatData), name: NSNotification.Name(rawValue: baseWordKey), object: nil)
         }
     }
+    func loadCurentChessboardData(data: ZYChessboard) {
+        titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
+        DispatchQueue(label: "loadCurentChessboardData").async {
+            self.chessboard = data
+            self.tipXdataArr = [ZYBaseWord]()
+            for _ in 0 ..< self.chessboard!.tipXArr.count {
+                self.tipXdataArr.append(ZYBaseWord())
+            }
+            self.tipYdataArr = [ZYBaseWord]()
+            for _ in 0 ..< self.chessboard!.tipYArr.count {
+                self.tipYdataArr.append(ZYBaseWord())
+            }
+            self.loadChessboardData(realm: self.realm, type: ZYPoetry.self)
+            self.loadChessboardData(realm: self.realm, type: ZYMovie.self)
+            self.loadChessboardData(realm: self.realm, type: ZYBook.self)
+            self.loadChessboardData(realm: self.realm, type: ZYIdiom.self)
+            self.loadChessboardData(realm: self.realm, type: ZYAllegoric.self)
+            
+            DispatchQueue.main.sync {
+                self.beganChessboard()
+            }
+        }
+    }
+    func loadChessboardData<T: ZYBaseWord>(realm: Realm, type: T.Type) {
+        let showReults = realm.objects(T.self).filter(NSPredicate(format: "isShow = true"))
+        for result in showReults {
+            autoreleasepool {
+                for i in 0 ..< chessboard!.tipXArr.count {
+                    if result.showString.contains(chessboard!.tipXArr[i].word) {
+                        tipXdataArr.remove(at: i)
+                        tipXdataArr.insert(result, at: i)
+                    }
+                }
+                for i in 0 ..< chessboard!.tipYArr.count {
+                    if result.showString.contains(chessboard!.tipYArr[i].word) {
+                        tipYdataArr.remove(at: i)
+                        tipYdataArr.insert(result, at: i)
+                    }
+                }
+            }
+        }
+    }
+    //MARK: 创建资源
     @objc func creatData() {
         if chessboard == nil {
-            DispatchQueue.main.async {
-                if self.creatChessboardData() {
-                    self.chessboard?.printGrid()
+            if self.creatChessboardData() {
+                self.chessboard?.printGrid()
+                DispatchQueue.main.sync {
                     self.beganChessboard()
                 }
             }
         }
     }
-    func idString() -> String {
-        let df = DateFormatter()
-        df.dateFormat = "yyyyMMddHmmssS"
-        return df.string(from: Date())
-    }
-    //MARK: 创建资源
     func creatChessboardData() -> Bool {
         guard let _ = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) else {
             ZYUserInforViewModel.shareUserInfor.initData()
@@ -99,48 +123,10 @@ class ZYMainViewController: UIViewController {
         let crosswordsGenerator = ZYCrosswordsGenerator.shareCrosswordsGenerator
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
         crosswordsGenerator.loadCrosswordsData()
-        chessboard = ZYChessboard()
-        chessboard?.grid = crosswordsGenerator.grid!
-        chessboard?.resultGrid = Array2D(columns: chessboardColumns, rows: chessboardColumns, defaultValue: chessboardEmptySymbol)
-        tipXdataArr = [ZYBaseWord]()
-        tipYdataArr = [ZYBaseWord]()
-        for i in 0 ..< crosswordsGenerator.resultContentArray.count {
-            let word = crosswordsGenerator.resultData[i]
-            let result = crosswordsGenerator.resultContentArray[i]
-            result.realm?.beginWrite()
-            result.isShow = true
-            if result.isKind(of: ZYPoetry.self) {
-                result.showString = word.word
-            }
-            try! result.realm?.commitWrite()
-            if word.direction == .vertical {
-                chessboard?.tipYArr.append(word)
-                tipYdataArr.append(result)
-            }else {
-                chessboard?.tipXArr.append(word)
-                tipXdataArr.append(result)
-            }
-        }
-        NSKeyedArchiver.archiveRootObject(chessboard ?? ZYChessboard(), toFile: chessboardDocumentPath.getFilePath())
+        chessboard = crosswordsGenerator.chessboard
+        tipXdataArr = crosswordsGenerator.tipXdataArr
+        tipYdataArr = crosswordsGenerator.tipYdataArr
         return true
-    }
-    //MARK: 加载资源
-    func loadChessboardData<T: ZYBaseWord>(realm: Realm, type: T.Type) {
-        let showReults = realm.objects(T.self).filter(NSPredicate(format: "isShow = true"))
-        for result in showReults {
-            for i in 0 ..< chessboard!.tipXArr.count {
-                if result.showString.contains(chessboard!.tipXArr[i].word) {
-                    tipXdataArr.remove(at: i)
-                    tipXdataArr.insert(result, at: i)
-                }
-            }
-            for i in 0 ..< chessboard!.tipYArr.count {
-                if result.showString.contains(chessboard!.tipYArr[i].word) {
-                    tipYdataArr.remove(at: i)
-                    tipYdataArr.insert(result, at: i)
-                }
-            }
-        }
     }
     //MARK: 重置资源
     var isNotShouldReset = true
@@ -195,7 +181,7 @@ class ZYMainViewController: UIViewController {
         UIView.mdInflateTransition(from: titleViewController.view, toView: chessboardViewController.view, originalPoint: titleViewController.loadingActivityIndicator.center, duration: 0.7) {
             self.title = self.chessboardViewController.title
             self.chessboardViewController.creatChessboardViewData()
-            self.chessboardViewController.showGuides()
+//            self.chessboardViewController.showGuides()
             self.chessboardViewController.resetValueClosure = { point in
                 self.resetValue(with: point, isShowInterstitial: true)
             }
@@ -223,7 +209,7 @@ class ZYMainViewController: UIViewController {
         }
     }
     //MARK: - 检测版本
-    func updateVersion() {
+    func updateVersionOrLoadData() {
         ZYVersion.shareVersion.checkNewVersion(appId: nil, bundelId: nil) { (currentVersion, storeVersion, openUrl, isUpdate) in
             if isUpdate {
                 self.showAlertView(title: "温馨提示", subTitle: "检测到新版本\(storeVersion),是否更新？", openUrl: openUrl)

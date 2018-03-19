@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setRealmData() {
         realmSchemaVersion()
         
-        DispatchQueue(label: "LoadBaseWord").async {
+        DispatchQueue(label: "loadBaseWord").async {
             ZYWordViewModel.shareWord.initFirstData()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: baseWordKey), object: nil)
         }

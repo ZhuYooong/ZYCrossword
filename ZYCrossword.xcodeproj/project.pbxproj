@@ -432,6 +432,7 @@
 		DE4D8FB22023121B0010997D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4D8FB12023121B0010997D /* AssetsLibrary.framework */; };
 		DE4D8FB4202312290010997D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4D8FB3202312290010997D /* Photos.framework */; };
 		DE699D1F1FC579760037F986 /* Cyan.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE699D1E1FC579760037F986 /* Cyan.plist */; };
+		DE6FF241205FAF62007C02A0 /* ZYChessboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6FF240205FAF62007C02A0 /* ZYChessboardViewModel.swift */; };
 		DE764F361FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */; };
 		DE764F381FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F371FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift */; };
 		DE764F3A1FCFF7D1009126E3 /* ZYThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F391FCFF7D1009126E3 /* ZYThemes.swift */; };
@@ -903,6 +904,7 @@
 		DE4D8FB12023121B0010997D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		DE4D8FB3202312290010997D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		DE699D1E1FC579760037F986 /* Cyan.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cyan.plist; sourceTree = "<group>"; };
+		DE6FF240205FAF62007C02A0 /* ZYChessboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYChessboardViewModel.swift; sourceTree = "<group>"; };
 		DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemeSelectCollectionViewController.swift; sourceTree = "<group>"; };
 		DE764F371FCFF18B009126E3 /* ZYThemeSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemeSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE764F391FCFF7D1009126E3 /* ZYThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemes.swift; sourceTree = "<group>"; };
@@ -1481,7 +1483,6 @@
 		04928DB51EC93D5D002915BD /* Chessboard */ = {
 			isa = PBXGroup;
 			children = (
-				04928DB61EC93DAF002915BD /* ZYChessboard.swift */,
 				040E95F21ED6B42C00FC29E2 /* ZYChessboardViewController.swift */,
 				040E95EE1ED6B3B900FC29E2 /* ZYChessboardView.swift */,
 				040E95F01ED6B3F500FC29E2 /* ZYChessboardButton.swift */,
@@ -1532,6 +1533,8 @@
 				0496F3321EBB2084008D3285 /* ZYCrosswordsGenerator.swift */,
 				0496F3341EBB20D3008D3285 /* ZYArray2D.swift */,
 				0496F3361EBB20E7008D3285 /* ZYArrayShuffle.swift */,
+				DE6FF240205FAF62007C02A0 /* ZYChessboardViewModel.swift */,
+				04928DB61EC93DAF002915BD /* ZYChessboard.swift */,
 			);
 			name = CrosswordsGenerator;
 			sourceTree = "<group>";
@@ -2432,6 +2435,7 @@
 				048D04A01F70E14400F42FED /* ZYLibraryListCell.swift in Sources */,
 				DE9A9A411FDA7BF500FB8BF3 /* ZYSecretClass.swift in Sources */,
 				047371851F0F65AE005BE7A9 /* ZYCrosswordListTableViewCell.swift in Sources */,
+				DE6FF241205FAF62007C02A0 /* ZYChessboardViewModel.swift in Sources */,
 				DE45A1672011957600A52E91 /* ZYScreenShotTools.swift in Sources */,
 				049E5A041EEE47CA00FC3560 /* ZYActivityIndicator.swift in Sources */,
 				DE4360EE202418B20098EFDC /* ZYShareClass.swift in Sources */,

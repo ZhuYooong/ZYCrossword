@@ -12,6 +12,7 @@ import CryptoSwift
 let userInfoKey = "userInfoUserDefultKey"
 let unlockedKey = "unlockedCountDefultKey"
 let themeKey = "themeDefultKey"
+let chessboardKey = "chessboardDefultKey"
 
 class ZYSecretClass: NSObject {
     static let shareSecret = ZYSecretClass()

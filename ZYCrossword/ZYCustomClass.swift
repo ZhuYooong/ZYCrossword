@@ -17,7 +17,16 @@ let chessboardColumns: Int = { () -> Int in
     return Int((screenWidth - 44) / 33)
 }()
 var chessboardEmptySymbol = "-"
-let chessboardDocumentPath = "Chessboard.plist"
+var chessboardDocumentPath: String {
+    get {
+        if let chessboardPath = ZYSecretClass.shareSecret.getUserDefaults(with: chessboardKey) {
+            return chessboardPath
+        }else {
+            ZYSecretClass.shareSecret.creatUserDefaults(with: "Chessboard.plist", defultKey: chessboardKey)
+            return "Chessboard.plist"
+        }
+    }
+}
 let coinCountKey = "coinCountChangeNotificationCenterKey"
 let baseWordKey = "baseWordLoadedNotificationCenterKey"
 
@@ -32,6 +41,19 @@ class ZYCustomClass: NSObject {
         snack.snackbar.text = text
         _ = snack.animate(snackbar: .visible)
         _ = snack.animate(snackbar: .hidden, delay: 4)
+    }
+    func anotherChessboardPath(isUpdate: Bool) -> String {
+        if let chessboardPath = ZYSecretClass.shareSecret.getUserDefaults(with: chessboardKey), chessboardPath == "Chessboard.plist" {
+            if isUpdate {
+                ZYSecretClass.shareSecret.creatUserDefaults(with: "ChessboardReserve.plist", defultKey: chessboardKey)
+            }
+            return "ChessboardReserve.plist"
+        }else {
+            if isUpdate {
+                ZYSecretClass.shareSecret.creatUserDefaults(with: "Chessboard.plist", defultKey: chessboardKey)
+            }
+            return "Chessboard.plist"
+        }
     }
 }
 //MARK: - 字符串的扩展
