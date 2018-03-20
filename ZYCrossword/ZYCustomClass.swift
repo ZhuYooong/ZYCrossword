@@ -29,6 +29,7 @@ var chessboardDocumentPath: String {
 }
 let coinCountKey = "coinCountChangeNotificationCenterKey"
 let baseWordKey = "baseWordLoadedNotificationCenterKey"
+let generateSuccessKey = "generateSuccessNotificationCenterKey"
 
 class ZYCustomClass: NSObject {
     static let shareCustom = ZYCustomClass()

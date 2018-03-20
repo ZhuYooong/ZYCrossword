@@ -17,19 +17,17 @@ class NetDataManager: NSObject {
     let DoubanBaseURL = "https://api.douban.com/v2"//DoubanBaseURL
     func GETRequest(_ URLString: URLConvertible, parameters: Parameters? = nil, NetData: @escaping (_ data: Data?)->Void) {//get方法
 //        HUD.show(.labeledProgress(title: "正在加载", subtitle: ""))
-        DispatchQueue.main.async(execute: {
-            Alamofire.request(URLString, method: .get, parameters: parameters).responseJSON {
-                response in
-                switch response.result {
-                case .success:
-                    NetData(response.data)
-                    HUD.hide()
-                case .failure( _):
-                    HUD.show(.labeledError(title: "连接服务器失败", subtitle: ""))
-                    HUD.hide()
-                }
+        Alamofire.request(URLString, method: .get, parameters: parameters).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                NetData(response.data)
+                HUD.hide()
+            case .failure( _):
+                HUD.show(.labeledError(title: "连接服务器失败", subtitle: ""))
+                HUD.hide()
             }
-        })
+        }
     }
 }
 extension NetDataManager {

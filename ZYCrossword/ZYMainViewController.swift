@@ -60,9 +60,13 @@ class ZYMainViewController: UIViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(creatData), name: NSNotification.Name(rawValue: baseWordKey), object: nil)
         }
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     func loadCurentChessboardData(data: ZYChessboard) {
         titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
-        DispatchQueue(label: "loadCurentChessboardData").async {
+        let group = DispatchGroup()
+        DispatchQueue(label: "loadCurentChessboardData", attributes: .concurrent).async(group: group) {
             self.chessboard = data
             self.tipXdataArr = [ZYBaseWord]()
             for _ in 0 ..< self.chessboard!.tipXArr.count {
@@ -77,11 +81,9 @@ class ZYMainViewController: UIViewController {
             self.loadChessboardData(realm: self.realm, type: ZYBook.self)
             self.loadChessboardData(realm: self.realm, type: ZYIdiom.self)
             self.loadChessboardData(realm: self.realm, type: ZYAllegoric.self)
-            
-            DispatchQueue.main.sync {
-                self.beganChessboard()
-            }
         }
+        group.wait()
+        beganChessboard()
     }
     func loadChessboardData<T: ZYBaseWord>(realm: Realm, type: T.Type) {
         let showReults = realm.objects(T.self).filter(NSPredicate(format: "isShow = true"))
@@ -157,7 +159,7 @@ class ZYMainViewController: UIViewController {
         UIView.mdInflateTransition(from: chessboardViewController.view, toView: titleViewController.view, originalPoint: originalPoint, duration: 0.7) {
             self.title = self.titleViewController.title
             self.chessboard = nil
-            DispatchQueue(label: "CrosswordsAnother").async { [weak self] in
+            DispatchQueue(label: "CrosswordsAnother", attributes: .concurrent).async { [weak self] in
                 self?.creatData()
             }
             if isShowInterstitial {
@@ -170,7 +172,7 @@ class ZYMainViewController: UIViewController {
     var chessboardViewController: ZYChessboardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID")  as! ZYChessboardViewController
     var isChangeTheme = false
     func beganChessboard() {
-        DispatchQueue(label: "LoadOther").async {
+        DispatchQueue(label: "LoadOther", attributes: .concurrent).async {
             ZYWordViewModel.shareWord.initOtherData()
         }
         

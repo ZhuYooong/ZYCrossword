@@ -26,14 +26,14 @@ class ZYVersion: NSObject {
         }
         let task = URLSession.shared.dataTask(with: request!) { (data, response, error) in
             if error != nil {
-                DispatchQueue.main.async {
+                DispatchQueue.main.sync {
                     newVersionBlock(currentVersion, "", "", false)
                 }
             }
             if let urlContent = data {
                 let appInfoDic = try! JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String: Any]
                 if let resultCount = appInfoDic?["resultCount"] as? Int, resultCount == 0 {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.sync {
                         newVersionBlock(currentVersion, "", "", false)
                     }
                 }
@@ -53,11 +53,11 @@ class ZYVersion: NSObject {
                     appStoreVersion = appStoreVersion.appending("00")
                 }
                 if Float(currentVersion) ?? 0 < Float(appStoreVersion) ?? 0 {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.sync {
                         newVersionBlock(currentVersion, resultDic?["version"] ?? "", resultDic?["trackViewUrl"] ?? "", true)
                     }
                 }else {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.sync {
                         newVersionBlock(currentVersion, resultDic?["version"] ?? "", resultDic?["trackViewUrl"] ?? "", false)
                     }
                 }

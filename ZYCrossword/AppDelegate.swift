@@ -37,10 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setRealmData() {
         realmSchemaVersion()
         
-        DispatchQueue(label: "loadBaseWord").async {
+        let group = DispatchGroup()
+        DispatchQueue(label: "loadBaseWord", attributes: .concurrent).async(group: group) {
             ZYWordViewModel.shareWord.initFirstData()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: baseWordKey), object: nil)
         }
+        group.wait()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: baseWordKey), object: nil)
     }
     let schemaVersion: UInt64 = 1
     func realmSchemaVersion() {

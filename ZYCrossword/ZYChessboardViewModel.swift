@@ -14,8 +14,12 @@ class ZYChessboardViewModel: NSObject {
     convenience init(contentArray: [AnyObject]) {
         self.init()
         self.contentArray = contentArray
+        NotificationCenter.default.addObserver(self, selector: #selector(generateSuccess), name: NSNotification.Name(rawValue: generateSuccessKey), object: nil)
     }
     override init() { }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     // MARK: - 加载数据
     var resultContentSet: Set<ZYBaseWord> = Set<ZYBaseWord>()
     var currentWords: Array<String> = Array<String>()
@@ -29,6 +33,9 @@ class ZYChessboardViewModel: NSObject {
         var count = 0
         var oldFindWord = ""
         while isContininue {
+            if isSuccess {
+                count = 200
+            }
             if currentWords.count == 0 {
                 if findWord(with: nil) == false {
                     count += 1
@@ -91,9 +98,6 @@ class ZYChessboardViewModel: NSObject {
     func findWord(with content: AnyObject, and findString: String?) -> Bool {
         if let results: Results<ZYPoetry> = content as? Results<ZYPoetry> {
             for item in filterResult(with: results, and: ZYPoetry.self, and: findString) {
-                autoreleasepool {
-                    
-                }
                 if !resultContentSet.contains(item) {
                     currentContent = item
                     if let foundWord = findDetailWord(with: item.detail, and: findString, isPoetry: true) {
@@ -231,16 +235,18 @@ class ZYChessboardViewModel: NSObject {
                 var colc = 0
                 for column: Int in 0 ..< chessboardColumns {
                     colc += 1
-                    let cell = grid[column, row]
-                    if String(letter) == cell {
-                        if rowc - glc > 0 {
-                            if ((rowc - glc) + word.count) <= chessboardColumns {
-                                coordlist.append((colc, rowc - glc, 1, colc + (rowc - glc), 0))
+                    autoreleasepool {
+                        let cell = grid[column, row]
+                        if String(letter) == cell {
+                            if rowc - glc > 0 {
+                                if ((rowc - glc) + word.count) <= chessboardColumns {
+                                    coordlist.append((colc, rowc - glc, 1, colc + (rowc - glc), 0))
+                                }
                             }
-                        }
-                        if colc - glc > 0 {
-                            if ((colc - glc) + word.count) <= chessboardColumns {
-                                coordlist.append((colc - glc, rowc, 0, rowc + (colc - glc), 0))
+                            if colc - glc > 0 {
+                                if ((colc - glc) + word.count) <= chessboardColumns {
+                                    coordlist.append((colc - glc, rowc, 0, rowc + (colc - glc), 0))
+                                }
                             }
                         }
                     }
@@ -370,6 +376,10 @@ class ZYChessboardViewModel: NSObject {
         }
     }
     // MARK: - Misc
+    var isSuccess = false
+    @objc func generateSuccess() {
+        isSuccess = true
+    }
     open var orientationOptimization = false
     fileprivate func randomValue() -> Int {
         if orientationOptimization {

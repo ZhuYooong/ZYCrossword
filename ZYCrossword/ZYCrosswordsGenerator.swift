@@ -50,22 +50,24 @@ class ZYCrosswordsGenerator: NSObject {
     // MARK: - Crosswords generation
     var isSuccess = false
     open func generate() {
-        DispatchQueue.global().sync {
-            
-        }
         if contentArray.count > 1 {
             while !isSuccess {
-                let chessboardViewModel = ZYChessboardViewModel(contentArray: contentArray)
-                chessboardViewModel.generateOnce()
-                if chessboardViewModel.currentWords.count > 10 {
-                    creatChessboard(chessboardViewModel: chessboardViewModel)
-                    isSuccess = true
+                DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+                    let chessboardViewModel = ZYChessboardViewModel(contentArray: self.contentArray)
+                    chessboardViewModel.generateOnce()
+                    if chessboardViewModel.currentWords.count > 10 {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: generateSuccessKey), object: chessboardViewModel)
+                    }
                 }
             }
         }else {
             let realm = try! Realm()
             loadData(with: realm)
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(generateSuccess(_:)), name: NSNotification.Name(rawValue: generateSuccessKey), object: nil)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     func creatChessboard(chessboardViewModel: ZYChessboardViewModel) {
         chessboard = ZYChessboard()
@@ -91,6 +93,12 @@ class ZYCrosswordsGenerator: NSObject {
             }
         }
         NSKeyedArchiver.archiveRootObject(chessboard ?? ZYChessboard(), toFile: chessboardDocumentPath.getFilePath())
+    }
+    @objc func generateSuccess(_ notification: Notification) {
+        if let chessboardViewModel = notification.object as? ZYChessboardViewModel {
+            self.creatChessboard(chessboardViewModel: chessboardViewModel)
+            self.isSuccess = true
+        }
     }
 }
 // MARK: - Additional types
