@@ -5,8 +5,7 @@ use_frameworks!
 target ’ZYCrossword’ do
 pod 'SwiftyJSON', '~> 4'
 pod 'Alamofire'
-pod 'Realm', '~> 3'
-pod 'RealmSwift', '~> 3'
+pod 'SQLite.swift'
 pod 'PKHUD', '~> 5'
 pod 'Kingfisher', '~> 4'
 pod 'SnapKit', '~> 4'
