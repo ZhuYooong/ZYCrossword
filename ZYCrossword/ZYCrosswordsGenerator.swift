@@ -17,7 +17,8 @@ class ZYCrosswordsGenerator: NSObject {
     var tipXdataArr = [ZYBaseWord]()
     var tipYdataArr = [ZYBaseWord]()
     // MARK: - Initialization
-    func loadCrosswordsData() {
+    func loadCrosswordsData(isBackgrounding: Bool) {
+        isBackground = isBackgrounding
         let realm = try! Realm()
         loadData(with: realm)
         generate()
@@ -51,13 +52,16 @@ class ZYCrosswordsGenerator: NSObject {
     var isSuccess = false
     open func generate() {
         if contentArray.count > 1 {
+            let semaphore = DispatchSemaphore(value: 5)
             while !isSuccess {
+                semaphore.wait()
                 DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
                     let chessboardViewModel = ZYChessboardViewModel(contentArray: self.contentArray)
                     chessboardViewModel.generateOnce()
-                    if chessboardViewModel.currentWords.count > 10 {
+                    if chessboardViewModel.currentWords.count > 10 && !self.isSuccess {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: generateSuccessKey), object: chessboardViewModel)
                     }
+                    semaphore.signal()
                 }
             }
         }else {
@@ -69,6 +73,7 @@ class ZYCrosswordsGenerator: NSObject {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    var isBackground: Bool = false
     func creatChessboard(chessboardViewModel: ZYChessboardViewModel) {
         chessboard = ZYChessboard()
         chessboard?.grid = chessboardViewModel.grid
@@ -92,7 +97,11 @@ class ZYCrosswordsGenerator: NSObject {
                 tipXdataArr.append(result)
             }
         }
-        NSKeyedArchiver.archiveRootObject(chessboard ?? ZYChessboard(), toFile: chessboardDocumentPath.getFilePath())
+        if isBackground {
+            NSKeyedArchiver.archiveRootObject(chessboard ?? ZYChessboard(), toFile: ZYCustomClass.shareCustom.anotherChessboardPath(isUpdate: false).getFilePath())
+        }else {
+            NSKeyedArchiver.archiveRootObject(chessboard ?? ZYChessboard(), toFile: chessboardDocumentPath.getFilePath())
+        }
     }
     @objc func generateSuccess(_ notification: Notification) {
         if let chessboardViewModel = notification.object as? ZYChessboardViewModel {

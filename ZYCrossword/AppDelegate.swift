@@ -37,12 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setRealmData() {
         realmSchemaVersion()
         
-        let group = DispatchGroup()
-        DispatchQueue(label: "loadBaseWord", attributes: .concurrent).async(group: group) {
-            ZYWordViewModel.shareWord.initFirstData()
+        DispatchQueue(label: "loadBaseWord", attributes: .concurrent).async() {
+            let group = DispatchGroup()
+            DispatchQueue(label: "loadFirstWord", attributes: .concurrent).async(group: group) {
+                ZYWordViewModel.shareWord.initFirstData()
+            }
+            group.wait()
+            DispatchQueue.global().asyncAfter(deadline: .now() + 7) {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: baseWordKey), object: nil)
+            }
         }
-        group.wait()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: baseWordKey), object: nil)
     }
     let schemaVersion: UInt64 = 1
     func realmSchemaVersion() {

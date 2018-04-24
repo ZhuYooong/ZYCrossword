@@ -33,6 +33,12 @@ class ZYChessboardViewController: UIViewController {
         creatMoreDropDown()
         initMenuData()
         NotificationCenter.default.addObserver(self, selector: #selector(initMenuData), name: NSNotification.Name(rawValue: coinCountKey), object: nil)
+        DispatchQueue(label: "LoadOther", attributes: .concurrent).async {
+            ZYWordViewModel.shareWord.initOtherData()
+        }
+        if let _ = NSKeyedUnarchiver.unarchiveObject(withFile: ZYCustomClass.shareCustom.anotherChessboardPath(isUpdate: false).getFilePath()) as? ZYChessboard { }else {
+            ZYCrosswordsGenerator.shareCrosswordsGenerator.loadCrosswordsData(isBackgrounding: true)
+        }
     }
     deinit {
         NotificationCenter.default.removeObserver(self)

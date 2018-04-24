@@ -37,7 +37,7 @@ class ZYMainViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
     }
-    override func viewDidLoad() {
+    override func viewDidLoad() {    
         super.viewDidLoad()
         view.theme_backgroundColor = "loadColor"
         view.addSubview(self.titleViewController.view)
@@ -47,6 +47,7 @@ class ZYMainViewController: UIViewController {
     }
     //MARK: - 资源
     let realm = try! Realm()
+ 
     var chessboard: ZYChessboard?
     var tipXdataArr = [ZYBaseWord]()
     var tipYdataArr = [ZYBaseWord]()
@@ -123,8 +124,10 @@ class ZYMainViewController: UIViewController {
             return false
         }
         let crosswordsGenerator = ZYCrosswordsGenerator.shareCrosswordsGenerator
-        titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
-        crosswordsGenerator.loadCrosswordsData()
+        DispatchQueue.main.sync {
+            titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
+        }
+        crosswordsGenerator.loadCrosswordsData(isBackgrounding: false)
         chessboard = crosswordsGenerator.chessboard
         tipXdataArr = crosswordsGenerator.tipXdataArr
         tipYdataArr = crosswordsGenerator.tipYdataArr
@@ -133,8 +136,25 @@ class ZYMainViewController: UIViewController {
     //MARK: 重置资源
     var isNotShouldReset = true
     func resetValue(with point: CGPoint, isShowInterstitial: Bool = false) {
+        if isNotShouldReset {
+            removeChessboardData(atPath: chessboardDocumentPath)
+            if let data = NSKeyedUnarchiver.unarchiveObject(withFile: ZYCustomClass.shareCustom.anotherChessboardPath(isUpdate: true).getFilePath()) as? ZYChessboard {
+                self.beganTitle(with: point, isShowInterstitial: isShowInterstitial, data: data)
+            }else {
+                removeChessboardData(atPath: chessboardDocumentPath)
+                self.beganTitle(with: point, isShowInterstitial: isShowInterstitial, data: nil)
+            }
+        }else {
+            removeChessboardData(atPath: "Chessboard.plist")
+            removeChessboardData(atPath: "ChessboardReserve.plist")
+            ZYSecretClass.shareSecret.creatUserDefaults(with: "Chessboard.plist", defultKey: chessboardKey)
+            isNotShouldReset = true
+            self.beganTitle(with: point, isShowInterstitial: isShowInterstitial, data: nil)
+        }
+    }
+    func removeChessboardData(atPath pathString: String) {
         do{
-            try FileManager.default.removeItem(atPath: chessboardDocumentPath.getFilePath())
+            try FileManager.default.removeItem(atPath: pathString.getFilePath())
             for baseWord in self.chessboardViewController.resultXArray {
                 baseWord.realm?.beginWrite()
                 baseWord.isRight = false
@@ -150,17 +170,19 @@ class ZYMainViewController: UIViewController {
         }catch{
             print("error")
         }
-        isNotShouldReset = true
-        self.beganTitle(with: point, isShowInterstitial: isShowInterstitial)
     }
     //MARK: - ViewController
     var titleViewController: ZYTitleViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TitleID") as! ZYTitleViewController
-    func beganTitle(with originalPoint: CGPoint, isShowInterstitial: Bool) {
+    func beganTitle(with originalPoint: CGPoint, isShowInterstitial: Bool, data: ZYChessboard?) {
         UIView.mdInflateTransition(from: chessboardViewController.view, toView: titleViewController.view, originalPoint: originalPoint, duration: 0.7) {
             self.title = self.titleViewController.title
             self.chessboard = nil
-            DispatchQueue(label: "CrosswordsAnother", attributes: .concurrent).async { [weak self] in
-                self?.creatData()
+            if let data = data {
+                self.loadCurentChessboardData(data: data)
+            }else {
+                DispatchQueue(label: "CrosswordsAnother", attributes: .concurrent).async { [weak self] in
+                    self?.creatData()
+                }
             }
             if isShowInterstitial {
                 if let _ = self.interstitial?.isReady {
@@ -172,10 +194,6 @@ class ZYMainViewController: UIViewController {
     var chessboardViewController: ZYChessboardViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChessboardID")  as! ZYChessboardViewController
     var isChangeTheme = false
     func beganChessboard() {
-        DispatchQueue(label: "LoadOther", attributes: .concurrent).async {
-            ZYWordViewModel.shareWord.initOtherData()
-        }
-        
         chessboardViewController.mainViewController = self
         chessboardViewController.chessboard = chessboard!
         chessboardViewController.resultXArray = tipXdataArr

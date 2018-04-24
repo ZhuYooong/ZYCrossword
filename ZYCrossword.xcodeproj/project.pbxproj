@@ -1099,7 +1099,6 @@
 			children = (
 				0490AA481EAEE85B0051C47D /* NetDataManager.swift */,
 				0490AA491EAEE85B0051C47D /* ZYCustomClass.swift */,
-				DE9A9A401FDA7BF500FB8BF3 /* ZYSecretClass.swift */,
 				04F8259E1EEA4DD200B62794 /* ZYMaterialDesignClass.swift */,
 				0490AA4A1EAEE85B0051C47D /* ZYWebViewController.swift */,
 			);
@@ -1542,6 +1541,7 @@
 		049E5A071EEE490900FC3560 /* Title */ = {
 			isa = PBXGroup;
 			children = (
+				DE9A9A401FDA7BF500FB8BF3 /* ZYSecretClass.swift */,
 				049E5A051EEE482600FC3560 /* ZYTitleViewController.swift */,
 			);
 			name = Title;
@@ -2633,7 +2633,7 @@
 					"$(PROJECT_DIR)/ZYCrossword/Share/ShareSDK/Support/Required",
 				);
 				INFOPLIST_FILE = ZYCrossword/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2667,7 +2667,7 @@
 					"$(PROJECT_DIR)/ZYCrossword/Share/ShareSDK/Support/Required",
 				);
 				INFOPLIST_FILE = ZYCrossword/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
