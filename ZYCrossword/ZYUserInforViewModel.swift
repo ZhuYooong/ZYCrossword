@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import RealmSwift
 
 class ZYUserInforViewModel: NSObject {
     static let shareUserInfor = ZYUserInforViewModel()

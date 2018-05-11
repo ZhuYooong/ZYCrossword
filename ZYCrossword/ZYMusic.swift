@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import RealmSwift
 
 class ZYMusic: ZYBaseWord {
     @objc dynamic var id = ""

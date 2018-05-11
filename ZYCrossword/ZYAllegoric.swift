@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import RealmSwift
 
 class ZYAllegoric: ZYBaseWord {
     @objc dynamic var url: String? = ""

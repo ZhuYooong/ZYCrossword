@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import RealmSwift
 
 class ZYJsonViewModel: NSObject {
     static let shareJson = ZYJsonViewModel()

@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import RealmSwift
 
 class ZYNetwordViewModel: NSObject {
     static let shareNetword = ZYNetwordViewModel()

@@ -9,7 +9,6 @@
 import UIKit
 import Foundation
 import SwiftyJSON
-import RealmSwift
 
 class ZYPoetry: ZYBaseWord {
     @objc dynamic var detail = ""

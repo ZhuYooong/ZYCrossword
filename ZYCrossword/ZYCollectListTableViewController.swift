@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import RealmSwift
 import GoogleMobileAds
 
 class ZYCollectListTableViewController: UITableViewController {

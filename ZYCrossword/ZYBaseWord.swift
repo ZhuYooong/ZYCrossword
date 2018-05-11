@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift
+
 class ZYBaseWord: Object {
     @objc dynamic var selecttedCount = 0
     @objc dynamic var isCollect = false

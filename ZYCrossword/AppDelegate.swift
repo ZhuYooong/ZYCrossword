@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 import Material
 import SwiftTheme
 import GoogleMobileAds
@@ -16,7 +15,6 @@ import GoogleMobileAds
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        setRealmData()
         if let themeName = ZYSecretClass.shareSecret.getUserDefaults(with: themeKey) {
             ThemeManager.setTheme(plistName: themeName, path: .mainBundle)
         }else {
@@ -32,30 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         setRootController()
         return true
-    }
-    //MARK: Realm
-    func setRealmData() {
-        realmSchemaVersion()
-        
-        DispatchQueue(label: "loadBaseWord", attributes: .concurrent).async() {
-            let group = DispatchGroup()
-            DispatchQueue(label: "loadFirstWord", attributes: .concurrent).async(group: group) {
-                ZYWordViewModel.shareWord.initFirstData()
-            }
-            group.wait()
-            DispatchQueue.global().asyncAfter(deadline: .now() + 7) {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: baseWordKey), object: nil)
-            }
-        }
-    }
-    let schemaVersion: UInt64 = 1
-    func realmSchemaVersion() {
-        let config = Realm.Configuration(
-            schemaVersion: schemaVersion,
-            migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < self.schemaVersion) { }
-        })
-        Realm.Configuration.defaultConfiguration = config
     }
     //MARK: ShareSDK
     func registeShareSDK() {

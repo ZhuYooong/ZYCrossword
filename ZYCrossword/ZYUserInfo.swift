@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RealmSwift
+
 class ZYUserInfo: Object {
     @objc dynamic var userIdentifier: String = ""
     @objc dynamic var starCount: Int = 0

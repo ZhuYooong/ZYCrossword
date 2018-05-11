@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import RealmSwift
 
 class ZYBook: ZYBaseWord {
     @objc dynamic var content_description = ""
