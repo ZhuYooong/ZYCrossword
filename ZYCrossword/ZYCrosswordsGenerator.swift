@@ -7,55 +7,42 @@
 //
 
 import UIKit
+import SQLite
 
 class ZYCrosswordsGenerator: NSObject {
     static let shareCrosswordsGenerator = ZYCrosswordsGenerator()
     fileprivate override init() {}
     
     var chessboard: ZYChessboard?
-    var tipXdataArr = [ZYBaseWord]()
-    var tipYdataArr = [ZYBaseWord]()
+    var tipXdataArr = [ZYWord]()
+    var tipYdataArr = [ZYWord]()
     // MARK: - Initialization
     func loadCrosswordsData(isBackgrounding: Bool) {
         isBackground = isBackgrounding
-        let realm = try! Realm()
-        loadData(with: realm)
+        loadDictionaryData()
         generate()
     }
     // MARK: - 加载数据
-    fileprivate var contentArray = [AnyObject]()
+    fileprivate var dictionaryArray = [(Row)]()
     
-    func loadData(with realm: Realm) {
-        contentArray.removeAll()
-        let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
-        for word in allWordArray {
-            if word.isSelectted == true {
-                self.loadJsonData(with: word.wordType, and: realm)
+    func loadDictionaryData() {
+        dictionaryArray.removeAll()
+        let allDictionaryArray = ZYDictionaryViewModel.shareDictionary.loadDictionaryData(with: nil)
+        for dictionary in allDictionaryArray {
+            if dictionary[Expression<Bool>("isSelectted")] == true {
+                dictionaryArray.append(dictionary)
             }
-        }
-    }
-    func loadJsonData(with name:String?, and realm: Realm) {
-        if name == "唐诗三百首" || name == "宋词三百首" || name == "古诗三百首" || name == "诗经" || name == "乐府诗集" || name == "楚辞" || name == "全唐诗" || name == "全宋词" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYPoetry.self, and: name, and: realm))
-        }else if name == "Top250的电影" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYMovie.self, and: name, and: realm))
-        }else if name == "Top250的图书" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYBook.self, and: name, and: realm))
-        }else if name == "汉语成语词典" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYIdiom.self, and: name, and: realm))
-        }else if name == "歇后语词典" {
-            contentArray.append(ZYJsonViewModel.shareJson.loadJsonData(with: ZYAllegoric.self, and: name, and: realm))
         }
     }
     // MARK: - Crosswords generation
     var isSuccess = false
-    open func generate() {
-        if contentArray.count > 1 {
+    func generate() {
+        if dictionaryArray.count > 1 {
             let semaphore = DispatchSemaphore(value: 5)
             while !isSuccess {
                 semaphore.wait()
                 DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
-                    let chessboardViewModel = ZYChessboardViewModel(contentArray: self.contentArray)
+                    let chessboardViewModel = ZYChessboardViewModel(contentArray: self.dictionaryArray)
                     chessboardViewModel.generateOnce()
                     if chessboardViewModel.currentWords.count > 10 && !self.isSuccess {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: generateSuccessKey), object: chessboardViewModel)
@@ -64,8 +51,7 @@ class ZYCrosswordsGenerator: NSObject {
                 }
             }
         }else {
-            let realm = try! Realm()
-            loadData(with: realm)
+            loadDictionaryData()
         }
         NotificationCenter.default.addObserver(self, selector: #selector(generateSuccess(_:)), name: NSNotification.Name(rawValue: generateSuccessKey), object: nil)
     }
@@ -77,17 +63,13 @@ class ZYCrosswordsGenerator: NSObject {
         chessboard = ZYChessboard()
         chessboard?.grid = chessboardViewModel.grid
         chessboard?.resultGrid = Array2D(columns: chessboardColumns, rows: chessboardColumns, defaultValue: chessboardEmptySymbol)
-        tipXdataArr = [ZYBaseWord]()
-        tipYdataArr = [ZYBaseWord]()
+        tipXdataArr = [ZYWord]()
+        tipYdataArr = [ZYWord]()
         for i in 0 ..< chessboardViewModel.resultContentArray.count {
             let word = chessboardViewModel.resultData[i]
             let result = chessboardViewModel.resultContentArray[i]
-            result.realm?.beginWrite()
-            result.isShow = true
-            if result.isKind(of: ZYPoetry.self) {
-                result.showString = word.word
-            }
-            try! result.realm?.commitWrite()
+            
+            ZYWordViewModel.shareWord.documentsDatabase.tableLampUpdateItem(with: .showBegin, word: result, show: word.word)
             if word.direction == .vertical {
                 chessboard?.tipYArr.append(word)
                 tipYdataArr.append(result)

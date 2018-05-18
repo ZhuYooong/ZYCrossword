@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ZYDictionary {
+class ZYDictionary: NSObject {
     var id: Int = 0
     var isSelectted: Bool = false
     var isUnlocked: Bool = false

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SQLite
 
 open class Array2D: NSObject, NSCoding {
     open var columns: Int = 0
@@ -46,5 +47,17 @@ open class Array2D: NSObject, NSCoding {
     }
     open func rowCount() -> Int {
         return self.rows
+    }
+}
+extension Array {
+    func containsContent<T>(obj: T) -> Bool {
+        if let row = obj as? Row {
+            return self.filter({ (ele) -> Bool in
+                (ele as! Row)[Expression<String>("showString")] == row[Expression<String>("showString")]
+            }).count > 0
+        }else {
+            return self.filter({$0 as? T == obj as! _OptionalNilComparisonType}).count > 0
+        }
+        
     }
 }

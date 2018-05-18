@@ -45,8 +45,6 @@ class ZYMainViewController: UIViewController {
         interstitial = createAndLoadInterstitial()
     }
     //MARK: - 资源
-    let realm = try! Realm()
- 
     var chessboard: ZYChessboard?
     var tipXdataArr = [ZYBaseWord]()
     var tipYdataArr = [ZYBaseWord]()

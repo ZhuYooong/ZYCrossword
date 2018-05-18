@@ -92,4 +92,36 @@ struct ZYWordDatabase {
             print("insertion failed: \(error)")
         }
     }
+    //替换
+    func tableLampUpdateItem(with type: ZYWordUpdateType, word: Row, show: String?) {
+        let alice = Table(ZYWordViewModel.shareWord.updateWordTitle(with: word[Expression<String>("wordType")])).filter(id == word[Expression<Int64>("id")])
+        do {
+            switch type {
+            case .showBegin:
+                if let string = show {
+                    try db.run(alice.update(isShow <- true, showString <- string))
+                }else {
+                    try db.run(alice.update(isShow <- true))
+                }
+            case .showFinished:
+                if ZYDictionaryType.poetryValues.containsContent(obj: ZYWordViewModel.shareWord.updateWordTitle(with: word[Expression<String>("wordType")])) {
+                    try db.run(alice.update(isShow <- false, isRight <- false, showString <- word[Expression<String>("detail")]))
+                }else {
+                    try db.run(alice.update(isShow <- false, isRight <- false))
+                }
+            case .collect:
+                try db.run(alice.update(isCollect <- true))
+            case .selectted:
+                try db.run(alice.update(selecttedCount <- (word[Expression<Int64>("selecttedCount")] + 1), isRight <- true))
+            }
+        }catch {
+            print("insertion failed: \(error)")
+        }
+    }
+}
+enum ZYWordUpdateType: Int {
+    case showBegin = 0
+    case showFinished = 1
+    case collect = 2
+    case selectted = 3
 }

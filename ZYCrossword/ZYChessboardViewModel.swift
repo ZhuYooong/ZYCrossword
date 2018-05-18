@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import SQLite
 
 class ZYChessboardViewModel: NSObject {
-    var contentArray = [AnyObject]()
-    convenience init(contentArray: [AnyObject]) {
+    var dictionaryArray = [(Row)]()
+    convenience init(contentArray: [(Row)]) {
         self.init()
-        self.contentArray = contentArray
+        self.dictionaryArray = contentArray
         NotificationCenter.default.addObserver(self, selector: #selector(generateSuccess), name: NSNotification.Name(rawValue: generateSuccessKey), object: nil)
     }
     override init() { }
@@ -20,12 +21,11 @@ class ZYChessboardViewModel: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     // MARK: - 加载数据
-    var resultContentSet: Set<ZYBaseWord> = Set<ZYBaseWord>()
     var currentWords: Array<String> = Array<String>()
     // MARK: - Logic properties
     open var grid: Array2D = Array2D(columns: chessboardColumns, rows: chessboardColumns, defaultValue: chessboardEmptySymbol)
     open var resultData: Array<Word> = Array<Word>()
-    open var resultContentArray: Array<ZYBaseWord> = Array<ZYBaseWord>()
+    open var resultContentArray: Array<Row> = Array<Row>()
     // MARK: - Crosswords generation
     func generateOnce() {
         var isContininue = true
@@ -76,7 +76,7 @@ class ZYChessboardViewModel: NSObject {
     }
     // MARK: findWord
     func findWord(with name: String?) -> Bool {
-        var thisContentArray = contentArray
+        var thisContentArray = dictionaryArray
         var isFail = false
         while !isFail {
             let index = randomInt(0, max: thisContentArray.count - 1)
@@ -93,71 +93,35 @@ class ZYChessboardViewModel: NSObject {
         }
         return false
     }
-    var currentContent: AnyObject?
-    func findWord(with content: AnyObject, and findString: String?) -> Bool {
-        if let results: Results<ZYPoetry> = content as? Results<ZYPoetry> {
-            for item in filterResult(with: results, and: ZYPoetry.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    currentContent = item
-                    if let foundWord = findDetailWord(with: item.detail, and: findString, isPoetry: true) {
-                        if fitAndAdd(foundWord) == true {
-                            return true
-                        }
-                    }
-                }
-            }
-        }else if let results: Results<ZYMovie> = content as? Results<ZYMovie> {
-            for item in filterResult(with: results, and: ZYMovie.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    currentContent = item
-                    if let foundWord = findDetailWord(with: item.movie_name, and: findString, isPoetry: false) {
-                        if fitAndAdd(foundWord) == true {
-                            return true
-                        }
-                    }
-                }
-            }
-        }else if let results: Results<ZYBook> = content as? Results<ZYBook> {
-            for item in filterResult(with: results, and: ZYBook.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    currentContent = item
-                    if let foundWord = findDetailWord(with: item.name, and: findString, isPoetry: false) {
-                        if fitAndAdd(foundWord) == true {
-                            return true
-                        }
-                    }
-                }
-            }
-        }else if let results: Results<ZYIdiom> = content as? Results<ZYIdiom> {
-            for item in filterResult(with: results, and: ZYIdiom.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    currentContent = item
-                    if let foundWord = findDetailWord(with: item.title ?? "", and: findString, isPoetry: false) {
-                        if fitAndAdd(foundWord) == true {
-                            return true
-                        }
-                    }
-                }
-            }
-        }else if let results: Results<ZYAllegoric> = content as? Results<ZYAllegoric> {
-            for item in filterResult(with: results, and: ZYAllegoric.self, and: findString) {
-                if !resultContentSet.contains(item) {
-                    currentContent = item
-                    if let foundWord = findDetailWord(with: item.name ?? "", and: findString, isPoetry: false) {
-                        if fitAndAdd(foundWord) == true {
-                            return true
-                        }
+    var currentContent: Row?
+    var loadedWordType = ZYLoadedWordType.ShowString
+    func findWord(with content: Row, and findString: String?) -> Bool {
+        loadedWordType = ZYLoadedWordType.allValues[randomValue()]
+        for item in ZYWordViewModel.shareWord.loadWordData(with: content[Expression<String>("wordType")], findString: findString, loadedWordType: loadedWordType) {
+            if !resultContentArray.containsContent(obj: item) && authorWhether(with: item) {
+                currentContent = item
+                if let foundWord = findDetailWord(with: item[Expression<String>(loadedWordType.rawValue)], and: findString, isPoetry: isPoetry(with: item)) {
+                    if fitAndAdd(foundWord) == true {
+                        return true
                     }
                 }
             }
         }
         return false
     }
-    func filterResult<T: Object>(with results: Results<T>, and type: T.Type, and findString: String?) -> Results<T> {
-        if let findString = findString {
-            return results.filter(NSPredicate(format: "showString contains '\(findString)'")).sorted(byKeyPath: "selecttedCount").sorted(byKeyPath: "isCollect")
+    func authorWhether(with word: Row) -> Bool {
+        let author = word[Expression<String>("author")]
+        if loadedWordType == .Author && (author.count <= 0 || author == "不详" || author == "无名氏" || author == "佚名") {
+            return false
         }else {
-            return results.sorted(byKeyPath: "selecttedCount").sorted(byKeyPath: "isCollect")
+            return true
+        }
+    }
+    func isPoetry(with word: Row) -> Bool {
+        if loadedWordType == .ShowString && ZYDictionaryType.poetryValues.containsContent(obj: word[Expression<String>("wordType")]) {
+            return true
+        }else {
+            return false
         }
     }
     func findDetailWord(with detail:String, and findString: String?, isPoetry: Bool) -> String? {
@@ -369,8 +333,7 @@ class ZYChessboardViewModel: NSObject {
             }
             let w = Word(word: word, column: column, row: row, direction: (direction == 0 ? .horizontal : .vertical), grid: grid)
             resultData.append(w)
-            resultContentSet.insert(currentContent as! ZYBaseWord)
-            resultContentArray.append(currentContent as! ZYBaseWord)
+            resultContentArray.append(currentContent!)
             currentWords.append(word)
         }
     }

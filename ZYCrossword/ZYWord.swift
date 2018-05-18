@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ZYWord {
+class ZYWord: NSObject {
     var id: Int = 0
     var selecttedCount: Int = 0
     var isCollect: Bool = false
