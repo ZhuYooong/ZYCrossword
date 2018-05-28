@@ -10,12 +10,13 @@ import UIKit
 import DropDown
 import Material
 import KSGuideController
+import SQLite
 
 class ZYChessboardViewController: UIViewController {
     var mainViewController: ZYMainViewController?
     var chessboard = ZYChessboard()
-    var resultXArray = [ZYBaseWord]()
-    var resultYArray = [ZYBaseWord]()
+    var resultXArray = [ZYWord]()
+    var resultYArray = [ZYWord]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -80,8 +81,8 @@ class ZYChessboardViewController: UIViewController {
     }
     @objc func initMenuData() {
         if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
-            starLabel.text = "\(user.starCount)"
-            coinLabel.text = "\(user.coinCount)"
+            starLabel.text = "\(user[Expression<Int>("starCount")])"
+            coinLabel.text = "\(user[Expression<Int>("coinCount")])"
         }
     }
     var resetValueClosure: ((_ point: CGPoint) -> Void)?
@@ -135,8 +136,8 @@ class ZYChessboardViewController: UIViewController {
         chessboardView.chessboardButtonClosure = { sender -> (landscapeIntro: [Array<Int>], portraitIntro: [Array<Int>]) in
             var landscapeIntro = [Array<Int>]()
             var portraitIntro = [Array<Int>]()
-            var landscapeResultIntro: ZYBaseWord?
-            var portraitResultIntro: ZYBaseWord?
+            var landscapeResultIntro: ZYWord?
+            var portraitResultIntro: ZYWord?
             let x = self.setIntro(with: self.chessboard.tipXArr, resultArray: self.resultXArray, sender: sender)
             landscapeResultIntro = x?.resultIntro
             landscapeIntro = x?.intro ?? [Array<Int>]()
@@ -152,7 +153,7 @@ class ZYChessboardViewController: UIViewController {
             chessboardView.chessboardButtonClick(sender: button)
         }
     }
-    func setIntro(with tipArray: Array<Word>, resultArray: [ZYBaseWord], sender: ZYChessboardButton) -> (intro: [Array<Int>], resultIntro: ZYBaseWord)? {
+    func setIntro(with tipArray: Array<Word>, resultArray: [ZYWord], sender: ZYChessboardButton) -> (intro: [Array<Int>], resultIntro: ZYWord)? {
         for i in 0 ..< tipArray.count {
             let XWord = tipArray[i]
             for num in XWord.grid {
@@ -165,12 +166,12 @@ class ZYChessboardViewController: UIViewController {
     }
     //MARK: - crosswordDataTableView
     @IBOutlet weak var crosswordDataTableView: UITableView!
-    var crosswordDataArray = [ZYBaseWord]()
+    var crosswordDataArray = [ZYWord]()
     var crosswordShowDic = ["landscape":false, "portrait":false]
     var isPortraitIntro = false
-    func reloadCrosswordData(landscape: ZYBaseWord?, portrait: ZYBaseWord?) {
+    func reloadCrosswordData(landscape: ZYWord?, portrait: ZYWord?) {
         crosswordShowDic = ["landscape":false, "portrait":false]
-        crosswordDataArray = [ZYBaseWord]()
+        crosswordDataArray = [ZYWord]()
         if let landscapeWord = landscape {
             crosswordShowDic.updateValue(true, forKey: "landscape")
             crosswordDataArray.append(landscapeWord)
@@ -201,17 +202,11 @@ class ZYChessboardViewController: UIViewController {
         }
         return ""
     }
-    func setCrosswordDataTableViewString(with word: ZYBaseWord) -> String {
-        if let poetryWord = word as? ZYPoetry {
-            return poetryWord.showString.showContentString(with: poetryWord.detail, typeString: poetryWord.wordType)
-        }else if let movieWord = word as? ZYMovie {
-            return movieWord.showString.showContentString(with: movieWord.content_description, typeString: movieWord.wordType)
-        }else if let bookWord = word as? ZYBook {
-            return bookWord.showString.showContentString(with: bookWord.content_description, typeString: bookWord.wordType)
-        }else if let idiomWord = word as? ZYIdiom {
-            return idiomWord.showString.showContentString(with: idiomWord.paraphrase ?? "", typeString: idiomWord.wordType)
-        }else if let allegoricWord = word as? ZYAllegoric {
-            return allegoricWord.showString.showContentString(with: allegoricWord.content ?? "", typeString: allegoricWord.wordType)
+    func setCrosswordDataTableViewString(with word: ZYWord) -> String {
+        if ZYDictionaryType.specificPoetryValues.containsContent(obj: word.wordType) {
+            return word.showString.showContentString(with: word.detail, typeString: word.wordType)
+        }else {
+            return word.showString.showContentString(with: word.content, typeString: word.wordType)
         }
         return ""
     }
@@ -222,10 +217,7 @@ class ZYChessboardViewController: UIViewController {
     @objc func collectionButtonClick(sender: UIButton) {
         let baseWord = crosswordDataArray[sender.tag]
         if baseWord.isCollect != true {
-            baseWord.realm?.beginWrite()
-            baseWord.isCollect = true
-            baseWord.collectDate = Date()
-            try! baseWord.realm?.commitWrite()
+            ZYWordViewModel.shareWord.documentsDatabase.tableLampUpdateWord(with:.collect, word:baseWord, show:nil)
             sender.setImage(UIImage(named: "Oval 84"), for: .normal)
         }
     }
@@ -294,7 +286,7 @@ class ZYChessboardViewController: UIViewController {
             return nil
         }
     }
-    func promptWord(with baseWord: ZYBaseWord) {
+    func promptWord(with baseWord: ZYWord) {
         if let coinCount = deleteCoinCount() {
             ZYUserInforViewModel.shareUserInfor.changeCoin(with: coinCount, add: false)
             wordInputTextField.text = baseWord.showString
@@ -363,10 +355,7 @@ extension ZYChessboardViewController: UITextFieldDelegate {
                 }
             }
             if isRight && resultXArray[i].isRight == false {
-                resultXArray[i].realm?.beginWrite()
-                resultXArray[i].selecttedCount += 1
-                resultXArray[i].isRight = true
-                try! resultXArray[i].realm?.commitWrite()
+                ZYWordViewModel.shareWord.documentsDatabase.tableLampUpdateWord(with:.selectted, word:resultXArray[i], show:nil)
             }
         }
         for i in 0 ..< chessboard.tipYArr.count {
@@ -378,10 +367,7 @@ extension ZYChessboardViewController: UITextFieldDelegate {
                 }
             }
             if isRight && resultYArray[i].isRight == false {
-                resultYArray[i].realm?.beginWrite()
-                resultYArray[i].selecttedCount += 1
-                resultYArray[i].isRight = true
-                try! resultYArray[i].realm?.commitWrite()
+                ZYWordViewModel.shareWord.documentsDatabase.tableLampUpdateWord(with:.selectted, word:resultXArray[i], show:nil)
             }
         }
     }

@@ -25,10 +25,10 @@ struct ZYWordDatabase {
         }
     }
     
-    let id = Expression<Int64>("id")
-    let selecttedCount = Expression<Int64>("selecttedCount")
+    let id = Expression<Int>("id")
+    let selecttedCount = Expression<Int>("selecttedCount")
     let isCollect = Expression<Bool>("isCollect")
-    let collectDate = Expression<Int64>("collectDate")
+    let collectDate = Expression<Int>("collectDate")
     let isRight = Expression<Bool>("isRight")
     let isShow = Expression<Bool>("isShow")
     
@@ -87,14 +87,14 @@ struct ZYWordDatabase {
     //插入
     func tableLampInsertItem(with wordTitle: String, item: Row) -> Void {
         do {
-            _ = try db.run(Table(wordTitle).insert(selecttedCount <- item[Expression<Int64>("selecttedCount")], isCollect <- item[Expression<Bool>("isCollect")], collectDate <- item[Expression<Int64>("collectDate")], isRight <- item[Expression<Bool>("isRight")], isShow <- item[Expression<Bool>("isShow")], showString <- item[Expression<String>("showString")], wordType <- item[Expression<String>("wordType")], name <- item[Expression<String>("name")], author <- item[Expression<String>("author")], detail <- item[Expression<String>("detail")], url <- item[Expression<String>("url")], content <- item[Expression<String>("content")], date <- item[Expression<String>("date")], background <- item[Expression<String>("background")], database <- item[Expression<String>("database")], type <- item[Expression<String>("type")], column0 <- item[Expression<String>("column0")], column1 <- item[Expression<String>("column1")], column2 <- item[Expression<String>("column2")], column3 <- item[Expression<String>("column3")], column4 <- item[Expression<String>("column4")]))
+            _ = try db.run(Table(wordTitle).insert(selecttedCount <- item[Expression<Int>("selecttedCount")], isCollect <- item[Expression<Bool>("isCollect")], collectDate <- item[Expression<Int>("collectDate")], isRight <- item[Expression<Bool>("isRight")], isShow <- item[Expression<Bool>("isShow")], showString <- item[Expression<String>("showString")], wordType <- item[Expression<String>("wordType")], name <- item[Expression<String>("name")], author <- item[Expression<String>("author")], detail <- item[Expression<String>("detail")], url <- item[Expression<String>("url")], content <- item[Expression<String>("content")], date <- item[Expression<String>("date")], background <- item[Expression<String>("background")], database <- item[Expression<String>("database")], type <- item[Expression<String>("type")], column0 <- item[Expression<String>("column0")], column1 <- item[Expression<String>("column1")], column2 <- item[Expression<String>("column2")], column3 <- item[Expression<String>("column3")], column4 <- item[Expression<String>("column4")]))
         }catch {
             print("insertion failed: \(error)")
         }
     }
     //替换
-    func tableLampUpdateItem(with type: ZYWordUpdateType, word: Row, show: String?) {
-        let alice = Table(ZYWordViewModel.shareWord.updateWordTitle(with: word[Expression<String>("wordType")])).filter(id == word[Expression<Int64>("id")])
+    func tableLampUpdateRow(with type: ZYWordUpdateType, word: Row, show: String?) {
+        let alice = Table(ZYWordViewModel.shareWord.updateWordTitle(with: word[Expression<String>("wordType")])).filter(id == word[Expression<Int>("id")])
         do {
             switch type {
             case .showBegin:
@@ -112,7 +112,32 @@ struct ZYWordDatabase {
             case .collect:
                 try db.run(alice.update(isCollect <- true))
             case .selectted:
-                try db.run(alice.update(selecttedCount <- (word[Expression<Int64>("selecttedCount")] + 1), isRight <- true))
+                try db.run(alice.update(selecttedCount <- (word[Expression<Int>("selecttedCount")] + 1), isRight <- true))
+            }
+        }catch {
+            print("insertion failed: \(error)")
+        }
+    }
+    func tableLampUpdateWord(with type: ZYWordUpdateType, word: ZYWord, show: String?) {
+        let alice = Table(ZYWordViewModel.shareWord.updateWordTitle(with: word.wordType)).filter(id == word.id)
+        do {
+            switch type {
+            case .showBegin:
+                if let string = show {
+                    try db.run(alice.update(isShow <- true, showString <- string))
+                }else {
+                    try db.run(alice.update(isShow <- true))
+                }
+            case .showFinished:
+                if ZYDictionaryType.poetryValues.containsContent(obj: ZYWordViewModel.shareWord.updateWordTitle(with: word.wordType)) {
+                    try db.run(alice.update(isShow <- false, isRight <- false, showString <- word.detail))
+                }else {
+                    try db.run(alice.update(isShow <- false, isRight <- false))
+                }
+            case .collect:
+                try db.run(alice.update(isCollect <- true))
+            case .selectted:
+                try db.run(alice.update(selecttedCount <- (word.selecttedCount + 1), isRight <- true))
             }
         }catch {
             print("insertion failed: \(error)")

@@ -9,6 +9,7 @@
 import UIKit
 import Material
 import GoogleMobileAds
+import SQLite
 
 class ZYShopListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +63,7 @@ class ZYShopListViewController: UIViewController {
     }
     @objc func initCoinData() {
         if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
-            coinCount = user.coinCount
+            coinCount = user[Expression<Int>("coinCount")]
         }
     }
     //MARK: - button

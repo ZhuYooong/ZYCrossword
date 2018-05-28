@@ -3,7 +3,6 @@ platform :ios, ’9.0’
 inhibit_all_warnings!
 use_frameworks!
 target ’ZYCrossword’ do
-pod 'SwiftyJSON', '~> 4'
 pod 'Alamofire'
 pod 'PKHUD', '~> 5'
 pod 'Kingfisher', '~> 4'

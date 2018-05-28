@@ -8,38 +8,33 @@
 
 import UIKit
 import GoogleMobileAds
+import SQLite
 
 class ZYCrosswordListTableViewController: UITableViewController {
     var selectResultBlock: ((Int, Bool) -> Void)?
-    var resultXArray = [ZYBaseWord]()
-    var resultYArray = [ZYBaseWord]()
+    var resultXArray = [ZYWord]()
+    var resultYArray = [ZYWord]()
     var tipXArr = Array<Word>()
     var tipYArr = Array<Word>()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
     }
-    func loadResult(with XArray: [ZYBaseWord], YArray: [ZYBaseWord]) {
+    func loadResult(with XArray: [ZYWord], YArray: [ZYWord]) {
         resultXArray = XArray
         resultYArray = YArray
         tableView.reloadData()
     }
-    func setCrosswordDataTableViewContentHeight(with index: Int, resultArray: [ZYBaseWord]) -> CGFloat {
+    func setCrosswordDataTableViewContentHeight(with index: Int, resultArray: [ZYWord]) -> CGFloat {
         let contentString = setCrosswordDataTableViewContent(with: index, resultArray: resultArray)
         return contentString.textHeightWithFont(UIFont.systemFont(ofSize: 14), constrainedToSize: CGSize(width: tableView.bounds.size.width - 48, height: 10000)) + 28
     }
-    func setCrosswordDataTableViewContent(with index: Int, resultArray: [ZYBaseWord]) -> String {
+    func setCrosswordDataTableViewContent(with index: Int, resultArray: [ZYWord]) -> String {
         if index < resultArray.count {
-            if let poetryWord = resultArray[index] as? ZYPoetry {
-                return poetryWord.showString.showContentString(with: poetryWord.detail, typeString: poetryWord.wordType)
-            }else if let movieWord = resultArray[index] as? ZYMovie {
-                return movieWord.showString.showContentString(with: movieWord.content_description, typeString: movieWord.wordType)
-            }else if let bookWord = resultArray[index] as? ZYBook {
-                return bookWord.showString.showContentString(with: bookWord.content_description, typeString: bookWord.wordType)
-            }else if let idiomWord = resultArray[index] as? ZYIdiom {
-                return idiomWord.showString.showContentString(with: idiomWord.paraphrase ?? "", typeString: idiomWord.wordType)
-            }else if let allegoricWord = resultArray[index] as? ZYAllegoric {
-                return allegoricWord.showString.showContentString(with: allegoricWord.content ?? "", typeString: allegoricWord.wordType)
+            if ZYDictionaryType.specificPoetryValues.containsContent(obj: resultArray[index].wordType) {
+                return resultArray[index].showString.showContentString(with: resultArray[index].detail, typeString: resultArray[index].wordType)
+            }else {
+                return resultArray[index].showString.showContentString(with: resultArray[index].content, typeString: resultArray[index].wordType)
             }
         }
         return ""

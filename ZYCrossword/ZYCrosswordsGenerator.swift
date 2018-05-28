@@ -69,13 +69,13 @@ class ZYCrosswordsGenerator: NSObject {
             let word = chessboardViewModel.resultData[i]
             let result = chessboardViewModel.resultContentArray[i]
             
-            ZYWordViewModel.shareWord.documentsDatabase.tableLampUpdateItem(with: .showBegin, word: result, show: word.word)
+            ZYWordViewModel.shareWord.documentsDatabase.tableLampUpdateRow(with: .showBegin, word: result, show: word.word)
             if word.direction == .vertical {
                 chessboard?.tipYArr.append(word)
-                tipYdataArr.append(result)
+                tipYdataArr.append(ZYWordViewModel.shareWord.formatConversionWord(with: result))
             }else {
                 chessboard?.tipXArr.append(word)
-                tipXdataArr.append(result)
+                tipXdataArr.append(ZYWordViewModel.shareWord.formatConversionWord(with: result))
             }
         }
         if isBackground {

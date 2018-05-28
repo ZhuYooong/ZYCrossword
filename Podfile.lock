@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.7.2)
   - CryptoSwift (0.8.3)
   - DropDown (2.3.2)
-  - Google-Mobile-Ads-SDK (7.30.0)
+  - Google-Mobile-Ads-SDK (7.31.0)
   - KeychainAccess (3.1.1)
   - Kingfisher (4.8.0)
   - KSGuideController (0.1.2)
@@ -19,7 +19,6 @@ PODS:
     - SQLite.swift/standard (= 0.11.4)
   - SQLite.swift/standard (0.11.4)
   - SwiftTheme (0.4.1)
-  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -34,13 +33,12 @@ DEPENDENCIES:
   - SnapKit (~> 4)
   - SQLite.swift (= 0.11.4)
   - SwiftTheme
-  - SwiftyJSON (~> 4)
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   CryptoSwift: 033efc3523865d19cc6ab6612fa17a62613b5dfa
   DropDown: 7f87abecc28f9b4edad810fe1211c5c018c257e5
-  Google-Mobile-Ads-SDK: 7404f68120ae8682afeb5af001fbf4aad731c78e
+  Google-Mobile-Ads-SDK: 6e529e748b45507a2ca904e0b5a52669ba3920c4
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   KSGuideController: a3829b33b65ca56eacd530c7b4917e973f756ee5
@@ -50,8 +48,7 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
-  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 1b2147b62a8c75584fe1c00fcbba6620f824b48f
+PODFILE CHECKSUM: 1d1ef49ebc6cb359bf4f90a9cc1d78679e3a24bd
 
 COCOAPODS: 1.3.1

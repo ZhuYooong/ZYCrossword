@@ -118,7 +118,7 @@ class ZYChessboardViewModel: NSObject {
         }
     }
     func isPoetry(with word: Row) -> Bool {
-        if loadedWordType == .ShowString && ZYDictionaryType.poetryValues.containsContent(obj: word[Expression<String>("wordType")]) {
+        if loadedWordType == .ShowString && ZYDictionaryType.specificPoetryValues.containsContent(obj: word[Expression<String>("wordType")]) {
             return true
         }else {
             return false

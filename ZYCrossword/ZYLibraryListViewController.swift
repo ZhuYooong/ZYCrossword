@@ -8,6 +8,7 @@
 
 import UIKit
 import KSGuideController
+import SQLite
 
 class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackViewControllerDelegate {
     var changeWordBlock:((Bool) -> Void)?
@@ -23,37 +24,18 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
     }
     //MARK: - 界面和数据
     fileprivate var countOfCards: Int = 3
-    var dictionaryWordArray = [ZYWord]()
-    var doubanWordArray = [ZYWord]()
-    var poetryWordArray = [ZYWord]()
+    var dictionaryWordArray = [ZYDictionary]()
+    var doubanWordArray = [ZYDictionary]()
+    var poetryWordArray = [ZYDictionary]()
     func initData() {
-        let realm = try! Realm()
-        let allWordArray = ZYWordViewModel.shareWord.loadWordData(with: realm)
+        let allWordArray = ZYDictionaryViewModel.shareDictionary.loadDictionaryData(with: nil)
         for word in allWordArray {
-            if word.wordType == ZYWordType.TangPoetry300.rawValue {
-                poetryWordArray.append(word)
-            }else if word.wordType == ZYWordType.SongPoetry300.rawValue {
-                poetryWordArray.append(word)
-            }else if word.wordType == ZYWordType.OldPoetry300.rawValue {
-                poetryWordArray.append(word)
-            }else if word.wordType == ZYWordType.ShiJing.rawValue {
-                poetryWordArray.append(word)
-            }else if word.wordType == ZYWordType.YueFu.rawValue {
-                poetryWordArray.append(word)
-            }else if word.wordType == ZYWordType.ChuCi.rawValue {
-                poetryWordArray.append(word)
-            }else if word.wordType == ZYWordType.TangPoetryAll.rawValue {
-                poetryWordArray.append(word)
-            }else if word.wordType == ZYWordType.SongPoetryAll.rawValue {
-                poetryWordArray.append(word)
-            }else if word.wordType == ZYWordType.Top250Movie.rawValue {
-                doubanWordArray.append(word)
-            }else if word.wordType == ZYWordType.Top250Book.rawValue {
-                doubanWordArray.append(word)
-            }else if word.wordType == ZYWordType.Idiom.rawValue {
-                dictionaryWordArray.append(word)
-            }else if word.wordType == ZYWordType.Allegoric.rawValue {
-                dictionaryWordArray.append(word)
+            if ZYDictionaryType.poetryValues.containsContent(obj: word[Expression<String>("wordType")]) {
+                poetryWordArray.append(ZYDictionaryViewModel.shareDictionary.formatConversionDictionary(with: word))
+            }else if ZYDictionaryType.dictionaryValues.containsContent(obj: word[Expression<String>("wordType")]) {
+                dictionaryWordArray.append(ZYDictionaryViewModel.shareDictionary.formatConversionDictionary(with: word))
+            }else if ZYDictionaryType.doubanValues.containsContent(obj: word[Expression<String>("wordType")]) {
+                doubanWordArray.append(ZYDictionaryViewModel.shareDictionary.formatConversionDictionary(with: word))
             }
         }
     }
@@ -107,18 +89,18 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightLabel)
         
         var count = 0
-        for word in dictionaryWordArray {
-            if word.isSelectted {
+        for dictionary in dictionaryWordArray {
+            if dictionary.isSelectted {
                 count += 1
             }
         }
-        for word in doubanWordArray {
-            if word.isSelectted {
+        for dictionary in doubanWordArray {
+            if dictionary.isSelectted {
                 count += 1
             }
         }
-        for word in poetryWordArray {
-            if word.isSelectted {
+        for dictionary in poetryWordArray {
+            if dictionary.isSelectted {
                 count += 1
             }
         }
@@ -143,7 +125,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
     }
     @objc func initCoinData() {
         if let user = ZYUserInforViewModel.shareUserInfor.getUserInfo() {
-            coinCount = user.coinCount
+            coinCount = user[Expression<Int>("coinCount")]
         }
     }
     @objc func coinButttonClick(sender: UIButton) {

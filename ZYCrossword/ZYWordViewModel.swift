@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 import SQLite
 
 class ZYWordViewModel: NSObject {
@@ -33,6 +32,7 @@ class ZYWordViewModel: NSObject {
             }
             return true
         }
+        return false
     }
     func updateDate(with wordTitle: String) {
         do {
@@ -57,33 +57,74 @@ class ZYWordViewModel: NSObject {
             print("insertion failed: \(error)")
         }
     }
-    //MARK: - 更新本地数据
-    func changeSelecttedData(with type: String,and id: Int) {
-        
-    }
-    func changeCollectData(with type: String,and id: Int) {
-        
-    }
-    func changeCollectDateData(with type: String,and id: Int) {
-        
-    }
-    func changeRightData(with type: String,and id: Int) {
-        
-    }
-    func changeShowData(with type: String,and id: Int) {
-        
-    }
     //MARK: - 读取本地数据
     func loadWordData(with wordType: String, findString: String?, loadedWordType: ZYLoadedWordType) -> [(Row)] {
         do {
             if let str = findString {
-                return try Array(documentsDatabase.db.prepare(Table(updateWordTitle(with: wordType)).filter(Expression<String>(loadedWordType.rawValue).like("%\(str)%")).order(Expression<Int64>("selecttedCount")).order(Expression<Bool>("isCollect"))))
+                return try Array(documentsDatabase.db.prepare(Table(updateWordTitle(with: wordType)).filter(Expression<String>(loadedWordType.rawValue).like("%\(str)%")).order(Expression<Int>("selecttedCount")).order(Expression<Bool>("isCollect"))))
             }else {
-                return try Array(documentsDatabase.db.prepare(Table(updateWordTitle(with: wordType)).order(Expression<Int64>("selecttedCount")).order(Expression<Bool>("isCollect"))))
+                return try Array(documentsDatabase.db.prepare(Table(updateWordTitle(with: wordType)).order(Expression<Int>("selecttedCount")).order(Expression<Bool>("isCollect"))))
             }
         }catch {
             print("insertion failed: \(error)")
         }
+        return [(Row)]()
+    }
+    func loadShowData() -> [(Row)] {
+        var rowArray = [(Row)]()
+        for dic in ZYDictionaryType.allValues {
+            do {
+                for row in try documentsDatabase.db.prepare(Table(dic.rawValue).filter(Expression<Bool>("isShow") == true)) {
+                    rowArray.append(row)
+                }
+            }catch {
+                print("insertion failed: \(error)")
+            }
+        }
+        return rowArray
+    }
+    func loadCollectData() -> [(Row)] {
+        var rowArray = [(Row)]()
+        for dic in ZYDictionaryType.allValues {
+            do {
+                for row in try documentsDatabase.db.prepare(Table(dic.rawValue).filter(Expression<Bool>("isCollect") == true)) {
+                    rowArray.append(row)
+                }
+            }catch {
+                print("insertion failed: \(error)")
+            }
+        }
+        return rowArray
+    }
+    //MARK: - Tool
+    func formatConversionWord(with item: Row) -> ZYWord {
+        let word = ZYWord()
+        word.id = item[Expression<Int>("id")]
+        word.selecttedCount = item[Expression<Int>("selecttedCount")]
+        word.isCollect = item[Expression<Bool>("isCollect")]
+        word.collectDate = item[Expression<Int>("collectDate")]
+        word.isRight = item[Expression<Bool>("isRight")]
+        word.isShow = item[Expression<Bool>("isShow")]
+        
+        word.showString = item[Expression<String>("showString")]
+        word.wordType = item[Expression<String>("wordType")]
+        
+        word.name = item[Expression<String>("name")]
+        word.author = item[Expression<String>("author")]
+        word.detail = item[Expression<String>("detail")]
+        word.url = item[Expression<String>("url")]
+        word.content = item[Expression<String>("content")]
+        word.date = item[Expression<String>("date")]
+        word.background = item[Expression<String>("background")]
+        word.database = item[Expression<String>("database")]
+        word.type = item[Expression<String>("type")]
+        
+        word.column0 = item[Expression<String>("column0")]
+        word.column1 = item[Expression<String>("column1")]
+        word.column2 = item[Expression<String>("column2")]
+        word.column3 = item[Expression<String>("column3")]
+        word.column4 = item[Expression<String>("column4")]
+        return word
     }
     func updateWordTitle(with wordType: String) -> String {
         if wordType == "唐诗三百首" {

@@ -132,6 +132,7 @@ struct ZYDictionaryDatabase {
             print("insertion failed: \(error)")
         }
     }
+    
 }
 enum ZYDictionaryType: String {
     //诗歌
@@ -153,4 +154,13 @@ enum ZYDictionaryType: String {
                             Top250Book,
                             Idiom,Allegoric]
     static let poetryValues = [TangPoetry300.rawValue,SongPoetry300.rawValue,OldPoetry300.rawValue,ShiJing.rawValue,YueFu.rawValue,ChuCi.rawValue]
+    static let specificPoetryValues = ["唐诗三百首","宋词三百首","古诗三百首","诗经","乐府诗集","楚辞"]
+    static let dictionaryValues = [Idiom.rawValue,Allegoric.rawValue]
+    static let specificDictionaryValues = ["歇后语词典","汉语成语词典"]
+    static let doubanValues = [Top250Movie.rawValue,Top250Book.rawValue]
+    static let specificDoubanValues = ["Top250的图书","Top250的电影"]
+}
+enum ZYDictionaryUpdateType: Int {
+    case selectted = 0
+    case unlocked = 1
 }

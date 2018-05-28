@@ -6,18 +6,18 @@
 //  Copyright © 2017年 ZhuYong. All rights reserved.
 //
 import UIKit
+import SQLite
 
 class ZYLibraryListCell: TisprCardStackViewCell {
     var parientViewController: ZYLibraryListViewController?
     var libraryContentBlock: ((String) -> Void)?
     var changeWordBlock:((Bool) -> Void)?
-    let realm = try! Realm()
     
     @IBOutlet weak var backgroundImageiVew: UIImageView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var cardTableView: UITableView!
-    var cardContentArray = [ZYWord]()
+    var cardContentArray = [ZYDictionary]()
     override func awakeFromNib() {
         super.awakeFromNib()
         initView()
@@ -51,14 +51,14 @@ class ZYLibraryListCell: TisprCardStackViewCell {
         }
     }
     func showLockAlert(with wordType: String, index: Int, cell: ZYLabraryCardTableViewCell) {
-        if let word = realm.objects(ZYWord.self).filter(NSPredicate(format: "wordType = '\(wordType)'")).first {
+        if let word = ZYDictionaryViewModel.shareDictionary.loadDictionaryData(with: wordType).first {
             let unlockedCount = UserDefaults.standard.integer(forKey: unlockedKey)
-            let truePrice = word.price + unlockedCount
+            let truePrice = word[Expression<Int>("price")] + unlockedCount
             let option = UIAlertController(title: "您确定要解锁《\(wordType)》吗？", message: "需要 \(truePrice) 金币", preferredStyle: .alert)
             option.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
             option.addAction(UIAlertAction(title: "确定", style: .default) { (action) in
                 if truePrice < self.parientViewController!.coinCount {
-                    ZYWordViewModel.shareWord.unlockWordData(with: word, and: self.realm)
+                    ZYDictionaryViewModel.shareDictionary.changeUnlockedData(with: self.cardContentArray[index].wordType)
                     ZYUserInforViewModel.shareUserInfor.changeCoin(with: truePrice, add: false)
                     self.cardContentArray[index].isUnlocked = true
                     UserDefaults.standard.set(unlockedCount + 1, forKey: unlockedKey)
@@ -115,10 +115,8 @@ extension ZYLibraryListCell: UITableViewDelegate, UITableViewDataSource {
                     cell.isCollectionSelected = true
                     cell.isCollection = !cell.isCollection
                     if changeWordBlock != nil {
-                        ZYWordViewModel.shareWord.clickWordData(with: cardContentArray[indexPath.row].wordType, and: realm)
-                        realm.beginWrite()
+                        ZYDictionaryViewModel.shareDictionary.changeSelecttedData(with: cardContentArray[indexPath.row].wordType, selectted: cell.isCollection)
                         cardContentArray[indexPath.row].isSelectted = cell.isCollection
-                        try! realm.commitWrite()
                         changeWordBlock!(true)
                     }
                 }

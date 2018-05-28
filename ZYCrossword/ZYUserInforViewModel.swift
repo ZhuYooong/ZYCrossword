@@ -7,66 +7,47 @@
 //
 
 import UIKit
-import SwiftyJSON
+import SQLite
 
 class ZYUserInforViewModel: NSObject {
     static let shareUserInfor = ZYUserInforViewModel()
     fileprivate override init() { }
     
     //MARK: - 存储本地数据
-    let realm = try! Realm()
-    func initData() {
-        let userInfo = ZYUserInfo()
-        userInfo.coinCount = 0
-        userInfo.starCount = 0
-        userInfo.userIdentifier = creatUserIdentifier()
-        try! realm.write {
-            realm.add(userInfo, update: true)
-        }
-        ZYSecretClass.shareSecret.creatUserDefaults(with: userInfo.userIdentifier, defultKey: userInfoKey)
+    let userInforDatabase = ZYUserInforDatabase()
+    func initUserInfor() {
+        userInforDatabase.tableLampCreate()
+        userInforDatabase.initFirstData()
     }
+    //MARK: - 更新本地数据
     func changeStarCount(with level: ChangeStarLevel) {
         if let user = getUserInfo() {
-            let userInfo = ZYUserInfo()
-            userInfo.userIdentifier = user.userIdentifier
-            if level == .third {
-                userInfo.coinCount = user.coinCount + 30
-            }else {
-                userInfo.coinCount = user.coinCount + 10
-            }
-            userInfo.starCount = user.starCount + level.rawValue
-            try! realm.write {
-                realm.add(userInfo, update: true)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: coinCountKey), object: nil)
-            }
+            userInforDatabase.tableLampUpdateRow(with: .starCount, count: level.rawValue, word: user)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: coinCountKey), object: nil)
         }
     }
     func changeCoin(with count: Int, add: Bool) {
         if let user = getUserInfo(), count > 0 {
-            let userInfo = ZYUserInfo()
-            userInfo.userIdentifier = user.userIdentifier
             if add {
-                userInfo.coinCount = user.coinCount + count
+                userInforDatabase.tableLampUpdateRow(with: .addCoin, count: count, word: user)
             }else {
-                userInfo.coinCount = user.coinCount - count
+                userInforDatabase.tableLampUpdateRow(with: .subtractCoin, count: count, word: user)
             }
-            userInfo.starCount = user.starCount
-            try! realm.write {
-                realm.add(userInfo, update: true)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: coinCountKey), object: nil)
-            }
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: coinCountKey), object: nil)
         }
     }
-    //MARK: - Tools
-    func getUserInfo() -> ZYUserInfo? {
-        if let userId = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) {
-            let predicate = NSPredicate(format: "userIdentifier = '\(userId)'")
-            if let user = self.realm.objects(ZYUserInfo.self).filter(predicate).first {
-                return user
+    //MARK: - 读取本地数据
+    func getUserInfo() -> Row? {
+        do {
+            if let userId = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) {
+                return Array(try userInforDatabase.db.prepare(Table("UserInfor").filter(Expression<String>("userIdentifier") == userId))).first
             }
+        }catch {
+            print("insertion failed: \(error)")
         }
         return nil
     }
+    //MARK: - Tools
     func creatUserIdentifier() -> String {
         let now = Date()
         return "\(now)"

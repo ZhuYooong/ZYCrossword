@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 
 class ZYNetwordViewModel: NSObject {
     static let shareNetword = ZYNetwordViewModel()

@@ -8,12 +8,8 @@
 
 import UIKit
 
-class ZYUserInfo: Object {
-    @objc dynamic var userIdentifier: String = ""
-    @objc dynamic var starCount: Int = 0
-    @objc dynamic var coinCount: Int = 0
-    
-    override static func primaryKey() -> String {
-        return "userIdentifier"
-    }
+class ZYUserInfo: NSObject {
+    var userIdentifier: String = ""
+    var starCount: Int = 0
+    var coinCount: Int = 0
 }

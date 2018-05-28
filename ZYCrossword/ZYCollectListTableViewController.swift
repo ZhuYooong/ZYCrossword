@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import SwiftyJSON
 import GoogleMobileAds
+import SQLite
 
 class ZYCollectListTableViewController: UITableViewController {
     override func viewDidLoad() {
@@ -22,64 +22,27 @@ class ZYCollectListTableViewController: UITableViewController {
         createAndLoadBanner()
     }
     //MARK: - Data
-    let realm = try! Realm()
     var collectionDicArray = [[String: Any]]()
     private func initData() {
         if title == "收藏夹" {
-            initCollectionData()
-        }else {
-            initLibraryContentData()
+            appendContent(with: ZYWordViewModel.shareWord.loadCollectData())
+            collectionDicArray.sort { (first, second) -> Bool in
+                return (first["collectDate"] as? Date ?? Date()) >= (second["collectDate"] as? Date ?? Date())
+            }
+        }else if let titieString = title {
+            appendContent(with: ZYWordViewModel.shareWord.loadWordData(with: titieString, findString: nil, loadedWordType: .ShowString))
         }
         tableView.reloadData()
     }
-    func initCollectionData() {
-        appendContent(with: realm.objects(ZYAllegoric.self).filter("isCollect == true"))
-        appendContent(with: realm.objects(ZYIdiom.self).filter("isCollect == true"))
-        appendContent(with: realm.objects(ZYBook.self).filter("isCollect == true"))
-        appendContent(with: realm.objects(ZYMovie.self).filter("isCollect == true"))
-        let musicResult = realm.objects(ZYMusic.self).filter("isCollect == true")
-        for _ in musicResult { }
-        appendContent(with: realm.objects(ZYPoetry.self).filter("isCollect == true"))
-        collectionDicArray.sort { (first, second) -> Bool in
-            return (first["collectDate"] as? Date ?? Date()) >= (second["collectDate"] as? Date ?? Date())
-        }
-    }
-    func initLibraryContentData() {
-        if title == ZYWordType.TangPoetry300.rawValue || title == ZYWordType.SongPoetry300.rawValue || title == ZYWordType.OldPoetry300.rawValue || title == ZYWordType.ShiJing.rawValue || title == ZYWordType.YueFu.rawValue || title == ZYWordType.ChuCi.rawValue || title == ZYWordType.TangPoetryAll.rawValue || title == ZYWordType.SongPoetryAll.rawValue {
-            appendContent(with: realm.objects(ZYPoetry.self).filter("wordType = '\(title ?? "")'"))
-        }else if title == ZYWordType.Top250Movie.rawValue {
-            appendContent(with: realm.objects(ZYMovie.self))
-        }else if title == ZYWordType.Top250Book.rawValue {
-            appendContent(with: realm.objects(ZYBook.self))
-        }else if title == ZYWordType.Idiom.rawValue {
-            appendContent(with: realm.objects(ZYIdiom.self))
-        }else if title == ZYWordType.Allegoric.rawValue {
-            appendContent(with: realm.objects(ZYAllegoric.self))
-        }
-    }
-    func appendContent(with poetryResult: Results<ZYPoetry>) {
-        for result in poetryResult {
-            collectionDicArray.append(["name": result.title , "type": result.wordType, "collectDate": result.collectDate, "content": poertryContent(with: result.detail), "url": result.url , "firstShort": result.dynasty , "secondShort": result.author, "translate": result.translate , "note": result.note , "appreciation": result.appreciation, "selecttedCount": result.selecttedCount, "height": kCloseCellHeight])
-        }
-    }
-    func appendContent(with movieResult: Results<ZYMovie>) {
-        for result in movieResult {
-            collectionDicArray.append(["name": result.movie_name , "type": result.wordType, "collectDate": result.collectDate, "content": result.content_description, "url": result.url , "firstShort": result.place , "secondShort": result.direct , "long": result.date, "selecttedCount": result.selecttedCount, "height": kCloseCellHeight])
-        }
-    }
-    func appendContent(with bookResult: Results<ZYBook>) {
-        for result in bookResult {
-            collectionDicArray.append(["name": result.name , "type": result.wordType, "collectDate": result.collectDate, "content": result.content_description, "url": result.link, "firstShort": result.score , "secondShort": result.author , "long": result.press, "selecttedCount": result.selecttedCount, "height": kCloseCellHeight])
-        }
-    }
-    func appendContent(with idiomResult: Results<ZYIdiom>) {
-        for result in idiomResult {
-            collectionDicArray.append(["name": result.title ?? "", "type": result.wordType, "collectDate": result.collectDate, "content": result.paraphrase ?? "", "url": idiomUrl(with: result.url ?? "", and: result.wordType, and: result.title ?? ""), "selecttedCount": result.selecttedCount, "height": kCloseCellHeight])
-        }
-    }
-    func appendContent(with allegoricResult: Results<ZYAllegoric>) {
-        for result in allegoricResult {
-            collectionDicArray.append(["name": result.content ?? "", "content": result.answer ?? "", "url": result.url ?? "", "type": result.wordType, "collectDate": result.collectDate, "selecttedCount": result.selecttedCount, "height": kCloseCellHeight])
+    func appendContent(with result: [(Row)]) {
+        for row in result {
+            if ZYDictionaryType.specificPoetryValues.containsContent(obj: row[Expression<String>("wordType")]) {
+                collectionDicArray.append(["name": row[Expression<String>("name")] , "type": row[Expression<String>("wordType")], "collectDate": row[Expression<Int>("collectDate")], "content": poertryContent(with: row[Expression<String>("detail")]), "url": row[Expression<String>("url")], "firstShort": row[Expression<String>("date")], "secondShort": row[Expression<String>("author")], "translate": row[Expression<String>("content")], "note": row[Expression<String>("column0")], "appreciation": row[Expression<String>("column1")], "selecttedCount": row[Expression<Int>("selecttedCount")], "height": kCloseCellHeight])
+            }else if ZYDictionaryType.specificDictionaryValues.containsContent(obj: row[Expression<String>("wordType")]) {
+                collectionDicArray.append(["name": row[Expression<String>("name")], "type": row[Expression<String>("wordType")], "collectDate": row[Expression<Int>("collectDate")], "content": row[Expression<String>("content")], "url": idiomUrl(with: row[Expression<String>("url")], and: row[Expression<String>("wordType")], and: row[Expression<String>("name")]), "selecttedCount": row[Expression<Int>("selecttedCount")], "height": kCloseCellHeight])
+            }else if ZYDictionaryType.specificDoubanValues.containsContent(obj: row[Expression<String>("wordType")]) {
+                collectionDicArray.append(["name": row[Expression<String>("name")], "type": row[Expression<String>("wordType")], "collectDate": row[Expression<Int>("collectDate")], "content": row[Expression<String>("content")], "url": row[Expression<String>("url")], "firstShort": row[Expression<String>("date")], "secondShort": row[Expression<String>("author")], "long": row[Expression<String>("column1")], "selecttedCount": row[Expression<Int>("selecttedCount")], "height": kCloseCellHeight])
+            }
         }
     }
     func idiomUrl(with url: String, and type: String, and name: String) -> String {

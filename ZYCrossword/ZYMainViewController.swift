@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import SQLite
 
 class ZYMainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
@@ -46,8 +47,8 @@ class ZYMainViewController: UIViewController {
     }
     //MARK: - 资源
     var chessboard: ZYChessboard?
-    var tipXdataArr = [ZYBaseWord]()
-    var tipYdataArr = [ZYBaseWord]()
+    var tipXdataArr = [ZYWord]()
+    var tipYdataArr = [ZYWord]()
     //MARK: 加载资源
     func loadData() {
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: chessboardDocumentPath.getFilePath()) as? ZYChessboard {
@@ -66,37 +67,33 @@ class ZYMainViewController: UIViewController {
         let group = DispatchGroup()
         DispatchQueue(label: "loadCurentChessboardData", attributes: .concurrent).async(group: group) {
             self.chessboard = data
-            self.tipXdataArr = [ZYBaseWord]()
+            self.tipXdataArr = [ZYWord]()
             for _ in 0 ..< self.chessboard!.tipXArr.count {
-                self.tipXdataArr.append(ZYBaseWord())
+                self.tipXdataArr.append(ZYWord())
             }
-            self.tipYdataArr = [ZYBaseWord]()
+            self.tipYdataArr = [ZYWord]()
             for _ in 0 ..< self.chessboard!.tipYArr.count {
-                self.tipYdataArr.append(ZYBaseWord())
+                self.tipYdataArr.append(ZYWord())
             }
-            self.loadChessboardData(realm: self.realm, type: ZYPoetry.self)
-            self.loadChessboardData(realm: self.realm, type: ZYMovie.self)
-            self.loadChessboardData(realm: self.realm, type: ZYBook.self)
-            self.loadChessboardData(realm: self.realm, type: ZYIdiom.self)
-            self.loadChessboardData(realm: self.realm, type: ZYAllegoric.self)
+            self.loadChessboardData()
         }
         group.wait()
         beganChessboard()
     }
-    func loadChessboardData<T: ZYBaseWord>(realm: Realm, type: T.Type) {
-        let showReults = realm.objects(T.self).filter(NSPredicate(format: "isShow = true"))
+    func loadChessboardData() {
+        let showReults = ZYWordViewModel.shareWord.loadShowData()
         for result in showReults {
             autoreleasepool {
                 for i in 0 ..< chessboard!.tipXArr.count {
-                    if result.showString.contains(chessboard!.tipXArr[i].word) {
+                    if result[Expression<String>("showString")].contains(chessboard!.tipXArr[i].word) {
                         tipXdataArr.remove(at: i)
-                        tipXdataArr.insert(result, at: i)
+                        tipXdataArr.insert(ZYWordViewModel.shareWord.formatConversionWord(with: result), at: i)
                     }
                 }
                 for i in 0 ..< chessboard!.tipYArr.count {
-                    if result.showString.contains(chessboard!.tipYArr[i].word) {
+                    if result[Expression<String>("showString")].contains(chessboard!.tipYArr[i].word) {
                         tipYdataArr.remove(at: i)
-                        tipYdataArr.insert(result, at: i)
+                        tipYdataArr.insert(ZYWordViewModel.shareWord.formatConversionWord(with: result), at: i)
                     }
                 }
             }
@@ -115,7 +112,7 @@ class ZYMainViewController: UIViewController {
     }
     func creatChessboardData() -> Bool {
         guard let _ = ZYSecretClass.shareSecret.getUserDefaults(with: userInfoKey) else {
-            ZYUserInforViewModel.shareUserInfor.initData()
+            ZYUserInforViewModel.shareUserInfor.initUserInfor()
             isNotShouldReset = false
             performSegue(withIdentifier: "librarySegueId", sender: self)
             return false
@@ -153,16 +150,10 @@ class ZYMainViewController: UIViewController {
         do{
             try FileManager.default.removeItem(atPath: pathString.getFilePath())
             for baseWord in self.chessboardViewController.resultXArray {
-                baseWord.realm?.beginWrite()
-                baseWord.isRight = false
-                baseWord.isShow = false
-                try baseWord.realm?.commitWrite()
+                ZYWordViewModel.shareWord.documentsDatabase.tableLampUpdateWord(with: .showFinished, word: baseWord, show: baseWord.showString)
             }
             for baseWord in self.chessboardViewController.resultYArray {
-                baseWord.realm?.beginWrite()
-                baseWord.isRight = false
-                baseWord.isShow = false
-                try baseWord.realm?.commitWrite()
+                ZYWordViewModel.shareWord.documentsDatabase.tableLampUpdateWord(with: .showFinished, word: baseWord, show: baseWord.showString)
             }
         }catch{
             print("error")

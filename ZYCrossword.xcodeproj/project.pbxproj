@@ -98,6 +98,7 @@
 		DE4D8FB02023120C0010997D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4D8FAF2023120C0010997D /* libsqlite3.tbd */; };
 		DE4D8FB22023121B0010997D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4D8FB12023121B0010997D /* AssetsLibrary.framework */; };
 		DE4D8FB4202312290010997D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4D8FB3202312290010997D /* Photos.framework */; };
+		DE5ADDD020B2B43100732C59 /* ZYUserInforDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5ADDCF20B2B43100732C59 /* ZYUserInforDatabase.swift */; };
 		DE699D1F1FC579760037F986 /* Cyan.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE699D1E1FC579760037F986 /* Cyan.plist */; };
 		DE6FF241205FAF62007C02A0 /* ZYChessboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6FF240205FAF62007C02A0 /* ZYChessboardViewModel.swift */; };
 		DE764F361FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */; };
@@ -242,6 +243,7 @@
 		DE4D8FAF2023120C0010997D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		DE4D8FB12023121B0010997D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		DE4D8FB3202312290010997D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		DE5ADDCF20B2B43100732C59 /* ZYUserInforDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYUserInforDatabase.swift; sourceTree = "<group>"; };
 		DE699D1E1FC579760037F986 /* Cyan.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cyan.plist; sourceTree = "<group>"; };
 		DE6FF240205FAF62007C02A0 /* ZYChessboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYChessboardViewModel.swift; sourceTree = "<group>"; };
 		DE764F351FCFF010009126E3 /* ZYThemeSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZYThemeSelectCollectionViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 			children = (
 				043556F61F7A444F009C1F1A /* ZYUserInfo.swift */,
 				DEEF359A1F7C969500F54EAC /* ZYUserInforViewModel.swift */,
+				DE5ADDCF20B2B43100732C59 /* ZYUserInforDatabase.swift */,
 			);
 			name = UserInfo;
 			sourceTree = "<group>";
@@ -978,7 +981,6 @@
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftTheme/SwiftTheme.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -994,7 +996,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTheme.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1049,6 +1050,7 @@
 				048D04A01F70E14400F42FED /* ZYLibraryListCell.swift in Sources */,
 				DE9A9A411FDA7BF500FB8BF3 /* ZYSecretClass.swift in Sources */,
 				047371851F0F65AE005BE7A9 /* ZYCrosswordListTableViewCell.swift in Sources */,
+				DE5ADDD020B2B43100732C59 /* ZYUserInforDatabase.swift in Sources */,
 				DE6FF241205FAF62007C02A0 /* ZYChessboardViewModel.swift in Sources */,
 				DE45A1672011957600A52E91 /* ZYScreenShotTools.swift in Sources */,
 				049E5A041EEE47CA00FC3560 /* ZYActivityIndicator.swift in Sources */,
