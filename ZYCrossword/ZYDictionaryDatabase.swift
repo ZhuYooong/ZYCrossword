@@ -51,11 +51,11 @@ struct ZYDictionaryDatabase {
     func initFirstData() {
         do {
             let allDictionaryArray = ZYDictionaryType.allValues
-            let dictionaryArray = try db.prepare(Table("WordDictionary"))
+//            let dictionaryArray = try db.prepare(Table("WordDictionary"))
             if try db.scalar(Table("WordDictionary").count) < allDictionaryArray.count {
                 for type in allDictionaryArray {
                     var isShouldUpdate = true
-                    for dictionary in dictionaryArray {
+                    for dictionary in (try db.prepare(Table("WordDictionary"))) {
                         if dictionary[Expression<String>("wordType")] == type.rawValue && dictionary[Expression<Bool>("isLoad")] == true {
                             isShouldUpdate = false
                         }

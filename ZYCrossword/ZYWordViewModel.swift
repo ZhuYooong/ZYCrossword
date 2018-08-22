@@ -23,6 +23,7 @@ class ZYWordViewModel: NSObject {
                 return true
             }catch {
                 print("insertion failed: \(error)")
+                return false
             }
         }else if (FileManager.default.contentsEqual(atPath: bundleDatabase.path, andPath: documentsDatabase.path)) {
             return true
@@ -32,7 +33,6 @@ class ZYWordViewModel: NSObject {
             }
             return true
         }
-        return false
     }
     func updateDate(with wordTitle: String) {
         do {
@@ -156,5 +156,5 @@ enum ZYLoadedWordType: String {
     case ShowString = "showString"
     case Author = "author"
     
-    static let allValues = [ShowString,Author]
+    static let allValues = [ShowString,ShowString,ShowString,Author]
 }

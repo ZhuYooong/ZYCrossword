@@ -203,7 +203,7 @@ class ZYChessboardViewController: UIViewController {
         return ""
     }
     func setCrosswordDataTableViewString(with word: ZYWord) -> String {
-        if ZYDictionaryType.specificPoetryValues.containsContent(obj: word.wordType) {
+        if ZYDictionaryType.specificPoetryValues.contains(word.wordType) {
             return word.showString.showContentString(with: word.detail, typeString: word.wordType)
         }else {
             return word.showString.showContentString(with: word.content, typeString: word.wordType)

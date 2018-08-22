@@ -104,7 +104,7 @@ struct ZYWordDatabase {
                     try db.run(alice.update(isShow <- true))
                 }
             case .showFinished:
-                if ZYDictionaryType.poetryValues.containsContent(obj: ZYWordViewModel.shareWord.updateWordTitle(with: word[Expression<String>("wordType")])) {
+                if ZYDictionaryType.poetryValues.contains(ZYWordViewModel.shareWord.updateWordTitle(with: word[Expression<String>("wordType")])) {
                     try db.run(alice.update(isShow <- false, isRight <- false, showString <- word[Expression<String>("detail")]))
                 }else {
                     try db.run(alice.update(isShow <- false, isRight <- false))
@@ -129,7 +129,7 @@ struct ZYWordDatabase {
                     try db.run(alice.update(isShow <- true))
                 }
             case .showFinished:
-                if ZYDictionaryType.poetryValues.containsContent(obj: ZYWordViewModel.shareWord.updateWordTitle(with: word.wordType)) {
+                if ZYDictionaryType.poetryValues.contains(ZYWordViewModel.shareWord.updateWordTitle(with: word.wordType)) {
                     try db.run(alice.update(isShow <- false, isRight <- false, showString <- word.detail))
                 }else {
                     try db.run(alice.update(isShow <- false, isRight <- false))

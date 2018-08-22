@@ -17,7 +17,7 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
         initData()
         initView()
         NotificationCenter.default.addObserver(self, selector: #selector(initCoinData), name: NSNotification.Name(rawValue: coinCountKey), object: nil)
-        showGuides()
+//        showGuides()
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -30,11 +30,11 @@ class ZYLibraryListViewController: TisprCardStackViewController, TisprCardStackV
     func initData() {
         let allWordArray = ZYDictionaryViewModel.shareDictionary.loadDictionaryData(with: nil)
         for word in allWordArray {
-            if ZYDictionaryType.poetryValues.containsContent(obj: word[Expression<String>("wordType")]) {
+            if ZYDictionaryType.poetryValues.contains(word[Expression<String>("wordType")]) {
                 poetryWordArray.append(ZYDictionaryViewModel.shareDictionary.formatConversionDictionary(with: word))
-            }else if ZYDictionaryType.dictionaryValues.containsContent(obj: word[Expression<String>("wordType")]) {
+            }else if ZYDictionaryType.dictionaryValues.contains(word[Expression<String>("wordType")]) {
                 dictionaryWordArray.append(ZYDictionaryViewModel.shareDictionary.formatConversionDictionary(with: word))
-            }else if ZYDictionaryType.doubanValues.containsContent(obj: word[Expression<String>("wordType")]) {
+            }else if ZYDictionaryType.doubanValues.contains(word[Expression<String>("wordType")]) {
                 doubanWordArray.append(ZYDictionaryViewModel.shareDictionary.formatConversionDictionary(with: word))
             }
         }

@@ -16,6 +16,8 @@ let screenWidth = UIScreen.main.bounds.width
 let chessboardColumns: Int = { () -> Int in
     return Int((screenWidth - 44) / 33)
 }()
+let generateSuccessCount = 10
+
 var chessboardEmptySymbol = "-"
 var chessboardDocumentPath: String {
     get {

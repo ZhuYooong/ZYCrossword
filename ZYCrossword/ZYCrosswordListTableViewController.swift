@@ -31,7 +31,7 @@ class ZYCrosswordListTableViewController: UITableViewController {
     }
     func setCrosswordDataTableViewContent(with index: Int, resultArray: [ZYWord]) -> String {
         if index < resultArray.count {
-            if ZYDictionaryType.specificPoetryValues.containsContent(obj: resultArray[index].wordType) {
+            if ZYDictionaryType.specificPoetryValues.contains(resultArray[index].wordType) {
                 return resultArray[index].showString.showContentString(with: resultArray[index].detail, typeString: resultArray[index].wordType)
             }else {
                 return resultArray[index].showString.showContentString(with: resultArray[index].content, typeString: resultArray[index].wordType)

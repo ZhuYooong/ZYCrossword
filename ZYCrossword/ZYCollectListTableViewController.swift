@@ -36,11 +36,11 @@ class ZYCollectListTableViewController: UITableViewController {
     }
     func appendContent(with result: [(Row)]) {
         for row in result {
-            if ZYDictionaryType.specificPoetryValues.containsContent(obj: row[Expression<String>("wordType")]) {
+            if ZYDictionaryType.specificPoetryValues.contains(row[Expression<String>("wordType")]) {
                 collectionDicArray.append(["name": row[Expression<String>("name")] , "type": row[Expression<String>("wordType")], "collectDate": row[Expression<Int>("collectDate")], "content": poertryContent(with: row[Expression<String>("detail")]), "url": row[Expression<String>("url")], "firstShort": row[Expression<String>("date")], "secondShort": row[Expression<String>("author")], "translate": row[Expression<String>("content")], "note": row[Expression<String>("column0")], "appreciation": row[Expression<String>("column1")], "selecttedCount": row[Expression<Int>("selecttedCount")], "height": kCloseCellHeight])
-            }else if ZYDictionaryType.specificDictionaryValues.containsContent(obj: row[Expression<String>("wordType")]) {
+            }else if ZYDictionaryType.specificDictionaryValues.contains(row[Expression<String>("wordType")]) {
                 collectionDicArray.append(["name": row[Expression<String>("name")], "type": row[Expression<String>("wordType")], "collectDate": row[Expression<Int>("collectDate")], "content": row[Expression<String>("content")], "url": idiomUrl(with: row[Expression<String>("url")], and: row[Expression<String>("wordType")], and: row[Expression<String>("name")]), "selecttedCount": row[Expression<Int>("selecttedCount")], "height": kCloseCellHeight])
-            }else if ZYDictionaryType.specificDoubanValues.containsContent(obj: row[Expression<String>("wordType")]) {
+            }else if ZYDictionaryType.specificDoubanValues.contains(row[Expression<String>("wordType")]) {
                 collectionDicArray.append(["name": row[Expression<String>("name")], "type": row[Expression<String>("wordType")], "collectDate": row[Expression<Int>("collectDate")], "content": row[Expression<String>("content")], "url": row[Expression<String>("url")], "firstShort": row[Expression<String>("date")], "secondShort": row[Expression<String>("author")], "long": row[Expression<String>("column1")], "selecttedCount": row[Expression<Int>("selecttedCount")], "height": kCloseCellHeight])
             }
         }

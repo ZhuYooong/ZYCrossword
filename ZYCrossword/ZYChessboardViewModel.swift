@@ -16,7 +16,7 @@ class ZYChessboardViewModel: NSObject {
         self.dictionaryArray = contentArray
         NotificationCenter.default.addObserver(self, selector: #selector(generateSuccess), name: NSNotification.Name(rawValue: generateSuccessKey), object: nil)
     }
-    override init() { }
+    override init() { } 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -32,9 +32,6 @@ class ZYChessboardViewModel: NSObject {
         var count = 0
         var oldFindWord = ""
         while isContininue {
-            if isSuccess {
-                count = 200
-            }
             if currentWords.count == 0 {
                 if findWord(with: nil) == false {
                     count += 1
@@ -46,7 +43,7 @@ class ZYChessboardViewModel: NSObject {
                     count += 1
                 }
             }
-            if count == 200 {
+            if count == 200 || currentWords.count > generateSuccessCount || isSuccess {
                 isContininue = false
             }
         }
@@ -96,7 +93,7 @@ class ZYChessboardViewModel: NSObject {
     var currentContent: Row?
     var loadedWordType = ZYLoadedWordType.ShowString
     func findWord(with content: Row, and findString: String?) -> Bool {
-        loadedWordType = ZYLoadedWordType.allValues[randomValue()]
+        loadedWordType = ZYLoadedWordType.allValues[randomInt(0, max: ZYLoadedWordType.allValues.count - 1)]
         for item in ZYWordViewModel.shareWord.loadWordData(with: content[Expression<String>("wordType")], findString: findString, loadedWordType: loadedWordType) {
             if !resultContentArray.containsContent(obj: item) && authorWhether(with: item) {
                 currentContent = item
@@ -118,14 +115,14 @@ class ZYChessboardViewModel: NSObject {
         }
     }
     func isPoetry(with word: Row) -> Bool {
-        if loadedWordType == .ShowString && ZYDictionaryType.specificPoetryValues.containsContent(obj: word[Expression<String>("wordType")]) {
+        if loadedWordType == .ShowString && ZYDictionaryType.specificPoetryValues.contains(word[Expression<String>("wordType")]) {
             return true
         }else {
             return false
         }
     }
     func findDetailWord(with detail:String, and findString: String?, isPoetry: Bool) -> String? {
-        let set = CharacterSet(charactersIn: "，。！？；)")
+        let set = CharacterSet(charactersIn: "，。！？；)·")
         var detailStrArray = detail.components(separatedBy: set)
         var detailStr = ""
         for str in detailStrArray {

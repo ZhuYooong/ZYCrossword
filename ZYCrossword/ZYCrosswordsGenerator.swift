@@ -44,10 +44,11 @@ class ZYCrosswordsGenerator: NSObject {
                 DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
                     let chessboardViewModel = ZYChessboardViewModel(contentArray: self.dictionaryArray)
                     chessboardViewModel.generateOnce()
-                    if chessboardViewModel.currentWords.count > 10 && !self.isSuccess {
+                    if chessboardViewModel.currentWords.count > generateSuccessCount && !self.isSuccess {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: generateSuccessKey), object: chessboardViewModel)
+                    }else {
+                        semaphore.signal()
                     }
-                    semaphore.signal()
                 }
             }
         }else {

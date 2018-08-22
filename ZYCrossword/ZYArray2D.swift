@@ -58,6 +58,5 @@ extension Array {
         }else {
             return self.filter({$0 as? T == obj as! _OptionalNilComparisonType}).count > 0
         }
-        
     }
 }

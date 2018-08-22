@@ -58,6 +58,7 @@ class ZYMainViewController: UIViewController {
         }else {
             NotificationCenter.default.addObserver(self, selector: #selector(creatData), name: NSNotification.Name(rawValue: baseWordKey), object: nil)
         }
+        ZYDictionaryViewModel.shareDictionary.initDictionaryData()
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -118,9 +119,7 @@ class ZYMainViewController: UIViewController {
             return false
         }
         let crosswordsGenerator = ZYCrosswordsGenerator.shareCrosswordsGenerator
-        DispatchQueue.main.sync {
-            titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
-        }
+        titleViewController.loadingTitleLabel.text = "荷花哈速度会加快……"
         crosswordsGenerator.loadCrosswordsData(isBackgrounding: false)
         chessboard = crosswordsGenerator.chessboard
         tipXdataArr = crosswordsGenerator.tipXdataArr

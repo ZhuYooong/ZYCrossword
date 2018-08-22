@@ -20,6 +20,7 @@ class ZYDictionaryViewModel: NSObject {
         if isSaveWordsucess {
             dictionaryDatabase.tableLampCreate()
             dictionaryDatabase.initFirstData()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: baseWordKey), object: nil)
         }
     }
     //MARK: - 更新本地数据
